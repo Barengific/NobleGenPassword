@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 android.R.string.yes
             ) { dialog, which ->
                 if (editText == null)
-                    Log.d("aaaa", "not null")fdfdffgddsg
+                    Log.d("aaaa", "not null")
                 else
                     Log.d("aaaa", "null")
             } // A null listener allows the button to dismiss the dialog and take no further action.

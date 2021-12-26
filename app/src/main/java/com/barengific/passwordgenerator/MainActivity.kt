@@ -7,6 +7,7 @@ import android.content.DialogInterface.OnShowListener
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
         val dialog = AlertDialog.Builder(this)
             .setTitle("Welcome")
-            .setMessage("Please enter the required information") // Specifying a listener allows you to take an action before dismissing the dialog.
+            .setMessage("Please provide the required information") // Specifying a listener allows you to take an action before dismissing the dialog.
             // The dialog is automatically dismissed when a dialog button is clicked.
             .setView(R.layout.alertdialog)
             .setPositiveButton(

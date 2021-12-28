@@ -1,15 +1,22 @@
 package com.barengific.passwordgenerator
 
+import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.DialogInterface.OnShowListener
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -26,6 +33,15 @@ import com.barengific.passwordgenerator.databinding.ActivityMainBinding
 import kotlinx.coroutines.NonCancellable.cancel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cuneytayyildiz.onboarder.utils.visible
+import kotlinx.android.synthetic.main.fragment_home.switch1
+import kotlinx.android.synthetic.main.fragment_home.editTextTextPassword
+import kotlinx.android.synthetic.main.fragment_home.editTextNumberPassword1
+import kotlinx.android.synthetic.main.fragment_home.editTextNumberPassword2
+import kotlinx.android.synthetic.main.fragment_home.editTextNumberPassword3
+import kotlinx.android.synthetic.main.fragment_home.editTextNumberPassword4
+import kotlinx.android.synthetic.main.fragment_home.btnSubmit
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -33,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var editText: EditText
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,44 +76,105 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //
-        //confirmFireMissiles()
         //
 
-//        val editTextPassword = findViewById<EditText>(R.id.editTextPassword)
-//        val editTextNumberPassword1 = findViewById<EditText>(R.id.editTextNumberPassword1)
-//        val editTextNumberPassword2 = findViewById<EditText>(R.id.editTextNumberPassword2)
-//        val editTextNumberPassword3 = findViewById<EditText>(R.id.editTextNumberPassword3)
-//        val editTextNumberPassword4 = findViewById<EditText>(R.id.editTextNumberPassword4)
-//
-//        editText = findViewById(R.id.editTextPassword)
-//        editText.text.toString()
+//        switch1.setOnClickListener {
+//            if (switch1.isChecked){
+//                switch1.setTextColor(Color.WHITE)
+//                Log.d("aaa","on")
+//            }
+//            else{
+//                switch1.setTextColor(Color.BLACK)
+//                Log.d("aaa","off")
+//            }
+//        }
 
-        val editText = findViewById<EditText>(R.id.editTextPassword)
-        val message = editText.text.toString()
+        val hidePasswordMethod = PasswordTransformationMethod()
+        switch1.setOnClickListener {
+            editTextTextPassword.apply {
+                transformationMethod =
+                    if (transformationMethod is PasswordTransformationMethod)
+                        null //shows password
+                    else
+                        hidePasswordMethod //hides password
+            }
+            editTextNumberPassword1.apply {
+                transformationMethod =
+                    if (transformationMethod is PasswordTransformationMethod)
+                        null //shows password
+                    else
+                        hidePasswordMethod //hides password
+            }
+            editTextNumberPassword2.apply {
+                transformationMethod =
+                    if (transformationMethod is PasswordTransformationMethod)
+                        null //shows password
+                    else
+                        hidePasswordMethod //hides password
+            }
+            editTextNumberPassword3.apply {
+                transformationMethod =
+                    if (transformationMethod is PasswordTransformationMethod)
+                        null //shows password
+                    else
+                        hidePasswordMethod //hides password
+            }
+            editTextNumberPassword4.apply {
+                transformationMethod =
+                    if (transformationMethod is PasswordTransformationMethod)
+                        null //shows password
+                    else
+                        hidePasswordMethod //hides password
+            }
+        }
+        btnSubmit.setOnClickListener{
+            if(editTextTextPassword.text.toString().isNotEmpty()
+                && editTextNumberPassword1.text.toString().isNotEmpty()
+                && editTextNumberPassword2.text.toString().isNotEmpty()
+                && editTextNumberPassword3.text.toString().isNotEmpty()
+                && editTextNumberPassword4.text.toString().isNotEmpty()){
+                    if(editTextTextPassword.text.toString().length >= 8){
+                        if(editTextNumberPassword1.text.toString().length == 1
+                            && editTextNumberPassword2.text.toString().length == 1
+                            && editTextNumberPassword3.text.toString().length == 1
+                            && editTextNumberPassword4.text.toString().length == 1){
+                            editTextTextPassword.visibility = View.INVISIBLE
+                            editTextNumberPassword1.visibility = View.INVISIBLE
+                            editTextNumberPassword2.visibility = View.INVISIBLE
+                            editTextNumberPassword3.visibility = View.INVISIBLE
+                            editTextNumberPassword4.visibility = View.INVISIBLE
+                            switch1.visibility = View.INVISIBLE
+                            btnSubmit.visibility = View.INVISIBLE
 
-//        val editTextPasswordv = editTextPassword.text.toString()
-//        val editTextNumberPassword1v = editTextNumberPassword1.text.toString()
-//        val editTextNumberPassword2v = editTextNumberPassword2.text.toString()
-//        val editTextNumberPassword3v = editTextNumberPassword3.text.toString()
-//        val editTextNumberPassword4v = editTextNumberPassword4.text.toString()
+                            //val path = applicationContext.getFilesDir()
+                            //Log.d("aaa", path.toString())
+
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                            Log.d("aaa",
+                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                    .toString()
+                            )
+//                            val PERMISSION_ALL = 1
+//                            val PERMISSIONS = arrayOf(
+//                                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+//                            )
+                            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                .toString()+"/barzzzz.txt").writeText("hello,hello,heloo barzz")
+                        }else{
+                            Toast.makeText(applicationContext, "Sigma values cannot be more than 1 digit", Toast.LENGTH_LONG).show()
+                        }
+                    }else{
+                        Toast.makeText(applicationContext, "Master Key has to be above 8 characters", Toast.LENGTH_LONG).show()
+                    }
+            } else{
+                Log.d("aaa", "buttonsss")
+                Toast.makeText(applicationContext, "Please fill in all the required fields", Toast.LENGTH_LONG).show()
+            }
 
 
-        val dialog = AlertDialog.Builder(this)
-            .setTitle("Welcome")
-            .setMessage("Please provide the required information") // Specifying a listener allows you to take an action before dismissing the dialog.
-            // The dialog is automatically dismissed when a dialog button is clicked.
-            .setView(R.layout.alertdialog)
-            .setPositiveButton(
-                android.R.string.yes
-            ) { dialog, which ->
-                if (editText == null)
-                    Log.d("aaaa", "not null")
-                else
-                    Log.d("aaaa", "null")
-            } // A null listener allows the button to dismiss the dialog and take no further action.
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setCancelable(false)
-            .show()
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -110,44 +188,4 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun confirmFireMissiles() {
-        val newFragment = FireMissilesDialogFragment()
-        newFragment.dialog?.setCanceledOnTouchOutside(false)
-        newFragment.dialog?.setCancelable(false)
-        newFragment.show(supportFragmentManager,"missiles")
-        //newFragment.show(supportFragmentManager, "missiles")
-//        Log.d("TAG", newFragment.isCancelable.toString());
-//        newFragment.onCancel()
-
-    }
-
 }
-
-class FireMissilesDialogFragment : DialogFragment() {
-
-//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//        return activity?.let {
-//            val builder = AlertDialog.Builder(it)
-//            // Get the layout inflater
-//            val inflater = requireActivity().layoutInflater;
-//
-//            // Inflate and set the layout for the dialog
-//            // Pass null as the parent view because its going in the dialog layout
-//            builder.setView(inflater.inflate(R.layout.alertdialog, null))
-//                // Add action buttons
-//                .setPositiveButton(R.string.submit,
-//                    DialogInterface.OnClickListener { dialog, id ->
-//                        // sign in the user ...
-//                    })
-////                .setNegativeButton(R.string.cancel,
-////                    DialogInterface.OnClickListener { dialog, id ->
-////                        getDialog()?.cancel()
-////                    })
-////                .setCancelable(false)
-//            builder.create()
-//        } ?: throw IllegalStateException("Activity cannot be null")
-//    }
-
-}
-
-

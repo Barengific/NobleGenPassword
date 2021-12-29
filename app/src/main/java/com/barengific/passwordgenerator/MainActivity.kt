@@ -36,33 +36,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cuneytayyildiz.onboarder.utils.visible
 import java.io.File
+import kotlinx.android.synthetic.main.fragment_home.*
+import com.barengific.passwordgenerator.Sha256 as Sha2561
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    lateinit var editText: EditText
-    public var a = 0
-
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        val message = intent.getStringExtra("fromIntro")
-        if(message.toString().equals("fin")){
-            Log.d("aaa", "no more intro")
-        }else{
-            val intent = Intent(this, AppIntroduction::class.java).apply {
-//            putExtra(EXTRA_MESSAGE, message)
-            }
-            Log.d("aaa", a.toString())
-            a = 1
-            startActivity(intent)
-        }
-
-
-
+//
+//        val message = intent.getStringExtra("fromIntro")
+//        if(message.toString().equals("fin")){
+//            Log.d("aaa", "no more intro")
+//        }else{
+//            val intent = Intent(this, AppIntroduction::class.java).apply {
+////            putExtra(EXTRA_MESSAGE, message)
+//            }
+//            startActivity(intent)
+//        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -85,6 +79,22 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val sss = Sha2561()
+        var qq = 0
+        btnGenerate.setOnClickListener {
+            //sss.hashes("")
+            if(qq == 0){
+                tvGen.setText(sss.hashes(""))
+                qq = 1
+            }else if(qq == 1){
+                tvGen.setText(sss.hashes("123"))
+                qq = 2
+            }else if(qq == 2){
+                tvGen.setText(sss.hashes("abc"))
+                qq = 20
+            }
+        }
 
 
     }

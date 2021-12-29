@@ -118,6 +118,27 @@ class Sha256 {
         return rt
     }
 
+    fun sig0(bits: String): String {
+        Log.d("aaainsig0", bits)
+        val a = rotr(bits, 7)
+        val b = rotr(bits, 18)
+        val c = shr(bits, 3)
+        Log.d("aaainsig0A", a)
+        Log.d("aaainsig0B", b)
+        Log.d("aaainsig0C", c)
+
+        Log.d("aaasig0", xor(a, b, c))
+        return xor(a, b, c)
+    }
+
+    fun sig1(bits: String): String {
+        val a = rotr(bits, 17)
+        val b = rotr(bits, 19)
+        val c = shr(bits, 10)
+        Log.d("aaasig1", xor(a, b, c))
+        return xor(a, b, c)
+    }
+
     fun xor(a: String, b: String, c: String): String {
 //        Log.d("aaainxorA", a)
 //        Log.d("aaainxorB", b)

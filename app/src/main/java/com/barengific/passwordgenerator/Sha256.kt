@@ -118,6 +118,27 @@ class Sha256 {
         return rt
     }
 
+    fun addZeros(msg: String, newLen: Int): String {
+        var msg = msg
+        for (i in msg.length until newLen) {
+            msg = "0$msg"
+        }
+        if (msg.length != 32) {
+            //System.out.println("add zeroes: " + msg.length());
+        }
+        //Log.d("addZeros", msg)
+        return msg
+    }
 
+    fun rmZeros(msg: String, newLen: Int): String {
+        var msg = msg
+        val target = msg.length - newLen
+        msg = msg.substring(target, msg.length)
+        if (msg.length != 32) {
+            println("remove zeroes: " + msg.length)
+        }
+        Log.d("aaarmZeros", msg)
+        return msg
+    }
 
 }

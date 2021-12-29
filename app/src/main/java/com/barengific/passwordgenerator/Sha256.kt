@@ -116,9 +116,7 @@ class Sha256 {
             }
             for (j in 16..63) { //
                 val s0 = sig0(msgChunks[msgChunks.size - 15])
-                Log.d("aaasig0", s0.toString())
                 val s1 = sig1(msgChunks[msgChunks.size - 2])
-                Log.d("aaasig1", s1.toString())
                 val addup = adder(
                     msgChunks[msgChunks.size - 16],
                     s0,
@@ -235,15 +233,15 @@ class Sha256 {
     }
 
     fun sig0(bits: String): String {
-        Log.d("aaainsig0", bits)
+//        Log.d("aaainsig0", bits)
         val a = rotr(bits, 7)
         val b = rotr(bits, 18)
         val c = shr(bits, 3)
-        Log.d("aaainsig0A", a)
-        Log.d("aaainsig0B", b)
-        Log.d("aaainsig0C", c)
-
-        Log.d("aaasig0", xor(a, b, c))
+//        Log.d("aaainsig0A", a)
+//        Log.d("aaainsig0B", b)
+//        Log.d("aaainsig0C", c)
+//
+//        Log.d("aaasig0", xor(a, b, c))
         return xor(a, b, c)
     }
 
@@ -251,7 +249,7 @@ class Sha256 {
         val a = rotr(bits, 17)
         val b = rotr(bits, 19)
         val c = shr(bits, 10)
-        Log.d("aaasig1", xor(a, b, c))
+//        Log.d("aaasig1", xor(a, b, c))
         return xor(a, b, c)
     }
 
@@ -261,7 +259,7 @@ class Sha256 {
         val b = rotr(bits, 13)
         val c = rotr(bits, 22)
         res = xor(a, b, c)
-        Log.d("aaasigma0", res)
+//        Log.d("aaasigma0", res)
         return res
     }
 
@@ -271,7 +269,7 @@ class Sha256 {
         val b = rotr(bits, 11)
         val c = rotr(bits, 25)
         res = xor(a, b, c)
-        Log.d("aaasigma1", res)
+//        Log.d("aaasigma1", res)
         return xor(a, b, c)
     }
 
@@ -281,41 +279,41 @@ class Sha256 {
 //        Log.d("aaainxorC", c)
 
         var res: String = ""
-        var ress: String = "a"
-        Log.d("aaainxorQQQQQ", (a[0].digitToInt() xor b[0].digitToInt() xor c[0].digitToInt()).toString())
+//        var ress: String = "a"
+//        Log.d("aaainxorQQQQQ", (a[0].digitToInt() xor b[0].digitToInt() xor c[0].digitToInt()).toString())
         for (i in 0 until a.length) {
             if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
                 res += "1"
-                Log.d("aaainxorIF0", "res")
-                Log.d("aaainxorIF0", res)
+//                Log.d("aaainxorIF0", "res")
+//                Log.d("aaainxorIF0", res)
             } else if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0) {
                 res += "0"
-                Log.d("aaainxorIF1", "res")
-                Log.d("aaainxorIF1", res.toString())
-                Log.d("aaainxorIF1", res.length.toString())
+//                Log.d("aaainxorIF1", "res")
+//                Log.d("aaainxorIF1", res.toString())
+//                Log.d("aaainxorIF1", res.length.toString())
                 var qqq: Boolean = res.isNullOrEmpty()
-                Log.d("aaainxorIF1", qqq.toString())
-                Log.d("aaainxorIFOUTTT1", ress)
+//                Log.d("aaainxorIF1", qqq.toString())
+//                Log.d("aaainxorIFOUTTT1", ress)
             } else {
                 //Log.d("aaainxorIF2", "res")
                 //Log.d("aaainxorIF2", res)
-                Log.d("aaainxorIF2", res.toString())
-                Log.d("aaainxorIF2", res.length.toString())
-                var qqq: Boolean = res.isNullOrEmpty()
-                Log.d("aaainxorIF2", qqq.toString())
-                Log.d("aaainxorIFOUTT2", ress)
+//                Log.d("aaainxorIF2", res.toString())
+//                Log.d("aaainxorIF2", res.length.toString())
+//                var qqq: Boolean = res.isNullOrEmpty()
+//                Log.d("aaainxorIF2", qqq.toString())
+//                Log.d("aaainxorIFOUTT2", ress)
                 println("____")
             }
         }
-        Log.d("aaaxor", res)
+//        Log.d("aaaxor", res)
         return res
     }
 
     fun adder(a: String, b: String, c: String, d: String): String {
-        Log.d("aaainadderA", a)
-        Log.d("aaainadderB", b)
-        Log.d("aaainadderC", c)
-        Log.d("aaainadderD", d)
+//        Log.d("aaainadderA", a)
+//        Log.d("aaainadderB", b)
+//        Log.d("aaainadderC", c)
+//        Log.d("aaainadderD", d)
 
         var res = ""
 
@@ -340,7 +338,7 @@ class Sha256 {
         if (res.length > 32) {
             res = rmZeros(res, 32)
         }
-        Log.d("aaaadder", res)
+//        Log.d("aaaadder", res)
         return res
     }
 
@@ -360,7 +358,7 @@ class Sha256 {
         if (res.length != 32) {
             println("tooo smlll still")
         }
-        Log.d("aaaaddersz", res)
+//        Log.d("aaaaddersz", res)
         return res
     }
 
@@ -371,7 +369,7 @@ class Sha256 {
             a = a.substring(0, a.length - 1)
             a = last_char + a
         }
-        Log.d("aaarotr", a)
+//        Log.d("aaarotr", a)
         return a
     }
 
@@ -381,7 +379,7 @@ class Sha256 {
             a = a.substring(0, a.length - 1)
             a = "0$a"
         }
-        Log.d("aaashr", a)
+//        Log.d("aaashr", a)
         return a
     }
 
@@ -397,7 +395,7 @@ class Sha256 {
                 println("nothing")
             }
         }
-        Log.d("aaacho", res)
+//        Log.d("aaacho", res)
         return res
     }
 
@@ -419,7 +417,7 @@ class Sha256 {
                 println("maj nothing")
             }
         }
-        Log.d("aaamj", res)
+//        Log.d("aaamj", res)
         return res
     }
 
@@ -442,7 +440,7 @@ class Sha256 {
         if (msg.length != 32) {
             println("remove zeroes: " + msg.length)
         }
-        Log.d("aaarmZeros", msg)
+//        Log.d("aaarmZeros", msg)
         return msg
     }
 

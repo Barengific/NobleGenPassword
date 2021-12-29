@@ -72,6 +72,52 @@ class Sha256 {
         311
     )
 
-    
+    fun rt2s(): ArrayList<String> {
+        //2^1/2 - 2^1/2 * 2^32
+        val rt: ArrayList<String> = ArrayList()
+        for (i in rt2.indices) {
+            rt.add(
+                addZeros(
+                    String.format(
+                        java.lang.Long.toBinaryString(
+                            ((Math.sqrt(
+                                rt2[i]
+                                    .toDouble()
+                            ) - Math.sqrt(rt2[i].toDouble()).toInt()) * Math.pow(
+                                2.0,
+                                32.0
+                            )).toLong()
+                        )
+                    ), 32
+                )
+            )
+        }
+        return rt
+    }
+
+    fun rt3s(): ArrayList<String> {
+        //2^1/3 - 2^1/3 * 2^32
+        val rt: ArrayList<String> = ArrayList()
+        for (i in rt3.indices) {
+            rt.add(
+                addZeros(
+                    String.format(
+                        java.lang.Long.toBinaryString(
+                            ((Math.cbrt(
+                                rt3[i]
+                                    .toDouble()
+                            ) - Math.cbrt(rt3[i].toDouble()).toInt()) * Math.pow(
+                                2.0,
+                                32.0
+                            )).toLong()
+                        )
+                    ), 32
+                )
+            )
+        }
+        return rt
+    }
+
+
 
 }

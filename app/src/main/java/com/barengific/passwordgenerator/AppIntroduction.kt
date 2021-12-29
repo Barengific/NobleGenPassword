@@ -1,5 +1,6 @@
 package com.barengific.passwordgenerator
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -34,12 +35,23 @@ class AppIntroduction : AppIntro() {
     override fun onSkipPressed(currentFragment: Fragment?) {
         super.onSkipPressed(currentFragment)
         // Decide what to do when the user clicks on "Skip"
+        //TODO intent go to main activity
+        val intent = Intent(this, CredentialsEnt::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            putExtra("fromIntro","fin")
+        }
+        startActivity(intent)
         finish()
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
         // Decide what to do when the user clicks on "Done"
+        val intent = Intent(this, CredentialsEnt::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            putExtra("fromIntro","fin")
+        }
+        startActivity(intent)
         finish()
     }
 }

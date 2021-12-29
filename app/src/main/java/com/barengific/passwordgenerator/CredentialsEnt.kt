@@ -6,31 +6,22 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import android.view.Menu
-import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.barengific.passwordgenerator.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.credentials_ent.*
 import java.io.File
 
 
 class CredentialsEnt : AppCompatActivity() {
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    //private lateinit var appBarConfiguration: AppBarConfiguration
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.credentials_ent)
 
+        Log.d("aaa", "innn cccredentials")
 
         val hidePasswordMethod = PasswordTransformationMethod()
         switch1.setOnClickListener {
@@ -70,6 +61,7 @@ class CredentialsEnt : AppCompatActivity() {
                         hidePasswordMethod //hides password
             }
         }
+
         btnSubmit.setOnClickListener {
             if (editTextTextPassword.text.toString().isNotEmpty()
                 && editTextNumberPassword1.text.toString().isNotEmpty()
@@ -98,6 +90,7 @@ class CredentialsEnt : AppCompatActivity() {
 
                         val intent = Intent(this, MainActivity::class.java).apply {
                             //putExtra(EXTRA_MESSAGE, message)
+                            putExtra("fromIntro","fin")
                         }
                         Log.d("aaa", "in credentials")
                         startActivity(intent)
@@ -128,15 +121,15 @@ class CredentialsEnt : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.main, menu)
+//        return true
+//    }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        val navController = findNavController(R.id.nav_host_fragment_content_main)
+//        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+//    }
 
 }

@@ -118,6 +118,27 @@ class Sha256 {
         return rt
     }
 
+    fun rotr(a: String, rotnumber: Int): String {
+        var a = a
+        for (i in 0 until rotnumber) {
+            val last_char = a.substring(a.length - 1)
+            a = a.substring(0, a.length - 1)
+            a = last_char + a
+        }
+        Log.d("aaarotr", a)
+        return a
+    }
+
+    fun shr(a: String, rotnumber: Int): String {
+        var a = a
+        for (i in 0 until rotnumber) {
+            a = a.substring(0, a.length - 1)
+            a = "0$a"
+        }
+        Log.d("aaashr", a)
+        return a
+    }
+
     fun cho(a: String, b: String, c: String): String {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         var res = ""

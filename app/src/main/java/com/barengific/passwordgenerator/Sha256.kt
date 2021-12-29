@@ -118,6 +118,28 @@ class Sha256 {
         return rt
     }
 
+    fun mj(a: String, b: String, c: String): String {
+//    #take majority input value
+        var res = ""
+        for (i in 0 until a.length) {
+            if ((a[i] == '1' && b[i] == '1') xor
+                (a[i] == '1' && c[i] == '1') xor
+                (b[i] == '1' && c[i] == '1')
+            ) {
+                res += "1"
+            } else if ((a[i] == '0' && b[i] == '0') xor
+                (a[i] == '0' && c[i] == '0') xor
+                (b[i] == '0' && c[i] == '0')
+            ) {
+                res += "0"
+            } else {
+                println("maj nothing")
+            }
+        }
+        Log.d("aaamj", res)
+        return res
+    }
+
     fun addZeros(msg: String, newLen: Int): String {
         var msg = msg
         for (i in msg.length until newLen) {

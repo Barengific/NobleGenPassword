@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.DialogInterface.OnShowListener
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -48,10 +49,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     lateinit var editText: EditText
+    public var a = 0
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        val message = intent.getStringExtra("fromIntro")
+        if(message.toString().equals("fin")){
+            Log.d("aaa", "no more intro")
+        }else{
+            val intent = Intent(this, AppIntroduction::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            }
+            Log.d("aaa", a.toString())
+            a = 1
+            startActivity(intent)
+        }
+
+
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

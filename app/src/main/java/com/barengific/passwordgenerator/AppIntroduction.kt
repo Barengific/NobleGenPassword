@@ -21,14 +21,17 @@ class AppIntroduction : AppIntro() {
 
         // Call addSlide passing your Fragments.
         // You can use AppIntroFragment to use a pre-built fragment
-        addSlide(
-            AppIntroFragment.newInstance(
+        addSlide(AppIntroFragment.newInstance(
             title = "Welcome...baz",
             description = "This is MYY the first slide of the example"
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Yehh...Let's get started!",
-            description = "This is the last slide, I won't annoy you more :)"
+            description = "This is the slide, :)"
+        ))
+        addSlide(AppIntroFragment.newInstance(
+            title = "Listen UP!",
+            description = "hahahaha:)"
         ))
     }
 

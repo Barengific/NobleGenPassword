@@ -118,6 +118,22 @@ class Sha256 {
         return rt
     }
 
+    fun cho(a: String, b: String, c: String): String {
+//    #use 'a' input to determine whether to take 'b' or 'c'
+        var res = ""
+        for (i in 0 until a.length) {
+            if (a[i] == '1') {
+                res += b[i]
+            } else if (a[i] == '0') {
+                res += c[i]
+            } else {
+                println("nothing")
+            }
+        }
+        Log.d("aaacho", res)
+        return res
+    }
+
     fun mj(a: String, b: String, c: String): String {
 //    #take majority input value
         var res = ""

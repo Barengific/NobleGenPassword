@@ -139,6 +139,26 @@ class Sha256 {
         return xor(a, b, c)
     }
 
+    fun sigma0(bits: String): String {
+        var res = ""
+        val a = rotr(bits, 2)
+        val b = rotr(bits, 13)
+        val c = rotr(bits, 22)
+        res = xor(a, b, c)
+        Log.d("aaasigma0", res)
+        return res
+    }
+
+    fun sigma1(bits: String): String {
+        var res = ""
+        val a = rotr(bits, 6)
+        val b = rotr(bits, 11)
+        val c = rotr(bits, 25)
+        res = xor(a, b, c)
+        Log.d("aaasigma1", res)
+        return xor(a, b, c)
+    }
+
     fun xor(a: String, b: String, c: String): String {
 //        Log.d("aaainxorA", a)
 //        Log.d("aaainxorB", b)

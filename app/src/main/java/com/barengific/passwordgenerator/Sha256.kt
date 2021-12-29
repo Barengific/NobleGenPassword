@@ -118,6 +118,24 @@ class Sha256 {
         return rt
     }
 
+    fun chunkNo(msg: String): Int {
+        var chunks = 1
+        var bsize = 447
+        if (msg.length <= bsize) {
+            chunks = 1
+        } else if (msg.length >= bsize + 1) {
+            while (true) {
+                bsize += 512
+                chunks += 1
+                if (msg.length <= bsize) {
+                    break
+                }
+            }
+        }
+        Log.d("aaachunkNo", chunks.toString())
+        return chunks
+    }
+
     fun sig0(bits: String): String {
         Log.d("aaainsig0", bits)
         val a = rotr(bits, 7)

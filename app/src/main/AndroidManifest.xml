@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PasswordGenerator">
         <activity
-            android:name=".AppIntroduction"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.PasswordGenerator.NoActionBar">
@@ -20,6 +20,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".AppIntroduction"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.PasswordGenerator.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".CredentialsEnt">
+        </activity>
+
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

@@ -118,6 +118,59 @@ class Sha256 {
         return rt
     }
 
+    fun adder(a: String, b: String, c: String, d: String): String {
+        Log.d("aaainadderA", a)
+        Log.d("aaainadderB", b)
+        Log.d("aaainadderC", c)
+        Log.d("aaainadderD", d)
+
+        var res = ""
+
+        val aint = a.toLong(2)
+        val bint = b.toLong(2)
+        val cint = c.toLong(2)
+        val dint = d.toLong(2)
+        val r = aint + bint + cint + dint
+        val binr = java.lang.Long.toBinaryString(r)
+        if (binr.length == 32) {
+            res = binr
+        } else if (binr.length > 32) {
+            res = java.lang.Long.toBinaryString((r % Math.pow(2.0, 32.0)).toLong())
+            if (res.length < 32) {
+                res = addZeros(binr, 32)
+            } else if (res.length > 32) {
+                //System.out.println("toobig");
+            }
+        } else if (binr.length < 32) {
+            res = addZeros(binr, 32)
+        }
+        if (res.length > 32) {
+            res = rmZeros(res, 32)
+        }
+        Log.d("aaaadder", res)
+        return res
+    }
+
+    fun addersz(a: Long): String {
+        var res = ""
+        val binr = java.lang.Long.toBinaryString(a)
+        if (binr.length == 32) {
+            res = binr
+        } else if (binr.length > 32) {
+            res = java.lang.Long.toBinaryString((a % Math.pow(2.0, 32.0)).toLong())
+        } else if (binr.length < 32) {
+            res = addZeros(binr, 32)
+        }
+        if (res.length < 32) {
+            res = addZeros(res, 32)
+        }
+        if (res.length != 32) {
+            println("tooo smlll still")
+        }
+        Log.d("aaaaddersz", res)
+        return res
+    }
+
     fun rotr(a: String, rotnumber: Int): String {
         var a = a
         for (i in 0 until rotnumber) {

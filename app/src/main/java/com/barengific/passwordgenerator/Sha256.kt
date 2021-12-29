@@ -72,6 +72,104 @@ class Sha256 {
         311
     )
 
+    fun hashes(msg: String): String? {
+        val rt22 = rt2s()
+        val rt33 = rt3s()
+        var message = ""
+        for (i in 0 until msg.length) {
+            message += String.format(
+                "%08d",
+                java.lang.Long.toBinaryString(msg[i].toLong()).toLong()
+            ) //msg to binary
+        }
+        val msgLen = String.format(
+            "%064d", java.lang.Long.toBinaryString(
+                message.length.toLong()
+            ).toLong()
+        ) //msg length in binary
+        val chunkno = chunkNo(message) //chuncks required //padding number
+        message += "1"
+        val padding = chunkno * 512 - (message.length + 64)
+        for (i in 0 until padding) {
+            message += "0"
+        } //padding applied
+        message += msgLen
+        var min = 0
+        var max = 512
+        val chunks: ArrayList<String> = ArrayList()
+        for (i in 0 until chunkno) {
+            chunks.add(message.substring(min, max)) //split into chunks of 512bit
+            min += 512
+            max += 512
+        }
+
+        //process the message in successive 512bit chunks:
+        for (i in 0 until chunkno) {
+            val newMsg = chunks[i]
+            min = 0
+            max = 32
+            val msgChunks: ArrayList<String> = ArrayList()
+            for (j in 0..15) {
+                msgChunks.add(newMsg.substring(min, max))
+                min += 32
+                max += 32
+            }
+            for (j in 16..63) { //
+                val s0 = sig0(msgChunks[msgChunks.size - 15])
+                Log.d("aaasig0", s0.toString())
+                val s1 = sig1(msgChunks[msgChunks.size - 2])
+                Log.d("aaasig1", s1.toString())
+                val addup = adder(
+                    msgChunks[msgChunks.size - 16],
+                    s0,
+                    msgChunks[msgChunks.size - 7],
+                    s1
+                )
+                msgChunks.add(addup)
+            }
+            var a = rt22[0]
+            var b = rt22[1]
+            var c = rt22[2]
+            var d = rt22[3]
+            var e = rt22[4]
+            var f = rt22[5]
+            var g = rt22[6]
+            var h = rt22[7]
+            for (j in 0..63) {
+                val S1 = sigma1(e)
+                val ch = cho(e, f, g)
+                val temp1 = addersz(
+                    h.toLong(2) + S1.toLong(2) + ch.toLong(2) + rt33[j]
+                        .toLong(2) + msgChunks[j].toLong(2)
+                )
+                val S0 = sigma0(a)
+                val maj = mj(a, b, c)
+                val temp2 = addersz(S0.toLong(2) + maj.toLong(2))
+                h = g
+                g = f
+                f = e
+                e = addersz(d.toLong(2) + temp1.toLong(2))
+                d = c
+                c = b
+                b = a
+                a = addersz(temp1.toLong(2) + temp2.toLong(2))
+            }
+            rt22[0] = addersz(rt22[0].toLong(2) + a.toLong(2))
+            rt22[1] = addersz(rt22[1].toLong(2) + b.toLong(2))
+            rt22[2] = addersz(rt22[2].toLong(2) + c.toLong(2))
+            rt22[3] = addersz(rt22[3].toLong(2) + d.toLong(2))
+            rt22[4] = addersz(rt22[4].toLong(2) + e.toLong(2))
+            rt22[5] = addersz(rt22[5].toLong(2) + f.toLong(2))
+            rt22[6] = addersz(rt22[6].toLong(2) + g.toLong(2))
+            rt22[7] = addersz(rt22[7].toLong(2) + h.toLong(2))
+        }
+        var digest = ""
+        for (j in 0..7) {
+            digest += rt22[j]
+        }
+        return BigInteger(digest, 2).toString(16)
+    }
+
     fun rt2s(): ArrayList<String> {
         //2^1/2 - 2^1/2 * 2^32
         val rt: ArrayList<String> = ArrayList()

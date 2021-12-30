@@ -94,7 +94,9 @@ class MainActivity : AppCompatActivity() {
         var qq = 0
         btnGenerate.setOnClickListener {
             //sss.hashes("")
-            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",10))
+
+            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            //tvGen.setText(spinner.selectedItem.toString())
 //            if(qq == 0){
 //                tvGen.setText(ss.hashes(""))
 //                qq = 1

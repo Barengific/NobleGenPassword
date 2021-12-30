@@ -9,8 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="-120dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <Button
             android:id="@+id/btnGenerate"
@@ -20,23 +20,25 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.421" />
+            app:layout_constraintVertical_bias="0.441" />
 
         <TextView
             android:id="@+id/tvGen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="344dp"
+            android:layout_height="48dp"
+            android:textIsSelectable="true"
             android:textSize="20sp"
             android:textStyle="normal|bold"
             app:layout_constraintBottom_toTopOf="@+id/btnGenerate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.853" />
+            app:layout_constraintVertical_bias="0.705"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/editTextKeyGen"
@@ -44,11 +46,52 @@
             android:layout_height="59dp"
             android:ems="10"
             android:hint="Password Derivation Key"
+            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/tvGen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.524" />
+            app:layout_constraintVertical_bias="0.172" />
+
+        <Spinner
+            android:id="@+id/p_len_spinner"
+            android:layout_width="74dp"
+            android:layout_height="55dp"
+            android:scrollbarSize="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.762"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.147"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Length"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.154" />
+
+        <TextView
+            android:id="@+id/tvCopy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="4dp"
+            android:text="Copy to clipboard"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_content_copy_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.345" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

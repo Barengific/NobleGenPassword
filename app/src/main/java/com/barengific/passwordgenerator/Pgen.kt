@@ -15,13 +15,14 @@ class Pgen {
     val decode = arrayOf("@","#","£","_","&","-","/","*",";","!","?",".","0","1","2","3","4","5","6","7","8","9","A","B","D","E","F","G","H","K","L","M","N","P","Q","R","S","T","U","V","W","Y","a","b","c","d","e","f","g","h","i","j","k","m","n","p","q","r","s","t","u","v","x","z"
     );
 
-    fun pgen(msg:String, mkey:String, int1:String, int2:String, int3:String, int4:String): String?{
+    fun pgen(msg:String, mkey:String, int1:String, int2:String, int3:String, int4:String, plen:Int): String?{
         val msg = msg
         val mkey = mkey
         val int1 = int1.toInt()
         val int2 = int2.toInt()
         val int3 = int3.toInt()
         val int4 = int4.toInt()
+        val plen = plen.toInt()
 
         var message = ""
         val msgb = hashes(msg)
@@ -41,9 +42,13 @@ class Pgen {
             max += 6
         }
 
+        var res = ""
+        for(i in 0 until plen){
+            val vol = chunks[i].toInt(2)
+            res += decode[vol]
+        }
 
-
-        return null
+        return res
     }
 
     fun hashes(msg:String): String? {

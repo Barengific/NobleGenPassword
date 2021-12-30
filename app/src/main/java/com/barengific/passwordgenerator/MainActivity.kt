@@ -11,8 +11,10 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
@@ -77,6 +79,25 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
+        var arr: Array<String> = arrayOf("0","1","2","3","4","5","6","7","8","9","10")
+        var adapter = CustomAdapter(arr)
+        var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+        recyclerView.setHasFixedSize(false)
+        recyclerView.setAdapter(adapter)
+        recyclerView.setLayoutManager(LinearLayoutManager(this))
+
+        arr = arrayOf("aaa0","aa1","aaa2","aaa3","a4","a5","a6","a7","a8");
+        adapter = CustomAdapter(arr)
+        recyclerView.setAdapter(adapter)
+        adapter.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
+        recyclerView.adapter?.notifyDataSetChanged()
+        adapter.notifyItemRangeChanged(0,5)
+
+
+
+
         val spinner: Spinner = findViewById(R.id.p_len_spinner)
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -124,6 +145,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+//        val cc = CustomAdapter(arr)
+//        cc.onAttachedToRecyclerView(findViewById(R.id.rview))
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -136,5 +162,43 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+}
+
+class CustomAdapter(private val dataSet: Array<String>) :
+    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+
+    /**
+     * Provide a reference to the type of views that you are using
+     * (custom ViewHolder).
+     */
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textView: TextView
+
+        init {
+            // Define click listener for the ViewHolder's View.
+            textView = view.findViewById(R.id.textView)
+        }
+    }
+
+    // Create new views (invoked by the layout manager)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        // Create a new view, which defines the UI of the list item
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.text_row_item, viewGroup, false)
+
+        return ViewHolder(view)
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
+        // Get element from your dataset at this position and replace the
+        // contents of the view with that element
+        viewHolder.textView.text = dataSet[position]
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = dataSet.size
 
 }

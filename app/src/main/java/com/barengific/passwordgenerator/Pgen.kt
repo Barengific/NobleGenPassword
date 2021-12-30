@@ -12,6 +12,9 @@ class Pgen {
         271,        277,        281,        283,        293,        307,        311
     )
 
+    val decode = arrayOf("@","#","£","_","&","-","/","*",";","!","?",".","0","1","2","3","4","5","6","7","8","9","A","B","D","E","F","G","H","K","L","M","N","P","Q","R","S","T","U","V","W","Y","a","b","c","d","e","f","g","h","i","j","k","m","n","p","q","r","s","t","u","v","x","z"
+    );
+
     fun pgen(msg:String, mkey:String, int1:String, int2:String, int3:String, int4:String): String?{
         val msg = msg
         val mkey = mkey
@@ -20,6 +23,23 @@ class Pgen {
         val int3 = int3.toInt()
         val int4 = int4.toInt()
 
+        var message = ""
+        val msgb = hashes(msg)
+        for (i in 0 until msgb!!.length) {
+            message += String.format(
+                "%08d",
+                java.lang.Long.toBinaryString(msgb!![i].toLong()).toLong()
+            ) //msg to binary
+        }
+
+        var min = 0
+        var max = 6
+        val chunks: ArrayList<String> = ArrayList()
+        for (i in 0 until 42) {
+            chunks.add(message.substring(min, max)) //split into chunks of 6bit
+            min += 6
+            max += 6
+        }
 
 
 

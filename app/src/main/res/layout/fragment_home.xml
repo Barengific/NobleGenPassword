@@ -14,8 +14,8 @@
 
         <Button
             android:id="@+id/btnGenerate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="177dp"
+            android:layout_height="57dp"
             android:text="@string/generate"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -92,6 +92,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.345" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rview"
+            android:layout_width="371dp"
+            android:layout_height="326dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnGenerate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -22,7 +22,7 @@ class Pgen {
         val int2 = int2.toInt()
         val int3 = int3.toInt()
         val int4 = int4.toInt()
-        val plen = plen.toInt()
+        val plen = plen
 
         var message = ""
         val msgb = hashes(msg)
@@ -51,7 +51,7 @@ class Pgen {
         return res
     }
 
-    fun hashes(msg:String): String? {
+    fun hashes(msg:String, mkey:String, int1:Int, int2:Int, int3:Int, int4:Int): String? {
         val rt22 = rt2s()
         val rt33 = rt3s()
 
@@ -95,10 +95,10 @@ class Pgen {
                 max += 32
             }
             for (j in 16..63) { //
-//                val s0 = sig0(msgChunks[msgChunks.size - 15], int1, int2, int3, int4)
-//                val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int3, int4)
-                val s0 = sig0(msgChunks[msgChunks.size - 15])
-                val s1 = sig1(msgChunks[msgChunks.size - 2])
+                val s0 = sig0(msgChunks[msgChunks.size - 15], int1, int2, int3, int4)
+                val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int3, int4)
+//                val s0 = sig0(msgChunks[msgChunks.size - 15])
+//                val s1 = sig1(msgChunks[msgChunks.size - 2])
                 val addup = adder(
                     msgChunks[msgChunks.size - 16],
                     s0,
@@ -116,15 +116,15 @@ class Pgen {
             var g = rt22[6]
             var h = rt22[7]
             for (j in 0..63) {
-//                val S1 = sigma1(e, int1, int2, int3, int4)
-                val S1 = sigma1(e)
+                val S1 = sigma1(e, int1, int2, int3, int4)
+//                val S1 = sigma1(e)
                 val ch = cho(e, f, g)
                 val temp1 = addersz(
                     h.toLong(2) + S1.toLong(2) + ch.toLong(2) + rt33[j]
                         .toLong(2) + msgChunks[j].toLong(2)
                 )
-//                val S0 = sigma0(a, int1, int2, int3, int4)
-                val S0 = sigma0(a)
+                val S0 = sigma0(a, int1, int2, int3, int4)
+//                val S0 = sigma0(a)
                 val maj = mj(a, b, c)
                 val temp2 = addersz(S0.toLong(2) + maj.toLong(2))
                 h = g
@@ -216,21 +216,21 @@ class Pgen {
     }
 
     //, int1:Int, int2:Int, int3:Int, int4:Int
-    fun sig0(bits: String): String {
+    fun sig0(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
         val a = rotr(bits, 7)
         val b = rotr(bits, 18)
         val c = shr(bits, 3)
         return xor(a, b, c)
     }
 
-    fun sig1(bits: String): String {
+    fun sig1(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
         val a = rotr(bits, 17)
         val b = rotr(bits, 19)
         val c = shr(bits, 10)
         return xor(a, b, c)
     }
 
-    fun sigma0(bits: String): String {
+    fun sigma0(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
         var res = ""
         val a = rotr(bits, 2)
         val b = rotr(bits, 13)
@@ -239,7 +239,7 @@ class Pgen {
         return res
     }
 
-    fun sigma1(bits: String): String {
+    fun sigma1(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
         var res = ""
         val a = rotr(bits, 6)
         val b = rotr(bits, 11)

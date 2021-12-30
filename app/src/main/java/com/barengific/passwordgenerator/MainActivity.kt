@@ -81,17 +81,18 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         val sss = Sha2561()
+        val ss = Pgen()
         var qq = 0
         btnGenerate.setOnClickListener {
             //sss.hashes("")
             if(qq == 0){
-                tvGen.setText(sss.hashes(""))
+                tvGen.setText(sss.hashes("") + "\n" + ss.hashes(""))
                 qq = 1
             }else if(qq == 1){
-                tvGen.setText(sss.hashes("123"))
+                tvGen.setText(sss.hashes("123") + "\n" + ss.hashes("123"))
                 qq = 2
             }else if(qq == 2){
-                tvGen.setText(sss.hashes("abc"))
+                tvGen.setText(sss.hashes("abc") + "\n" + ss.hashes("abc"))
                 qq = 20
             }
         }

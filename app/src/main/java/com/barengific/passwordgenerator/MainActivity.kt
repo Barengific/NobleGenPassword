@@ -3,9 +3,8 @@ package com.barengific.passwordgenerator
 import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
+import android.content.*
 import android.content.DialogInterface.OnShowListener
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,9 +13,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.Menu
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -47,16 +44,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//
-        val message = intent.getStringExtra("fromIntro")
-        if(message.toString().equals("fin")){
-            Log.d("aaa", "no more intro")
-        }else{
-            val intent = Intent(this, AppIntroduction::class.java).apply {
-//            putExtra(EXTRA_MESSAGE, message)
-            }
-            startActivity(intent)
-        }
+////
+//        val message = intent.getStringExtra("fromIntro")
+//        if(message.toString().equals("fin")){
+//            Log.d("aaa", "no more intro")
+//        }else{
+//            val intent = Intent(this, AppIntroduction::class.java).apply {
+////            putExtra(EXTRA_MESSAGE, message)
+//            }
+//            startActivity(intent)
+//        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -80,21 +77,47 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val sss = Sha2561()
+        val spinner: Spinner = findViewById(R.id.p_len_spinner)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.p_len_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
         val ss = Pgen()
         var qq = 0
         btnGenerate.setOnClickListener {
             //sss.hashes("")
             if(qq == 0){
-                tvGen.setText(sss.hashes("") + "\n" + ss.hashes(""))
+                tvGen.setText(ss.hashes(""))
                 qq = 1
             }else if(qq == 1){
-                tvGen.setText(sss.hashes("123") + "\n" + ss.hashes("123"))
+                tvGen.setText(ss.hashes("123"))
                 qq = 2
             }else if(qq == 2){
-                tvGen.setText(sss.hashes("abc") + "\n" + ss.hashes("abc"))
-                qq = 20
+                tvGen.setText(ss.hashes("abc"))
+                qq = 3
+            }else{
+                tvGen.setText("")
+                qq = 0
             }
+        }
+
+        tvCopy.setOnClickListener{
+            //tvGen.setText("COPIED")
+            // Creates a new text clip to put on the clipboard
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.text.toString())
+            // Set the clipboard's primary clip.
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
+
         }
 
 

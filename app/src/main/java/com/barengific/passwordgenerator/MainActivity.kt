@@ -94,19 +94,20 @@ class MainActivity : AppCompatActivity() {
         var qq = 0
         btnGenerate.setOnClickListener {
             //sss.hashes("")
-            if(qq == 0){
-                tvGen.setText(ss.hashes(""))
-                qq = 1
-            }else if(qq == 1){
-                tvGen.setText(ss.hashes("123"))
-                qq = 2
-            }else if(qq == 2){
-                tvGen.setText(ss.hashes("abc"))
-                qq = 3
-            }else{
-                tvGen.setText("")
-                qq = 0
-            }
+            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",10))
+//            if(qq == 0){
+//                tvGen.setText(ss.hashes(""))
+//                qq = 1
+//            }else if(qq == 1){
+//                tvGen.setText(ss.hashes("123"))
+//                qq = 2
+//            }else if(qq == 2){
+//                tvGen.setText(ss.hashes("abc"))
+//                qq = 3
+//            }else{
+//                tvGen.setText("")
+//                qq = 0
+//            }
         }
 
         tvCopy.setOnClickListener{

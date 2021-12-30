@@ -48,15 +48,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 //
-//        val message = intent.getStringExtra("fromIntro")
-//        if(message.toString().equals("fin")){
-//            Log.d("aaa", "no more intro")
-//        }else{
-//            val intent = Intent(this, AppIntroduction::class.java).apply {
-////            putExtra(EXTRA_MESSAGE, message)
-//            }
-//            startActivity(intent)
-//        }
+        val message = intent.getStringExtra("fromIntro")
+        if(message.toString().equals("fin")){
+            Log.d("aaa", "no more intro")
+        }else{
+            val intent = Intent(this, AppIntroduction::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            }
+            startActivity(intent)
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

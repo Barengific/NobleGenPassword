@@ -16,7 +16,6 @@ class Pgen {
     );
 
     fun pgen(msg:String, mkey:String, int1:String, int2:String, int3:String, int4:String, plen:Int): String?{
-        val msg = msg
         val mkey = mkey
         val int1 = int1.toInt()
         val int2 = int2.toInt()
@@ -25,7 +24,8 @@ class Pgen {
         val plen = plen
 
         var message = ""
-        val msgb = hashes(msg)
+        val msg = msg+hashesPure(mkey)
+        val msgb = hashes(msg, int1, int2, int3, int4)
         for (i in 0 until msgb!!.length) {
             message += String.format(
                 "%08d",
@@ -50,8 +50,12 @@ class Pgen {
 
         return res
     }
+    fun hashesPure(msg:String): String? {
+        val int1 = 0
+        val int2 = 0
+        val int3 = 0
+        val int4 = 0
 
-    fun hashes(msg:String, mkey:String, int1:Int, int2:Int, int3:Int, int4:Int): String? {
         val rt22 = rt2s()
         val rt33 = rt3s()
 
@@ -95,8 +99,8 @@ class Pgen {
                 max += 32
             }
             for (j in 16..63) { //
-                val s0 = sig0(msgChunks[msgChunks.size - 15], int1, int2, int3, int4)
-                val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int3, int4)
+                val s0 = sig0(msgChunks[msgChunks.size - 15], int1, int2, int4)
+                val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int4)
 //                val s0 = sig0(msgChunks[msgChunks.size - 15])
 //                val s1 = sig1(msgChunks[msgChunks.size - 2])
                 val addup = adder(
@@ -116,14 +120,115 @@ class Pgen {
             var g = rt22[6]
             var h = rt22[7]
             for (j in 0..63) {
-                val S1 = sigma1(e, int1, int2, int3, int4)
+                val S1 = sigma1(e, int1, int2, int3)
 //                val S1 = sigma1(e)
                 val ch = cho(e, f, g)
                 val temp1 = addersz(
                     h.toLong(2) + S1.toLong(2) + ch.toLong(2) + rt33[j]
                         .toLong(2) + msgChunks[j].toLong(2)
                 )
-                val S0 = sigma0(a, int1, int2, int3, int4)
+                val S0 = sigma0(a, int1, int2, int3)
+//                val S0 = sigma0(a)
+                val maj = mj(a, b, c)
+                val temp2 = addersz(S0.toLong(2) + maj.toLong(2))
+                h = g
+                g = f
+                f = e
+                e = addersz(d.toLong(2) + temp1.toLong(2))
+                d = c
+                c = b
+                b = a
+                a = addersz(temp1.toLong(2) + temp2.toLong(2))
+            }
+            rt22[0] = addersz(rt22[0].toLong(2) + a.toLong(2))
+            rt22[1] = addersz(rt22[1].toLong(2) + b.toLong(2))
+            rt22[2] = addersz(rt22[2].toLong(2) + c.toLong(2))
+            rt22[3] = addersz(rt22[3].toLong(2) + d.toLong(2))
+            rt22[4] = addersz(rt22[4].toLong(2) + e.toLong(2))
+            rt22[5] = addersz(rt22[5].toLong(2) + f.toLong(2))
+            rt22[6] = addersz(rt22[6].toLong(2) + g.toLong(2))
+            rt22[7] = addersz(rt22[7].toLong(2) + h.toLong(2))
+        }
+        var digest = ""
+        for (j in 0..7) {
+            digest += rt22[j]
+        }
+        return BigInteger(digest, 2).toString(16)
+    }
+
+    fun hashes(msg:String, int1:Int, int2:Int, int3:Int, int4:Int): String? {
+        val rt22 = rt2s()
+        val rt33 = rt3s()
+
+        var message = ""
+        for (i in 0 until msg.length) {
+            message += String.format(
+                "%08d",
+                java.lang.Long.toBinaryString(msg[i].toLong()).toLong()
+            ) //msg to binary
+        }
+        val msgLen = String.format(
+            "%064d", java.lang.Long.toBinaryString(
+                message.length.toLong()
+            ).toLong()
+        ) //msg length in binary
+        val chunkno = chunkNo(message) //chuncks required //padding number
+        message += "1"
+        val padding = chunkno * 512 - (message.length + 64)
+        for (i in 0 until padding) {
+            message += "0"
+        } //padding applied
+        message += msgLen
+        var min = 0
+        var max = 512
+        val chunks: ArrayList<String> = ArrayList()
+        for (i in 0 until chunkno) {
+            chunks.add(message.substring(min, max)) //split into chunks of 512bit
+            min += 512
+            max += 512
+        }
+
+        //process the message in successive 512bit chunks:
+        for (i in 0 until chunkno) {
+            val newMsg = chunks[i]
+            min = 0
+            max = 32
+            val msgChunks: ArrayList<String> = ArrayList()
+            for (j in 0..15) {
+                msgChunks.add(newMsg.substring(min, max))
+                min += 32
+                max += 32
+            }
+            for (j in 16..63) { //
+                val s0 = sig0(msgChunks[msgChunks.size - 15], int1, int2, int4)
+                val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int4)
+//                val s0 = sig0(msgChunks[msgChunks.size - 15])
+//                val s1 = sig1(msgChunks[msgChunks.size - 2])
+                val addup = adder(
+                    msgChunks[msgChunks.size - 16],
+                    s0,
+                    msgChunks[msgChunks.size - 7],
+                    s1
+                )
+                msgChunks.add(addup)
+            }
+            var a = rt22[0]
+            var b = rt22[1]
+            var c = rt22[2]
+            var d = rt22[3]
+            var e = rt22[4]
+            var f = rt22[5]
+            var g = rt22[6]
+            var h = rt22[7]
+            for (j in 0..63) {
+                val S1 = sigma1(e, int1, int2, int3)
+//                val S1 = sigma1(e)
+                val ch = cho(e, f, g)
+                val temp1 = addersz(
+                    h.toLong(2) + S1.toLong(2) + ch.toLong(2) + rt33[j]
+                        .toLong(2) + msgChunks[j].toLong(2)
+                )
+                val S0 = sigma0(a, int1, int2, int3)
 //                val S0 = sigma0(a)
                 val maj = mj(a, b, c)
                 val temp2 = addersz(S0.toLong(2) + maj.toLong(2))
@@ -216,34 +321,34 @@ class Pgen {
     }
 
     //, int1:Int, int2:Int, int3:Int, int4:Int
-    fun sig0(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
-        val a = rotr(bits, 7)
-        val b = rotr(bits, 18)
-        val c = shr(bits, 3)
+    fun sig0(bits: String, int1:Int, int2:Int, int4:Int): String {
+        val a = rotr(bits, 7+int1)
+        val b = rotr(bits, 18-int2)
+        val c = shr(bits, 3+int4)
         return xor(a, b, c)
     }
 
-    fun sig1(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
-        val a = rotr(bits, 17)
-        val b = rotr(bits, 19)
-        val c = shr(bits, 10)
+    fun sig1(bits: String, int1:Int, int2:Int, int4:Int): String {
+        val a = rotr(bits, 17+int1)
+        val b = rotr(bits, 19-int2)
+        val c = shr(bits, 10+(int4/2).toInt())
         return xor(a, b, c)
     }
 
-    fun sigma0(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
+    fun sigma0(bits: String, int1:Int, int2:Int, int3:Int): String {
         var res = ""
-        val a = rotr(bits, 2)
-        val b = rotr(bits, 13)
-        val c = rotr(bits, 22)
+        val a = rotr(bits, 2+int1)
+        val b = rotr(bits, 13-int2)
+        val c = rotr(bits, 22-(int3/2).toInt())
         res = xor(a, b, c)
         return res
     }
 
-    fun sigma1(bits: String, int1:Int, int2:Int, int3:Int, int4:Int): String {
+    fun sigma1(bits: String, int1:Int, int2:Int, int3:Int): String {
         var res = ""
-        val a = rotr(bits, 6)
-        val b = rotr(bits, 11)
-        val c = rotr(bits, 25)
+        val a = rotr(bits, 6+int1)
+        val b = rotr(bits, 11-(int2/2).toInt())
+        val c = rotr(bits, 25-int3)
         res = xor(a, b, c)
         return res
     }

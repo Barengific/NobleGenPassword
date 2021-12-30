@@ -12,13 +12,21 @@ class Pgen {
         271,        277,        281,        283,        293,        307,        311
     )
 
-    fun pgen(msg:String, int1:String, int2:String, int3:String, int4:String, ): String?{
+    fun pgen(msg:String, mkey:String, int1:String, int2:String, int3:String, int4:String): String?{
+        val msg = msg
+        val mkey = mkey
+        val int1 = int1.toInt()
+        val int2 = int2.toInt()
+        val int3 = int3.toInt()
+        val int4 = int4.toInt()
+
+
 
 
         return null
     }
 
-    fun hashes(msg: String): String? {
+    fun hashes(msg:String): String? {
         val rt22 = rt2s()
         val rt33 = rt3s()
 
@@ -62,6 +70,8 @@ class Pgen {
                 max += 32
             }
             for (j in 16..63) { //
+//                val s0 = sig0(msgChunks[msgChunks.size - 15], int1, int2, int3, int4)
+//                val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int3, int4)
                 val s0 = sig0(msgChunks[msgChunks.size - 15])
                 val s1 = sig1(msgChunks[msgChunks.size - 2])
                 val addup = adder(
@@ -81,12 +91,14 @@ class Pgen {
             var g = rt22[6]
             var h = rt22[7]
             for (j in 0..63) {
+//                val S1 = sigma1(e, int1, int2, int3, int4)
                 val S1 = sigma1(e)
                 val ch = cho(e, f, g)
                 val temp1 = addersz(
                     h.toLong(2) + S1.toLong(2) + ch.toLong(2) + rt33[j]
                         .toLong(2) + msgChunks[j].toLong(2)
                 )
+//                val S0 = sigma0(a, int1, int2, int3, int4)
                 val S0 = sigma0(a)
                 val maj = mj(a, b, c)
                 val temp2 = addersz(S0.toLong(2) + maj.toLong(2))
@@ -115,7 +127,7 @@ class Pgen {
         return BigInteger(digest, 2).toString(16)
     }
 
-    fun rt2s(): ArrayList<String> {
+    private fun rt2s(): ArrayList<String> {
         //2^1/2 - 2^1/2 * 2^32
         val rt: ArrayList<String> = ArrayList()
         for (i in rt2.indices) {
@@ -138,7 +150,7 @@ class Pgen {
         return rt
     }
 
-    fun rt3s(): ArrayList<String> {
+    private fun rt3s(): ArrayList<String> {
         //2^1/3 - 2^1/3 * 2^32
         val rt: ArrayList<String> = ArrayList()
         for (i in rt3.indices) {
@@ -175,20 +187,14 @@ class Pgen {
                 }
             }
         }
-        Log.d("aaachunkNo", chunks.toString())
         return chunks
     }
 
+    //, int1:Int, int2:Int, int3:Int, int4:Int
     fun sig0(bits: String): String {
-//        Log.d("aaainsig0", bits)
         val a = rotr(bits, 7)
         val b = rotr(bits, 18)
         val c = shr(bits, 3)
-//        Log.d("aaainsig0A", a)
-//        Log.d("aaainsig0B", b)
-//        Log.d("aaainsig0C", c)
-//
-//        Log.d("aaasig0", xor(a, b, c))
         return xor(a, b, c)
     }
 
@@ -196,7 +202,6 @@ class Pgen {
         val a = rotr(bits, 17)
         val b = rotr(bits, 19)
         val c = shr(bits, 10)
-//        Log.d("aaasig1", xor(a, b, c))
         return xor(a, b, c)
     }
 
@@ -206,7 +211,6 @@ class Pgen {
         val b = rotr(bits, 13)
         val c = rotr(bits, 22)
         res = xor(a, b, c)
-//        Log.d("aaasigma0", res)
         return res
     }
 
@@ -216,51 +220,24 @@ class Pgen {
         val b = rotr(bits, 11)
         val c = rotr(bits, 25)
         res = xor(a, b, c)
-//        Log.d("aaasigma1", res)
-        return xor(a, b, c)
+        return res
     }
 
     fun xor(a: String, b: String, c: String): String {
-//        Log.d("aaainxorA", a)
-//        Log.d("aaainxorB", b)
-//        Log.d("aaainxorC", c)
-
         var res: String = ""
-//        var ress: String = "a"
-//        Log.d("aaainxorQQQQQ", (a[0].digitToInt() xor b[0].digitToInt() xor c[0].digitToInt()).toString())
         for (i in 0 until a.length) {
             if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
                 res += "1"
-//                Log.d("aaainxorIF0", "res")
-//                Log.d("aaainxorIF0", res)
             } else if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0) {
                 res += "0"
-//                Log.d("aaainxorIF1", "res")
-//                Log.d("aaainxorIF1", res.toString())
-//                Log.d("aaainxorIF1", res.length.toString())
-                var qqq: Boolean = res.isNullOrEmpty()
-//                Log.d("aaainxorIF1", qqq.toString())
-//                Log.d("aaainxorIFOUTTT1", ress)
             } else {
-                //Log.d("aaainxorIF2", "res")
-                //Log.d("aaainxorIF2", res)
-//                Log.d("aaainxorIF2", res.toString())
-//                Log.d("aaainxorIF2", res.length.toString())
-//                var qqq: Boolean = res.isNullOrEmpty()
-//                Log.d("aaainxorIF2", qqq.toString())
-//                Log.d("aaainxorIFOUTT2", ress)
                 println("____")
             }
         }
-//        Log.d("aaaxor", res)
         return res
     }
 
     fun adder(a: String, b: String, c: String, d: String): String {
-//        Log.d("aaainadderA", a)
-//        Log.d("aaainadderB", b)
-//        Log.d("aaainadderC", c)
-//        Log.d("aaainadderD", d)
 
         var res = ""
 
@@ -361,7 +338,7 @@ class Pgen {
             ) {
                 res += "0"
             } else {
-                println("maj nothing")
+                //println("maj nothing")
             }
         }
 //        Log.d("aaamj", res)
@@ -385,11 +362,9 @@ class Pgen {
         val target = msg.length - newLen
         msg = msg.substring(target, msg.length)
         if (msg.length != 32) {
-            println("remove zeroes: " + msg.length)
+            //println("remove zeroes: " + msg.length)
         }
-//        Log.d("aaarmZeros", msg)
         return msg
     }
-
 
 }

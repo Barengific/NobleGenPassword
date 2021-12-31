@@ -33,9 +33,13 @@ import com.barengific.passwordgenerator.databinding.ActivityMainBinding
 import kotlinx.coroutines.NonCancellable.cancel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.barengific.passwordgenerator.database.AppDatabase
+import com.barengific.passwordgenerator.database.Word
 import com.cuneytayyildiz.onboarder.utils.visible
 import java.io.File
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.Dispatchers
 import com.barengific.passwordgenerator.Sha256 as Sha2561
 
 class MainActivity : AppCompatActivity() {
@@ -133,6 +137,22 @@ class MainActivity : AppCompatActivity() {
 //            }
         }
 
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries().build()
+
+        val wordDao = db.wordDao()
+
+        val aa = Word(0,"pgen", "hello", "world")
+        val vv = Word(0,"custom", "thisis", "testers")
+
+        wordDao.insertAll(aa)
+        wordDao.insertAll(vv)
+        wordDao.getAll().toString()
+
+
+
         tvCopy.setOnClickListener{
             //tvGen.setText("COPIED")
             // Creates a new text clip to put on the clipboard
@@ -142,11 +162,20 @@ class MainActivity : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
             Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
 
+            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
+                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
         }
 
 
 //        val cc = CustomAdapter(arr)
 //        cc.onAttachedToRecyclerView(findViewById(R.id.rview))
+
+
+
+
+
+
+
 
 
 

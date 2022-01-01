@@ -165,6 +165,10 @@ class MainActivity : AppCompatActivity() {
             tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
                     + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
         }
+        
+        btnSave.setOnClickListener{
+
+        }
 
 
 //        val cc = CustomAdapter(arr)

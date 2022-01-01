@@ -3,10 +3,6 @@ package com.barengific.passwordgenerator
 import android.content.*
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
@@ -31,6 +27,16 @@ import android.widget.Toast
 import android.text.Editable
 
 import android.text.TextWatcher
+import android.view.ContextMenu.ContextMenuInfo
+import android.graphics.PorterDuff
+import android.util.Log
+import android.view.*
+import android.widget.ImageButton
+
+import android.widget.TextView
+
+
+
 
 
 
@@ -172,6 +178,14 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        //
+        //
+        //
+
+        registerForContextMenu(recyclerView);
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -184,6 +198,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+    
+
+
+
 
 }
 
@@ -194,12 +212,19 @@ class CustomAdapter(private val dataSet: List<Word>) :
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
+        val textView1: TextView
+        val textView2: TextView
+        val textView3: TextView
+        val textView4: TextView
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.textView)
+            textView1 = view.findViewById(R.id.textView1)
+            textView2 = view.findViewById(R.id.textView2)
+            textView3 = view.findViewById(R.id.textView3)
+            textView4 = view.findViewById(R.id.textView4)
         }
     }
 
@@ -217,7 +242,10 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet[position].toString()
+        viewHolder.textView1.text = dataSet[position].wid.toString()
+        viewHolder.textView2.text = dataSet[position].pType.toString()
+        viewHolder.textView3.text = dataSet[position].key .toString()
+        viewHolder.textView4.text = dataSet[position].value.toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)

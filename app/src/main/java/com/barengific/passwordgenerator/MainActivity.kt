@@ -41,6 +41,11 @@ import java.io.File
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
 import com.barengific.passwordgenerator.Sha256 as Sha2561
+import android.widget.AdapterView
+
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -147,9 +152,16 @@ class MainActivity : AppCompatActivity() {
             wordDao.insertAll(aa)
         }
 
-        spinner.setOnItemClickListener { parent, view, position, id ->
-            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-        }
+//        spinner.setOnItemClickListener { parent, view, position, id ->
+//            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+//        }
+
+        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            } // to close the onItemSelected
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        })
 
         editTextKeyGen.setOnClickListener{
             tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))

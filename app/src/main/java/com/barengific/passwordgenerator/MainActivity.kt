@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             wordDao.insertAll(aa)
         }
 
-        spinner.setOnClickListener{
+        spinner.setOnItemClickListener { parent, view, position, id ->
             tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
         }
 

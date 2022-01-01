@@ -1,16 +1,8 @@
 package com.barengific.passwordgenerator
 
-import android.Manifest
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.*
-import android.content.DialogInterface.OnShowListener
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -26,25 +18,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.barengific.passwordgenerator.databinding.ActivityMainBinding
-import kotlinx.coroutines.NonCancellable.cancel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
-import com.cuneytayyildiz.onboarder.utils.visible
-import java.io.File
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.Dispatchers
-import com.barengific.passwordgenerator.Sha256 as Sha2561
 import android.widget.AdapterView
 
 import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import android.text.Editable
 
 import android.text.TextWatcher
@@ -94,29 +77,29 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-        //recycle view
-        var arr: Array<String> = arrayOf("0","1","2","3","4","5","6","7","8","9","10")
-        var adapter = CustomAdapter(arr)
-        var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-        recyclerView.setHasFixedSize(false)
-        recyclerView.setAdapter(adapter)
-        recyclerView.setLayoutManager(LinearLayoutManager(this))
-
-        arr = arrayOf("aaa0","aa1","aaa2","aaa3","a4","a5","a6","a7","a8");
-        adapter = CustomAdapter(arr)
-        recyclerView.setAdapter(adapter)
-        adapter.notifyDataSetChanged()
-        adapter.notifyDataSetChanged()
-        recyclerView.adapter?.notifyDataSetChanged()
-        adapter.notifyItemRangeChanged(0,5)
-
         //db initialise
         val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "database-name"
         ).allowMainThreadQueries().build()
         val wordDao = db.wordDao()
+
+        //recycle view
+        val arr = wordDao.getAll()
+        var adapter = CustomAdapter(arr)
+        var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+        recyclerView.setHasFixedSize(false)
+       recyclerView.setAdapter(adapter)
+        recyclerView.setLayoutManager(LinearLayoutManager(this))
+//
+//        arr = arrayOf("aaa0","aa1","aaa2","aaa3","a4","a5","a6","a7","a8");
+//        adapter = CustomAdapter(arr)
+//        recyclerView.setAdapter(adapter)
+//        adapter.notifyDataSetChanged()
+//        adapter.notifyDataSetChanged()
+//        recyclerView.adapter?.notifyDataSetChanged()
+//        adapter.notifyItemRangeChanged(0,5)
+
 
         //length dropdown
         val spinner: Spinner = findViewById(R.id.p_len_spinner)
@@ -156,6 +139,21 @@ class MainActivity : AppCompatActivity() {
         btnSave.setOnClickListener{
             val aa = Word(0,"pgen", editTextKeyGen.text.toString(),  tvGen.text.toString())
             wordDao.insertAll(aa)
+
+            val arrr = wordDao.getAll()
+
+            var adapter = CustomAdapter(arrr)
+            var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+            recyclerView.setHasFixedSize(false)
+            recyclerView.setAdapter(adapter)
+            recyclerView.setLayoutManager(LinearLayoutManager(this))
+
+//            recyclerView.setAdapter(adapter)
+//            adapter.notifyDataSetChanged()
+//            recyclerView.adapter?.notifyDataSetChanged()
+//            adapter.notifyItemRangeChanged(0,5)
+
+            //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
         }
 
         spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
@@ -195,7 +193,7 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class CustomAdapter(private val dataSet: Array<String>) :
+class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     /**
@@ -225,7 +223,7 @@ class CustomAdapter(private val dataSet: Array<String>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
+        viewHolder.textView.text = dataSet[position].toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)

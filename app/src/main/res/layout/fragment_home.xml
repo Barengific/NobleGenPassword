@@ -38,8 +38,9 @@
 
         <TextView
             android:id="@+id/tvGen"
-            android:layout_width="344dp"
+            android:layout_width="342dp"
             android:layout_height="48dp"
+            android:background="@drawable/backwithborder"
             android:textIsSelectable="true"
             android:textSize="20sp"
             android:textStyle="normal|bold"
@@ -49,8 +50,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.705"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:background="@drawable/backwithborder" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/editTextKeyGen"
@@ -97,6 +97,7 @@
             android:id="@+id/tvCopy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/backwithborder"
             android:drawablePadding="4dp"
             android:text="Copy to clipboard"
             android:textSize="16sp"
@@ -105,8 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.345"
-            android:background="@drawable/backwithborder" />
+            app:layout_constraintVertical_bias="0.325" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rview"

@@ -89,10 +89,9 @@ class MainActivity : AppCompatActivity() {
         var adapter = CustomAdapter(arr)
         var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
         recyclerView.setHasFixedSize(false)
-       recyclerView.setAdapter(adapter)
+        recyclerView.setAdapter(adapter)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
-//
-//        arr = arrayOf("aaa0","aa1","aaa2","aaa3","a4","a5","a6","a7","a8");
+
 //        adapter = CustomAdapter(arr)
 //        recyclerView.setAdapter(adapter)
 //        adapter.notifyDataSetChanged()
@@ -170,11 +169,6 @@ class MainActivity : AppCompatActivity() {
                 tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
             }
         })
-
-
-//        val cc = CustomAdapter(arr)
-//        cc.onAttachedToRecyclerView(findViewById(R.id.rview))
-
 
 
 

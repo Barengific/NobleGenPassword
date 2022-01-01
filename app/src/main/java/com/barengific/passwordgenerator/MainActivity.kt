@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-////
+        //intro activity
 //        val message = intent.getStringExtra("fromIntro")
 //        if(message.toString().equals("fin")){
 //            Log.d("aaa", "no more intro")
@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
+        //recycle view
         var arr: Array<String> = arrayOf("0","1","2","3","4","5","6","7","8","9","10")
         var adapter = CustomAdapter(arr)
         var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
@@ -99,9 +100,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter?.notifyDataSetChanged()
         adapter.notifyItemRangeChanged(0,5)
 
+        //db initialise
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries().build()
+        val wordDao = db.wordDao()
 
-
-
+        //length dropdown
         val spinner: Spinner = findViewById(R.id.p_len_spinner)
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -116,69 +122,42 @@ class MainActivity : AppCompatActivity() {
         }
 
         val ss = Pgen()
-        var qq = 0
-        btnGenerate.setOnClickListener {
-            //sss.hashes("")
 
+
+        //Listeners
+        btnGenerate.setOnClickListener {
             tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-            //tvGen.setText(spinner.selectedItem.toString())
-//            if(qq == 0){
-//                tvGen.setText(ss.hashes(""))
-//                qq = 1
-//            }else if(qq == 1){
-//                tvGen.setText(ss.hashes("123"))
-//                qq = 2
-//            }else if(qq == 2){
-//                tvGen.setText(ss.hashes("abc"))
-//                qq = 3
-//            }else{
-//                tvGen.setText("")
-//                qq = 0
-//            }
         }
 
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "database-name"
-        ).allowMainThreadQueries().build()
-
-        val wordDao = db.wordDao()
-
-        val aa = Word(0,"pgen", "hello", "world")
-        val vv = Word(0,"custom", "thisis", "testers")
-
-        wordDao.insertAll(aa)
-        wordDao.insertAll(vv)
-        wordDao.getAll().toString()
-
-
-
         tvCopy.setOnClickListener{
-            //tvGen.setText("COPIED")
             // Creates a new text clip to put on the clipboard
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip: ClipData = ClipData.newPlainText("PGen", tvGen.text.toString())
             // Set the clipboard's primary clip.
             clipboard.setPrimaryClip(clip)
+
             Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
 
             tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
                     + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
         }
-        
-        btnSave.setOnClickListener{
 
+        btnSave.setOnClickListener{
+            val aa = Word(0,"pgen", editTextKeyGen.text.toString(),  tvGen.text.toString())
+            wordDao.insertAll(aa)
+        }
+
+        spinner.setOnClickListener{
+            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+        }
+
+        editTextKeyGen.setOnClickListener{
+            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
         }
 
 
 //        val cc = CustomAdapter(arr)
 //        cc.onAttachedToRecyclerView(findViewById(R.id.rview))
-
-
-
-
-
-
 
 
 

@@ -45,6 +45,12 @@ import android.widget.AdapterView
 
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import android.text.Editable
+
+import android.text.TextWatcher
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -152,10 +158,6 @@ class MainActivity : AppCompatActivity() {
             wordDao.insertAll(aa)
         }
 
-//        spinner.setOnItemClickListener { parent, view, position, id ->
-//            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-//        }
-
         spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
@@ -163,9 +165,13 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         })
 
-        editTextKeyGen.setOnClickListener{
-            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-        }
+        editTextKeyGen.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            }
+        })
 
 
 //        val cc = CustomAdapter(arr)

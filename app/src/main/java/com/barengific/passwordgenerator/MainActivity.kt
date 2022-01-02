@@ -1,7 +1,6 @@
 package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent.getActivity
 import android.content.*
 import android.os.Build
 import android.os.Bundle
@@ -30,31 +29,39 @@ import android.text.Editable
 
 import android.text.TextWatcher
 import android.view.ContextMenu.ContextMenuInfo
-import android.graphics.PorterDuff
 import android.util.Log
 import android.view.*
-import android.widget.ImageButton
 
 import android.widget.TextView
 import android.view.MenuInflater
 
 import android.view.ContextMenu
-import android.content.ClipData.Item
-import android.widget.AdapterView.AdapterContextMenuInfo
-import com.google.android.gms.vision.clearcut.LogUtils
-import java.lang.Exception
-import android.R.menu
-import android.content.SharedPreferences
-import java.security.AccessController.getContext
-
-
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     var arrr: List<Word> = listOf(Word(0,"","",""))
+
+    companion object {
+        var pos: Int = 0
+        fun getPosi() : Int = pos
+        fun setPosi(pos: Int) { this.pos = pos}
+    }
+
+//    init {
+//        0.also { pos = it }
+//    }
+
+    var pos: Int = 0;
+
+//    fun getPosi(): Int {
+//        return pos
+//    }
+//
+//    fun setPosi(pos: Int) {
+//        this.pos = pos
+//    }
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -221,50 +228,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         var position = -1
-        when (item.itemId) {
-            R.id.menu_copy-> {
-                Log.d("aaa", "in copy")
 
+        when (item.itemId) {
+            R.id.menu_copy -> {
+                Log.d("aaaPOOCopy", getPosi().toString())
             }
             R.id.menu_delete -> {
-                Log.d("aaa", "in dellele")
+
+                Log.d("aaamenu_delete", getPosi().toString())
+
             }
             R.id.menu_cancel -> {
-                Log.d("aaa", "in cance")
+                Log.d("aaamenu_cancel",  getPosi().toString())
             }
         }
         return super.onContextItemSelected(item)
     }
 
-//    override fun onContextItemSelected(item: MenuItem): Boolean {
-////        val adapter = CustomAdapter(arrr)
-////        val selectedItem: Item? = adapter.getSelectedItem()
-//////        LogUtils.d .debug("selected " + selectedItem.getContent())
-////        when (item.itemId) {
-////            R.id.menu_delete -> selectedItem?.let { doDelete(it) }
-////        }
-////        val info = item.menuInfo //as AdapterView.AdapterContextMenuInfo
-//////        return super.onContextItemSelected(item)
-////        return when (item.itemId) {
-////            R.id.menu_copy -> {
-////                menuCopy()
-////                true
-////            }
-////            R.id.menu_delete -> {
-////                deleteNote()
-////                true
-////            }
-////            else -> super.onContextItemSelected(item)
-////        }
-//    }
-
-    private fun menuCopy() {
-
-    }
-
-    private fun deleteNote() {
-
-    }
 
 //    override fun onContextItemSelected(item: MenuItem): Boolean {
 //        var position = -1
@@ -295,6 +275,10 @@ class CustomAdapter(private val dataSet: List<Word>) :
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
+    companion object {
+        var position: Int = 0
+        fun getPosi() : Int = position
+    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
         View.OnCreateContextMenuListener {
@@ -313,9 +297,13 @@ class CustomAdapter(private val dataSet: List<Word>) :
 //                Menu.NONE, Menu.NONE
 //                //Menu.NONE, "R.string.restore_backup"
 //            )
+            //menu.add(0, Menu.NONE, getAdapterPosition(), Menu.NONE);
+            //menu.add(0,menu.size(),1,"a")
             //menu.add(R.id.ivMore)
+            Log.d("aaahol", getPosition().toString())
+            MainActivity.pos = getPosition()
+            MainActivity.setPosi(getPosition())
         }
-
 
         val textView1: TextView
         val textView2: TextView
@@ -327,7 +315,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
             fileName = view.findViewById(R.id.textView4) as TextView
             menuButton = view.findViewById(R.id.ivMore) as ImageView
             view.setOnCreateContextMenuListener(this)
-
 
 
             // Define click listener for the ViewHolder's View.
@@ -350,10 +337,14 @@ class CustomAdapter(private val dataSet: List<Word>) :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(v: View?): Boolean {
-                setPosition(viewHolder.getPosition())
+                setPosition(viewHolder.position)
+                setPosition(viewHolder.adapterPosition)
                 return false
             }
         })
+
+        Log.d("aaaholder", viewHolder.adapterPosition.toString())
+        Log.d("aaaholder2", getPosition().toString())
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
@@ -373,6 +364,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
     //
     //
     private var position: Int = 0
+
     fun getPosition(): Int {
         return position
     }

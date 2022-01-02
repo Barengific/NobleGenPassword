@@ -16,6 +16,8 @@
     <string name="Masterkey_phrase">Enter a Master Phrase Key</string>
     <string name="submit">Submit</string>
     <string name="generate">Generate</string>
+    <string name="delete">Delete</string>
+    <string name="copy">Copy</string>
 
     <string-array name="p_len_array">
         <item>4</item>

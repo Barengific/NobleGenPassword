@@ -1,5 +1,7 @@
 package com.barengific.passwordgenerator
 
+import android.annotation.SuppressLint
+import android.app.PendingIntent.getActivity
 import android.content.*
 import android.os.Build
 import android.os.Bundle
@@ -34,10 +36,16 @@ import android.view.*
 import android.widget.ImageButton
 
 import android.widget.TextView
+import android.view.MenuInflater
 
-
-
-
+import android.view.ContextMenu
+import android.content.ClipData.Item
+import android.widget.AdapterView.AdapterContextMenuInfo
+import com.google.android.gms.vision.clearcut.LogUtils
+import java.lang.Exception
+import android.R.menu
+import android.content.SharedPreferences
+import java.security.AccessController.getContext
 
 
 
@@ -46,9 +54,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    var arrr: List<Word> = listOf(Word(0,"","",""))
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         //intro activity
 //        val message = intent.getStringExtra("fromIntro")
@@ -145,7 +156,7 @@ class MainActivity : AppCompatActivity() {
             val aa = Word(0,"pgen", editTextKeyGen.text.toString(),  tvGen.text.toString())
             wordDao.insertAll(aa)
 
-            val arrr = wordDao.getAll()
+            arrr = wordDao.getAll()
 
             var adapter = CustomAdapter(arrr)
             var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
@@ -180,10 +191,12 @@ class MainActivity : AppCompatActivity() {
 
         //
         //
-        //
+//        //
 
         registerForContextMenu(recyclerView);
+        val ustomAdapter = CustomAdapter(arr)
 
+        //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
 
 
     }
@@ -198,8 +211,79 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-    
 
+//
+    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater: MenuInflater = this.menuInflater //getActivity().getMenuInflater()
+        inflater.inflate(R.menu.rv_menu_context, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        var position = -1
+        when (item.itemId) {
+            R.id.menu_copy-> {
+                Log.d("aaa", "in copy")
+
+            }
+            R.id.menu_delete -> {
+                Log.d("aaa", "in dellele")
+            }
+            R.id.menu_cancel -> {
+                Log.d("aaa", "in cance")
+            }
+        }
+        return super.onContextItemSelected(item)
+    }
+
+//    override fun onContextItemSelected(item: MenuItem): Boolean {
+////        val adapter = CustomAdapter(arrr)
+////        val selectedItem: Item? = adapter.getSelectedItem()
+//////        LogUtils.d .debug("selected " + selectedItem.getContent())
+////        when (item.itemId) {
+////            R.id.menu_delete -> selectedItem?.let { doDelete(it) }
+////        }
+////        val info = item.menuInfo //as AdapterView.AdapterContextMenuInfo
+//////        return super.onContextItemSelected(item)
+////        return when (item.itemId) {
+////            R.id.menu_copy -> {
+////                menuCopy()
+////                true
+////            }
+////            R.id.menu_delete -> {
+////                deleteNote()
+////                true
+////            }
+////            else -> super.onContextItemSelected(item)
+////        }
+//    }
+
+    private fun menuCopy() {
+
+    }
+
+    private fun deleteNote() {
+
+    }
+
+//    override fun onContextItemSelected(item: MenuItem): Boolean {
+//        var position = -1
+//        position = try {
+//            (LocaleProviderAdapter.getAdapter() as BackupRestoreListAdapter).getPosition()
+//        } catch (e: Exception) {
+//            Log.d("TAG", e.localizedMessage, e)
+//            return super.onContextItemSelected(item)
+//        }
+//        when (item.itemId) {
+//            R.id.ctx_menu_remove_backup -> {}
+//            R.id.ctx_menu_restore_backup -> {}
+//        }
+//        return super.onContextItemSelected(item)
+//    }
+
+    public fun getContext(): Context? {
+        return this.getApplicationContext()
+    }
 
 
 
@@ -207,28 +291,54 @@ class MainActivity : AppCompatActivity() {
 
 class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
+        View.OnCreateContextMenuListener {
+        var icon: ImageView
+        var fileName: TextView
+        var menuButton: ImageView
+        @SuppressLint("ResourceType")
+        override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
+            //menuInfo is null
+//            menu.add(
+//                Menu.NONE, Menu.NONE, Menu.NONE, Menu.NONE
+//                //Menu.NONE, "R.string.remove_backup"
+//            )
+//            menu.add(
+//                R.id.ivCopy, "Copy",
+//                Menu.NONE, Menu.NONE
+//                //Menu.NONE, "R.string.restore_backup"
+//            )
+            //menu.add(R.id.ivMore)
+        }
+
+
         val textView1: TextView
         val textView2: TextView
         val textView3: TextView
         val textView4: TextView
 
         init {
+            icon = view.findViewById(R.id.ivCopy) as ImageView
+            fileName = view.findViewById(R.id.textView4) as TextView
+            menuButton = view.findViewById(R.id.ivMore) as ImageView
+            view.setOnCreateContextMenuListener(this)
+
+
+
             // Define click listener for the ViewHolder's View.
             textView1 = view.findViewById(R.id.textView1)
             textView2 = view.findViewById(R.id.textView2)
             textView3 = view.findViewById(R.id.textView3)
             textView4 = view.findViewById(R.id.textView4)
         }
+
     }
 
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
@@ -237,8 +347,13 @@ class CustomAdapter(private val dataSet: List<Word>) :
         return ViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
+            override fun onLongClick(v: View?): Boolean {
+                setPosition(viewHolder.getPosition())
+                return false
+            }
+        })
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
@@ -248,7 +363,24 @@ class CustomAdapter(private val dataSet: List<Word>) :
         viewHolder.textView4.text = dataSet[position].value.toString()
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    override fun onViewRecycled(holder: ViewHolder) {
+        holder.itemView.setOnLongClickListener(null)
+        super.onViewRecycled(holder)
+    }
+
     override fun getItemCount() = dataSet.size
+    ///
+    //
+    //
+    private var position: Int = 0
+    fun getPosition(): Int {
+        return position
+    }
+    fun setPosition(position: Int) {
+        this.position = position
+    }
 
 }
+
+
+

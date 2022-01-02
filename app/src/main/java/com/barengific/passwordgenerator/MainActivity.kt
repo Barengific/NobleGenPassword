@@ -154,9 +154,16 @@ class MainActivity : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
+//
+          tvGen.setText(getPosi().toString())
+//            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
+//                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
 
-            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
-                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
+            val text1: TextView? =
+                recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+                    R.id.textView4)
+
+            Log.d("aaacc", text1?.text.toString())
         }
 
         btnSave.setOnClickListener{
@@ -228,10 +235,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         var position = -1
-
+        Log.d("aaaonContextItemSelected", item.order.toString())
         when (item.itemId) {
             R.id.menu_copy -> {
                 Log.d("aaaPOOCopy", getPosi().toString())
+
+//                val text1: TextView =
+//                    yourRecyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(
+//                        R.id.textView1
+//                    )
             }
             R.id.menu_delete -> {
 
@@ -303,6 +315,8 @@ class CustomAdapter(private val dataSet: List<Word>) :
             Log.d("aaahol", getPosition().toString())
             MainActivity.pos = getPosition()
             MainActivity.setPosi(getPosition())
+
+            menu.setHeaderTitle("Hi")
         }
 
         val textView1: TextView

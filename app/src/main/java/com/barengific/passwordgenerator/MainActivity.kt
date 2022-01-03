@@ -38,6 +38,7 @@ import android.view.MenuInflater
 import android.view.ContextMenu
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -73,7 +74,6 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         //intro activity
 //        val message = intent.getStringExtra("fromIntro")
@@ -150,8 +150,9 @@ class MainActivity : AppCompatActivity() {
 
         //Listeners
         btnGenerate.setOnClickListener {
-            tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
         }
+        editTextKeyGen.editText.toString()
 
         tvCopy.setOnClickListener{
             // Creates a new text clip to put on the clipboard
@@ -165,16 +166,17 @@ class MainActivity : AppCompatActivity() {
           //tvGen.setText(getPosi().toString())
 //            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
 //                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
-
-            val text1: TextView? =
-                recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                    R.id.textView4)
-
-            Log.d("aaacc", text1?.text.toString())
+//
+//            val text1: TextView? =
+//                recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+//                    R.id.textView4)
+//
+//            Log.d("aaacc", text1?.text.toString())
+//            Log.d("aaa", editTextKeyGen.editText?.text.toString())
         }
 
         btnSave.setOnClickListener{
-            val aa = Word(0,"pgen", editTextKeyGen.text.toString(),  tvGen.text.toString())
+            val aa = Word(0,"pgen", editTextKeyGen.editText.toString(),  tvGen.text.toString())
             wordDao.insertAll(aa)
 
             arrr = wordDao.getAll()
@@ -195,19 +197,18 @@ class MainActivity : AppCompatActivity() {
 
         spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+                tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
             } // to close the onItemSelected
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         })
 
-        editTextKeyGen.addTextChangedListener(object : TextWatcher {
+        editTextKeyGen.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                tvGen.setText(ss.pgen(editTextKeyGen.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+                tvGen.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
             }
         })
-
 
 
         //
@@ -274,16 +275,14 @@ class MainActivity : AppCompatActivity() {
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
                         R.id.textView4)
 
-                //Log.d("aaamenu_delete", getPosi().toString())
-
                 var a = Word(wid?.text.toString().toInt(), pType?.text.toString(), key?.text.toString(), value?.text.toString())
                 db.wordDao().delete(a)
                 arrr = wordDao.getAll()
                 var adapter = CustomAdapter(arrr)
-                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
+                db.close()
 
             }
             R.id.menu_cancel -> {
@@ -293,39 +292,11 @@ class MainActivity : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 
-
-
-
-
-//    override fun onContextItemSelected(item: MenuItem): Boolean {
-//        var position = -1
-//        position = try {
-//            (LocaleProviderAdapter.getAdapter() as BackupRestoreListAdapter).getPosition()
-//        } catch (e: Exception) {
-//            Log.d("TAG", e.localizedMessage, e)
-//            return super.onContextItemSelected(item)
-//        }
-//        when (item.itemId) {
-//            R.id.ctx_menu_remove_backup -> {}
-//            R.id.ctx_menu_restore_backup -> {}
-//        }
-//        return super.onContextItemSelected(item)
-//    }
-
-//    public fun getContext(): Context? {
-//        return this.getApplicationContext()
-//    }
-
-
-
 }
 
 class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
+
     companion object {
         var position: Int = 0
         fun getPosi() : Int = position
@@ -351,11 +322,11 @@ class CustomAdapter(private val dataSet: List<Word>) :
             //menu.add(0, Menu.NONE, getAdapterPosition(), Menu.NONE);
             //menu.add(0,menu.size(),1,"a")
             //menu.add(R.id.ivMore)
-            Log.d("aaahol", getPosition().toString())
+//            Log.d("aaahol", getPosition().toString())
             MainActivity.pos = getPosition()
             MainActivity.setPosi(getPosition())
 
-            menu.setHeaderTitle("Hi")
+//            menu.setHeaderTitle("Hi")
         }
 
         val textView1: TextView

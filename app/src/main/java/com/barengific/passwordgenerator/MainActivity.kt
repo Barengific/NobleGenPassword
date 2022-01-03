@@ -140,23 +140,23 @@ class MainActivity : AppCompatActivity() {
 
 
         //length dropdown
-        val spinner: Spinner = findViewById(R.id.p_len_spinner)
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.p_len_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-        }
+//        val spinner: Spinner = findViewById(R.id.p_len_spinner)
+//        // Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter.createFromResource(
+//            this,
+//            R.array.p_len_array,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            spinner.adapter = adapter
+//        }
 
 
         //length dropdown
         val Lines = resources.getStringArray(R.array.p_len_array).toList()
-        val adapterr = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, Lines)
+        val adapterr = ArrayAdapter(this, R.layout.length_layout, Lines)
         filled_exposed_dropdown.setAdapter(adapterr)
         //filled_exposed_dropdown.setText("10",false)
 
@@ -179,7 +179,13 @@ class MainActivity : AppCompatActivity() {
         //Listeners
         btnGenerate.setOnClickListener {
             //tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-            tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            if(filled_exposed_dropdown.hasSelection()){
+                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
+            }else{
+                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",10))
+            }
+
         }
 
 
@@ -224,16 +230,17 @@ class MainActivity : AppCompatActivity() {
             //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
         }
 
-        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-            } // to close the onItemSelected
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        })
+//        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+//            } // to close the onItemSelected
+//            override fun onNothingSelected(parent: AdapterView<*>?) {}
+//        })
 
-        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
+        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->Int
             val selection = parent.getItemAtPosition(position) as String
             Log.d("aaanewMAterialSpinner", selection)
+            tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",selection.toInt()))
 
         })
 
@@ -248,7 +255,12 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+                if(filled_exposed_dropdown.hasSelection()){
+                    tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
+                }else{
+                    tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",10))
+                }
+                //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
             }
         })
 

@@ -34,13 +34,13 @@
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCopy"
-                app:layout_constraintVertical_bias="0.002" />
+                app:layout_constraintVertical_bias="0.01" />
 
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="57dp"
-                android:text="Save"
+                android:text="@string/btnSave"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -48,12 +48,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvCopy"
                 app:layout_constraintVertical_bias="0.063" />
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvGen"
                 android:layout_width="342dp"
                 android:layout_height="48dp"
                 android:background="@drawable/backwithborder"
-                android:textIsSelectable="true"
+                android:editable="false"
+                android:textIsSelectable="false"
                 android:textSize="20sp"
                 android:textStyle="normal|bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +63,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/p_len_spinner"
                 app:layout_constraintVertical_bias="0.0"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="MissingClass,SpeakableTextPresentCheck"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTextKeyGen"
@@ -70,18 +80,22 @@
                 android:layout_height="59dp"
                 android:background="@drawable/backwithborder"
                 android:ems="10"
-                android:hint="Password Derivation Key"
+                android:hint="@string/textfield_password_derivation_key"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.043" >
+                app:layout_constraintVertical_bias="0.043"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:startIconContentDescription="AAAA"
+                app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:inputType="textPassword"
+                    tools:ignore="TextContrastCheck,TextContrastCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -103,14 +117,15 @@
                 android:id="@+id/tvLength"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Length"
+                android:text="@string/text_view_length"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/p_len_spinner"
                 app:layout_constraintHorizontal_bias="0.878"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextKeyGen"
-                app:layout_constraintVertical_bias="0.041" />
+                app:layout_constraintVertical_bias="0.041"
+            tools:ignore="MissingClass" />
 
             <TextView
                 android:id="@+id/tvCopy"
@@ -118,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/backwithborder"
                 android:drawablePadding="4dp"
-                android:text="Copy to clipboard"
+                android:text="@string/text_view_copy_to_clipboard"
                 android:textSize="16sp"
                 app:drawableStartCompat="@drawable/ic_content_copy_24"
                 app:layout_constraintBottom_toBottomOf="parent"

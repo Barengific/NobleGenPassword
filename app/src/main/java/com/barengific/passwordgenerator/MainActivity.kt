@@ -63,6 +63,8 @@ class MainActivity : AppCompatActivity() {
 //        this.pos = pos
 //    }
 
+    lateinit var recyclerView: RecyclerView
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         //recycle view
         val arr = wordDao.getAll()
         var adapter = CustomAdapter(arr)
-        var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+        recyclerView = findViewById<View>(R.id.rview) as RecyclerView
         recyclerView.setHasFixedSize(false)
         recyclerView.setAdapter(adapter)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
@@ -173,7 +175,7 @@ class MainActivity : AppCompatActivity() {
             arrr = wordDao.getAll()
 
             var adapter = CustomAdapter(arrr)
-            var recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+            //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
             recyclerView.setHasFixedSize(false)
             recyclerView.setAdapter(adapter)
             recyclerView.setLayoutManager(LinearLayoutManager(this))
@@ -234,16 +236,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        var position = -1
-        Log.d("aaaonContextItemSelected", item.order.toString())
+        //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+        //var position = -1
+        //Log.d("aaaContextItemSelected", item.order.toString())
         when (item.itemId) {
             R.id.menu_copy -> {
                 Log.d("aaaPOOCopy", getPosi().toString())
 
-//                val text1: TextView =
-//                    yourRecyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(
-//                        R.id.textView1
-//                    )
+
+                val text1: TextView? =
+                    recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+                        R.id.textView4)
+
+                Log.d("aaaPOOCopy1111", text1?.text.toString())
+                Log.d("aaaPOOCopy1111", recyclerView.adapter?.itemCount.toString())
             }
             R.id.menu_delete -> {
 
@@ -273,9 +279,9 @@ class MainActivity : AppCompatActivity() {
 //        return super.onContextItemSelected(item)
 //    }
 
-    public fun getContext(): Context? {
-        return this.getApplicationContext()
-    }
+//    public fun getContext(): Context? {
+//        return this.getApplicationContext()
+//    }
 
 
 

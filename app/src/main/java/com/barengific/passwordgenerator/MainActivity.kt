@@ -22,12 +22,12 @@ import androidx.room.Room
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
 import kotlinx.android.synthetic.main.fragment_home.*
-import android.widget.AdapterView
 
 import android.widget.Toast
 import android.text.Editable
 
 import android.text.TextWatcher
+import android.util.Base64
 import android.view.ContextMenu.ContextMenuInfo
 import android.util.Log
 import android.view.*
@@ -36,14 +36,19 @@ import android.widget.TextView
 import android.view.MenuInflater
 
 import android.view.ContextMenu
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.length_layout.*
 import android.widget.AdapterView.OnItemClickListener
-
-
+import com.barengific.passwordgenerator.crypt.Encode.encode
+import com.barengific.passwordgenerator.crypt.Decode.decode
+import java.io.UnsupportedEncodingException
+import java.security.InvalidAlgorithmParameterException
+import java.security.InvalidKeyException
+import java.security.NoSuchAlgorithmException
+import java.security.spec.InvalidKeySpecException
+import java.security.spec.InvalidParameterSpecException
+import javax.crypto.*
+import javax.crypto.spec.SecretKeySpec
 
 
 class MainActivity : AppCompatActivity() {
@@ -186,6 +191,25 @@ class MainActivity : AppCompatActivity() {
                 tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",10))
             }
 
+            Log.d("aaa", "in gennnnn")
+            // get text from edittext
+            // pass the string to the encryption
+            // algorithm and get the encrypted code
+            val rv = encode("Hello")
+            // set the code to the edit text
+            Log.d("aaaENNN", rv)
+
+
+
+
+            // get code from edittext
+            Log.d("aaa", "text - $rv")
+            // pass the string to the decryption algorithm
+            // and get the decrypted text
+            val rv2 = decode(rv)
+            // set the text to the edit text for display
+            Log.d("aaaDEC", rv2)
+
         }
 
 
@@ -269,6 +293,16 @@ class MainActivity : AppCompatActivity() {
 
         //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
 
+        val plaintext: ByteArray = "...".encodeToByteArray()
+        val keygen = KeyGenerator.getInstance("AES")
+        keygen.init(256)
+        val key: SecretKey = keygen.generateKey()
+        val cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING")
+        cipher.init(Cipher.ENCRYPT_MODE, key)
+        val ciphertext: ByteArray = cipher.doFinal(plaintext)
+        val iv: ByteArray = cipher.iv
+
+        
 
     }
 
@@ -340,6 +374,49 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onContextItemSelected(item)
+    }
+
+
+    @Throws(
+        NoSuchAlgorithmException::class,
+        NoSuchPaddingException::class,
+        InvalidKeyException::class,
+        InvalidParameterSpecException::class,
+        IllegalBlockSizeException::class,
+        BadPaddingException::class,
+        UnsupportedEncodingException::class
+    )
+    fun encryptMsg(message: String, secret: SecretKey?): String? {
+        var cipher: Cipher? = null
+        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+        cipher.init(Cipher.ENCRYPT_MODE, secret)
+        val cipherText: ByteArray = cipher.doFinal(message.toByteArray(charset("UTF-8")))
+        return Base64.encodeToString(cipherText, Base64.NO_WRAP)
+    }
+
+    @Throws(
+        NoSuchPaddingException::class,
+        NoSuchAlgorithmException::class,
+        InvalidParameterSpecException::class,
+        InvalidAlgorithmParameterException::class,
+        InvalidKeyException::class,
+        BadPaddingException::class,
+        IllegalBlockSizeException::class,
+        UnsupportedEncodingException::class
+    )
+    fun decryptMsg(cipherText: String?, secret: SecretKey?): String? {
+        var cipher: Cipher? = null
+        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+        cipher.init(Cipher.DECRYPT_MODE, secret)
+        val decode: ByteArray = Base64.decode(cipherText, Base64.NO_WRAP)
+        return String(cipher.doFinal(decode), 'U')
+    }
+
+    @Throws(NoSuchAlgorithmException::class, InvalidKeySpecException::class)
+    fun generateKey(key: String): SecretKey? {
+        val secret: SecretKeySpec
+        secret = SecretKeySpec(key.toByteArray(), "AES")
+        return secret
     }
 
 }

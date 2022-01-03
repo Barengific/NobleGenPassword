@@ -36,6 +36,8 @@ import android.widget.TextView
 import android.view.MenuInflater
 
 import android.view.ContextMenu
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -64,6 +66,9 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     lateinit var recyclerView: RecyclerView
+//    lateinit var db = Room.databaseBuilder(applicationContext,
+//        AppDatabase::class.java, "database-name"
+//    ).allowMainThreadQueries().build()
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -236,9 +241,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-        //var position = -1
-        //Log.d("aaaContextItemSelected", item.order.toString())
         when (item.itemId) {
             R.id.menu_copy -> {
                 val text1: TextView? =
@@ -251,8 +253,37 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
             }
             R.id.menu_delete -> {
+                val db = Room.databaseBuilder(
+                    applicationContext,
+                    AppDatabase::class.java, "database-name"
+                ).allowMainThreadQueries().build()
+                val wordDao = db.wordDao()
+//                arrr = wordDao.getAll()
+//                Log.d("aaamenu_delete", arrr.toString())
 
-                Log.d("aaamenu_delete", getPosi().toString())
+                val wid: TextView? =
+                    recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+                        R.id.textView1)
+                val pType: TextView? =
+                    recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+                        R.id.textView2)
+                val key: TextView? =
+                    recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+                        R.id.textView3)
+                val value: TextView? =
+                    recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+                        R.id.textView4)
+
+                //Log.d("aaamenu_delete", getPosi().toString())
+
+                var a = Word(wid?.text.toString().toInt(), pType?.text.toString(), key?.text.toString(), value?.text.toString())
+                db.wordDao().delete(a)
+                arrr = wordDao.getAll()
+                var adapter = CustomAdapter(arrr)
+                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                recyclerView.setHasFixedSize(false)
+                recyclerView.setAdapter(adapter)
+                recyclerView.setLayoutManager(LinearLayoutManager(this))
 
             }
             R.id.menu_cancel -> {
@@ -261,6 +292,9 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onContextItemSelected(item)
     }
+
+
+
 
 
 //    override fun onContextItemSelected(item: MenuItem): Boolean {

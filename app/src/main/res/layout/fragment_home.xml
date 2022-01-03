@@ -32,7 +32,6 @@
                 android:layout_width="409dp"
                 android:layout_height="57dp"
                 android:background="@drawable/backwithborder"
-                android:ems="10"
                 android:hint="@string/textfield_password_derivation_key"
                 android:textSize="20sp"
                 app:endIconMode="password_toggle"
@@ -41,7 +40,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_bias="0.01"
                 app:startIconContentDescription="AAAA"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
@@ -53,35 +52,34 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--            textview generate-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dropdownmenu"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="409dp"
                 android:layout_height="57dp"
+                android:background="@drawable/backwithborder"
                 android:hint="Length"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/editTextKeyGen"
-                app:layout_constraintVertical_bias="0.0"
-                android:background="@drawable/backwithborder"
+                app:layout_constraintVertical_bias="0.01"
                 app:startIconDrawable="@drawable/ic_baseline_format_list_numbered_24">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/filled_exposed_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="none"/>
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            textview generate-->
             <Button
                 android:id="@+id/btnGenerate"
                 android:layout_width="409dp"
                 android:layout_height="57dp"
-                android:layout_marginTop="24dp"
                 android:text="@string/generate"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +87,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dropdownmenu"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.01" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvGen"
@@ -106,7 +104,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnGenerate"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_bias="0.01"
                 tools:ignore="MissingClass,SpeakableTextPresentCheck">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -134,7 +132,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvGen"
-                app:layout_constraintVertical_bias="0.05" />
+                app:layout_constraintVertical_bias="0.03" />
 
             <!--            recyclerview db-->
             <Button
@@ -146,19 +144,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCopy"
-                app:layout_constraintVertical_bias="0.05" />
+                app:layout_constraintVertical_bias="0.03" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rview"
                 android:layout_width="0dp"
-                android:layout_height="361dp"
+                android:layout_height="370dp"
                 android:background="@drawable/backwithborder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnSave"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.01" />
 
 
             <!--            material dropdown menu-->

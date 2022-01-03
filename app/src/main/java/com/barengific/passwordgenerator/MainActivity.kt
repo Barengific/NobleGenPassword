@@ -241,15 +241,20 @@ class MainActivity : AppCompatActivity() {
         //Log.d("aaaContextItemSelected", item.order.toString())
         when (item.itemId) {
             R.id.menu_copy -> {
-                Log.d("aaaPOOCopy", getPosi().toString())
+                //Log.d("aaaPOOCopy", getPosi().toString())
 
 
                 val text1: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
                         R.id.textView4)
 
-                Log.d("aaaPOOCopy1111", text1?.text.toString())
-                Log.d("aaaPOOCopy1111", recyclerView.adapter?.itemCount.toString())
+                //Log.d("aaaPOOCopy1111", text1?.text.toString())
+                //Log.d("aaaPOOCopy1111", recyclerView.adapter?.itemCount.toString())
+
+                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip: ClipData = ClipData.newPlainText("PGen", text1?.text.toString())
+                // Set the clipboard's primary clip.
+                clipboard.setPrimaryClip(clip)
             }
             R.id.menu_delete -> {
 
@@ -336,7 +341,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
             menuButton = view.findViewById(R.id.ivMore) as ImageView
             view.setOnCreateContextMenuListener(this)
 
-
             // Define click listener for the ViewHolder's View.
             textView1 = view.findViewById(R.id.textView1)
             textView2 = view.findViewById(R.id.textView2)
@@ -363,8 +367,8 @@ class CustomAdapter(private val dataSet: List<Word>) :
             }
         })
 
-        Log.d("aaaholder", viewHolder.adapterPosition.toString())
-        Log.d("aaaholder2", getPosition().toString())
+            //Log.d("aaaholder", viewHolder.adapterPosition.toString())
+        //Log.d("aaaholder2", getPosition().toString())
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element

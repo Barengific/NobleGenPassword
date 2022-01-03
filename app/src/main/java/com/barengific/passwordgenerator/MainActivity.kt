@@ -150,14 +150,15 @@ class MainActivity : AppCompatActivity() {
 
         //Listeners
         btnGenerate.setOnClickListener {
-            tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            //tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
         }
-        editTextKeyGen.editText.toString()
+
 
         tvCopy.setOnClickListener{
             // Creates a new text clip to put on the clipboard
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.text.toString())
+            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
             // Set the clipboard's primary clip.
             clipboard.setPrimaryClip(clip)
 
@@ -176,7 +177,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener{
-            val aa = Word(0,"pgen", editTextKeyGen.editText.toString(),  tvGen.text.toString())
+            val aa = Word(0,"pgen", editTextKeyGen.editText?.text.toString(),  tvGen.editText?.text.toString())
             wordDao.insertAll(aa)
 
             arrr = wordDao.getAll()
@@ -197,7 +198,7 @@ class MainActivity : AppCompatActivity() {
 
         spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
             } // to close the onItemSelected
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         })
@@ -206,14 +207,9 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                tvGen.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
             }
         })
-
-
-        //
-        //
-//        //
 
         registerForContextMenu(recyclerView);
         val ustomAdapter = CustomAdapter(arr)

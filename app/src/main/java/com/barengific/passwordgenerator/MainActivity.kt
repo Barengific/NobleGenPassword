@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
 //
-          tvGen.setText(getPosi().toString())
+          //tvGen.setText(getPosi().toString())
 //            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
 //                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
 
@@ -241,20 +241,14 @@ class MainActivity : AppCompatActivity() {
         //Log.d("aaaContextItemSelected", item.order.toString())
         when (item.itemId) {
             R.id.menu_copy -> {
-                //Log.d("aaaPOOCopy", getPosi().toString())
-
-
                 val text1: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
                         R.id.textView4)
 
-                //Log.d("aaaPOOCopy1111", text1?.text.toString())
-                //Log.d("aaaPOOCopy1111", recyclerView.adapter?.itemCount.toString())
-
                 val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clip: ClipData = ClipData.newPlainText("PGen", text1?.text.toString())
-                // Set the clipboard's primary clip.
                 clipboard.setPrimaryClip(clip)
+                Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
             }
             R.id.menu_delete -> {
 

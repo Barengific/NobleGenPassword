@@ -41,6 +41,10 @@ import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.length_layout.*
+import android.widget.AdapterView.OnItemClickListener
+
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -154,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         val Lines = resources.getStringArray(R.array.p_len_array).toList()
         val adapterr = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, Lines)
         filled_exposed_dropdown.setAdapter(adapterr)
-        filled_exposed_dropdown.setText("10",false)
+        //filled_exposed_dropdown.setText("10",false)
 
 //        (TextField.editableText as? AutoCompleteTextView)?.setAdapter(adapterr)
 ////        val spinnerr: Spinner = findViewById(R.id.filled_exposed_dropdown)
@@ -226,6 +230,19 @@ class MainActivity : AppCompatActivity() {
             } // to close the onItemSelected
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         })
+
+        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
+            val selection = parent.getItemAtPosition(position) as String
+            Log.d("aaanewMAterialSpinner", selection)
+
+        })
+
+//
+//        autoCompleteTextView.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
+//            val selection = parent.getItemAtPosition(position) as String
+//            //TODO Do something with the selected text
+//        })
+
 
         editTextKeyGen.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}

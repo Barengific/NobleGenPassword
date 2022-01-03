@@ -12,12 +12,13 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="dialog_fire_missiles">\"BARZ\"</string>
     <string name="fire">\"HAA FIRES\"</string>
-    <string name="cancel">\"Cannsl</string>
+    <string name="cancel">\"Cancel</string>
     <string name="Masterkey_phrase">Enter a Master Phrase Key</string>
     <string name="submit">Submit</string>
     <string name="generate">Generate</string>
     <string name="delete">Delete</string>
     <string name="copy">Copy</string>
+    <string name="action_about">About</string>
 
     <string-array name="p_len_array">
         <item>4</item>

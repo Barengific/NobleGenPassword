@@ -36,9 +36,11 @@ import android.widget.TextView
 import android.view.MenuInflater
 
 import android.view.ContextMenu
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.length_layout.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 //        AppDatabase::class.java, "database-name"
 //    ).allowMainThreadQueries().build()
 
+    @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,6 +149,26 @@ class MainActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
+
+        //length dropdown
+        val Lines = resources.getStringArray(R.array.p_len_array).toList()
+        val adapterr = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, Lines)
+        filled_exposed_dropdown.setAdapter(adapterr)
+        filled_exposed_dropdown.setText("10",false)
+
+//        (TextField.editableText as? AutoCompleteTextView)?.setAdapter(adapterr)
+////        val spinnerr: Spinner = findViewById(R.id.filled_exposed_dropdown)
+//        // Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter.createFromResource(this,R.array.p_len_array,
+//            android.R.layout.simple_dropdown_item_1line
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            //spinnerr.adapter = adapter
+//
+//        }
+
         val ss = Pgen()
 
 
@@ -219,6 +242,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

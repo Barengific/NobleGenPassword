@@ -22,6 +22,7 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="-16dp">
 
+            <!--            btnGenerate-->
             <Button
                 android:id="@+id/btnGenerate"
                 android:layout_width="177dp"
@@ -36,6 +37,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvCopy"
                 app:layout_constraintVertical_bias="0.01" />
 
+            <!--            btnSave-->
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
@@ -48,23 +50,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvCopy"
                 app:layout_constraintVertical_bias="0.063" />
 
+            <!--            textview generate-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvGen"
-                android:layout_width="342dp"
+                android:layout_width="372dp"
                 android:layout_height="48dp"
                 android:background="@drawable/backwithborder"
                 android:editable="false"
                 android:textIsSelectable="false"
                 android:textSize="20sp"
                 android:textStyle="normal|bold"
+                app:endIconMode="password_toggle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/p_len_spinner"
                 app:layout_constraintVertical_bias="0.0"
-                tools:ignore="MissingClass,SpeakableTextPresentCheck"
-                app:endIconMode="password_toggle">
+                tools:ignore="MissingClass,SpeakableTextPresentCheck">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -74,22 +77,24 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--editTextKeyGen            -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTextKeyGen"
-                android:layout_width="251dp"
+                android:layout_width="372dp"
                 android:layout_height="59dp"
                 android:background="@drawable/backwithborder"
                 android:ems="10"
                 android:hint="@string/textfield_password_derivation_key"
                 android:textSize="20sp"
+                app:endIconMode="password_toggle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.043"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24"
                 app:startIconContentDescription="AAAA"
-                app:endIconMode="password_toggle">
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                tools:visibility="visible">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -113,6 +118,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+            <!--            textview length-->
             <TextView
                 android:id="@+id/tvLength"
                 android:layout_width="wrap_content"
@@ -125,8 +131,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextKeyGen"
                 app:layout_constraintVertical_bias="0.041"
-            tools:ignore="MissingClass" />
+                tools:ignore="MissingClass" />
 
+            <!--            textview copy-->
             <TextView
                 android:id="@+id/tvCopy"
                 android:layout_width="wrap_content"
@@ -142,6 +149,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvGen"
                 app:layout_constraintVertical_bias="0.031" />
 
+            <!--            recyclerview db-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rview"
                 android:layout_width="374dp"
@@ -153,6 +161,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnGenerate"
                 app:layout_constraintVertical_bias="20" />
+
+
+<!--            material dropdown menu-->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Length"
+                app:layout_constraintBottom_toTopOf="@+id/btnGenerate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.166"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextKeyGen"
+                app:layout_constraintVertical_bias="0.025">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/filled_exposed_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/backwithborder"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

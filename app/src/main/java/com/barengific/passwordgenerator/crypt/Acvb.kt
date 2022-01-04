@@ -26,11 +26,17 @@ object Acvb {
     private const val mstrKeyParameter : String = "ifbhAgGOcXMdRebE"
 
     fun encrypt_AES(strKey: String, strClearText: String, mstrIvParameter: String): String? {
+        var strKey = strKey
         if(strKey.length > 16){
             //TODO cut key down to 16
-            
+            val ksize = strKey.length
+            strKey = strKey.substring(0,16)
         }else if(strKey.length < 16){
             //TODO increase key size
+            val ksize = strKey.length
+            val isize = 16 - ksize
+            val incrS = mstrKeyParameter.substring(0,isize)
+            strKey = strKey + incrS
         }
 
         val mstrIvParameter = mstrIvParameter + mstrIvParameterE

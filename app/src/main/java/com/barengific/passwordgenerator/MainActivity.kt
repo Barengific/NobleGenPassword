@@ -40,8 +40,6 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.length_layout.*
 import android.widget.AdapterView.OnItemClickListener
 import com.barengific.passwordgenerator.crypt.Acvb
-import com.barengific.passwordgenerator.crypt.Encode.encode
-import com.barengific.passwordgenerator.crypt.Decode.decode
 import java.io.UnsupportedEncodingException
 import java.security.InvalidAlgorithmParameterException
 import java.security.InvalidKeyException
@@ -122,6 +120,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
+
         //db initialise
         val db = Room.databaseBuilder(
             applicationContext,
@@ -199,6 +199,13 @@ class MainActivity : AppCompatActivity() {
 
             val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
             Log.d("aaaQQQ_DEC", deout!!)
+
+            val sc = generateKey("aaaaaaaaaaaaaaaa")
+            val en  = encryptMsg("hell this is a msg", sc)
+            Log.d("aaaWWW_EN",en!!)
+
+            val de  = decryptMsg(en, sc)
+            Log.d("aaaWWW_DE",de!!)
 
         }
 
@@ -279,18 +286,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         registerForContextMenu(recyclerView);
-        val ustomAdapter = CustomAdapter(arr)
-
-        //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
-
-        val plaintext: ByteArray = "...".encodeToByteArray()
-        val keygen = KeyGenerator.getInstance("AES")
-        keygen.init(256)
-        val key: SecretKey = keygen.generateKey()
-        val cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING")
-        cipher.init(Cipher.ENCRYPT_MODE, key)
-        val ciphertext: ByteArray = cipher.doFinal(plaintext)
-        val iv: ByteArray = cipher.iv
 
 
     }
@@ -408,6 +403,24 @@ class MainActivity : AppCompatActivity() {
         val secret: SecretKeySpec
         secret = SecretKeySpec(key.toByteArray(), "AES")
         return secret
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        Handler().post(object : Runnable {
+            override fun run() {
+                val view = findViewById(R.id.menu_overflow) as View
+                Builder(this)
+                    .setTarget(view)
+                    .setRadius(10)
+                    .setMaskColour(Color.argb(150, 0, 0, 0))
+                    .setContentText("Find Your Wishlist Here") // optional but starting animations immediately in onCreate can make them choppy
+                    .setDismissOnTouch(true)
+                    .show()
+            }
+        })
+        return true
     }
 
 }

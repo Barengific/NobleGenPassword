@@ -456,24 +456,9 @@ class CustomAdapter(private val dataSet: List<Word>) :
         var menuButton: ImageView
         @SuppressLint("ResourceType")
         override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
-            //menuInfo is null
-//            menu.add(
-//                Menu.NONE, Menu.NONE, Menu.NONE, Menu.NONE
-//                //Menu.NONE, "R.string.remove_backup"
-//            )
-//            menu.add(
-//                R.id.ivCopy, "Copy",
-//                Menu.NONE, Menu.NONE
-//                //Menu.NONE, "R.string.restore_backup"
-//            )
-            //menu.add(0, Menu.NONE, getAdapterPosition(), Menu.NONE);
-            //menu.add(0,menu.size(),1,"a")
-            //menu.add(R.id.ivMore)
-//            Log.d("aaahol", getPosition().toString())
             MainActivity.pos = getPosition()
             MainActivity.setPosi(getPosition())
 
-//            menu.setHeaderTitle("Hi")
         }
 
         val textView1: TextView

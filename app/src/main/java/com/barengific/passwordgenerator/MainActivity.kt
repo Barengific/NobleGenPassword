@@ -306,30 +306,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Get user select menu id and title.
         val itemId = item.itemId
-        //val menuTitle = item.title as String
-        //val stringBuffer = StringBuffer()
-        //stringBuffer.append("You clicked menu ")
-        //stringBuffer.append(menuTitle)
-        //val message = stringBuffer.toString()
         when (itemId) {
             R.menu.main -> {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
             }
-            R.id.action_settings -> openSettings()// this.showAlertDialog(message)
+            R.id.action_settings -> openSettings()
             R.id.action_about -> openAbout()
-            R.id.action_exit ->                 // If user click exit menu then finish this activity.
-                finish()
+            R.id.action_exit -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
 
     fun openSettings(){
         Log.d("aaa","in open settings")
+            val intent = Intent(this, SettingsActivity::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            }
+            startActivity(intent)
     }
+
     fun openAbout(){
         Log.d("aaa","in open about")
     }

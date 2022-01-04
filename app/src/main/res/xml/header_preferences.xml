@@ -2,9 +2,9 @@
 
     <Preference
         app:fragment="com.barengific.passwordgenerator.SettingsActivity$MessagesFragment"
-        app:icon="@drawable/messages"
+        app:icon="@drawable/ic_baseline_security_24"
         app:key="messages_header"
-        app:title="@string/messages_header" />
+        app:title="@string/security_header" />
 
     <Preference
         app:fragment="com.barengific.passwordgenerator.SettingsActivity$SyncFragment"

@@ -39,6 +39,7 @@ import android.view.ContextMenu
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.length_layout.*
 import android.widget.AdapterView.OnItemClickListener
+import com.barengific.passwordgenerator.crypt.Acvb
 import com.barengific.passwordgenerator.crypt.Encode.encode
 import com.barengific.passwordgenerator.crypt.Decode.decode
 import java.io.UnsupportedEncodingException
@@ -192,23 +193,20 @@ class MainActivity : AppCompatActivity() {
             }
 
             Log.d("aaa", "in gennnnn")
-            // get text from edittext
-            // pass the string to the encryption
-            // algorithm and get the encrypted code
             val rv = encode("Hello")
-            // set the code to the edit text
             Log.d("aaaENNN", rv)
-
-
-
-
             // get code from edittext
             Log.d("aaa", "text - $rv")
-            // pass the string to the decryption algorithm
-            // and get the decrypted text
             val rv2 = decode(rv)
-            // set the text to the edit text for display
             Log.d("aaaDEC", rv2)
+
+            val acvb = Acvb
+
+            val enout = acvb.encrypt_AES("aaaaaaaaaaaaaaaa","hello this is a mesage", "qqqqqqqqqqqqqqqq")
+            Log.d("aaaQQQ_EN", enout!!)
+
+            val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
+            Log.d("aaaQQQ_DEC", deout!!)
 
         }
 
@@ -302,7 +300,6 @@ class MainActivity : AppCompatActivity() {
         val ciphertext: ByteArray = cipher.doFinal(plaintext)
         val iv: ByteArray = cipher.iv
 
-        
 
     }
 
@@ -409,7 +406,9 @@ class MainActivity : AppCompatActivity() {
         cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
         cipher.init(Cipher.DECRYPT_MODE, secret)
         val decode: ByteArray = Base64.decode(cipherText, Base64.NO_WRAP)
-        return String(cipher.doFinal(decode), 'U')
+        //String("aa")
+        //String(cipher.doFinal(decode), 'U')
+        return String(cipher.doFinal(decode))
     }
 
     @Throws(NoSuchAlgorithmException::class, InvalidKeySpecException::class)

@@ -20,9 +20,19 @@ object Acvb {
     // AES encryption
     private const val AES = "AES"
     // key offset
-    private const val mstrIvParameter : String = "1234567890123456";
+
+    private const val mstrIvParameterE : String = "639051521258";
+    private const val mstrKeyParameter : String = "ifbhAgGOcXMdRebE"
 
     fun encrypt_AES(strKey: String, strClearText: String, mstrIvParameter: String): String? {
+        if(strKey.length > 16){
+            //TODO cut key down to 16
+        }else if(strKey.length < 16){
+            //TODO increase key size
+        }
+
+        val mstrIvParameter = mstrIvParameter + mstrIvParameterE
+
         try {
             val raw = strKey.toByteArray()
             // create AES key
@@ -50,6 +60,14 @@ object Acvb {
 
     @Throws(Exception::class)
     fun decrypt(strKey: String, strCipherText: String?, mstrIvParameter: String): String? {
+        if(strKey.length > 16){
+            //TODO cut key down to 16
+        }else if(strKey.length < 16){
+            //TODO increase key size
+        }
+
+        val mstrIvParameter = mstrIvParameter + mstrIvParameterE
+
         try {
             val raw = strKey.toByteArray(charset("ASCII"))
             // create AES secret key

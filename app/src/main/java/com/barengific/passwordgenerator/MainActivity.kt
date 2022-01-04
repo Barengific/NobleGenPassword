@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.*
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
@@ -48,6 +49,10 @@ import java.security.spec.InvalidKeySpecException
 import java.security.spec.InvalidParameterSpecException
 import javax.crypto.*
 import javax.crypto.spec.SecretKeySpec
+import android.content.Intent
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -286,6 +291,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         registerForContextMenu(recyclerView);
+        val ustomAdapter = CustomAdapter(arr)
+
+        //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
 
 
     }
@@ -295,6 +303,35 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Get user select menu id and title.
+        val itemId = item.itemId
+        //val menuTitle = item.title as String
+        //val stringBuffer = StringBuffer()
+        //stringBuffer.append("You clicked menu ")
+        //stringBuffer.append(menuTitle)
+        //val message = stringBuffer.toString()
+        when (itemId) {
+            R.menu.main -> {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+            }
+            R.id.action_settings -> openSettings()// this.showAlertDialog(message)
+            R.id.action_about -> openAbout()
+            R.id.action_exit ->                 // If user click exit menu then finish this activity.
+                finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun openSettings(){
+        Log.d("aaa","in open settings")
+    }
+    fun openAbout(){
+        Log.d("aaa","in open about")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -403,24 +440,6 @@ class MainActivity : AppCompatActivity() {
         val secret: SecretKeySpec
         secret = SecretKeySpec(key.toByteArray(), "AES")
         return secret
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        Handler().post(object : Runnable {
-            override fun run() {
-                val view = findViewById(R.id.menu_overflow) as View
-                Builder(this)
-                    .setTarget(view)
-                    .setRadius(10)
-                    .setMaskColour(Color.argb(150, 0, 0, 0))
-                    .setContentText("Find Your Wishlist Here") // optional but starting animations immediately in onCreate can make them choppy
-                    .setDismissOnTouch(true)
-                    .show()
-            }
-        })
-        return true
     }
 
 }

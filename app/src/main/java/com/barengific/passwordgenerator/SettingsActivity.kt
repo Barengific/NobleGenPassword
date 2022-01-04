@@ -1,6 +1,7 @@
 package com.barengific.passwordgenerator
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -37,7 +38,10 @@ class SettingsActivity : AppCompatActivity(),
 
     override fun onSupportNavigateUp(): Boolean {
         if (supportFragmentManager.popBackStackImmediate()) {
+            Log.d("aaaaa", "backit")
             return true
+        }else{
+            Log.d("aaaaa", "farrrr")
         }
         return super.onSupportNavigateUp()
     }

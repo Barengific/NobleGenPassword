@@ -1,6 +1,7 @@
 package com.barengific.passwordgenerator.crypt
 
 import android.util.Base64
+import android.util.Log
 import com.barengific.passwordgenerator.crypt.Acvb
 import java.lang.Exception
 import javax.crypto.Cipher
@@ -39,7 +40,7 @@ object Acvb {
             strKey = strKey + incrS
         }
 
-        val mstrIvParameter = mstrIvParameter + mstrIvParameterE
+        //val mstrIvParameter = mstrIvParameter + mstrIvParameterE
 
         try {
             val raw = strKey.toByteArray()
@@ -74,7 +75,7 @@ object Acvb {
             //TODO increase key size
         }
 
-        val mstrIvParameter = mstrIvParameter + mstrIvParameterE
+        //val mstrIvParameter = mstrIvParameter + mstrIvParameterE
 
         try {
             val raw = strKey.toByteArray(charset("ASCII"))

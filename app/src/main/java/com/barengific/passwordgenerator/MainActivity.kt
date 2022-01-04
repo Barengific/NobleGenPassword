@@ -192,14 +192,6 @@ class MainActivity : AppCompatActivity() {
                 tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",10))
             }
 
-            Log.d("aaa", "in gennnnn")
-            val rv = encode("Hello")
-            Log.d("aaaENNN", rv)
-            // get code from edittext
-            Log.d("aaa", "text - $rv")
-            val rv2 = decode(rv)
-            Log.d("aaaDEC", rv2)
-
             val acvb = Acvb
 
             val enout = acvb.encrypt_AES("aaaaaaaaaaaaaaaa","hello this is a mesage", "qqqqqqqqqqqqqqqq")

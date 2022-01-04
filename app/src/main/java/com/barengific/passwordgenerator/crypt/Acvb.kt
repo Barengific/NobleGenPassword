@@ -21,12 +21,14 @@ object Acvb {
     private const val AES = "AES"
     // key offset
 
+    private const val mstrIvParameterX : String = "6390515264757125";
     private const val mstrIvParameterE : String = "639051521258";
     private const val mstrKeyParameter : String = "ifbhAgGOcXMdRebE"
 
     fun encrypt_AES(strKey: String, strClearText: String, mstrIvParameter: String): String? {
         if(strKey.length > 16){
             //TODO cut key down to 16
+            
         }else if(strKey.length < 16){
             //TODO increase key size
         }

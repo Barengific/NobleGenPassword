@@ -447,7 +447,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
     companion object {
         var position: Int = 0
-        fun getPosi() : Int = position
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
@@ -514,7 +513,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
             }
         })
 
-            //Log.d("aaaholder", viewHolder.adapterPosition.toString())
+        //Log.d("aaaholder", viewHolder.adapterPosition.toString())
         //Log.d("aaaholder2", getPosition().toString())
 
         // Get element from your dataset at this position and replace the
@@ -531,7 +530,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
     }
 
     override fun getItemCount() = dataSet.size
-    ///
+
     //
     //
     private var position: Int = 0

@@ -82,7 +82,7 @@ class SettingsActivity : AppCompatActivity(),
 
     class MessagesFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.messages_preferences, rootKey)
+            setPreferencesFromResource(R.xml.security_preferences, rootKey)
         }
     }
 

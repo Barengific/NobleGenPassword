@@ -149,6 +149,9 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext,
                         "Authentication error: $errString", Toast.LENGTH_SHORT)
                         .show()
+                    val intent = Intent(applicationContext, MainActivity::class.java).apply {}
+                    startActivity(intent)
+                    Log.d("aaaaaaaa", "ineeeeeerrrr")
                 }
 
                 override fun onAuthenticationSucceeded(
@@ -157,6 +160,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext,
                         "Authentication succeeded!", Toast.LENGTH_SHORT)
                         .show()
+                    Log.d("aaaaaaaa", "insuccc")
                 }
 
                 override fun onAuthenticationFailed() {
@@ -164,11 +168,14 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Authentication failed",
                         Toast.LENGTH_SHORT)
                         .show()
+                    val intent = Intent(applicationContext, MainActivity::class.java).apply {}
+                    startActivity(intent)
+                    Log.d("aaaaaaaa", "infalllled")
                 }
             })
 
         promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric login for my app")
+            .setTitle("Biometric login")
             .setSubtitle("Log in using your biometric credential")
             .setNegativeButtonText("Use account password")
             .build()

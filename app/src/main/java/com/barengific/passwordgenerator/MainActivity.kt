@@ -56,6 +56,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.barengific.passwordgenerator.ui.home.HomeFragment.Companion.setHeres
 import com.barengific.passwordgenerator.ui.login.LoginActivity
 import java.util.concurrent.Executor
 
@@ -109,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }
+        //setHeres(0)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

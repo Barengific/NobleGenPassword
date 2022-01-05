@@ -1,9 +1,9 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.SettingsActivity$MessagesFragment"
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$SecurityFragment"
         app:icon="@drawable/ic_baseline_security_24"
-        app:key="messages_header"
+        app:key="security_header"
         app:title="@string/security_header" />
 
     <Preference
@@ -13,13 +13,13 @@
         app:title="@string/sync_header" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.SettingsActivity$SyncFragment"
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$BackupFragment"
         app:icon="@drawable/ic_baseline_save_alt_24"
         app:key="backup_header"
         app:title="@string/settings_header_backup" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.SettingsActivity$SyncFragment"
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$RestoreFragment"
         app:icon="@drawable/ic_baseline_restore_24"
         app:key="restore_header"
         app:title="@string/settings_header_restore" />

@@ -5,5 +5,6 @@ package com.barengific.passwordgenerator.data.model
  */
 data class LoggedInUser(
     val userId: String,
-    val displayName: String
+    val displayName: String,
+    val authentic: Boolean
 )

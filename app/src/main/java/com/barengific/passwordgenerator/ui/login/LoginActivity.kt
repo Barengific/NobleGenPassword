@@ -64,12 +64,12 @@ class LoginActivity : AppCompatActivity() {
                 override fun onAuthenticationError(errorCode: Int,
                                                    errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-                    Toast.makeText(applicationContext,
-                        "Authentication error: $errString", Toast.LENGTH_SHORT)
-                        .show()
+//                    Toast.makeText(applicationContext,
+//                        "Authentication error: $errString", Toast.LENGTH_SHORT)
+//                        .show()
                     val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
                     startActivity(intent)
-                    Log.d("aaaaaaaa", "ineeeeeerrrr")
+//                    Log.d("aaaaaaaa", "ineeeeeerrrr")
                 }
 
                 override fun onAuthenticationSucceeded(
@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext,
                         "Authentication succeeded!", Toast.LENGTH_SHORT)
                         .show()
-                    Log.d("aaaaaaaa", "insuccc")
+//                    Log.d("aaaaaaaa", "insuccc")
                     val intent = Intent(applicationContext, MainActivity::class.java).apply {
                         putExtra("fromLogin","fin")
                     }
@@ -87,9 +87,9 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
-                    Toast.makeText(applicationContext, "Authentication failed",
-                        Toast.LENGTH_SHORT)
-                        .show()
+//                    Toast.makeText(applicationContext, "Authentication failed",
+//                        Toast.LENGTH_SHORT)
+//                        .show()
                     val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
                     startActivity(intent)
                     Log.d("aaaaaaaa", "infalllled")
@@ -97,59 +97,15 @@ class LoginActivity : AppCompatActivity() {
             })
 
         promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric login")
-            .setSubtitle("Log in using your biometric credential")
-            .setNegativeButtonText("Use account password")
+            .setTitle("Noble Manager")
+            .setSubtitle("Please scan your fingerprint or your face to proceed.")
+            .setNegativeButtonText("CANCEL")
             .build()
-
-        // Prompt appears when user clicks "Log in".
-        // Consider integrating with the keystore to unlock cryptographic operations,
-        // if needed by your app.
-//        val biometricLoginButton =
-//            findViewById<Button>(R.id.biometric_login)
-//        biometricLoginButton.setOnClickListener {
-//            biometricPrompt.authenticate(promptInfo)
-//        }
-        /////////////////////////////////////////////biometricPrompt.authenticate(promptInfo)
 
         biometricPrompt.authenticate(promptInfo)
 
-//        val canAuthenticate = BiometricManager.from(applicationContext).canAuthenticate(
-//            BiometricManager.Authenticators.BIOMETRIC_STRONG
-//        )
-//        if (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS) {
-//            //finish()
-//            Log.d("aaaaa", "loginnnn fffff")
-//
-//            if (ciphertextWrapper != null) {
-//                Log.d("aaaaa", "loginnnn qqqqqqqqq")
-//                //biometricPrompt.authenticate(promptInfo)
-//            } else {
-//                Log.d("aaaaa", "loginnnn wwwwwwwwwww")
-//                //startActivity(Intent(this, MainActivity::class.java))
-//            }
-//        }else{
-//            Log.d("aaaaa", "loginnnn succcccesss")
-////            finish()
-//
-//        }
-
 
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
 }
 

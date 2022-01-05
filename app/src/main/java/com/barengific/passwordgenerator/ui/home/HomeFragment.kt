@@ -45,6 +45,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 

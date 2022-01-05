@@ -50,21 +50,27 @@ import java.security.spec.InvalidParameterSpecException
 import javax.crypto.*
 import javax.crypto.spec.SecretKeySpec
 import android.content.Intent
-
-
-
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
+import java.util.concurrent.Executor
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    var arrr: List<Word> = listOf(Word(0,"","",""))
+    var arrr: List<Word> = listOf(Word(0, "", "", ""))
 
     companion object {
         var pos: Int = 0
-        fun getPosi() : Int = pos
-        fun setPosi(pos: Int) { this.pos = pos}
+        fun getPosi(): Int = pos
+        fun setPosi(pos: Int) {
+            this.pos = pos
+        }
     }
 
 //    init {
@@ -86,25 +92,120 @@ class MainActivity : AppCompatActivity() {
 //        AppDatabase::class.java, "database-name"
 //    ).allowMainThreadQueries().build()
 
+    //private lateinit var biometricPrompt: BiometricPrompt
+    private val cryptographyManager = CryptographyManager()
+    private val ciphertextWrapper
+        get() = cryptographyManager.getCiphertextWrapperFromSharedPrefs(
+            applicationContext,
+            SHARED_PREFS_FILENAME,
+            Context.MODE_PRIVATE,
+            CIPHERTEXT_WRAPPER
+        )
+
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+
     @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
-        //intro activity
-//        val message = intent.getStringExtra("fromIntro")
-//        if(message.toString().equals("fin")){
-//            Log.d("aaa", "no more intro")
-//        }else{
-//            val intent = Intent(this, AppIntroduction::class.java).apply {
-////            putExtra(EXTRA_MESSAGE, message)
-//            }
-//            startActivity(intent)
-//        }
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        );
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
+
+        //
+        //
+        //
+
+        generateSecretKey(
+            KeyGenParameterSpec.Builder(
+            "KEY_NAME",
+            KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
+            .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+            .setUserAuthenticationRequired(true)
+            // Invalidate the keys if the user has registered a new biometric
+            // credential, such as a new fingerprint. Can call this method only
+            // on Android 7.0 (API level 24) or higher. The variable
+            // "invalidatedByBiometricEnrollment" is true by default.
+            .setInvalidatedByBiometricEnrollment(true)
+            .build())
+
+        executor = ContextCompat.getMainExecutor(this)
+        biometricPrompt = BiometricPrompt(this, executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int,
+                                                   errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(applicationContext,
+                        "Authentication error: $errString", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onAuthenticationSucceeded(
+                    result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    Toast.makeText(applicationContext,
+                        "Authentication succeeded!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(applicationContext, "Authentication failed",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric login for my app")
+            .setSubtitle("Log in using your biometric credential")
+            .setNegativeButtonText("Use account password")
+            .build()
+
+        // Prompt appears when user clicks "Log in".
+        // Consider integrating with the keystore to unlock cryptographic operations,
+        // if needed by your app.
+//        val biometricLoginButton =
+//            findViewById<Button>(R.id.biometric_login)
+//        biometricLoginButton.setOnClickListener {
+//            biometricPrompt.authenticate(promptInfo)
+//        }
+        /////////////////////////////////////////////biometricPrompt.authenticate(promptInfo)
+
+        val canAuthenticate = BiometricManager.from(applicationContext).canAuthenticate(BIOMETRIC_STRONG)
+        if (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS) {
+            //finish()
+            Log.d("aaaaa", "loginnnn fffff")
+            biometricPrompt.authenticate(promptInfo)
+            if (ciphertextWrapper != null) {
+                Log.d("aaaaa", "loginnnn qqqqqqqqq")
+                //biometricPrompt.authenticate(promptInfo)
+            } else {
+                Log.d("aaaaa", "loginnnn wwwwwwwwwww")
+                //startActivity(Intent(this, MainActivity::class.java))
+            }
+        }else{
+            Log.d("aaaaa", "loginnnn succcccesss")
+//            finish()
+
+        }
+
+//
+        //
+        //
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
@@ -124,7 +225,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
 
 
         //db initialise
@@ -191,40 +291,62 @@ class MainActivity : AppCompatActivity() {
         btnGenerate.setOnClickListener {
             //tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
             //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-            if(filled_exposed_dropdown.hasSelection()){
-                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
-            }else{
-                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",10))
+            if (filled_exposed_dropdown.hasSelection()) {
+                tvGen.editText?.setText(
+                    ss.pgen(
+                        editTextKeyGen.editText?.text.toString(),
+                        "jimbob",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        filled_exposed_dropdown.editableText.toString().toInt()
+                    )
+                )
+            } else {
+                tvGen.editText?.setText(
+                    ss.pgen(
+                        editTextKeyGen.editText?.text.toString(),
+                        "jimbob",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        10
+                    )
+                )
             }
 
             val acvb = Acvb
 
-            val enout = acvb.encrypt_AES("aaaaaaaaaaaaaaaa","hello this is a mesage", "qqqqqqqqqqqqqqqq")
+            val enout =
+                acvb.encrypt_AES("aaaaaaaaaaaaaaaa", "hello this is a mesage", "qqqqqqqqqqqqqqqq")
             Log.d("aaaQQQ_EN", enout!!)
 
             val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
             Log.d("aaaQQQ_DEC", deout!!)
 
             val sc = generateKey("aaaaaaaaaaaaaaaa")
-            val en  = encryptMsg("hell this is a msg", sc)
-            Log.d("aaaWWW_EN",en!!)
+            val en = encryptMsg("hell this is a msg", sc)
+            Log.d("aaaWWW_EN", en!!)
 
-            val de  = decryptMsg(en, sc)
-            Log.d("aaaWWW_DE",de!!)
+            val de = decryptMsg(en, sc)
+            Log.d("aaaWWW_DE", de!!)
 
+            biometricPrompt.authenticate(promptInfo)
         }
 
 
-        tvCopy.setOnClickListener{
+        tvCopy.setOnClickListener {
             // Creates a new text clip to put on the clipboard
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
             // Set the clipboard's primary clip.
             clipboard.setPrimaryClip(clip)
 
-            Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
 //
-          //tvGen.setText(getPosi().toString())
+            //tvGen.setText(getPosi().toString())
 //            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
 //                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
 //
@@ -236,8 +358,13 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("aaa", editTextKeyGen.editText?.text.toString())
         }
 
-        btnSave.setOnClickListener{
-            val aa = Word(0,"pgen", editTextKeyGen.editText?.text.toString(),  tvGen.editText?.text.toString())
+        btnSave.setOnClickListener {
+            val aa = Word(
+                0,
+                "pgen",
+                editTextKeyGen.editText?.text.toString(),
+                tvGen.editText?.text.toString()
+            )
             wordDao.insertAll(aa)
 
             arrr = wordDao.getAll()
@@ -263,10 +390,21 @@ class MainActivity : AppCompatActivity() {
 //            override fun onNothingSelected(parent: AdapterView<*>?) {}
 //        })
 
-        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->Int
+        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
+            Int
             val selection = parent.getItemAtPosition(position) as String
             Log.d("aaanewMAterialSpinner", selection)
-            tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",selection.toInt()))
+            tvGen.editText?.setText(
+                ss.pgen(
+                    editTextKeyGen.editText?.text.toString(),
+                    "jimbob",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    selection.toInt()
+                )
+            )
 
         })
 
@@ -281,10 +419,30 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if(filled_exposed_dropdown.hasSelection()){
-                    tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
-                }else{
-                    tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",10))
+                if (filled_exposed_dropdown.hasSelection()) {
+                    tvGen.editText?.setText(
+                        ss.pgen(
+                            editTextKeyGen.editText?.text.toString(),
+                            "jimbob",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            filled_exposed_dropdown.editableText.toString().toInt()
+                        )
+                    )
+                } else {
+                    tvGen.editText?.setText(
+                        ss.pgen(
+                            editTextKeyGen.editText?.text.toString(),
+                            "jimbob",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            10
+                        )
+                    )
                 }
                 //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
             }
@@ -320,16 +478,16 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun openSettings(){
-        Log.d("aaa","in open settings")
-            val intent = Intent(this, SettingsActivity::class.java).apply {
+    fun openSettings() {
+        Log.d("aaa", "in open settings")
+        val intent = Intent(this, SettingsActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
-            }
-            startActivity(intent)
+        }
+        startActivity(intent)
     }
 
-    fun openAbout(){
-        Log.d("aaa","in open about")
+    fun openAbout() {
+        Log.d("aaa", "in open about")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -337,8 +495,12 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-//
-    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+    //
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
         super.onCreateContextMenu(menu, v, menuInfo)
         val inflater: MenuInflater = this.menuInflater //getActivity().getMenuInflater()
         inflater.inflate(R.menu.rv_menu_context, menu)
@@ -349,12 +511,13 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_copy -> {
                 val text1: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                        R.id.textView4)
+                        R.id.textView4
+                    )
 
                 val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clip: ClipData = ClipData.newPlainText("PGen", text1?.text.toString())
                 clipboard.setPrimaryClip(clip)
-                Toast.makeText(applicationContext,"Text Copied", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
             }
             R.id.menu_delete -> {
                 val db = Room.databaseBuilder(
@@ -367,18 +530,27 @@ class MainActivity : AppCompatActivity() {
 
                 val wid: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                        R.id.textView1)
+                        R.id.textView1
+                    )
                 val pType: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                        R.id.textView2)
+                        R.id.textView2
+                    )
                 val key: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                        R.id.textView3)
+                        R.id.textView3
+                    )
                 val value: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                        R.id.textView4)
+                        R.id.textView4
+                    )
 
-                var a = Word(wid?.text.toString().toInt(), pType?.text.toString(), key?.text.toString(), value?.text.toString())
+                var a = Word(
+                    wid?.text.toString().toInt(),
+                    pType?.text.toString(),
+                    key?.text.toString(),
+                    value?.text.toString()
+                )
                 db.wordDao().delete(a)
                 arrr = wordDao.getAll()
                 var adapter = CustomAdapter(arrr)
@@ -389,7 +561,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.menu_cancel -> {
-                Log.d("aaamenu_cancel",  getPosi().toString())
+                Log.d("aaamenu_cancel", getPosi().toString())
             }
         }
         return super.onContextItemSelected(item)
@@ -440,6 +612,29 @@ class MainActivity : AppCompatActivity() {
         return secret
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//
+//        if (ciphertextWrapper != null) {
+//            if (SampleAppUser.fakeToken == null) {
+//                showBiometricPromptForDecryption()
+//            } else {
+//                // The user has already logged in, so proceed to the rest of the app
+//                // this is a todo for you, the developer
+//                updateApp(getString(R.string.already_signedin))
+//            }
+//        }
+//
+//    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun generateSecretKey(keyGenParameterSpec: KeyGenParameterSpec) {
+        val keyGenerator = KeyGenerator.getInstance(
+            KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
+        keyGenerator.init(keyGenParameterSpec)
+        keyGenerator.generateKey()
+    }
+
 }
 
 class CustomAdapter(private val dataSet: List<Word>) :
@@ -454,6 +649,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
         var icon: ImageView
         var fileName: TextView
         var menuButton: ImageView
+
         @SuppressLint("ResourceType")
         override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
             MainActivity.pos = getPosition()
@@ -505,7 +701,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
         // contents of the view with that element
         viewHolder.textView1.text = dataSet[position].wid.toString()
         viewHolder.textView2.text = dataSet[position].pType.toString()
-        viewHolder.textView3.text = dataSet[position].key .toString()
+        viewHolder.textView3.text = dataSet[position].key.toString()
         viewHolder.textView4.text = dataSet[position].value.toString()
     }
 
@@ -523,6 +719,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
     fun getPosition(): Int {
         return position
     }
+
     fun setPosition(position: Int) {
         this.position = position
     }

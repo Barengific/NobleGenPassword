@@ -19,6 +19,7 @@ import com.barengific.passwordgenerator.CredentialsEnt
 import com.barengific.passwordgenerator.MainActivity
 import com.barengific.passwordgenerator.R
 import com.barengific.passwordgenerator.databinding.FragmentHomeBinding
+import com.barengific.passwordgenerator.ui.gallery.GalleryFragment
 
 class HomeFragment : Fragment() {
 
@@ -28,8 +29,16 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+//
+//    private var here = 0;
 
-    private var here = 0;
+    companion object {
+        var heress: Int = 0
+        fun getHeres(): Int = heress
+        fun setHeres(heress: Int) {
+            this.heress = heress
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,13 +51,20 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        if(here == 0){
-            here += 1
-        }else if(here == 1){
-            val intent = Intent(activity, MainActivity::class.java).apply {
+        if(getHeres() == 0){
+            setHeres(1)
+            Log.d("aaa", "inn hommmee")
+            val intent = Intent(this.context, MainActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
             }
             startActivity(intent)
+        }else if(heress == 1){
+            Log.d("aaa", "nottt inn hommmee")
+//            val intent = Intent(this.context, MainActivity::class.java).apply {
+////            putExtra(EXTRA_MESSAGE, message)
+//            }
+//            startActivity(intent)
+            //setHeres(0)
         }
 
 

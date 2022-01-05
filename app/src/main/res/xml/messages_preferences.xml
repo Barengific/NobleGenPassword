@@ -7,13 +7,11 @@
 
     <EditTextPreference
         app:key="reply"
-        app:defaultValue="reply"
         app:title="@string/digit_phrase"
         app:useSimpleSummaryProvider="true" />
 
     <ListPreference
-        app:key="hello"
-        app:defaultValue="reply"
+        app:key="locktype"
         app:entries="@array/lock_entries"
         app:entryValues="@array/lock_values"
         app:title="@string/ask_for_lock"

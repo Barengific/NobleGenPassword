@@ -74,20 +74,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    init {
-//        0.also { pos = it }
-//    }
-
-    var pos: Int = 0;
-
-//    fun getPosi(): Int {
-//        return pos
-//    }
-//
-//    fun setPosi(pos: Int) {
-//        this.pos = pos
-//    }
-
     lateinit var recyclerView: RecyclerView
 //    lateinit var db = Room.databaseBuilder(applicationContext,
 //        AppDatabase::class.java, "database-name"
@@ -115,9 +101,7 @@ class MainActivity : AppCompatActivity() {
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
-        );
-
-
+        )
 
         val qq = getIntent().extras?.get("fromLogin")
         Log.d("aaaaaafromlog", qq.toString())
@@ -170,22 +154,6 @@ class MainActivity : AppCompatActivity() {
 //        adapter.notifyDataSetChanged()
 //        recyclerView.adapter?.notifyDataSetChanged()
 //        adapter.notifyItemRangeChanged(0,5)
-
-
-        //length dropdown
-//        val spinner: Spinner = findViewById(R.id.p_len_spinner)
-//        // Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter.createFromResource(
-//            this,
-//            R.array.p_len_array,
-//            android.R.layout.simple_spinner_item
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            // Apply the adapter to the spinner
-//            spinner.adapter = adapter
-//        }
-
 
         //length dropdown
         val Lines = resources.getStringArray(R.array.p_len_array).toList()
@@ -255,7 +223,6 @@ class MainActivity : AppCompatActivity() {
             val de = decryptMsg(en, sc)
             Log.d("aaaWWW_DE", de!!)
 
-            biometricPrompt.authenticate(promptInfo)
         }
 
 
@@ -297,20 +264,8 @@ class MainActivity : AppCompatActivity() {
             recyclerView.setAdapter(adapter)
             recyclerView.setLayoutManager(LinearLayoutManager(this))
 
-//            recyclerView.setAdapter(adapter)
-//            adapter.notifyDataSetChanged()
-//            recyclerView.adapter?.notifyDataSetChanged()
-//            adapter.notifyItemRangeChanged(0,5)
-
             //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
         }
-
-//        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-//            } // to close the onItemSelected
-//            override fun onNothingSelected(parent: AdapterView<*>?) {}
-//        })
 
         filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
             Int

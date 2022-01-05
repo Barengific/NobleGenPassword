@@ -1,5 +1,6 @@
 package com.barengific.passwordgenerator
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,11 @@ class SettingsActivity : AppCompatActivity(),
             return true
         }else{
             Log.d("aaaaa", "farrrr")
+            val intent = Intent(this, MainActivity::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            }
+            startActivity(intent)
+//            return false
         }
         return super.onSupportNavigateUp()
     }

@@ -68,7 +68,7 @@
     <string name="ask_for_lock">Biometric Lock</string>
     <string name="settings_header_backup">Backup</string>
     <string name="settings_header_restore">Restore</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login"></string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>

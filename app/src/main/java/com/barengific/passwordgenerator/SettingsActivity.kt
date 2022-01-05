@@ -3,6 +3,7 @@ package com.barengific.passwordgenerator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -15,6 +16,12 @@ class SettingsActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
+
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        );
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
@@ -80,7 +87,7 @@ class SettingsActivity : AppCompatActivity(),
         }
     }
 
-    class MessagesFragment : PreferenceFragmentCompat() {
+    class SecurityFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.security_preferences, rootKey)
         }
@@ -89,6 +96,18 @@ class SettingsActivity : AppCompatActivity(),
     class SyncFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.sync_preferences, rootKey)
+        }
+    }
+
+    class BackupFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.backup_preferences, rootKey)
+        }
+    }
+
+    class RestoreFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.restore_preferences, rootKey)
         }
     }
 }

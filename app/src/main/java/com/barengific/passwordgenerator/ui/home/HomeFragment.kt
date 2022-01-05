@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
         if(here == 0){
             here += 1
         }else if(here == 1){
-            val intent = Intent(getActivity(), MainActivity::class.java).apply {
+            val intent = Intent(activity, MainActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
             }
             startActivity(intent)

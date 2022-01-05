@@ -12,4 +12,16 @@
         app:key="sync_header"
         app:title="@string/sync_header" />
 
+    <Preference
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$SyncFragment"
+        app:icon="@drawable/ic_baseline_save_alt_24"
+        app:key="backup_header"
+        app:title="@string/settings_header_backup" />
+
+    <Preference
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$SyncFragment"
+        app:icon="@drawable/ic_baseline_restore_24"
+        app:key="restore_header"
+        app:title="@string/settings_header_restore" />
+
 </PreferenceScreen>

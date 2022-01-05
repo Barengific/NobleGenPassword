@@ -39,7 +39,7 @@ class GalleryFragment : Fragment() {
         })
 
         //lateinit var context: Context
-        val intent = Intent(getActivity(), MainActivity::class.java).apply {
+        val intent = Intent(activity, MainActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
         }
         startActivity(intent)

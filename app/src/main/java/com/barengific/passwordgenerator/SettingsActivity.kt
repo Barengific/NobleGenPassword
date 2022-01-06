@@ -1,12 +1,15 @@
 package com.barengific.passwordgenerator
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 
 private const val TITLE_TAG = "settingsActivityTitle"
 
@@ -47,6 +50,19 @@ class SettingsActivity : AppCompatActivity(),
     override fun onSupportNavigateUp(): Boolean {
         if (supportFragmentManager.popBackStackImmediate()) {
             Log.d("aaaaa", "backit")
+            val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+
+            val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
+                this,
+                "secret_shared_prefs",
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+
+            val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
+            Log.d("aaaaaEEESEttings", nameE.toString())
             return true
         }else{
             Log.d("aaaaa", "farrrr")

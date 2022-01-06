@@ -61,6 +61,8 @@ import com.barengific.passwordgenerator.ui.home.HomeFragment.Companion.setHeres
 import com.barengific.passwordgenerator.ui.login.LoginActivity
 import java.util.concurrent.Executor
 
+import android.content.SharedPreferences
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -192,6 +194,31 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("aaaaaGEN3", filled_exposed_dropdown.editableText.toString().toIntOrNull().toString())
 //            val selection = filled_exposed_dropdown.getItemAtPosition(position) as String
 //            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
+
+            val sharedPref = this?.getSharedPreferences(
+                getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
+
+            val sharedPreff = this?.getPreferences(Context.MODE_PRIVATE)
+
+            //write save
+            val newHighScore: Int = 12345
+            val sharedPrefSave = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+            with (sharedPrefSave.edit()) {
+                putInt(getString(R.string.saved_high_score_key_del), newHighScore)
+                apply()
+            }
+
+
+            // read retreive
+            val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
+            val highScore = sharedPrefRead.getInt(getString(R.string.saved_high_score_key_del), defaultValue)
+
+            Log.d("aaaaaaSgared", highScore.toString() )
+
+
+
+
             if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                 tvGen.editText?.setText(
                     ss.pgen(

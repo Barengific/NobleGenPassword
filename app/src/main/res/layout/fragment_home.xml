@@ -95,6 +95,7 @@
                 android:layout_height="57dp"
                 android:background="@drawable/backwithborder"
                 android:editable="false"
+                android:hint="@string/output_result"
                 android:textIsSelectable="false"
                 android:textSize="20sp"
                 android:textStyle="normal|bold"

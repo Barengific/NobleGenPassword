@@ -336,6 +336,10 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("aaa", editTextKeyGen.editText?.text.toString())
         }
 
+        tvGen.setStartIconOnClickListener {
+            Log.d("aaaaaaaaa", "copyyyingggg123")
+        }
+
         btnSave.setOnClickListener {
             val aa = Word(
                 0,

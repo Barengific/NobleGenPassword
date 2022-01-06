@@ -105,7 +105,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnGenerate"
                 app:layout_constraintVertical_bias="0.01"
-                tools:ignore="MissingClass,SpeakableTextPresentCheck">
+                tools:ignore="MissingClass,SpeakableTextPresentCheck"
+                app:startIconDrawable="@drawable/ic_baseline_content_copy_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

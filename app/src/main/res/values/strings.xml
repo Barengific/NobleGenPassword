@@ -80,5 +80,6 @@
     <string name="preference_file_key_del">aaaaa_delete_this</string>
     <string name="saved_high_score_key_del">11</string>
     <string name="hide">Hide</string>
+    <string name="output_result">Output Result</string>
 
 </resources>

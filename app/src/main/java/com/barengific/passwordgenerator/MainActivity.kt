@@ -121,7 +121,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }
-        //setHeres(0)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -611,11 +610,12 @@ class CustomAdapter(private val dataSet: List<Word>) :
         var position: Int = 0
     }
 
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
         View.OnCreateContextMenuListener {
-        var icon: ImageView
+        var ivCopy: ImageView
         var fileName: TextView
-        var menuButton: ImageView
+        var ivMore: ImageView
 
         @SuppressLint("ResourceType")
         override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
@@ -630,9 +630,9 @@ class CustomAdapter(private val dataSet: List<Word>) :
         val textView4: TextView
 
         init {
-            icon = view.findViewById(R.id.ivCopy) as ImageView
+            ivCopy = view.findViewById(R.id.ivCopy) as ImageView
             fileName = view.findViewById(R.id.textView4) as TextView
-            menuButton = view.findViewById(R.id.ivMore) as ImageView
+            ivMore = view.findViewById(R.id.ivMore) as ImageView
             view.setOnCreateContextMenuListener(this)
 
             // Define click listener for the ViewHolder's View.
@@ -660,6 +660,33 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 return false
             }
         })
+
+        viewHolder.ivMore.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                //creating a popup menu
+                val popup = PopupMenu(view?.context, viewHolder.ivMore)
+                //inflating menu from xml resource
+                popup.inflate(R.menu.rv_menu_context)
+                //adding click listener
+                popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                    override fun onMenuItemClick(item: MenuItem): Boolean {
+                        when (item.itemId) {
+                            R.id.menu_copy -> {Log.d("aaaamenuu","copy")}                //handle menu1 click
+                                //true
+                            R.id.menu_delete -> {Log.d("aaaamenuu","copy")}                      //handle menu2 click
+                                //true
+                            R.id.menu_cancel ->  {Log.d("aaaamenuu","canceeel")}                      //handle menu3 click
+
+                        }
+                        return true
+                    }
+                })
+                //displaying the popup
+                popup.show()
+            }
+        })
+
+        
 
         //Log.d("aaaholder", viewHolder.adapterPosition.toString())
         //Log.d("aaaholder2", getPosition().toString())

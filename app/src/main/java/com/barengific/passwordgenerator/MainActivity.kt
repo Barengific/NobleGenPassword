@@ -56,6 +56,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.barengific.passwordgenerator.CustomAdapter.Companion.position
 import com.barengific.passwordgenerator.ui.home.HomeFragment.Companion.setHeres
 import com.barengific.passwordgenerator.ui.login.LoginActivity
 import java.util.concurrent.Executor
@@ -183,19 +184,15 @@ class MainActivity : AppCompatActivity() {
         btnGenerate.setOnClickListener {
             //tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
             //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-            if (filled_exposed_dropdown.hasSelection()) {
-                tvGen.editText?.setText(
-                    ss.pgen(
-                        editTextKeyGen.editText?.text.toString(),
-                        "jimbob",
-                        "4",
-                        "5",
-                        "6",
-                        "7",
-                        filled_exposed_dropdown.editableText.toString().toInt()
-                    )
-                )
-            } else {
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.hasSelection().toString())
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.isSelected.toString())
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
+//            Log.d("aaaaaGEN1", filled_exposed_dropdown.editableText.toString())
+//            Log.d("aaaaaGEN2", filled_exposed_dropdown.editableText.toString().toBooleanStrictOrNull().toString())
+//            Log.d("aaaaaGEN3", filled_exposed_dropdown.editableText.toString().toIntOrNull().toString())
+//            val selection = filled_exposed_dropdown.getItemAtPosition(position) as String
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
+            if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                 tvGen.editText?.setText(
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
@@ -207,23 +204,36 @@ class MainActivity : AppCompatActivity() {
                         10
                     )
                 )
+            } else {
+                tvGen.editText?.setText(
+                    ss.pgen(
+                        editTextKeyGen.editText?.text.toString(),
+                        "jimbob",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        filled_exposed_dropdown.editableText.toString().toInt()
+                    )
+                )
             }
 
-            val acvb = Acvb
-
-            val enout =
-                acvb.encrypt_AES("aaaaaaaaaaaaaaaa", "hello this is a mesage", "qqqqqqqqqqqqqqqq")
-            Log.d("aaaQQQ_EN", enout!!)
-
-            val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
-            Log.d("aaaQQQ_DEC", deout!!)
-
-            val sc = generateKey("aaaaaaaaaaaaaaaa")
-            val en = encryptMsg("hell this is a msg", sc)
-            Log.d("aaaWWW_EN", en!!)
-
-            val de = decryptMsg(en, sc)
-            Log.d("aaaWWW_DE", de!!)
+            //encrypt/decrypt
+//            val acvb = Acvb
+//
+//            val enout =
+//                acvb.encrypt_AES("aaaaaaaaaaaaaaaa", "hello this is a mesage", "qqqqqqqqqqqqqqqq")
+//            Log.d("aaaQQQ_EN", enout!!)
+//
+//            val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
+//            Log.d("aaaQQQ_DEC", deout!!)
+//
+//            val sc = generateKey("aaaaaaaaaaaaaaaa")
+//            val en = encryptMsg("hell this is a msg", sc)
+//            Log.d("aaaWWW_EN", en!!)
+//
+//            val de = decryptMsg(en, sc)
+//            Log.d("aaaWWW_DE", de!!)
 
         }
 
@@ -298,7 +308,7 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (filled_exposed_dropdown.hasSelection()) {
+                if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                     tvGen.editText?.setText(
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
@@ -307,7 +317,7 @@ class MainActivity : AppCompatActivity() {
                             "5",
                             "6",
                             "7",
-                            filled_exposed_dropdown.editableText.toString().toInt()
+                            10
                         )
                     )
                 } else {
@@ -319,7 +329,7 @@ class MainActivity : AppCompatActivity() {
                             "5",
                             "6",
                             "7",
-                            10
+                            filled_exposed_dropdown.editableText.toString().toInt()
                         )
                     )
                 }

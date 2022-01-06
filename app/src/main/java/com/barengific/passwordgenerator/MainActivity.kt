@@ -671,11 +671,11 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
                     override fun onMenuItemClick(item: MenuItem): Boolean {
                         when (item.itemId) {
-                            R.id.menu_copy -> {Log.d("aaaamenuu","copy")}                //handle menu1 click
+                            R.id.menu_copy -> {Log.d("aaaamenuu","copy")}    //TODO             //handle menu1 click
                                 //true
-                            R.id.menu_delete -> {Log.d("aaaamenuu","copy")}                      //handle menu2 click
+                            R.id.menu_delete -> {Log.d("aaaamenuu","delete")}         //TODO              //handle menu2 click
                                 //true
-                            R.id.menu_cancel ->  {Log.d("aaaamenuu","canceeel")}                      //handle menu3 click
+                            R.id.menu_cancel ->  {Log.d("aaaamenuu","canceeel")}     //TODO                  //handle menu3 click
 
                         }
                         return true
@@ -686,7 +686,14 @@ class CustomAdapter(private val dataSet: List<Word>) :
             }
         })
 
-        
+        viewHolder.ivCopy.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                Log.d("aaaaICONu","innn copyy")
+
+            }
+        })
+
+
 
         //Log.d("aaaholder", viewHolder.adapterPosition.toString())
         //Log.d("aaaholder2", getPosition().toString())

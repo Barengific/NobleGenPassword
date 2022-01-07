@@ -78,14 +78,16 @@
             app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivVis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_visibility_24" />
+            app:srcCompat="@drawable/ic_image_visible_pressable"
+            android:clickable="true"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

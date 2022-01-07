@@ -66,8 +66,10 @@ class SettingsActivity : AppCompatActivity(),
             return true
         }else{
             Log.d("aaaaa", "farrrr")
+            MainActivity.authStatus = true
             val intent = Intent(this, MainActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
+                putExtra("fromLogin","fin")
             }
             startActivity(intent)
 //            return false

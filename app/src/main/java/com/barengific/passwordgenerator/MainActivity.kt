@@ -130,11 +130,11 @@ class MainActivity : AppCompatActivity() {
         //authenticate
         val qq = getIntent().extras?.get("fromLogin")
         Log.d("aaaaaafromlog", qq.toString())
-        if(qq.toString().equals("fin") == false){
-//            val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
-//            startActivity(intent)
-        }
-        if(!authStatus){
+//        if(qq.toString().equals("fin") == false){
+////            val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
+////            startActivity(intent)
+//        }
+        if(!(authStatus or qq.toString().equals("fin"))){
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }
@@ -630,17 +630,17 @@ class MainActivity : AppCompatActivity() {
         keyGenerator.generateKey()
     }
 
-//    override fun onPause() {
-//        super.onPause()
-//        super.onResume()
-//        Toast.makeText(applicationContext, "onPause called", Toast.LENGTH_SHORT).show()
-//        //authStatus = false
-//    }
+    override fun onPause() {
+        super.onPause()
+        super.onResume()
+        //Toast.makeText(applicationContext, "onPause called", Toast.LENGTH_SHORT).show()
+        authStatus = false
+    }
 
     override fun onStop() {
         super.onStop()
         authStatus = false
-        Toast.makeText(applicationContext, authStatus.toString()+"STOPP called", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(applicationContext, authStatus.toString()+"STOPP called", Toast.LENGTH_SHORT).show()
 
     }
 

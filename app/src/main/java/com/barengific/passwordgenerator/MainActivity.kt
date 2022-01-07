@@ -69,12 +69,11 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import androidx.security.crypto.MasterKeys
 import android.content.Context.CLIPBOARD_SERVICE
+import android.text.method.PasswordTransformationMethod
 
-
-
-
-
-
+import android.view.MotionEvent
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.text_row_item.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -678,7 +677,25 @@ class CustomAdapter(private val dataSet: List<Word>) :
             }
         })
 
+        viewHolder.ivMore.setOnTouchListener(@SuppressLint("ClickableViewAccessibility")
+        object: View.OnTouchListener{
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                    if (event.action == MotionEvent.ACTION_DOWN) {
+                        v.drawer_layout.ivMore.setImageResource(R.drawable.ic_baseline_expand_more_24) //R.drawable.ic_baseline_expand_more_24
+//                        v.layoutParams.height = 10000
+//                        v.layoutParams.width = 100000
+
+                    } else if (event.action == MotionEvent.ACTION_UP) {
+//                        v.layoutParams.height = 1
+//                        v.layoutParams.width = 1
+                    }
+
+                return false
+            }
+        })
+
         viewHolder.ivMore.setOnClickListener(object : View.OnClickListener {
+
             override fun onClick(view: View?) {
                 //creating a popup menu
                 val popup = PopupMenu(view?.context, viewHolder.ivMore)

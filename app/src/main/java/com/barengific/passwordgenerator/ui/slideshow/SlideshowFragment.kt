@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.barengific.passwordgenerator.MainActivity
 import com.barengific.passwordgenerator.R
 import com.barengific.passwordgenerator.databinding.FragmentSlideshowBinding
 
@@ -35,11 +36,13 @@ class SlideshowFragment : Fragment() {
         slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        MainActivity.authStatus = true
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        MainActivity.authStatus = true
     }
 }

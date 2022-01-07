@@ -70,13 +70,14 @@ class HomeFragment : Fragment() {
         }
 
 
-
+        MainActivity.authStatus = true
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        MainActivity.authStatus = true
     }
 }
 

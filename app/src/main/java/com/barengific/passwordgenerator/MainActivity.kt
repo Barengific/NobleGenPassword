@@ -733,7 +733,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                             R.id.menu_cancel ->  {
                                 Log.d("aaaamenuu","canceeel") //TODO
-                            }         
+                            }
                             R.id.menu_hide ->  {
                                 Log.d("aaaamenuu","canceeel") //TODO
                             }
@@ -750,6 +750,10 @@ class CustomAdapter(private val dataSet: List<Word>) :
         viewHolder.ivCopy.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 Log.d("aaaaICONu","innn copyy")
+                val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(view?.context, "Text Copied", Toast.LENGTH_LONG).show()
 
             }
         })

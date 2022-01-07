@@ -13,63 +13,69 @@
 
         <ImageView
             android:id="@+id/ivCopy"
-            android:layout_width="21dp"
-            android:layout_height="19dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView1"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_content_copy_24" />
+            app:srcCompat="@drawable/ic_image_copy_extra"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="28dp"
-            android:layout_height="19dp"
-            android:text="aaaaa"
+            android:layout_height="24dp"
+            android:text="a"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="31dp"
-            android:layout_height="19dp"
-            android:text="TextView"
+            android:layout_height="24dp"
+            android:text="b"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.168"
+            app:layout_constraintHorizontal_bias="0.195"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="82dp"
-            android:layout_height="19dp"
-            android:text="bbbbbbb"
+            android:layout_height="24dp"
+            android:text="c"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.387"
+            app:layout_constraintHorizontal_bias="0.43"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="79dp"
-            android:layout_height="19dp"
-            android:text="TextView"
+            android:layout_height="24dp"
+            android:text="d"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.802"
+            app:layout_constraintHorizontal_bias="0.742"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
 
         <ImageView
             android:id="@+id/ivMore"
-            android:layout_width="22dp"
-            android:layout_height="19dp"
+            android:layout_width="25dp"
+            android:layout_height="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.979"

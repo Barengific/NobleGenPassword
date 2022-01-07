@@ -729,9 +729,14 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
 
 
-                            }         //TODO              //handle menu2 click
+                            }
 
-                            R.id.menu_cancel ->  {Log.d("aaaamenuu","canceeel")}     //TODO                  //handle menu3 click
+                            R.id.menu_cancel ->  {
+                                Log.d("aaaamenuu","canceeel") //TODO
+                            }         
+                            R.id.menu_hide ->  {
+                                Log.d("aaaamenuu","canceeel") //TODO
+                            }
 
                         }
                         return true

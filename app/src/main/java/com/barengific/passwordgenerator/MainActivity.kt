@@ -62,11 +62,16 @@ import com.barengific.passwordgenerator.ui.login.LoginActivity
 import java.util.concurrent.Executor
 
 import android.content.SharedPreferences
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import androidx.security.crypto.MasterKeys
+import android.content.Context.CLIPBOARD_SERVICE
+
+
+
 
 
 
@@ -337,6 +342,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvGen.setStartIconOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
+            // Set the clipboard's primary clip.
+            clipboard.setPrimaryClip(clip)
+
+            Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
             Log.d("aaaaaaaaa", "copyyyingggg123")
         }
 
@@ -675,7 +686,16 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
                     override fun onMenuItemClick(item: MenuItem): Boolean {
                         when (item.itemId) {
-                            R.id.menu_copy -> {Log.d("aaaamenuu","copy")}    //TODO             //handle menu1 click
+                            R.id.menu_copy -> {
+                                Log.d("aaaamenuu","copy")
+                                val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                                val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
+                                // Set the clipboard's primary clip.
+                                clipboard.setPrimaryClip(clip)
+
+                                Toast.makeText(view?.context, "Text Copied", Toast.LENGTH_LONG).show()
+
+                            }    //TODO             //handle menu1 click
                                 //true
                             R.id.menu_delete -> {Log.d("aaaamenuu","delete")}         //TODO              //handle menu2 click
                                 //true

@@ -81,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
                         "Authentication succeeded!", Toast.LENGTH_SHORT)
                         .show()
 //                    Log.d("aaaaaaaa", "insuccc")
+                    MainActivity.authStatus = true
                     val intent = Intent(applicationContext, MainActivity::class.java).apply {
                         putExtra("fromLogin","fin")
                     }

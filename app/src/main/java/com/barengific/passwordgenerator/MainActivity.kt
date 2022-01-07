@@ -77,10 +77,7 @@ import kotlinx.android.synthetic.main.text_row_item.view.*
 import androidx.lifecycle.Lifecycle
 
 import androidx.lifecycle.OnLifecycleEvent
-
-
-
-
+import androidx.lifecycle.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -127,6 +124,7 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
+//        ProcessLifecycleOwner.get().getLifecycle().addObserver(t);
 
 
         //authenticate
@@ -136,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 //            val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
 //            startActivity(intent)
         }
-        if(authStatus == false){
+        if(!authStatus){
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }
@@ -635,21 +633,28 @@ class MainActivity : AppCompatActivity() {
 //    override fun onPause() {
 //        super.onPause()
 //        super.onResume()
-//        Toast.makeText(applicationContext, "onPause called", Toast.LENGTH_LONG).show()
-//        authStatus = false
+//        Toast.makeText(applicationContext, "onPause called", Toast.LENGTH_SHORT).show()
+//        //authStatus = false
 //    }
+
+    override fun onStop() {
+        super.onStop()
+        authStatus = false
+        Toast.makeText(applicationContext, authStatus.toString()+"STOPP called", Toast.LENGTH_SHORT).show()
+
+    }
+
     //
     //TODO
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onAppBackgrounded() {
-        Toast.makeText(applicationContext, "BACKGROUNDED called", Toast.LENGTH_SHORT).show()
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onAppForegrounded() {
-        Toast.makeText(applicationContext, "FOREGROUNDED", Toast.LENGTH_SHORT).show()
-
-    }
+//    @LifecycleEventObserver fun onAppBackgrounded {
+//        Toast.makeText(applicationContext, "BACKGROUNDED called", Toast.LENGTH_SHORT).show()
+//    }
+//
+//    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+//    fun onAppForegrounded() {
+//        Toast.makeText(applicationContext, "FOREGROUNDED", Toast.LENGTH_SHORT).show()
+//
+//    }
 
 }
 

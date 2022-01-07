@@ -39,10 +39,13 @@ class GalleryFragment : Fragment() {
         })
 
         //lateinit var context: Context
+        MainActivity.authStatus = true
         val intent = Intent(activity, MainActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
+            putExtra("fromLogin","fin")
         }
         startActivity(intent)
+
 
         return root
     }
@@ -50,5 +53,6 @@ class GalleryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        MainActivity.authStatus = true
     }
 }

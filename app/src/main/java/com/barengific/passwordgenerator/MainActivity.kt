@@ -85,13 +85,15 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var pos: Int = 0
+        lateinit var recyclerView: RecyclerView
         fun getPosi(): Int = pos
         fun setPosi(pos: Int) {
             this.pos = pos
         }
     }
 
-    lateinit var recyclerView: RecyclerView
+    //TODO
+    //lateinit var recyclerView: RecyclerView
 //    lateinit var db = Room.databaseBuilder(applicationContext,
 //        AppDatabase::class.java, "database-name"
 //    ).allowMainThreadQueries().build()
@@ -690,15 +692,45 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                 Log.d("aaaamenuu","copy")
                                 val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                                 val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
-                                // Set the clipboard's primary clip.
                                 clipboard.setPrimaryClip(clip)
-
                                 Toast.makeText(view?.context, "Text Copied", Toast.LENGTH_LONG).show()
 
-                            }    //TODO             //handle menu1 click
-                                //true
-                            R.id.menu_delete -> {Log.d("aaaamenuu","delete")}         //TODO              //handle menu2 click
-                                //true
+                            }
+                            R.id.menu_delete -> {
+                                Log.d("aaaamenuu","delete")
+                                val db = view?.context?.let {
+                                    Room.databaseBuilder(
+                                        it,
+                                        AppDatabase::class.java, "database-name"
+                                    ).allowMainThreadQueries().build()
+                                }
+                                val wordDao = db?.wordDao()
+
+                                val wid: TextView? = viewHolder.textView1
+                                val pType: TextView? = viewHolder.textView2
+                                val key: TextView? = viewHolder.textView3
+                                val value: TextView? = viewHolder.textView4
+
+                                var a = Word(
+                                    wid?.text.toString().toInt(),
+                                    pType?.text.toString(),
+                                    key?.text.toString(),
+                                    value?.text.toString()
+                                )
+                                db?.wordDao()?.delete(a)
+                                val arrr = wordDao?.getAll()
+                                var adapter = arrr?.let { CustomAdapter(it) }
+
+                                MainActivity.recyclerView.setHasFixedSize(false)
+                                MainActivity.recyclerView.setAdapter(adapter)
+                                MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
+                                db?.close()
+                                Log.d("aaaamenuu","DDDdelete")
+
+
+
+                            }         //TODO              //handle menu2 click
+
                             R.id.menu_cancel ->  {Log.d("aaaamenuu","canceeel")}     //TODO                  //handle menu3 click
 
                         }

@@ -74,6 +74,12 @@ import android.text.method.PasswordTransformationMethod
 import android.view.MotionEvent
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.text_row_item.view.*
+import androidx.lifecycle.Lifecycle
+
+import androidx.lifecycle.OnLifecycleEvent
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -85,6 +91,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var pos: Int = 0
         lateinit var recyclerView: RecyclerView
+        var authStatus = false
         fun getPosi(): Int = pos
         fun setPosi(pos: Int) {
             this.pos = pos
@@ -121,12 +128,20 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_SECURE
         )
 
+
+        //authenticate
         val qq = getIntent().extras?.get("fromLogin")
         Log.d("aaaaaafromlog", qq.toString())
         if(qq.toString().equals("fin") == false){
+//            val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
+//            startActivity(intent)
+        }
+        if(authStatus == false){
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }
+
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -615,6 +630,25 @@ class MainActivity : AppCompatActivity() {
             KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
         keyGenerator.init(keyGenParameterSpec)
         keyGenerator.generateKey()
+    }
+
+//    override fun onPause() {
+//        super.onPause()
+//        super.onResume()
+//        Toast.makeText(applicationContext, "onPause called", Toast.LENGTH_LONG).show()
+//        authStatus = false
+//    }
+    //
+    //TODO
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onAppBackgrounded() {
+        Toast.makeText(applicationContext, "BACKGROUNDED called", Toast.LENGTH_SHORT).show()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onAppForegrounded() {
+        Toast.makeText(applicationContext, "FOREGROUNDED", Toast.LENGTH_SHORT).show()
+
     }
 
 }

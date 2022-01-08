@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
-//import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 import android.widget.Toast
 import android.text.Editable
@@ -37,8 +37,8 @@ import android.widget.TextView
 import android.view.MenuInflater
 
 import android.view.ContextMenu
-//import kotlinx.android.synthetic.main.fragment_home.view.*
-//import kotlinx.android.synthetic.main.length_layout.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.length_layout.*
 import android.widget.AdapterView.OnItemClickListener
 import com.barengific.passwordgenerator.crypt.Acvb
 import java.io.UnsupportedEncodingException
@@ -57,7 +57,7 @@ import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.barengific.passwordgenerator.CustomAdapter.Companion.position
-import com.barengific.passwordgenerator.ui.home.HomeFragment.Companion.setHeres
+
 import com.barengific.passwordgenerator.ui.login.LoginActivity
 import java.util.concurrent.Executor
 
@@ -72,8 +72,8 @@ import android.content.Context.CLIPBOARD_SERVICE
 import android.text.method.PasswordTransformationMethod
 
 import android.view.MotionEvent
-//import kotlinx.android.synthetic.main.activity_main.view.*
-//import kotlinx.android.synthetic.main.text_row_item.view.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.text_row_item.view.*
 import androidx.lifecycle.Lifecycle
 
 import androidx.lifecycle.OnLifecycleEvent
@@ -144,8 +144,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.appBarMain.toolbar)
 
+        setSupportActionBar(binding.appBarMain.toolbar)
+//
         binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -171,291 +172,291 @@ class MainActivity : AppCompatActivity() {
 
 
         //***************************************************
-//
-//        //db initialise
-//        val db = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java, "database-name"
-//        ).allowMainThreadQueries().build()
-//        val wordDao = db.wordDao()
-//
-//        //recycle view
-//        val arr = wordDao.getAll()
-//        var adapter = CustomAdapter(arr)
-//        recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-//        recyclerView.setHasFixedSize(false)
+
+        //db initialise
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries().build()
+        val wordDao = db.wordDao()
+
+        //recycle view
+        val arr = wordDao.getAll()
+        var adapter = CustomAdapter(arr)
+        recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+        recyclerView.setHasFixedSize(false)
+        recyclerView.setAdapter(adapter)
+        recyclerView.setLayoutManager(LinearLayoutManager(this))
+
+//        adapter = CustomAdapter(arr)
 //        recyclerView.setAdapter(adapter)
-//        recyclerView.setLayoutManager(LinearLayoutManager(this))
-//
-////        adapter = CustomAdapter(arr)
-////        recyclerView.setAdapter(adapter)
-////        adapter.notifyDataSetChanged()
-////        adapter.notifyDataSetChanged()
-////        recyclerView.adapter?.notifyDataSetChanged()
-////        adapter.notifyItemRangeChanged(0,5)
-//
-//        //length dropdown ********************8 TODO
-/////////        val Lines = resources.getStringArray(R.array.p_len_array).toList()
-////////        val adapterr = ArrayAdapter(this, R.layout.length_layout, Lines)
-////////        filled_exposed_dropdown.setAdapter(adapterr)
-//        //filled_exposed_dropdown.setText("10",false)
-//
-////        (TextField.editableText as? AutoCompleteTextView)?.setAdapter(adapterr)
-//////        val spinnerr: Spinner = findViewById(R.id.filled_exposed_dropdown)
-////        // Create an ArrayAdapter using the string array and a default spinner layout
-////        ArrayAdapter.createFromResource(this,R.array.p_len_array,
-////            android.R.layout.simple_dropdown_item_1line
-////        ).also { adapter ->
-////            // Specify the layout to use when the list of choices appears
-////            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-////            // Apply the adapter to the spinner
-////            //spinnerr.adapter = adapter
-////
-////        }
-//
-//        val ss = Pgen()
-//
-//
-//        //Listeners
-//        btnGenerate.setOnClickListener {
-//            //tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-//            //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-////            Log.d("aaaaaGEN", filled_exposed_dropdown.hasSelection().toString())
-////            Log.d("aaaaaGEN", filled_exposed_dropdown.isSelected.toString())
-////            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
-////            Log.d("aaaaaGEN1", filled_exposed_dropdown.editableText.toString())
-////            Log.d("aaaaaGEN2", filled_exposed_dropdown.editableText.toString().toBooleanStrictOrNull().toString())
-////            Log.d("aaaaaGEN3", filled_exposed_dropdown.editableText.toString().toIntOrNull().toString())
-////            val selection = filled_exposed_dropdown.getItemAtPosition(position) as String
-////            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
-//
-//            val sharedPref = this?.getSharedPreferences(
-//                getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
-//
-//            val sharedPreff = this?.getPreferences(Context.MODE_PRIVATE)
-//
-//            //write save
-//            val newHighScore: Int = 12345
-//            val sharedPrefSave = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
-//            with (sharedPrefSave.edit()) {
-//                putInt(getString(R.string.saved_high_score_key_del), newHighScore)
-//                apply()
-//            }
-//
-//
-//            // read retreive
-//            val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
-//            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
-//            val highScore = sharedPrefRead.getInt(getString(R.string.saved_high_score_key_del), defaultValue)
-//
-//            //for settings //redwrite
-//            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this /* Activity context */)
-//            //read
-//            val name = sharedPreferences.getString("signature", "nonon")
-//            //write
-//            with (sharedPreferences.edit()){
-//                putString("signature", "newwwsigg")
-//                apply()
-//            }
-//            val nameS = sharedPreferences.getString("signature", "nonon")
-//
-////            Log.d("aaaaaaSgared1", highScore.toString() )
-////            Log.d("aaaaaaSgared2", name.toString() )
-////            Log.d("aaaaaaSgared3", nameS.toString() )
-//
-//            val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-//            val masterKeyAliasS: MasterKey.Builder = MasterKey.Builder(this)
-//            val sharedPreferencesE: SharedPreferences = EncryptedSharedPreferences.create(
-//                "secret_shared_prefs",
-//                masterKeyAlias,
-//                this,
-//                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-//                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-//            )
-//
-//            val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-//                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-//                .build()
-//
-//            val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
-//                this,
-//                "secret_shared_prefs",
-//                masterKey,
-//                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-//                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
-//
-//            sharedPreferencesEE.edit().putString("signatureS", "encrrrr").apply()
-//            val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
-//            Log.d("aaaaaEEEEEEE", nameE.toString())
-//            Log.d("aaaaaEEEEEEEMM", masterKey.toString())
-//            // use the shared preferences and editor as you normally would
-//
-//            // use the shared preferences and editor as you normally would
-//            val editor = sharedPreferences.edit()
-//
-//
-//
-//
-//            if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
-//                tvGen.editText?.setText(
-//                    ss.pgen(
-//                        editTextKeyGen.editText?.text.toString(),
-//                        "jimbob",
-//                        "4",
-//                        "5",
-//                        "6",
-//                        "7",
-//                        10
-//                    )
-//                )
-//            } else {
-//                tvGen.editText?.setText(
-//                    ss.pgen(
-//                        editTextKeyGen.editText?.text.toString(),
-//                        "jimbob",
-//                        "4",
-//                        "5",
-//                        "6",
-//                        "7",
-//                        filled_exposed_dropdown.editableText.toString().toInt()
-//                    )
-//                )
-//            }
-//
-//            //encrypt/decrypt
-////            val acvb = Acvb
-////
-////            val enout =
-////                acvb.encrypt_AES("aaaaaaaaaaaaaaaa", "hello this is a mesage", "qqqqqqqqqqqqqqqq")
-////            Log.d("aaaQQQ_EN", enout!!)
-////
-////            val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
-////            Log.d("aaaQQQ_DEC", deout!!)
-////
-////            val sc = generateKey("aaaaaaaaaaaaaaaa")
-////            val en = encryptMsg("hell this is a msg", sc)
-////            Log.d("aaaWWW_EN", en!!)
-////
-////            val de = decryptMsg(en, sc)
-////            Log.d("aaaWWW_DE", de!!)
+//        adapter.notifyDataSetChanged()
+//        adapter.notifyDataSetChanged()
+//        recyclerView.adapter?.notifyDataSetChanged()
+//        adapter.notifyItemRangeChanged(0,5)
+
+        //length dropdown ********************8 TODO
+        val Lines = resources.getStringArray(R.array.p_len_array).toList()
+        val adapterr = ArrayAdapter(this, R.layout.length_layout, Lines)
+        filled_exposed_dropdown.setAdapter(adapterr)
+//        filled_exposed_dropdown.setText("10",false)
+
+//        (TextField.editableText as? AutoCompleteTextView)?.setAdapter(adapterr)
+////        val spinnerr: Spinner = findViewById(R.id.filled_exposed_dropdown)
+//        // Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter.createFromResource(this,R.array.p_len_array,
+//            android.R.layout.simple_dropdown_item_1line
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            //spinnerr.adapter = adapter
 //
 //        }
+
+        val ss = Pgen()
+
+
+        //Listeners
+        btnGenerate.setOnClickListener {
+            //tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+            //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.hasSelection().toString())
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.isSelected.toString())
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
+//            Log.d("aaaaaGEN1", filled_exposed_dropdown.editableText.toString())
+//            Log.d("aaaaaGEN2", filled_exposed_dropdown.editableText.toString().toBooleanStrictOrNull().toString())
+//            Log.d("aaaaaGEN3", filled_exposed_dropdown.editableText.toString().toIntOrNull().toString())
+//            val selection = filled_exposed_dropdown.getItemAtPosition(position) as String
+//            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
+
+            val sharedPref = this?.getSharedPreferences(
+                getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
+
+            val sharedPreff = this?.getPreferences(Context.MODE_PRIVATE)
+
+            //write save
+            val newHighScore: Int = 12345
+            val sharedPrefSave = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+            with (sharedPrefSave.edit()) {
+                putInt(getString(R.string.saved_high_score_key_del), newHighScore)
+                apply()
+            }
+
+
+            // read retreive
+            val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
+            val highScore = sharedPrefRead.getInt(getString(R.string.saved_high_score_key_del), defaultValue)
+
+            //for settings //redwrite
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this /* Activity context */)
+            //read
+            val name = sharedPreferences.getString("signature", "nonon")
+            //write
+            with (sharedPreferences.edit()){
+                putString("signature", "newwwsigg")
+                apply()
+            }
+            val nameS = sharedPreferences.getString("signature", "nonon")
+
+//            Log.d("aaaaaaSgared1", highScore.toString() )
+//            Log.d("aaaaaaSgared2", name.toString() )
+//            Log.d("aaaaaaSgared3", nameS.toString() )
+
+            val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+            val masterKeyAliasS: MasterKey.Builder = MasterKey.Builder(this)
+            val sharedPreferencesE: SharedPreferences = EncryptedSharedPreferences.create(
+                "secret_shared_prefs",
+                masterKeyAlias,
+                this,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+
+            val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+
+            val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
+                this,
+                "secret_shared_prefs",
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+
+            sharedPreferencesEE.edit().putString("signatureS", "encrrrr").apply()
+            val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
+            Log.d("aaaaaEEEEEEE", nameE.toString())
+            Log.d("aaaaaEEEEEEEMM", masterKey.toString())
+            // use the shared preferences and editor as you normally would
+
+            // use the shared preferences and editor as you normally would
+            val editor = sharedPreferences.edit()
+
+
+
+
+            if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
+                tvGen.editText?.setText(
+                    ss.pgen(
+                        editTextKeyGen.editText?.text.toString(),
+                        "jimbob",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        10
+                    )
+                )
+            } else {
+                tvGen.editText?.setText(
+                    ss.pgen(
+                        editTextKeyGen.editText?.text.toString(),
+                        "jimbob",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        filled_exposed_dropdown.editableText.toString().toInt()
+                    )
+                )
+            }
+
+            //encrypt/decrypt
+//            val acvb = Acvb
 //
+//            val enout =
+//                acvb.encrypt_AES("aaaaaaaaaaaaaaaa", "hello this is a mesage", "qqqqqqqqqqqqqqqq")
+//            Log.d("aaaQQQ_EN", enout!!)
 //
-//        tvCopy.setOnClickListener {
-//            // Creates a new text clip to put on the clipboard
-//            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
-//            // Set the clipboard's primary clip.
-//            clipboard.setPrimaryClip(clip)
+//            val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
+//            Log.d("aaaQQQ_DEC", deout!!)
 //
-//            Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
-////
-//            //tvGen.setText(getPosi().toString())
-////            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
-////                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
-////
-////            val text1: TextView? =
-////                recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-////                    R.id.textView4)
-////
-////            Log.d("aaacc", text1?.text.toString())
-////            Log.d("aaa", editTextKeyGen.editText?.text.toString())
-//        }
+//            val sc = generateKey("aaaaaaaaaaaaaaaa")
+//            val en = encryptMsg("hell this is a msg", sc)
+//            Log.d("aaaWWW_EN", en!!)
 //
-//        tvGen.setStartIconOnClickListener {
-//            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
-//            // Set the clipboard's primary clip.
-//            clipboard.setPrimaryClip(clip)
+//            val de = decryptMsg(en, sc)
+//            Log.d("aaaWWW_DE", de!!)
+
+        }
+
+
+        tvCopy.setOnClickListener {
+            // Creates a new text clip to put on the clipboard
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
+            // Set the clipboard's primary clip.
+            clipboard.setPrimaryClip(clip)
+
+            Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
 //
-//            Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
-//            Log.d("aaaaaaaaa", "copyyyingggg123")
-//        }
+            //tvGen.setText(getPosi().toString())
+//            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
+//                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
 //
-//        btnSave.setOnClickListener {
-//            val aa = Word(
-//                0,
-//                "pgen",
-//                editTextKeyGen.editText?.text.toString(),
-//                tvGen.editText?.text.toString()
-//            )
-//            wordDao.insertAll(aa)
+//            val text1: TextView? =
+//                recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+//                    R.id.textView4)
 //
-//            arrr = wordDao.getAll()
+//            Log.d("aaacc", text1?.text.toString())
+//            Log.d("aaa", editTextKeyGen.editText?.text.toString())
+        }
+
+        tvGen.setStartIconOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
+            // Set the clipboard's primary clip.
+            clipboard.setPrimaryClip(clip)
+
+            Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
+            Log.d("aaaaaaaaa", "copyyyingggg123")
+        }
+
+        btnSave.setOnClickListener {
+            val aa = Word(
+                0,
+                "pgen",
+                editTextKeyGen.editText?.text.toString(),
+                tvGen.editText?.text.toString()
+            )
+            wordDao.insertAll(aa)
+
+            arrr = wordDao.getAll()
+
+            var adapter = CustomAdapter(arrr)
+            //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+            recyclerView.setHasFixedSize(false)
+            recyclerView.setAdapter(adapter)
+            recyclerView.setLayoutManager(LinearLayoutManager(this))
+
+            //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
+        }
+
+        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
+            Int
+            val selection = parent.getItemAtPosition(position) as String
+            Log.d("aaanewMAterialSpinner", selection)
+            tvGen.editText?.setText(
+                ss.pgen(
+                    editTextKeyGen.editText?.text.toString(),
+                    "jimbob",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    selection.toInt()
+                )
+            )
+
+        })
+
 //
-//            var adapter = CustomAdapter(arrr)
-//            //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-//            recyclerView.setHasFixedSize(false)
-//            recyclerView.setAdapter(adapter)
-//            recyclerView.setLayoutManager(LinearLayoutManager(this))
-//
-//            //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
-//        }
-//
-//        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
-//            Int
+//        autoCompleteTextView.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
 //            val selection = parent.getItemAtPosition(position) as String
-//            Log.d("aaanewMAterialSpinner", selection)
-//            tvGen.editText?.setText(
-//                ss.pgen(
-//                    editTextKeyGen.editText?.text.toString(),
-//                    "jimbob",
-//                    "4",
-//                    "5",
-//                    "6",
-//                    "7",
-//                    selection.toInt()
-//                )
-//            )
-//
+//            //TODO Do something with the selected text
 //        })
-//
-////
-////        autoCompleteTextView.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
-////            val selection = parent.getItemAtPosition(position) as String
-////            //TODO Do something with the selected text
-////        })
-//
-//
-//        editTextKeyGen.editText?.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable) {}
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//                if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
-//                    tvGen.editText?.setText(
-//                        ss.pgen(
-//                            editTextKeyGen.editText?.text.toString(),
-//                            "jimbob",
-//                            "4",
-//                            "5",
-//                            "6",
-//                            "7",
-//                            10
-//                        )
-//                    )
-//                } else {
-//                    tvGen.editText?.setText(
-//                        ss.pgen(
-//                            editTextKeyGen.editText?.text.toString(),
-//                            "jimbob",
-//                            "4",
-//                            "5",
-//                            "6",
-//                            "7",
-//                            filled_exposed_dropdown.editableText.toString().toInt()
-//                        )
-//                    )
-//                }
-//                //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
-//            }
-//        })
-//
-//        registerForContextMenu(recyclerView);
-//        val ustomAdapter = CustomAdapter(arr)
-//
-//        //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
-//
+
+
+        editTextKeyGen.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
+                    tvGen.editText?.setText(
+                        ss.pgen(
+                            editTextKeyGen.editText?.text.toString(),
+                            "jimbob",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            10
+                        )
+                    )
+                } else {
+                    tvGen.editText?.setText(
+                        ss.pgen(
+                            editTextKeyGen.editText?.text.toString(),
+                            "jimbob",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            filled_exposed_dropdown.editableText.toString().toInt()
+                        )
+                    )
+                }
+                //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
+            }
+        })
+
+        registerForContextMenu(recyclerView);
+        val ustomAdapter = CustomAdapter(arr)
+
+        //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
+
 
     }
 

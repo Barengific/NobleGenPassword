@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +21,7 @@ import com.barengific.passwordgenerator.MainActivity
 import com.barengific.passwordgenerator.R
 import com.barengific.passwordgenerator.databinding.FragmentHomeBinding
 import com.barengific.passwordgenerator.ui.gallery.GalleryFragment
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -53,6 +55,8 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
         if(getHeres() == 0){
             setHeres(1)
             Log.d("aaa", "inn hommmee")
@@ -67,11 +71,26 @@ class HomeFragment : Fragment() {
 //            }
 //            startActivity(intent)
             //setHeres(0)
+            //TODO
         }
 
 
         MainActivity.authStatus = true
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        // TODO: Use the ViewModel
+
+//        //length dropdown
+//        val Lines = resources.getStringArray(R.array.p_len_array).toList()
+////        val adapterr = getActivity()?.let { ArrayAdapter(it, R.layout.length_layout, Lines) }
+//        val adapterr = this.context?.let { ArrayAdapter(it, R.layout.length_layout, Lines) }
+//        filled_exposed_dropdown.setAdapter(adapterr)
+
+        
     }
 
     override fun onDestroyView() {

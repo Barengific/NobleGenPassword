@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.barengific.passwordgenerator.MainActivity
-import com.barengific.passwordgenerator.R
 import com.barengific.passwordgenerator.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {

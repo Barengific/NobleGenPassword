@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.barengific.passwordgenerator.databinding.ActivityMainBinding
+import com.barengific.passwordgenerator.databinding.FragmentHomeBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -81,7 +82,7 @@ import androidx.lifecycle.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: FragmentHomeBinding
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
 
@@ -142,11 +143,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        setSupportActionBar(binding.appBarMain.toolbar)
+//        setSupportActionBar(binding.appBarMain.toolbar)
 //
 //        binding.appBarMain.fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

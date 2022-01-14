@@ -4,6 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintBottom_toTopOf="@id/nestedScrollViewInitialCompanySelection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollViewInitialCompanySelection"
         android:layout_width="0dp"
@@ -105,8 +119,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnGenerate"
                 app:layout_constraintVertical_bias="0.01"
-                tools:ignore="MissingClass,SpeakableTextPresentCheck"
-                app:startIconDrawable="@drawable/ic_baseline_content_copy_24">
+                app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+                tools:ignore="MissingClass,SpeakableTextPresentCheck">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

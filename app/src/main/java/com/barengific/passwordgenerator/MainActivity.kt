@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.fragment_home)
+        setContentView(R.layout.activity_main)
 //TODO
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,

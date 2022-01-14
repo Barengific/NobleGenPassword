@@ -5,19 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintBottom_toTopOf="@id/nestedScrollViewInitialCompanySelection"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollViewInitialCompanySelection"
         android:layout_width="0dp"
@@ -39,6 +26,19 @@
             <!--            btnGenerate-->
 
             <!--            btnSave-->
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:layout_constraintBottom_toTopOf="@id/editTextKeyGen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTextKeyGen"

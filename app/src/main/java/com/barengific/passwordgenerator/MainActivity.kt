@@ -130,8 +130,8 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_SECURE
         )
 //        ProcessLifecycleOwner.get().getLifecycle().addObserver(t);
-
-
+        setSupportActionBar(findViewById(R.id.app_bar_main))
+        //TODO
         //authenticate
         val qq = getIntent().extras?.get("fromLogin")
         Log.d("aaaaaafromlog", qq.toString())

@@ -84,7 +84,7 @@ import androidx.lifecycle.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: ActivityMainBinding
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
 
@@ -145,8 +145,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//        binding = FragmentHomeBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 //
 //        setSupportActionBar(binding.appBarMain.toolbar)

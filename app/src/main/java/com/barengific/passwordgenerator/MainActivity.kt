@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_home)
+        //setContentView(R.layout.fragment_home)
 //TODO
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
@@ -145,10 +145,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        binding = FragmentHomeBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 
-
+//
 //        setSupportActionBar(binding.appBarMain.toolbar)
 //
 //        binding.appBarMain.fab.setOnClickListener { view ->

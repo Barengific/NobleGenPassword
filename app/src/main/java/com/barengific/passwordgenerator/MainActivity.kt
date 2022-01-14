@@ -80,7 +80,6 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.text_row_item.view.*
 import androidx.lifecycle.Lifecycle
 
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.*
 
 class MainActivity : AppCompatActivity() {
@@ -130,7 +129,7 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_SECURE
         )
 //        ProcessLifecycleOwner.get().getLifecycle().addObserver(t);
-        setSupportActionBar(findViewById(R.id.toolbar))
+        //setSupportActionBar(findViewById(R.id.toolbar))
         //TODO
         //authenticate
         val qq = getIntent().extras?.get("fromLogin")

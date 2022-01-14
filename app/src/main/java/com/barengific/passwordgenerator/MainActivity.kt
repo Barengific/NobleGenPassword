@@ -868,7 +868,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
 class FireMissilesDialogFragment : DialogFragment() {
 
-    override fun onCreateDialog(savedInstanceState: Bundle): Dialog {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
@@ -884,6 +884,7 @@ class FireMissilesDialogFragment : DialogFragment() {
             // Create the AlertDialog object and return it
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
-    }//TODO
+    }
+    //TODO
 }
 

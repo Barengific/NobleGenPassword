@@ -18,7 +18,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.barengific.passwordgenerator.databinding.ActivityMainBinding
-import com.barengific.passwordgenerator.databinding.FragmentHomeBinding
+//import com.barengific.passwordgenerator.databinding.FragmentHomeBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room

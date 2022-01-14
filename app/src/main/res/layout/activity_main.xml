@@ -64,8 +64,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/editTextKeyGen"
-                app:layout_constraintVertical_bias="0.01"
-                app:startIconDrawable="@drawable/ic_baseline_format_list_numbered_24">
+                app:layout_constraintVertical_bias="0.01">
+<!--                app:startIconDrawable="@drawable/ic_baseline_format_list_numbered_24">-->
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/filled_exposed_dropdown"

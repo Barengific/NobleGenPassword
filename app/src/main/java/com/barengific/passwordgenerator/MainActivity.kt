@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 //
-//        setSupportActionBar(binding.appBarMain.toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar))
 //
 //        binding.appBarMain.fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

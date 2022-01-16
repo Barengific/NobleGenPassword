@@ -81,5 +81,6 @@
     <string name="saved_high_score_key_del">11</string>
     <string name="hide">Hide</string>
     <string name="output_result">Output Result</string>
+    <string name="enter_pin">Pin Number</string>
 
 </resources>

@@ -28,7 +28,7 @@ class CredentialsEnt : AppCompatActivity() {
                 && editTextNumberPassword3.text.toString().isNotEmpty()
                 && editTextNumberPassword4.text.toString().isNotEmpty()
             ) {
-                if (editTextTextPassword.text.toString().length >= 8) {
+                if (editTextPassword.editText?.toString()?.length >= 8) {
                     if (editTextNumberPassword1.text.toString().length == 1
                         && editTextNumberPassword2.text.toString().length == 1
                         && editTextNumberPassword3.text.toString().length == 1

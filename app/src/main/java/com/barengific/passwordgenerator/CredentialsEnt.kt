@@ -34,11 +34,8 @@ class CredentialsEnt : AppCompatActivity() {
                         Log.d("aaa", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString())
 
                         File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/barz.txt").writeText(
-                            editTextTextPassword.text.toString() +"\n" +
-                                    editTextNumberPassword1.text.toString() +"\n" +
-                                    editTextNumberPassword2.text.toString() +"\n" +
-                                    editTextNumberPassword3.text.toString() +"\n" +
-                                    editTextNumberPassword4.text.toString())
+                            editTextPassword.editText?.text.toString() +"\n" +
+                                    editTextPin.editText?.text.toString())
 
                         val intent = Intent(this, MainActivity::class.java).apply {
                             //putExtra(EXTRA_MESSAGE, message)

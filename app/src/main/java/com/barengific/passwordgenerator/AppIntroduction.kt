@@ -22,16 +22,16 @@ class AppIntroduction : AppIntro() {
         // Call addSlide passing your Fragments.
         // You can use AppIntroFragment to use a pre-built fragment
         addSlide(AppIntroFragment.newInstance(
-            title = "Welcome...baz",
-            description = "This is MYY the first slide of the example"
+            title = "Welcome...",
+            description = "This is the Noble Password Manger"
         ))
         addSlide(AppIntroFragment.newInstance(
-            title = "Yehh...Let's get started!",
-            description = "This is the slide, :)"
+            title = "Simple & Effective!",
+            description = "An easy way to create unique passwords"
         ))
         addSlide(AppIntroFragment.newInstance(
-            title = "Listen UP!",
-            description = "hahahaha:)"
+            title = "Safe & Reliable!",
+            description = "You don't have to worry about brute force attacks and even if the app gets deleted, the passwords can be derived back!"
         ))
     }
 

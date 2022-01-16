@@ -23,16 +23,9 @@ class CredentialsEnt : AppCompatActivity() {
 
         btnSubmit.setOnClickListener {
             if (editTextPassword.editText?.text.toString().isNotEmpty()
-                && editTextNumberPassword1.text.toString().isNotEmpty()
-                && editTextNumberPassword2.text.toString().isNotEmpty()
-                && editTextNumberPassword3.text.toString().isNotEmpty()
-                && editTextNumberPassword4.text.toString().isNotEmpty()
-            ) {
-                if (editTextPassword.editText?.toString()?.length >= 8) {
-                    if (editTextNumberPassword1.text.toString().length == 1
-                        && editTextNumberPassword2.text.toString().length == 1
-                        && editTextNumberPassword3.text.toString().length == 1
-                        && editTextNumberPassword4.text.toString().length == 1
+                && editTextPin.editText?.text.toString().isNotEmpty()) {
+                if (editTextPassword.editText?.toString()?.length!! >= 8) {
+                    if (editTextPin.editText?.text.toString().length == 1
                     ) {
                         //val path = applicationContext.getFilesDir()
                         //Log.d("aaa", path.toString())

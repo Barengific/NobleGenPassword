@@ -869,21 +869,24 @@ class FireMissilesDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            builder.setMessage(R.string.dialog_fire_missiles)
-                .setPositiveButton(R.string.fire,
+            // Get the layout inflater
+            val inflater = requireActivity().layoutInflater;
+
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(inflater.inflate(R.layout.dialog_signin, null))
+                // Add action buttons
+                .setPositiveButton(R.string.signin,
                     DialogInterface.OnClickListener { dialog, id ->
-                        // FIRE ZE MISSILES!
+                        // sign in the user ...
                     })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
-                        // User cancelled the dialog
+                        getDialog().cancel()
                     })
-            // Create the AlertDialog object and return it
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-    //TODO
 }
 

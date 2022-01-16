@@ -24,8 +24,8 @@ class CredentialsEnt : AppCompatActivity() {
         btnSubmit.setOnClickListener {
             if (editTextPassword.editText?.text.toString().isNotEmpty()
                 && editTextPin.editText?.text.toString().isNotEmpty()) {
-                if (editTextPassword.editText?.toString()?.length!! >= 8) {
-                    if (editTextPin.editText?.text.toString().length == 1
+                if (editTextPassword.editText?.text.toString().length >= 8) {
+                    if (editTextPin.editText?.text.toString().length == 4
                     ) {
                         //val path = applicationContext.getFilesDir()
                         //Log.d("aaa", path.toString())
@@ -46,7 +46,7 @@ class CredentialsEnt : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             applicationContext,
-                            "Sigma values cannot be more than 1 digit",
+                            "Sigma values cannot be more or less than 4 digits",
                             Toast.LENGTH_LONG
                         ).show()
                     }

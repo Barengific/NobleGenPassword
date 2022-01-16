@@ -883,7 +883,7 @@ class FireMissilesDialogFragment : DialogFragment() {
 //                    })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
-                        getDialog().cancel()
+                        getDialog()?.cancel()
                     })
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

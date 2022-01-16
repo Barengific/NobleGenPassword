@@ -21,49 +21,8 @@ class CredentialsEnt : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.credentials_ent)
 
-        Log.d("aaa", "innn cccredentials")
-
-        val hidePasswordMethod = PasswordTransformationMethod()
-        switch1.setOnClickListener {
-            editTextTextPassword.apply {
-                transformationMethod =
-                    if (transformationMethod is PasswordTransformationMethod)
-                        null //shows password
-                    else
-                        hidePasswordMethod //hides password
-            }
-            editTextNumberPassword1.apply {
-                transformationMethod =
-                    if (transformationMethod is PasswordTransformationMethod)
-                        null //shows password
-                    else
-                        hidePasswordMethod //hides password
-            }
-            editTextNumberPassword2.apply {
-                transformationMethod =
-                    if (transformationMethod is PasswordTransformationMethod)
-                        null //shows password
-                    else
-                        hidePasswordMethod //hides password
-            }
-            editTextNumberPassword3.apply {
-                transformationMethod =
-                    if (transformationMethod is PasswordTransformationMethod)
-                        null //shows password
-                    else
-                        hidePasswordMethod //hides password
-            }
-            editTextNumberPassword4.apply {
-                transformationMethod =
-                    if (transformationMethod is PasswordTransformationMethod)
-                        null //shows password
-                    else
-                        hidePasswordMethod //hides password
-            }
-        }
-
         btnSubmit.setOnClickListener {
-            if (editTextTextPassword.text.toString().isNotEmpty()
+            if (editTextPassword.editText?.text.toString().isNotEmpty()
                 && editTextNumberPassword1.text.toString().isNotEmpty()
                 && editTextNumberPassword2.text.toString().isNotEmpty()
                 && editTextNumberPassword3.text.toString().isNotEmpty()

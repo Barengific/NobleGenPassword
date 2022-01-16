@@ -64,7 +64,7 @@ class CredentialsEnt : AppCompatActivity() {
                     "Please fill in all the required fields",
                     Toast.LENGTH_LONG
                 ).show()
-            }
+            }//TODO make toast short
 
         }
 

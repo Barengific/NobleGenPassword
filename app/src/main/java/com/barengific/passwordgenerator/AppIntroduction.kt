@@ -23,7 +23,7 @@ class AppIntroduction : AppIntro() {
         // You can use AppIntroFragment to use a pre-built fragment
         addSlide(AppIntroFragment.newInstance(
             title = "Welcome...",
-            description = "This is the Noble Password Manger"
+            description = "This is the Noble Password Manager"
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Simple & Effective!",

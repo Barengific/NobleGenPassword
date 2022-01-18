@@ -129,11 +129,27 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_SECURE
         )
 
+        val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
+            this,
+            "secret_shared_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+
+        val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
+        val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
+
 //        //TODO
 //        //authenticate
-        val qq = getIntent().extras?.get("fromLogin")
-        Log.d("aaaaaafromlog", qq.toString())
-        if(qq.toString().equals("cert") == false){
+        val fromLogin = getIntent().extras?.get("fromLogin")
+        val fromIntro = getIntent().extras?.get("fromIntro")
+
+        Log.d("aaaaaafromlog", fromLogin.toString())
+        if(!(nameS.equals("nonon") or nameT.equals("nonon"))){
             val intent = Intent(applicationContext, AppIntroduction::class.java).apply {}
             startActivity(intent)
         }
@@ -178,6 +194,9 @@ class MainActivity : AppCompatActivity() {
         filled_exposed_dropdown.setAdapter(adapterr)
 
         val ss = Pgen()
+
+
+
 
 
         //Listeners

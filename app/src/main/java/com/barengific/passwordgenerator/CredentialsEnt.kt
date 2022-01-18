@@ -76,7 +76,7 @@ class CredentialsEnt : AppCompatActivity() {
 
     }
     fun saveInfo(mk: String, pik: Int){
-
+        //TODO save keys to encrypted sharedPrefs
         val sharedPref = this?.getSharedPreferences(
             getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
 
@@ -84,7 +84,7 @@ class CredentialsEnt : AppCompatActivity() {
 
         //write save
         val newHighScore: Int = 12345
-        val sharedPrefSave = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+        val sharedPrefSave = this?.getPreferences(Context.MODE_PRIVATE) ?: return
         with (sharedPrefSave.edit()) {
             putInt(getString(R.string.saved_high_score_key_del), newHighScore)
             apply()
@@ -92,7 +92,7 @@ class CredentialsEnt : AppCompatActivity() {
 
 
         // read retreive
-        val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+        val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return
         val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
         val highScore = sharedPrefRead.getInt(getString(R.string.saved_high_score_key_del), defaultValue)
 

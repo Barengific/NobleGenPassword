@@ -196,10 +196,6 @@ class MainActivity : AppCompatActivity() {
 
         val ss = Pgen()
 
-
-
-
-
         //Listeners
         btnGenerate.setOnClickListener {
 
@@ -271,11 +267,11 @@ class MainActivity : AppCompatActivity() {
                 tvGen.editText?.setText(
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
-                        "jimbob",
-                        "4",
-                        "5",
-                        "6",
-                        "7",
+                        nameS.toString(),
+                        nameT.toString().get(0).toString(),
+                        nameT.toString().get(1).toString(),
+                        nameT.toString().get(2).toString(),
+                        nameT.toString().get(3).toString(),
                         10
                     )
                 )

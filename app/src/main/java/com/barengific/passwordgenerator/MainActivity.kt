@@ -262,6 +262,8 @@ class MainActivity : AppCompatActivity() {
 //
 //            // use the shared preferences and editor as you normally would
 //            val editor = sharedPreferences.edit()
+            Log.d("paaaaaaaa", nameS.toString())
+            Log.d("paaaaaaaa", nameT.toString())
 
             if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                 tvGen.editText?.setText(

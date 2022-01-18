@@ -279,11 +279,11 @@ class MainActivity : AppCompatActivity() {
                 tvGen.editText?.setText(
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
-                        "jimbob",
-                        "4",
-                        "5",
-                        "6",
-                        "7",
+                        nameS.toString(),
+                        nameT.toString().get(0).toString(),
+                        nameT.toString().get(1).toString(),
+                        nameT.toString().get(2).toString(),
+                        nameT.toString().get(3).toString(),
                         filled_exposed_dropdown.editableText.toString().toInt()
                     )
                 )
@@ -367,11 +367,11 @@ class MainActivity : AppCompatActivity() {
             tvGen.editText?.setText(
                 ss.pgen(
                     editTextKeyGen.editText?.text.toString(),
-                    "jimbob",
-                    "4",
-                    "5",
-                    "6",
-                    "7",
+                    nameS.toString(),
+                    nameT.toString().get(0).toString(),
+                    nameT.toString().get(1).toString(),
+                    nameT.toString().get(2).toString(),
+                    nameT.toString().get(3).toString(),
                     selection.toInt()
                 )
             )
@@ -393,11 +393,11 @@ class MainActivity : AppCompatActivity() {
                     tvGen.editText?.setText(
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
-                            "jimbob",
-                            "4",
-                            "5",
-                            "6",
-                            "7",
+                            nameS.toString(),
+                            nameT.toString().get(0).toString(),
+                            nameT.toString().get(1).toString(),
+                            nameT.toString().get(2).toString(),
+                            nameT.toString().get(3).toString(),
                             10
                         )
                     )
@@ -405,11 +405,11 @@ class MainActivity : AppCompatActivity() {
                     tvGen.editText?.setText(
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
-                            "jimbob",
-                            "4",
-                            "5",
-                            "6",
-                            "7",
+                            nameS.toString(),
+                            nameT.toString().get(0).toString(),
+                            nameT.toString().get(1).toString(),
+                            nameT.toString().get(2).toString(),
+                            nameT.toString().get(3).toString(),
                             filled_exposed_dropdown.editableText.toString().toInt()
                         )
                     )

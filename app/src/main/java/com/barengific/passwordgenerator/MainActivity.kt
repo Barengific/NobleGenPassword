@@ -176,20 +176,6 @@ class MainActivity : AppCompatActivity() {
         val Lines = resources.getStringArray(R.array.p_len_array).toList()
         val adapterr = ArrayAdapter(this, R.layout.length_layout, Lines)
         filled_exposed_dropdown.setAdapter(adapterr)
-//        filled_exposed_dropdown.setText("10",false)
-
-//        (TextField.editableText as? AutoCompleteTextView)?.setAdapter(adapterr)
-////        val spinnerr: Spinner = findViewById(R.id.filled_exposed_dropdown)
-//        // Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter.createFromResource(this,R.array.p_len_array,
-//            android.R.layout.simple_dropdown_item_1line
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            // Apply the adapter to the spinner
-//            //spinnerr.adapter = adapter
-//
-//        }
 
         val ss = Pgen()
 

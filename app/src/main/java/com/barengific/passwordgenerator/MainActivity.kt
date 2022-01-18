@@ -153,6 +153,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, AppIntroduction::class.java).apply {}
             startActivity(intent)
         }
+        //
 
         if(!(authStatus or fromLogin.toString().equals("fin"))){
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}

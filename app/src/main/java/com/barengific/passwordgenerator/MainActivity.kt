@@ -233,70 +233,70 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("aaaaaGEN3", filled_exposed_dropdown.editableText.toString().toIntOrNull().toString())
 //            val selection = filled_exposed_dropdown.getItemAtPosition(position) as String
 //            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
-
-            val sharedPref = this?.getSharedPreferences(
-                getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
-
-            val sharedPreff = this?.getPreferences(Context.MODE_PRIVATE)
-
-            //write save
-            val newHighScore: Int = 12345
-            val sharedPrefSave = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
-            with (sharedPrefSave.edit()) {
-                putInt(getString(R.string.saved_high_score_key_del), newHighScore)
-                apply()
-            }
-
-
-            // read retreive
-            val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
-            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
-            val highScore = sharedPrefRead.getInt(getString(R.string.saved_high_score_key_del), defaultValue)
-
-            //for settings //redwrite
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this /* Activity context */)
-            //read
-            val name = sharedPreferences.getString("signature", "nonon")
-            //write
-            with (sharedPreferences.edit()){
-                putString("signature", "newwwsigg")
-                apply()
-            }
-            val nameS = sharedPreferences.getString("signature", "nonon")
-
-//            Log.d("aaaaaaSgared1", highScore.toString() )
-//            Log.d("aaaaaaSgared2", name.toString() )
-//            Log.d("aaaaaaSgared3", nameS.toString() )
-
-            val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-            val masterKeyAliasS: MasterKey.Builder = MasterKey.Builder(this)
-            val sharedPreferencesE: SharedPreferences = EncryptedSharedPreferences.create(
-                "secret_shared_prefs",
-                masterKeyAlias,
-                this,
-                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-            )
-
-            val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build()
-
-            val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
-                this,
-                "secret_shared_prefs",
-                masterKey,
-                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
-
-            sharedPreferencesEE.edit().putString("signatureS", "encrrrr").apply()
-            val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
-            Log.d("aaaaaEEEEEEE", nameE.toString())
-            Log.d("aaaaaEEEEEEEMM", masterKey.toString())
-            // use the shared preferences and editor as you normally would
-
-            // use the shared preferences and editor as you normally would
-            val editor = sharedPreferences.edit()
+//
+//            val sharedPref = this?.getSharedPreferences(
+//                getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
+//
+//            val sharedPreff = this?.getPreferences(Context.MODE_PRIVATE)
+//
+//            //write save
+//            val newHighScore: Int = 12345
+//            val sharedPrefSave = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+//            with (sharedPrefSave.edit()) {
+//                putInt(getString(R.string.saved_high_score_key_del), newHighScore)
+//                apply()
+//            }
+//
+//
+//            // read retreive
+//            val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+//            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
+//            val highScore = sharedPrefRead.getInt(getString(R.string.saved_high_score_key_del), defaultValue)
+//
+//            //for settings //redwrite
+//            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this /* Activity context */)
+//            //read
+//            val name = sharedPreferences.getString("signature", "nonon")
+//            //write
+//            with (sharedPreferences.edit()){
+//                putString("signature", "newwwsigg")
+//                apply()
+//            }
+//            val nameS = sharedPreferences.getString("signature", "nonon")
+//
+////            Log.d("aaaaaaSgared1", highScore.toString() )
+////            Log.d("aaaaaaSgared2", name.toString() )
+////            Log.d("aaaaaaSgared3", nameS.toString() )
+//
+//            val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+//            val masterKeyAliasS: MasterKey.Builder = MasterKey.Builder(this)
+//            val sharedPreferencesE: SharedPreferences = EncryptedSharedPreferences.create(
+//                "secret_shared_prefs",
+//                masterKeyAlias,
+//                this,
+//                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+//                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+//            )
+//
+//            val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+//                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+//                .build()
+//
+//            val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
+//                this,
+//                "secret_shared_prefs",
+//                masterKey,
+//                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+//                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+//
+//            sharedPreferencesEE.edit().putString("signatureS", "encrrrr").apply()
+//            val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
+//            Log.d("aaaaaEEEEEEE", nameE.toString())
+//            Log.d("aaaaaEEEEEEEMM", masterKey.toString())
+//            // use the shared preferences and editor as you normally would
+//
+//            // use the shared preferences and editor as you normally would
+//            val editor = sharedPreferences.edit()
 
 
 

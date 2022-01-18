@@ -132,11 +132,11 @@ class MainActivity : AppCompatActivity() {
 //        //TODO
 //        //authenticate
         val qq = getIntent().extras?.get("fromLogin")
-//        Log.d("aaaaaafromlog", qq.toString())
-//        if(qq.toString().equals("cert") == false){
-//            val intent = Intent(applicationContext, AppIntroduction::class.java).apply {}
-//            startActivity(intent)
-//        }
+        Log.d("aaaaaafromlog", qq.toString())
+        if(qq.toString().equals("cert") == false){
+            val intent = Intent(applicationContext, AppIntroduction::class.java).apply {}
+            startActivity(intent)
+        }
 
         if(!(authStatus or qq.toString().equals("fin"))){
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}

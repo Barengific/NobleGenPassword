@@ -182,17 +182,7 @@ class MainActivity : AppCompatActivity() {
 
         //Listeners
         btnGenerate.setOnClickListener {
-            //tvGen.setText(ss.pgen(editTextKeyGen.editText.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-            //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",spinner.selectedItem.toString().toInt()))
-//            Log.d("aaaaaGEN", filled_exposed_dropdown.hasSelection().toString())
-//            Log.d("aaaaaGEN", filled_exposed_dropdown.isSelected.toString())
-//            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
-//            Log.d("aaaaaGEN1", filled_exposed_dropdown.editableText.toString())
-//            Log.d("aaaaaGEN2", filled_exposed_dropdown.editableText.toString().toBooleanStrictOrNull().toString())
-//            Log.d("aaaaaGEN3", filled_exposed_dropdown.editableText.toString().toIntOrNull().toString())
-//            val selection = filled_exposed_dropdown.getItemAtPosition(position) as String
-//            Log.d("aaaaaGEN", filled_exposed_dropdown.listSelection.toString())
-//
+
 //            val sharedPref = this?.getSharedPreferences(
 //                getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
 //
@@ -256,9 +246,6 @@ class MainActivity : AppCompatActivity() {
 //
 //            // use the shared preferences and editor as you normally would
 //            val editor = sharedPreferences.edit()
-
-
-
 
             if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                 tvGen.editText?.setText(

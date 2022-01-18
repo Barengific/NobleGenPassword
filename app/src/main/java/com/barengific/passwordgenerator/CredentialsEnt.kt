@@ -32,15 +32,7 @@ class CredentialsEnt : AppCompatActivity() {
                 if (editTextPassword.editText?.text.toString().length >= 8) {
                     if (editTextPin.editText?.text.toString().length == 4
                     ) {
-                        //val path = applicationContext.getFilesDir()
-                        //Log.d("aaa", path.toString())
-
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                        Log.d("aaa", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString())
-
-                        File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/barz.txt").writeText(
-                            editTextPassword.editText?.text.toString() +"\n" +
-                                    editTextPin.editText?.text.toString())
+                        saveInfo(editTextPassword.editText?.text.toString(), editTextPin.editText?.text.toString())
 
                         val intent = Intent(this, MainActivity::class.java).apply {
                             //putExtra(EXTRA_MESSAGE, message)
@@ -74,7 +66,7 @@ class CredentialsEnt : AppCompatActivity() {
         }
 
     }
-    fun saveInfo(mk: String, pik: Int){
+    fun saveInfo(mk: String, pik: String){
         //TODO save keys to encrypted sharedPrefs
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
@@ -89,7 +81,7 @@ class CredentialsEnt : AppCompatActivity() {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
         sharedPreferencesEE.edit().putString("signatureS", mk).apply()
-        sharedPreferencesEE.edit().putString("signatureT", pik.toString()).apply()
+        sharedPreferencesEE.edit().putString("signatureT", pik).apply()
 
         val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")

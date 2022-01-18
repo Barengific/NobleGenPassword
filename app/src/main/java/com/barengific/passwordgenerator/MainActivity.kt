@@ -149,12 +149,12 @@ class MainActivity : AppCompatActivity() {
         val fromIntro = getIntent().extras?.get("fromIntro")
 
         Log.d("aaaaaafromlog", fromLogin.toString())
-        if(!(nameS.equals("nonon") or nameT.equals("nonon"))){
+        if(nameS.equals("nonon") or nameT.equals("nonon")){
             val intent = Intent(applicationContext, AppIntroduction::class.java).apply {}
             startActivity(intent)
         }
 
-        if(!(authStatus or qq.toString().equals("fin"))){
+        if(!(authStatus or fromLogin.toString().equals("fin"))){
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }

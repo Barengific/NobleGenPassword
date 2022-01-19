@@ -150,10 +150,7 @@ class SettingsActivity : AppCompatActivity(),
             }
             setPreferencesFromResource(R.xml.security_preferences, rootKey)
         }
-
-        override fun onDestroyPreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
-        }
+        
     }
 
 

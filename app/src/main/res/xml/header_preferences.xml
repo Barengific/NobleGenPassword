@@ -30,4 +30,16 @@
         app:key="intro_header"
         app:title="@string/settings_header_intro" />
 
+    <Preference
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$TutFragment"
+        app:icon="@drawable/ic_baseline_restore_24"
+        app:key="intro_header"
+        app:title="@string/settings_header_tut" />
+
+    <Preference
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$RSTFragment"
+        app:icon="@drawable/ic_baseline_restore_24"
+        app:key="intro_header"
+        app:title="@string/settings_header_rst" />
+
 </PreferenceScreen>

@@ -194,6 +194,7 @@ class SettingsActivity : AppCompatActivity(),
     }
 
     class TutFragment : PreferenceFragmentCompat() {
+        @SuppressLint("ResourceType")
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             val intent = Intent(this.context, TutIntroduction::class.java).apply {
                 putExtra("fromSettings","fin")

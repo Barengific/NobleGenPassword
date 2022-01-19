@@ -465,6 +465,13 @@ class MainActivity : AppCompatActivity() {
         newFragment.show(supportFragmentManager, "missiles")
     }
 
+    fun openDonate() {
+        Log.d("aaa", "in open about")
+        val newFragment = FireMissilesDialogFragment()
+        newFragment.show(supportFragmentManager, "missiles")
+    }
+    
+
 //    override fun onSupportNavigateUp(): Boolean {
 //        val navController = findNavController(R.id.nav_host_fragment_content_main)
 //        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -621,20 +628,7 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         authStatus = false
         //Toast.makeText(applicationContext, authStatus.toString()+"STOPP called", Toast.LENGTH_SHORT).show()
-
     }
-
-    //
-    //TODO
-//    @LifecycleEventObserver fun onAppBackgrounded {
-//        Toast.makeText(applicationContext, "BACKGROUNDED called", Toast.LENGTH_SHORT).show()
-//    }
-//
-//    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-//    fun onAppForegrounded() {
-//        Toast.makeText(applicationContext, "FOREGROUNDED", Toast.LENGTH_SHORT).show()
-//
-//    }
 
 }
 

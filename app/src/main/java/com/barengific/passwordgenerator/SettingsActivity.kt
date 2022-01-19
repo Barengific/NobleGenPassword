@@ -112,7 +112,7 @@ class SettingsActivity : AppCompatActivity(),
 
     class SecurityFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.security_preferences, rootKey)
+
 
             //
             val masterKey = this.context?.let {
@@ -148,6 +148,11 @@ class SettingsActivity : AppCompatActivity(),
                 putString("signatureT",nameT)
                 apply()
             }
+            setPreferencesFromResource(R.xml.security_preferences, rootKey)
+        }
+
+        override fun onDestroyPreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
         }
     }
 

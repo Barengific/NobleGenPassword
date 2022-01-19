@@ -194,4 +194,16 @@ class SettingsActivity : AppCompatActivity(),
             startActivity(intent)
         }
     }
+
+    class TutFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
+        }
+    }
+
+    class RSTFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
+        }
+    }
 }

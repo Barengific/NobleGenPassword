@@ -465,12 +465,15 @@ class MainActivity : AppCompatActivity() {
         newFragment.show(supportFragmentManager, "missiles")
     }
 
+    //TODO donation option
     fun openDonate() {
-        Log.d("aaa", "in open about")
-        val newFragment = FireMissilesDialogFragment()
-        newFragment.show(supportFragmentManager, "missiles")
+
     }
-    
+
+    //TODO ad free version option
+    fun openAdFree() {
+
+    }
 
 //    override fun onSupportNavigateUp(): Boolean {
 //        val navController = findNavController(R.id.nav_host_fragment_content_main)

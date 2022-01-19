@@ -197,6 +197,7 @@ class MainActivity : AppCompatActivity() {
         val ss = Pgen()
 
         //Listeners
+        //TODO encrypt / decrypt to / fro database data
         btnGenerate.setOnClickListener {
 
 //            val sharedPref = this?.getSharedPreferences(

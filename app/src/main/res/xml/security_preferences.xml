@@ -17,4 +17,8 @@
         app:title="@string/ask_for_lock"
         app:useSimpleSummaryProvider="true" />
 
+    <SeekBarPreference
+        app:key="seekBar"
+        />
+
 </PreferenceScreen>

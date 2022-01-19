@@ -1,5 +1,6 @@
 package com.barengific.passwordgenerator
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -130,6 +131,22 @@ class SettingsActivity : AppCompatActivity(),
     class RestoreFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.restore_preferences, rootKey)
+        }
+    }
+
+    class IntroFragment : PreferenceFragmentCompat() {
+        @SuppressLint("ResourceType")
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            Log.d("aaaa", "in credd fragment settings")
+            val intent = Intent(this.context, AppIntroduction::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+                putExtra("fromLogin","fin")
+            }
+            startActivity(intent)
+        }
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            Log.d("aaaa", "in credd fragment settings")
         }
     }
 }

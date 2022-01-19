@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
@@ -112,6 +113,41 @@ class SettingsActivity : AppCompatActivity(),
     class SecurityFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.security_preferences, rootKey)
+
+            //
+            val masterKey = this.context?.let {
+                MasterKey.Builder(it, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build()
+            }
+
+            val sharedPreferencesEE: SharedPreferences = masterKey?.let {
+                this.context?.let { it1 ->
+                    EncryptedSharedPreferences.create(
+                        it1,
+                        "secret_shared_prefs",
+                        it,
+                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+                }
+            }!!
+
+            //write
+            //sharedPreferencesEE.edit().putString("signatureS", "encrrrr").apply()
+            //read
+            val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
+            val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
+
+            //for settings //readwrite
+            val preferences = PreferenceManager.getDefaultSharedPreferences(this.context /* Activity context */)
+            //read
+//            val name = sharedPreferences.getString("signature", "nonon")
+            //write
+            with (preferences.edit()){
+                putString("signatureS",nameS)
+                putString("signatureT",nameT)
+                apply()
+            }
         }
     }
 
@@ -143,10 +179,6 @@ class SettingsActivity : AppCompatActivity(),
                 putExtra("fromLogin","fin")
             }
             startActivity(intent)
-        }
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            Log.d("aaaa", "in credd fragment settings")
         }
     }
 }

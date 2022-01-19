@@ -187,7 +187,6 @@ class SettingsActivity : AppCompatActivity(),
         @SuppressLint("ResourceType")
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             val intent = Intent(this.context, AppIntroduction::class.java).apply {
-//            putExtra(EXTRA_MESSAGE, message)
                 putExtra("fromSettings","fin")
             }
             startActivity(intent)
@@ -197,7 +196,6 @@ class SettingsActivity : AppCompatActivity(),
     class TutFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             val intent = Intent(this.context, TutIntroduction::class.java).apply {
-//            putExtra(EXTRA_MESSAGE, message)
                 putExtra("fromSettings","fin")
             }
             startActivity(intent)
@@ -207,7 +205,6 @@ class SettingsActivity : AppCompatActivity(),
     class RSTFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             val intent = Intent(this.context, CredentialsEnt::class.java).apply {
-//            putExtra(EXTRA_MESSAGE, message)
                 putExtra("fromSettings","fin")
             }
             startActivity(intent)

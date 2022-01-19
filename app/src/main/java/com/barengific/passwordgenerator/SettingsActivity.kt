@@ -65,6 +65,17 @@ class SettingsActivity : AppCompatActivity(),
 
             val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
             Log.d("aaaaaEEESEttings", nameE.toString())
+            //for settings //readwrite
+            val preferences = PreferenceManager.getDefaultSharedPreferences(this /* Activity context */)
+            //read
+//            val name = sharedPreferences.getString("signature", "nonon")
+            //write
+            with (preferences.edit()){
+                putString("signatureS", "nonon")
+                putString("signatureT", "nonon")
+                apply()
+            }
+
             return true
         }else{
             Log.d("aaaaa", "farrrr")
@@ -150,7 +161,7 @@ class SettingsActivity : AppCompatActivity(),
             }
             setPreferencesFromResource(R.xml.security_preferences, rootKey)
         }
-        
+
     }
 
 

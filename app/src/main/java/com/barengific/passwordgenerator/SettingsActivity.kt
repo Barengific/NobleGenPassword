@@ -98,6 +98,9 @@ class SettingsActivity : AppCompatActivity(),
         title = pref.title
         return true
     }
+    //add intro
+    //add tutorial
+
 
     class HeaderFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -110,6 +113,7 @@ class SettingsActivity : AppCompatActivity(),
             setPreferencesFromResource(R.xml.security_preferences, rootKey)
         }
     }
+
 
     class SyncFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

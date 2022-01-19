@@ -82,5 +82,6 @@
     <string name="hide">Hide</string>
     <string name="output_result">Output Result</string>
     <string name="enter_pin">Pin Number</string>
+    <string name="settings_header_intro">Introduction</string>
 
 </resources>

@@ -186,10 +186,9 @@ class SettingsActivity : AppCompatActivity(),
     class IntroFragment : PreferenceFragmentCompat() {
         @SuppressLint("ResourceType")
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            Log.d("aaaa", "in credd fragment settings")
             val intent = Intent(this.context, AppIntroduction::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
-                putExtra("fromLogin","fin")
+                putExtra("fromSettings","fin")
             }
             startActivity(intent)
         }

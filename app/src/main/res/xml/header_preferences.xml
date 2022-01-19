@@ -33,13 +33,13 @@
     <Preference
         app:fragment="com.barengific.passwordgenerator.SettingsActivity$TutFragment"
         app:icon="@drawable/ic_baseline_contact_support_24"
-        app:key="intro_header"
+        app:key="tut_header"
         app:title="@string/settings_header_tut" />
 
     <Preference
         app:fragment="com.barengific.passwordgenerator.SettingsActivity$RSTFragment"
         app:icon="@drawable/ic_baseline_delete_sweep_24"
-        app:key="intro_header"
+        app:key="rst_header"
         app:title="@string/settings_header_rst" />
 
 </PreferenceScreen>

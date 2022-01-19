@@ -206,7 +206,11 @@ class SettingsActivity : AppCompatActivity(),
 
     class RSTFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
+            val intent = Intent(this.context, CredentialsEnt::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+                putExtra("fromSettings","fin")
+            }
+            startActivity(intent)
         }
     }
 }

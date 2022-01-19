@@ -24,4 +24,10 @@
         app:key="restore_header"
         app:title="@string/settings_header_restore" />
 
+    <Preference
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$IntroFragment"
+        app:icon="@drawable/ic_baseline_restore_24"
+        app:key="intro_header"
+        app:title="@string/settings_header_intro" />
+
 </PreferenceScreen>

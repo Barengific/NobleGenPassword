@@ -196,7 +196,11 @@ class SettingsActivity : AppCompatActivity(),
 
     class TutFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
+            val intent = Intent(this.context, TutIntroduction::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+                putExtra("fromSettings","fin")
+            }
+            startActivity(intent)
         }
     }
 

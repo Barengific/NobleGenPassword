@@ -16,7 +16,8 @@ import kotlin.Throws
 
 object Aqtik {
 
-    lateinit var nameE: String;
+    lateinit var mstrKeyParameter: String;
+    lateinit var mstrIvParameter: String;
 
     private const val TAG = "AESCBCUtils"
     // CBC (cipher block chaining) mode, pkcs5padding complement mode
@@ -32,9 +33,9 @@ object Aqtik {
 
     private const val mstrIvParameterX : String = "6390515264757125";
     private const val mstrIvParameterE : String = "639051521258";
-    private const val mstrKeyParameter : String = "ifbhAgGOcXMdRebE"
+    private const val mstrKeyParameterE : String = "ifbhAgGOcXMdRebE"
 
-    fun encrypt_AES(strKey: String, strClearText: String, mstrIvParameter: String): String? {
+    fun encrypt_AES(strClearText: String): String? {
         var strKey = strKey
         if(strKey.length > 16){
             //TODO cut key down to 16
@@ -57,7 +58,7 @@ object Aqtik {
             // create a cipher
             val cipher = Cipher.getInstance(CBC_PKCS5_PADDING)
             // create offset
-            val iv = IvParameterSpec(mstrIvParameter.toByteArray())
+            val iv = IvParameterSpec(mstrIvParameterE.toByteArray())
             // initialize the encryptor
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv)
             // perform encryption
@@ -130,5 +131,8 @@ object Aqtik {
 
         val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
+
+        mstrIvParameter = mstrIvParameter + mstrIvParameterE
+        mstrKeyParameter = mstrIvParameter + mstrIvParameterE
     }
 }

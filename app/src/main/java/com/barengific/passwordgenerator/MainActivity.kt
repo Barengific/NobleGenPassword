@@ -376,14 +376,16 @@ class MainActivity : AppCompatActivity() {
             var aNew: MutableList<Word> = listOf(Word(arrr[0].wid, arrr[0].pType, arrr[0].key, arrr[0].value)) as MutableList<Word>
 
             for (item in arrr.indices) {
-                aNew += listOf(Word(arrr[item].wid, arrr[item].pType, Aqtik.decrypt(arrr[item].key), Aqtik.decrypt(arrr[item].value)))
+                val aS = Aqtik.decrypt(arrr[item].key)
+                val aT = Aqtik.decrypt(arrr[item].value)
+                aNew.add(Word(arrr[item].wid, arrr[item].pType, aS, aT))
             }
+//
+//            Log.d("aaaaDBDD", arrr.toString())
+//            Log.d("aaaaDBDD", arrrNew.toString())
+//            Log.d("aaaaDBDDINCDI", arrr.indices.toString())
 
-            Log.d("aaaaDBDD", arrr.toString())
-            Log.d("aaaaDBDD", arrrNew.toString())
-            Log.d("aaaaDBDDINCDI", arrr.indices.toString())
-
-            var adapter = CustomAdapter(arrrNew)
+            var adapter = CustomAdapter(aNew)
             //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
             recyclerView.setHasFixedSize(false)
             recyclerView.setAdapter(adapter)

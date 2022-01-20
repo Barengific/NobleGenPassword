@@ -351,7 +351,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-            secretKey = generateKey(nameS+nameT)
+            val secretKey = generateKey(nameS+nameT)
+            Log.d("aaaWWW1", secretKey.toString())
+            val secretKey2 = generateKey(nameS+nameT)
+            Log.d("aaaWWW2", secretKey2.toString())
+            
             val aa = Word(
                 0,
                 "pgen",

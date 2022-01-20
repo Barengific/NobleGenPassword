@@ -360,12 +360,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-            val secretKey1 = generateKey(nameS+nameT)
-            Log.d("aaaWWW1", secretKey1.toString())
-            val secretKey2 = generateKey(nameS+nameT)
-            Log.d("aaaWWW2", secretKey2.toString())
-
-            Aqtik.encrypt(editTextKeyGen.editText?.text.toString())
 
             val aa = Word(
                 0,
@@ -379,15 +373,10 @@ class MainActivity : AppCompatActivity() {
             //var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
            // arrrNew.add()
 
-            var arrrNew: List<Word> = listOf(Word(arrr[0].wid, arrr[0].pType, arrr[0].key, arrr[0].value))
+            var aNew: MutableList<Word> = listOf(Word(arrr[0].wid, arrr[0].pType, arrr[0].key, arrr[0].value)) as MutableList<Word>
 
-            for (items in arrr.indices) {
-                if(arrr.size == items-2){
-                    break
-                }else{
-                    var item = items+1
-                    arrrNew += listOf(Word(arrr[item].wid, arrr[item].pType, Aqtik.decrypt(arrr[item].key), Aqtik.decrypt(arrr[item].value)))
-                }
+            for (item in arrr.indices) {
+                aNew += listOf(Word(arrr[item].wid, arrr[item].pType, Aqtik.decrypt(arrr[item].key), Aqtik.decrypt(arrr[item].value)))
             }
 
             Log.d("aaaaDBDD", arrr.toString())

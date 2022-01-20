@@ -373,12 +373,13 @@ class MainActivity : AppCompatActivity() {
             //var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
            // arrrNew.add()
 
-            var aNew: MutableList<Word> = listOf(Word(arrr[0].wid, arrr[0].pType, arrr[0].key, arrr[0].value)) as MutableList<Word>
+            var aNew: MutableList<Word> = mutableListOf(Word(arrr[0].wid, arrr[0].pType, Aqtik.decrypt(arrr[0].key), Aqtik.decrypt(arrr[0].value)))
 
             for (item in arrr.indices) {
                 val aS = Aqtik.decrypt(arrr[item].key)
                 val aT = Aqtik.decrypt(arrr[item].value)
-                aNew.add(Word(arrr[item].wid, arrr[item].pType, aS, aT))
+                val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
+                aNew.add(aWW)
             }
 //
 //            Log.d("aaaaDBDD", arrr.toString())

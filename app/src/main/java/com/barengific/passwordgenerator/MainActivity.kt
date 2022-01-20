@@ -773,8 +773,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                 db?.close()
                                 Log.d("aaaamenuu","DDDdelete")
 
-
-
                             }
 
                             R.id.menu_cancel ->  {

@@ -81,6 +81,7 @@ import kotlinx.android.synthetic.main.text_row_item.view.*
 import androidx.lifecycle.Lifecycle
 
 import androidx.lifecycle.*
+import com.barengific.passwordgenerator.crypt.Aqtik
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -152,7 +153,6 @@ class MainActivity : AppCompatActivity() {
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
         val nameDB = sharedPreferencesEE.getString("signatureDB", "nonon")
 
-//        //TODO
 //        //authenticate
         val fromLogin = getIntent().extras?.get("fromLogin")
         val fromIntro = getIntent().extras?.get("fromIntro")
@@ -363,11 +363,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("aaaWWW1", secretKey1.toString())
             val secretKey2 = generateKey(nameS+nameT)
             Log.d("aaaWWW2", secretKey2.toString())
-            encryptMsg(editTextKeyGen.editText?.text.toString(), secretKey1)?.let { it1 ->
-                Log.d("aaaWWW3",
-                    it1
-                )
-            }
+
+            Aqtik.encrypt(editTextKeyGen.editText?.text.toString())
 
             val aa = Word(
                 0,

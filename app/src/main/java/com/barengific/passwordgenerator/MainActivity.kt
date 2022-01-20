@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var pos: Int = 0
         lateinit var recyclerView: RecyclerView
+        lateinit var arrrNew: List<Word>
         var authStatus = false
         private var instance: MainActivity? = null
         fun getPosi(): Int = pos
@@ -378,7 +379,7 @@ class MainActivity : AppCompatActivity() {
             //var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
            // arrrNew.add()
 
-            var arrrNew: List<Word> = listOf(Word(arrr[0].wid, arrr[0].pType, arrr[0].key, arrr[0].value))
+            //var arrrNew: List<Word> //= listOf(Word(arrr[0].wid, arrr[0].pType, arrr[0].key, arrr[0].value))
 
             for (item in arrr.indices) {
                 arrrNew += listOf(Word(arrr[item].wid, arrr[item].pType, arrr[item].key, arrr[item].value))

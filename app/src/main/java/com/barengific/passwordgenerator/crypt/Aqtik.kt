@@ -1,7 +1,12 @@
 package com.barengific.passwordgenerator.crypt
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Base64
 import android.util.Log
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.barengific.passwordgenerator.MainActivity
 import com.barengific.passwordgenerator.crypt.Acvb
 import java.lang.Exception
 import javax.crypto.Cipher
@@ -10,6 +15,7 @@ import javax.crypto.spec.SecretKeySpec
 import kotlin.Throws
 
 object Aqtik {
+
     private const val TAG = "AESCBCUtils"
     // CBC (cipher block chaining) mode, pkcs5padding complement mode
     // AES is the encryption mode, CBC is the working mode, and pkcs5padding is the filling mode
@@ -102,5 +108,27 @@ object Aqtik {
             e.printStackTrace()
         }
         return null
+    }
+
+    fun getKey(){
+        val masterKey = MasterKey.Builder(MainActivity.applicationContext().applicationContext, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()//TODO fgfdg
+
+        val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
+            this,
+            "secret_shared_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+
+        //get string
+//        sharedPreferencesEE.edit().putString("signatureS", mk).apply()
+//        sharedPreferencesEE.edit().putString("signatureT", pik).apply()
+
+        val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
+        val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
+        Log.d("aaaaaEEEEEEEMASTER", nameT.toString())
+        Log.d("aaaaaEEEEEEEPINNNN", nameS.toString())
     }
 }

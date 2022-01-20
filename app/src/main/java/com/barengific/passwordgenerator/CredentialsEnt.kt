@@ -87,7 +87,6 @@ class CredentialsEnt : AppCompatActivity() {
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
         Log.d("aaaaaEEEEEEEMASTER", nameT.toString())
         Log.d("aaaaaEEEEEEEPINNNN", nameS.toString())
-        // use the shared preferences and editor as you normally would
 
     }
 

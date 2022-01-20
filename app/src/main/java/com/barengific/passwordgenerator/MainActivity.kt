@@ -383,9 +383,24 @@ class MainActivity : AppCompatActivity() {
 //                arrrNew += aWW
 //            }
 
-            Thread(Runnable {
-                Thread.sleep(1000)
-                println("test")
+//            Thread(Runnable {
+//                Thread.sleep(1000)
+//                println("test")
+//                for (item in arrr.indices) {
+//                    val aS = Aqtik.decrypt(arrr[item].key)
+//                    val aT = Aqtik.decrypt(arrr[item].value)
+//                    val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
+//                    aNew.add(aWW)
+//
+//                }
+//                var adapter = CustomAdapter(aNew)
+//                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+//                recyclerView.setHasFixedSize(false)
+//                recyclerView.setAdapter(adapter)
+//                recyclerView.setLayoutManager(LinearLayoutManager(this))
+//            })
+
+            thread { Thread.sleep(1000)
                 for (item in arrr.indices) {
                     val aS = Aqtik.decrypt(arrr[item].key)
                     val aT = Aqtik.decrypt(arrr[item].value)
@@ -398,16 +413,9 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
-            })
 
-//            thread { Thread.sleep(1000)
-//                for (item in arrr.indices) {
-//                    val aS = Aqtik.decrypt(arrr[item].key)
-//                    val aT = Aqtik.decrypt(arrr[item].value)
-//                    val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
-//                    aNew.add(aWW)
-//                }}
-//
+            }
+
 //            Log.d("aaaaDBDD", arrr.toString())
 //            Log.d("aaaaDBDD", arrrNew.toString())
 //            Log.d("aaaaDBDDINCDI", arrr.indices.toString())

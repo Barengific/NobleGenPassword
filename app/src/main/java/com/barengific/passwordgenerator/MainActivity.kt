@@ -387,8 +387,9 @@ class MainActivity : AppCompatActivity() {
 
             Log.d("aaaaDBDD", arrr.toString())
             Log.d("aaaaDBDD", arrrNew.toString())
+            Log.d("aaaaDBDDINCDI", arrr.indices.toString())
 
-            var adapter = CustomAdapter(arrr)
+            var adapter = CustomAdapter(arrrNew)
             //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
             recyclerView.setHasFixedSize(false)
             recyclerView.setAdapter(adapter)

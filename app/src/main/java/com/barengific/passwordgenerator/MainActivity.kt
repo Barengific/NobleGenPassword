@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
         if(nameDB.equals("nonon")){
             secretKey = generateKey(nameS+nameT)
         }
-        
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -351,10 +351,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
+            secretKey = generateKey(nameS+nameT)
             val aa = Word(
                 0,
                 "pgen",
-                editTextKeyGen.editText?.text.toString(),
+                encryptMsgs(editTextKeyGen.editText?.text.toString(), secretKey),
                 tvGen.editText?.text.toString()
             )
             wordDao.insertAll(aa)
@@ -570,6 +571,14 @@ class MainActivity : AppCompatActivity() {
         UnsupportedEncodingException::class
     )
     fun encryptMsg(message: String, secret: SecretKey?): String? {
+        var cipher: Cipher? = null
+        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+        cipher.init(Cipher.ENCRYPT_MODE, secret)
+        val cipherText: ByteArray = cipher.doFinal(message.toByteArray(charset("UTF-8")))
+        return Base64.encodeToString(cipherText, Base64.NO_WRAP)
+    }
+
+    fun encryptMsgs(message: String, secret: SecretKey?): String {
         var cipher: Cipher? = null
         cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
         cipher.init(Cipher.ENCRYPT_MODE, secret)

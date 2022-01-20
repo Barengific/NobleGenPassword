@@ -132,7 +132,8 @@ object Aqtik {
         val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
 
-        mstrIvParameter = mstrIvParameter + mstrIvParameterE
-        mstrKeyParameter = mstrIvParameter + mstrIvParameterE
+        mstrIvParameter = nameT + mstrIvParameterE
+
+        mstrKeyParameter = nameS + mstrKeyParameterE
     }
 }

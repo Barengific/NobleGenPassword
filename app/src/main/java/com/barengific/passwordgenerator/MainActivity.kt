@@ -722,25 +722,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 return false
             }
         })
-//
-//        viewHolder.ivMore.setOnTouchListener(@SuppressLint("ClickableViewAccessibility")
-//        object: View.OnTouchListener{
-//            override fun onTouch(v: View, event: MotionEvent): Boolean {
-//                    if (event.action == MotionEvent.ACTION_DOWN) {
-//                        v.drawer_layout.ivMore.setImageResource(R.drawable.ic_baseline_expand_more_24) //R.drawable.ic_baseline_expand_more_24#
-//                        val mainPic = findViewById(R.drawable.ic_baseline_expand_more_24) as ImageView
-//                        ((ImageView)findViewById(R.id.image_view1)).setImageResource(R.drawable.cover);
-////                        v.layoutParams.height = 10000
-////                        v.layoutParams.width =  10000
-//
-//                    } else if (event.action == MotionEvent.ACTION_UP) {
-////                        v.layoutParams.height = 1
-////                        v.layoutParams.width =  1
-//                    }
-//
-//                return false
-//            }
-//        })
 
         viewHolder.ivMore.setOnClickListener(object : View.OnClickListener {
 

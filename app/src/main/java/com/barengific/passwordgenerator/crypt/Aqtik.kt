@@ -29,8 +29,8 @@ object Aqtik {
 
     // AES encryption
     private const val AES = "AES"
-    // key offset
 
+    // key offset
     private const val mstrIvParameterX : String = "6390515264757125";
     private const val mstrIvParameterE : String = "639051521258";
     private const val mstrKeyParameterE : String = "ifbhAgGOcXMdRebE"
@@ -45,7 +45,7 @@ object Aqtik {
             // create a cipher
             val cipher = Cipher.getInstance(CBC_PKCS5_PADDING)
             // create offset
-            val iv = IvParameterSpec(mstrIvParameterE.toByteArray())
+            val iv = IvParameterSpec(mstrIvParameter.toByteArray())
             // initialize the encryptor
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv)
             // perform encryption
@@ -64,17 +64,11 @@ object Aqtik {
     }
 
     @Throws(Exception::class)
-    fun decrypt(strKey: String, strCipherText: String?, mstrIvParameter: String): String? {
-        if(strKey.length > 16){
-            //TODO cut key down to 16
-        }else if(strKey.length < 16){
-            //TODO increase key size
-        }
-
-        //val mstrIvParameter = mstrIvParameter + mstrIvParameterE
+    fun decrypt(strCipherText: String?): String? {
+        getKey()
 
         try {
-            val raw = strKey.toByteArray(charset("ASCII"))
+            val raw = mstrKeyParameter.toByteArray(charset("ASCII"))
             // create AES secret key
             val skeySpec =
                 SecretKeySpec(raw, AES)

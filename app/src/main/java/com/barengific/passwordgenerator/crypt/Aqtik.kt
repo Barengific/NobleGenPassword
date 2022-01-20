@@ -16,6 +16,8 @@ import kotlin.Throws
 
 object Aqtik {
 
+    lateinit var nameE: String;
+
     private const val TAG = "AESCBCUtils"
     // CBC (cipher block chaining) mode, pkcs5padding complement mode
     // AES is the encryption mode, CBC is the working mode, and pkcs5padding is the filling mode
@@ -113,10 +115,10 @@ object Aqtik {
     fun getKey(){
         val masterKey = MasterKey.Builder(MainActivity.applicationContext().applicationContext, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()//TODO fgfdg
+            .build()
 
         val sharedPreferencesEE: SharedPreferences = EncryptedSharedPreferences.create(
-            this,
+            MainActivity.applicationContext(),
             "secret_shared_prefs",
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
@@ -128,7 +130,5 @@ object Aqtik {
 
         val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
-        Log.d("aaaaaEEEEEEEMASTER", nameT.toString())
-        Log.d("aaaaaEEEEEEEPINNNN", nameS.toString())
     }
 }

@@ -382,10 +382,7 @@ class MainActivity : AppCompatActivity() {
             arrrNew += listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb"))
 
             for (item in arrr.indices) {
-                // ...
-                    
-                arrr[item].key
-                arrr[item].value
+                arrrNew += listOf(Word(arrr[item].wid, arrr[item].pType, arrr[item].key, arrr[item].value))
             }
 
 

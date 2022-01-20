@@ -142,6 +142,7 @@ class MainActivity : AppCompatActivity() {
 
         val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
+        val nameDB = sharedPreferencesEE.getString("signatureDB", "nonon")
 
 //        //TODO
 //        //authenticate
@@ -159,6 +160,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }
+
+        var secretKey: SecretKey?
+        if(nameDB.equals("nonon")){
+            secretKey = generateKey(nameS+nameT)
+        }
+        
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -82,6 +82,7 @@ import androidx.lifecycle.Lifecycle
 
 import androidx.lifecycle.*
 import com.barengific.passwordgenerator.crypt.Aqtik
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -374,23 +375,48 @@ class MainActivity : AppCompatActivity() {
            // arrrNew.add()
 
             var aNew: MutableList<Word> = mutableListOf(Word(arrr[0].wid, arrr[0].pType, Aqtik.decrypt(arrr[0].key), Aqtik.decrypt(arrr[0].value)))
+//            for (item in arrr.indices) {
+//                val aS = Aqtik.decrypt(arrr[item].key)
+//                val aT = Aqtik.decrypt(arrr[item].value)
+//                val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
+//                //aNew.add(aWW)
+//                arrrNew += aWW
+//            }
 
-            for (item in arrr.indices) {
-                val aS = Aqtik.decrypt(arrr[item].key)
-                val aT = Aqtik.decrypt(arrr[item].value)
-                val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
-                aNew.add(aWW)
-            }
+            Thread(Runnable {
+                Thread.sleep(1000)
+                println("test")
+                for (item in arrr.indices) {
+                    val aS = Aqtik.decrypt(arrr[item].key)
+                    val aT = Aqtik.decrypt(arrr[item].value)
+                    val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
+                    aNew.add(aWW)
+
+                }
+                var adapter = CustomAdapter(aNew)
+                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                recyclerView.setHasFixedSize(false)
+                recyclerView.setAdapter(adapter)
+                recyclerView.setLayoutManager(LinearLayoutManager(this))
+            })
+
+//            thread { Thread.sleep(1000)
+//                for (item in arrr.indices) {
+//                    val aS = Aqtik.decrypt(arrr[item].key)
+//                    val aT = Aqtik.decrypt(arrr[item].value)
+//                    val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
+//                    aNew.add(aWW)
+//                }}
 //
 //            Log.d("aaaaDBDD", arrr.toString())
 //            Log.d("aaaaDBDD", arrrNew.toString())
 //            Log.d("aaaaDBDDINCDI", arrr.indices.toString())
 
-            var adapter = CustomAdapter(aNew)
-            //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-            recyclerView.setHasFixedSize(false)
-            recyclerView.setAdapter(adapter)
-            recyclerView.setLayoutManager(LinearLayoutManager(this))
+//            var adapter = CustomAdapter(aNew)
+//            //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+//            recyclerView.setHasFixedSize(false)
+//            recyclerView.setAdapter(adapter)
+//            recyclerView.setLayoutManager(LinearLayoutManager(this))
 
             //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
         }

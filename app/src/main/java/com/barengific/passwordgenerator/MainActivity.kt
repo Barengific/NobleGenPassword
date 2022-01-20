@@ -369,8 +369,8 @@ class MainActivity : AppCompatActivity() {
             val aa = Word(
                 0,
                 "pgen",
-                encryptMsgs(editTextKeyGen.editText?.text.toString(), secretKey1),
-                tvGen.editText?.text.toString()
+                Aqtik.encrypt(editTextKeyGen.editText?.text.toString()),
+                Aqtik.encrypt(tvGen.editText?.text.toString())
             )
             wordDao.insertAll(aa)
 

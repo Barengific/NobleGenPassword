@@ -36,23 +36,10 @@ object Aqtik {
     private const val mstrKeyParameterE : String = "ifbhAgGOcXMdRebE"
 
     fun encrypt_AES(strClearText: String): String? {
-        var strKey = strKey
-        if(strKey.length > 16){
-            //TODO cut key down to 16
-            val ksize = strKey.length
-            strKey = strKey.substring(0,16)
-        }else if(strKey.length < 16){
-            //TODO increase key size
-            val ksize = strKey.length
-            val isize = 16 - ksize
-            val incrS = mstrKeyParameter.substring(0,isize)
-            strKey = strKey + incrS
-        }
-
-        //val mstrIvParameter = mstrIvParameter + mstrIvParameterE
+        getKey()
 
         try {
-            val raw = strKey.toByteArray()
+            val raw = mstrKeyParameter.toByteArray()
             // create AES key
             val skeySpec = SecretKeySpec(raw, AES)
             // create a cipher
@@ -125,10 +112,6 @@ object Aqtik {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
-        //get string
-//        sharedPreferencesEE.edit().putString("signatureS", mk).apply()
-//        sharedPreferencesEE.edit().putString("signatureT", pik).apply()
-
         val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
 
@@ -142,7 +125,7 @@ object Aqtik {
             //TODO increase key size
             val ksize = strKey.length
             val isize = 16 - ksize
-            val incrS = mstrKeyParameter.substring(0,isize)
+            val incrS = mstrKeyParameterE.substring(0,isize)
             strKey = strKey + incrS
         }
         mstrKeyParameter = strKey

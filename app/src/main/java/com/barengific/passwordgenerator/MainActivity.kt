@@ -804,11 +804,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
             }
         })
 
-
-
-        //Log.d("aaaholder", viewHolder.adapterPosition.toString())
-        //Log.d("aaaholder2", getPosition().toString())
-
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.textView1.text = dataSet[position].wid.toString()

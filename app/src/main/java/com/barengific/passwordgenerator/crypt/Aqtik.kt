@@ -134,6 +134,17 @@ object Aqtik {
 
         mstrIvParameter = nameT + mstrIvParameterE
 
-        mstrKeyParameter = nameS + mstrKeyParameterE
+        var strKey = nameS
+        if(strKey?.length!! > 16){
+            //TODO cut key down to 16
+            strKey = strKey.substring(0,16)
+        }else if(strKey.length < 16){
+            //TODO increase key size
+            val ksize = strKey.length
+            val isize = 16 - ksize
+            val incrS = mstrKeyParameter.substring(0,isize)
+            strKey = strKey + incrS
+        }
+        mstrKeyParameter = strKey
     }
 }

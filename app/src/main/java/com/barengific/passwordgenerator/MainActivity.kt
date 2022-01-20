@@ -88,13 +88,21 @@ class MainActivity : AppCompatActivity() {
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
 
+    init {
+        instance = this
+    }
+
     companion object {
         var pos: Int = 0
         lateinit var recyclerView: RecyclerView
         var authStatus = false
+        private var instance: MainActivity? = null
         fun getPosi(): Int = pos
         fun setPosi(pos: Int) {
             this.pos = pos
+        }
+        fun applicationContext() : Context {
+            return instance!!.applicationContext
         }
     }
 

@@ -35,7 +35,7 @@ object Aqtik {
     private const val mstrIvParameterE : String = "639051521258";
     private const val mstrKeyParameterE : String = "ifbhAgGOcXMdRebE"
 
-    fun encrypt_AES(strClearText: String): String? {
+    fun encrypt(strClearText: String): String? {
         getKey()
 
         try {

@@ -375,6 +375,11 @@ class MainActivity : AppCompatActivity() {
             wordDao.insertAll(aa)
 
             arrr = wordDao.getAll()
+            var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
+           // arrrNew.add()
+
+            Log.d("aaaaDBDD", arrr.toString())
+            Log.d("aaaaDBDD", arrrNew.toString())
 
             var adapter = CustomAdapter(arrr)
             //recyclerView = findViewById<View>(R.id.rview) as RecyclerView

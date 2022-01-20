@@ -351,15 +351,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-            val secretKey = generateKey(nameS+nameT)
-            Log.d("aaaWWW1", secretKey.toString())
+            val secretKey1 = generateKey(nameS+nameT)
+            Log.d("aaaWWW1", secretKey1.toString())
             val secretKey2 = generateKey(nameS+nameT)
             Log.d("aaaWWW2", secretKey2.toString())
-            
+            encryptMsg(editTextKeyGen.editText?.text.toString(), secretKey1)?.let { it1 ->
+                Log.d("aaaWWW3",
+                    it1
+                )
+            }
+
             val aa = Word(
                 0,
                 "pgen",
-                encryptMsgs(editTextKeyGen.editText?.text.toString(), secretKey),
+                encryptMsgs(editTextKeyGen.editText?.text.toString(), secretKey1),
                 tvGen.editText?.text.toString()
             )
             wordDao.insertAll(aa)

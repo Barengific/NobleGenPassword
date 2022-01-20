@@ -375,8 +375,19 @@ class MainActivity : AppCompatActivity() {
             wordDao.insertAll(aa)
 
             arrr = wordDao.getAll()
-            var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
+            //var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
            // arrrNew.add()
+
+            var arrrNew: List<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb"))
+            arrrNew += listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb"))
+
+            for (item in arrr.indices) {
+                // ...
+                    
+                arrr[item].key
+                arrr[item].value
+            }
+
 
             Log.d("aaaaDBDD", arrr.toString())
             Log.d("aaaaDBDD", arrrNew.toString())

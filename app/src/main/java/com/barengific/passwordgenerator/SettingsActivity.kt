@@ -1,12 +1,16 @@
 package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -210,5 +214,26 @@ class SettingsActivity : AppCompatActivity(),
             }
             startActivity(intent)
         }
+    }
+
+
+}
+
+class ConDialogFragment : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            val inflater = requireActivity().layoutInflater;
+            builder.setView(inflater.inflate(R.layout.alertdialog_about, null))
+                .setPositiveButton(R.string.confirm,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        getDialog()?.show()
+                    })
+                .setNegativeButton(R.string.cancel,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        getDialog()?.cancel()
+                    })
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
     }
 }

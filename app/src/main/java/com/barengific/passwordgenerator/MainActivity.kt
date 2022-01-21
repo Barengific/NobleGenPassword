@@ -631,13 +631,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
             }
             R.id.menu_delete -> {
-                val db = Room.databaseBuilder(
-                    applicationContext,
-                    AppDatabase::class.java, "database-name"
-                ).allowMainThreadQueries().build()
-                val wordDao = db.wordDao()
-//                arrr = wordDao.getAll()
-//                Log.d("aaamenu_delete", arrr.toString())
+                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+                val factory = SupportFactory(passphrase)
+                val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
+                    .openHelperFactory(factory)
+                    .allowMainThreadQueries()
+                    .build()
+                val wordDao = room.wordDao()
 
                 val wid: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
@@ -662,13 +662,13 @@ class MainActivity : AppCompatActivity() {
                     key?.text.toString(),
                     value?.text.toString()
                 )
-                db.wordDao().delete(a)
+                room.wordDao().delete(a)
                 arrr = wordDao.getAll()
                 var adapter = CustomAdapter(arrr)
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
-                db.close()
+                //room.close()
 
             }
             R.id.menu_cancel -> {

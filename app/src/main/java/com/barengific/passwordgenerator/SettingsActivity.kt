@@ -243,7 +243,10 @@ class ConDialogFragment : DialogFragment() {
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
-                        
+                        val intent = Intent(this.context, SettingsActivity::class.java).apply {
+                            putExtra("fromSettings","fin")
+                        }
+                        startActivity(intent)
                     })
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

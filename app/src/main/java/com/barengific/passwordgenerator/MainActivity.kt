@@ -741,10 +741,7 @@ class MainActivity : AppCompatActivity() {
                     for (i in 0 until pSize) {
                         arrr.get(posis.get(i)).value = "****"
                         arrr.get(posis.get(i)).key = "****"
-                    }//TODO check - database\Word changed from val to var ^
-
-                    arrr.get(ed2).value = "****"
-                    arrr.get(ed2).key = "****"
+                    }
 
                     var adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView

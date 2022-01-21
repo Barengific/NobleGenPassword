@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
+    var posis: MutableList<Int> = mutableListOf(-1)
 
     init {
         instance = this
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         var pos: Int = 0
         lateinit var recyclerView: RecyclerView
         lateinit var arrrNew: List<Word>
-        lateinit var posis: MutableList<Int>
+        lateinit var posiss: MutableList<Int>
         var authStatus = false
         private var instance: MainActivity? = null
         fun getPosi(): Int = pos
@@ -731,6 +732,7 @@ class MainActivity : AppCompatActivity() {
 
                 var btnHideAllStatus = false
 
+                Log.d("aaaaPOS", posis.toString())
                 posis.add(getPosi())
                 if(posis.contains(getPosi())){//if existent then show
                     posis.removeAt(getPosi())
@@ -753,7 +755,7 @@ class MainActivity : AppCompatActivity() {
 
 
                 }
-                
+
             }
             R.id.menu_cancel -> {
                 Log.d("aaamenu_cancel", getPosi().toString())

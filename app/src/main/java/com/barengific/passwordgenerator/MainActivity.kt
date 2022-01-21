@@ -375,6 +375,11 @@ class MainActivity : AppCompatActivity() {
            // arrrNew.add()
 
             var aNew: MutableList<Word> = mutableListOf(Word(arrr[0].wid, arrr[0].pType, Aqtik.decrypt(arrr[0].key), Aqtik.decrypt(arrr[0].value)))
+            //arrr += a
+            runOnUiThread {
+                adapter.notifyDataSetChanged()
+            }
+
 //            for (item in arrr.indices) {
 //                val aS = Aqtik.decrypt(arrr[item].key)
 //                val aT = Aqtik.decrypt(arrr[item].value)

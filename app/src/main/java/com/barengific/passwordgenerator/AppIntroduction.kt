@@ -40,10 +40,18 @@ class AppIntroduction : AppIntro() {
         // Decide what to do when the user clicks on "Skip"
         //TODO intent go to main activity
         val fromSettings = getIntent().extras?.get("fromSettings")
-        val intent = Intent(this, CredentialsEnt::class.java).apply {
-            putExtra("fromIntro","fin")
+        if(fromSettings?.equals("fin") == true){
+            val intent = Intent(this, SettingsActivity::class.java).apply {
+                putExtra("fromIntro","fin")
+            }
+            startActivity(intent)
+        }else{
+            val intent = Intent(this, CredentialsEnt::class.java).apply {
+                putExtra("fromIntro","fin")
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
+
         finish()
     }
 
@@ -51,10 +59,17 @@ class AppIntroduction : AppIntro() {
         super.onDonePressed(currentFragment)
         // Decide what to do when the user clicks on "Done"
         val fromSettings = getIntent().extras?.get("fromSettings")
-        val intent = Intent(this, CredentialsEnt::class.java).apply {
-            putExtra("fromIntro","fin")
+        if(fromSettings?.equals("fin") == true){
+            val intent = Intent(this, SettingsActivity::class.java).apply {
+                putExtra("fromIntro","fin")
+            }
+            startActivity(intent)
+        }else{
+            val intent = Intent(this, CredentialsEnt::class.java).apply {
+                putExtra("fromIntro","fin")
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
         finish()
     }
 }

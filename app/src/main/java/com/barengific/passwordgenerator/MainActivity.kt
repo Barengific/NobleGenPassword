@@ -730,6 +730,16 @@ class MainActivity : AppCompatActivity() {
                 val wordDao = room.wordDao()
 
                 var btnHideAllStatus = false
+
+                if(posis.contains(getPosi())){//if existent then show
+
+                }else{//if not existent then hide
+                    posis.add(getPosi())
+
+                }
+
+
+
                 if(btnHideAllStatus){
                     btnHideAll.setText("Hide")
                     btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)

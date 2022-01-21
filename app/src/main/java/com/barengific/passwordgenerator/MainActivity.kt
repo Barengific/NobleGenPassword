@@ -387,6 +387,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
+//TODO fix visibilty of rcyclerview when item saved
 
 //            val aa = Word(
 //                0,
@@ -715,6 +716,9 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
                 room.close()
 
+            }
+            R.id.menu_hide -> {
+                Log.d("aaamenu_cancel", getPosi().toString())
             }
             R.id.menu_cancel -> {
                 Log.d("aaamenu_cancel", getPosi().toString())

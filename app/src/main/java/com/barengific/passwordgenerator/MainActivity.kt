@@ -83,6 +83,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.*
 import com.barengific.passwordgenerator.crypt.Aqtik
 import com.barengific.passwordgenerator.database.WordDao
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.btnGenerate
+import kotlinx.android.synthetic.main.fragment_home.btnSave
+import kotlinx.android.synthetic.main.fragment_home.editTextKeyGen
+import kotlinx.android.synthetic.main.fragment_home.filled_exposed_dropdown
+import kotlinx.android.synthetic.main.fragment_home.tvCopy
+import kotlinx.android.synthetic.main.fragment_home.tvGen
 import net.sqlcipher.database.SQLiteDatabase
 import kotlin.concurrent.thread
 import net.sqlcipher.database.SupportFactory
@@ -546,6 +553,19 @@ class MainActivity : AppCompatActivity() {
                 //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
             }
         })
+        var btnHideAllStatus = true
+        btnHideAll.setOnClickListener {
+            if(btnHideAllStatus){
+                btnHideAll.setText("Show")
+                btnHideAllStatus = false
+            }else{
+                btnHideAll.setText("Hide")
+                btnHideAllStatus = true
+            }
+
+
+        }
+
 
         registerForContextMenu(recyclerView);
         val ustomAdapter = CustomAdapter(arr)

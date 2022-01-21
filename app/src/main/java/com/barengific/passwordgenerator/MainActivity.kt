@@ -737,6 +737,23 @@ class MainActivity : AppCompatActivity() {
                 }else{//if not existent then hide
                     posis.add(getPosi())
 
+                    val pSize = posis.size
+                    for (i in 0 until pSize) {
+                        arrr.get(posis.get(i)).value = "****"
+                        arrr.get(posis.get(i)).key = "****"
+                    }//TODO check - database\Word changed from val to var ^
+
+                    arrr.get(ed2).value = "****"
+                    arrr.get(ed2).key = "****"
+
+                    var adapter = CustomAdapter(arrr)
+                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                    recyclerView.setHasFixedSize(false)
+                    recyclerView.setAdapter(adapter)
+                    recyclerView.setLayoutManager(LinearLayoutManager(this))
+                    room.close()
+
+
                 }
 
 

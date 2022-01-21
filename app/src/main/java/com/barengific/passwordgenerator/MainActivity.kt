@@ -668,7 +668,7 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
-                //room.close()
+                room.close()
 
             }
             R.id.menu_cancel -> {
@@ -847,14 +847,24 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                             }
                             R.id.menu_delete -> {
-                                Log.d("aaaamenuu","delete")
-                                val db = view?.context?.let {
-                                    Room.databaseBuilder(
-                                        it,
-                                        AppDatabase::class.java, "database-name"
-                                    ).allowMainThreadQueries().build()
+                                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+                                val factory = SupportFactory(passphrase)
+                                val room = view?.context?.let {
+                                    Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
+                                        .openHelperFactory(factory)
+                                        .allowMainThreadQueries()
+                                        .build()
                                 }
-                                val wordDao = db?.wordDao()
+                                val wordDao = room?.wordDao()
+//
+//                                Log.d("aaaamenuu","delete")
+//                                val db = view?.context?.let {
+//                                    Room.databaseBuilder(
+//                                        it,
+//                                        AppDatabase::class.java, "database-name"
+//                                    ).allowMainThreadQueries().build()
+//                                }
+//                                val wordDao = db?.wordDao()
 
                                 val wid: TextView? = viewHolder.textView1
                                 val pType: TextView? = viewHolder.textView2
@@ -867,14 +877,14 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                     key?.text.toString(),
                                     value?.text.toString()
                                 )
-                                db?.wordDao()?.delete(a)
+                                room?.wordDao()?.delete(a)
                                 val arrr = wordDao?.getAll()
                                 var adapter = arrr?.let { CustomAdapter(it) }
 
                                 MainActivity.recyclerView.setHasFixedSize(false)
                                 MainActivity.recyclerView.setAdapter(adapter)
                                 MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
-                                db?.close()
+                                room?.close()
                                 Log.d("aaaamenuu","DDDdelete")
 
                             }

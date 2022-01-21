@@ -11,6 +11,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -209,10 +210,16 @@ class SettingsActivity : AppCompatActivity(),
 
     class RSTFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            val intent = Intent(this.context, CredentialsEnt::class.java).apply {
-                putExtra("fromSettings","fin")
-            }
-            startActivity(intent)
+            val newFragment = ConDialogFragment()
+            (activity as FragmentActivity).supportFragmentManager
+
+            newFragment.show((activity as FragmentActivity).supportFragmentManager, "missiles")
+
+
+//            val intent = Intent(this.context, CredentialsEnt::class.java).apply {
+//                putExtra("fromSettings","fin")
+//            }
+//            startActivity(intent)
         }
     }
 
@@ -227,11 +234,16 @@ class ConDialogFragment : DialogFragment() {
             builder.setView(inflater.inflate(R.layout.alertdialog_about, null))
                 .setPositiveButton(R.string.confirm,
                     DialogInterface.OnClickListener { dialog, id ->
+                        val intent = Intent(this.context, CredentialsEnt::class.java).apply {
+                            putExtra("fromSettings","fin")
+                        }
+                        startActivity(intent)
                         getDialog()?.show()
                     })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
+                        
                     })
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

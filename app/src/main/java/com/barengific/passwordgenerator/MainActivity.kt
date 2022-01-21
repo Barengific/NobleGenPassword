@@ -563,6 +563,23 @@ class MainActivity : AppCompatActivity() {
                 btnHideAll.setText("Hide")
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
                 btnHideAllStatus = true
+
+
+                arrr = wordDao.getAll()
+                val arSize = arrr.size
+
+                for (i in 0..arSize) {
+                    arrr.get(i).value = "****"
+                    arrr.get(i).key = "****"
+                }//TODO check - database\Word changed from val to var ^
+
+                var adapter = CustomAdapter(arrr)
+                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                recyclerView.setHasFixedSize(false)
+                recyclerView.setAdapter(adapter)
+                recyclerView.setLayoutManager(LinearLayoutManager(this))
+
+
             }//TODO
 
 

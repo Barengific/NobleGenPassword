@@ -40,7 +40,6 @@ class AppIntroduction : AppIntro() {
         // Decide what to do when the user clicks on "Skip"
         //TODO intent go to main activity
         val intent = Intent(this, CredentialsEnt::class.java).apply {
-//            putExtra(EXTRA_MESSAGE, message)
             putExtra("fromIntro","fin")
         }
         startActivity(intent)
@@ -51,7 +50,6 @@ class AppIntroduction : AppIntro() {
         super.onDonePressed(currentFragment)
         // Decide what to do when the user clicks on "Done"
         val intent = Intent(this, CredentialsEnt::class.java).apply {
-//            putExtra(EXTRA_MESSAGE, message)
             putExtra("fromIntro","fin")
         }
         startActivity(intent)

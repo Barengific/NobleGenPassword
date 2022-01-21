@@ -731,6 +731,7 @@ class MainActivity : AppCompatActivity() {
 
                 var btnHideAllStatus = false
 
+                posis.add(getPosi())
                 if(posis.contains(getPosi())){//if existent then show
                     posis.removeAt(getPosi())
 
@@ -752,43 +753,7 @@ class MainActivity : AppCompatActivity() {
 
 
                 }
-
-
-
-                if(btnHideAllStatus){
-                    btnHideAll.setText("Hide")
-                    btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)
-                    btnHideAllStatus = false
-
-                    arrr = wordDao.getAll()
-                    var adapter = CustomAdapter(arrr)
-                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-                    recyclerView.setHasFixedSize(false)
-                    recyclerView.setAdapter(adapter)
-                    recyclerView.setLayoutManager(LinearLayoutManager(this))
-                    room.close()
-
-                }else{
-                    btnHideAll.setText("Show")
-                    btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
-                    btnHideAllStatus = true
-
-                    arrr = wordDao.getAll()
-
-                    val ed = CustomAdapter.position
-                    val ed2 = getPosi()
-
-                    arrr.get(ed2).value = "****"
-                    arrr.get(ed2).key = "****"
-
-                    var adapter = CustomAdapter(arrr)
-                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-                    recyclerView.setHasFixedSize(false)
-                    recyclerView.setAdapter(adapter)
-                    recyclerView.setLayoutManager(LinearLayoutManager(this))
-                    room.close()
-
-                }//TODO
+                
             }
             R.id.menu_cancel -> {
                 Log.d("aaamenu_cancel", getPosi().toString())

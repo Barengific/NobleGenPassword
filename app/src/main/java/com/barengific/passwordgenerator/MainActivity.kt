@@ -553,10 +553,10 @@ class MainActivity : AppCompatActivity() {
                 //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
             }
         })
-        var btnHideAllStatus = true
+        var btnHideAllStatus = false
         btnHideAll.setOnClickListener {
             if(btnHideAllStatus){
-                btnHideAll.setText("Show")
+                btnHideAll.setText("Hide")
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)
                 btnHideAllStatus = false
 
@@ -568,7 +568,7 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
 
             }else{
-                btnHideAll.setText("Hide")
+                btnHideAll.setText("Show")
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
                 btnHideAllStatus = true
 

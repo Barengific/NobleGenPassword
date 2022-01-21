@@ -85,5 +85,6 @@
     <string name="settings_header_intro">Introduction</string>
     <string name="settings_header_tut">Tutorial</string>
     <string name="settings_header_rst">Reset Credentials</string>
+    <string name="confirm">Confirm</string>
 
 </resources>

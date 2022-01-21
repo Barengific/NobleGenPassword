@@ -86,5 +86,7 @@
     <string name="settings_header_tut">Tutorial</string>
     <string name="settings_header_rst">Reset Credentials</string>
     <string name="confirm">Confirm</string>
+    <string name="action_donations">Donation</string>
+    <string name="action_adfree">Ad Free Version</string>
 
 </resources>

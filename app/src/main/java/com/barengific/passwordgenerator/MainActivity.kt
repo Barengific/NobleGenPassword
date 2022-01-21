@@ -191,8 +191,8 @@ class MainActivity : AppCompatActivity() {
         //***************************************************
 
 
+        //db initialise
         val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
-
         val factory = SupportFactory(passphrase)
         val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
             .openHelperFactory(factory)
@@ -200,13 +200,15 @@ class MainActivity : AppCompatActivity() {
             .build()
         val wordDao = room.wordDao()
 
+//        //unsecure connection
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            AppDatabase::class.java, "database-name"
+//        ).allowMainThreadQueries().build()
+//        //val wordDao = db.wordDao()
+//        val wordDaos = db.wordDao()
+//        val arrs = wordDaos.getAll()
 
-        //db initialise
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "database-name"
-        ).allowMainThreadQueries().build()
-        //val wordDao = db.wordDao()
 
         //recycle view
         val arr = wordDao.getAll()
@@ -379,11 +381,17 @@ class MainActivity : AppCompatActivity() {
 
         btnSave.setOnClickListener {
 
+//            val aa = Word(
+//                0,
+//                "pgen",
+//                Aqtik.encrypt(editTextKeyGen.editText?.text.toString()),
+//                Aqtik.encrypt(tvGen.editText?.text.toString())
+//            )
             val aa = Word(
                 0,
                 "pgen",
-                Aqtik.encrypt(editTextKeyGen.editText?.text.toString()),
-                Aqtik.encrypt(tvGen.editText?.text.toString())
+                editTextKeyGen.editText?.text.toString(),
+                tvGen.editText?.text.toString()
             )
             wordDao.insertAll(aa)
 

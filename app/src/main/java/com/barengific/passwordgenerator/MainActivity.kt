@@ -400,7 +400,24 @@ class MainActivity : AppCompatActivity() {
 //                recyclerView.setLayoutManager(LinearLayoutManager(this))
 //            })
 
-            thread { Thread.sleep(1000)
+//            thread { Thread.sleep(1000)
+//                for (item in arrr.indices) {
+//                    val aS = Aqtik.decrypt(arrr[item].key)
+//                    val aT = Aqtik.decrypt(arrr[item].value)
+//                    val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
+//                    aNew.add(aWW)
+//
+//                }
+//                var adapter = CustomAdapter(aNew)
+//                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+//                recyclerView.setHasFixedSize(false)
+//                recyclerView.setAdapter(adapter)
+//                recyclerView.setLayoutManager(LinearLayoutManager(this))
+//
+//            }
+
+            runOnUiThread {
+                // Stuff that updates the UI
                 for (item in arrr.indices) {
                     val aS = Aqtik.decrypt(arrr[item].key)
                     val aT = Aqtik.decrypt(arrr[item].value)

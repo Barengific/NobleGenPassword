@@ -147,6 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="57dp"
                 android:text="@string/btnSave"
+                app:icon="@drawable/ic_image_add_save_pressable"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

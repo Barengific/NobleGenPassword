@@ -416,22 +416,28 @@ class MainActivity : AppCompatActivity() {
 //
 //            }
 
-            runOnUiThread {
-                // Stuff that updates the UI
-                for (item in arrr.indices) {
-                    val aS = Aqtik.decrypt(arrr[item].key)
-                    val aT = Aqtik.decrypt(arrr[item].value)
-                    val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
-                    aNew.add(aWW)
-
-                }
-                var adapter = CustomAdapter(aNew)
-                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-                recyclerView.setHasFixedSize(false)
-                recyclerView.setAdapter(adapter)
-                recyclerView.setLayoutManager(LinearLayoutManager(this))
-
-            }
+//            runOnUiThread {
+//                // Stuff that updates the UI
+//                for (item in arrr.indices) {
+//                    val aS = Aqtik.decrypt(arrr[item].key)
+//                    val aT = Aqtik.decrypt(arrr[item].value)
+//                    val aWW = Word(arrr[item].wid, arrr[item].pType, aS, aT)
+//                    aNew.add(aWW)
+//
+//                }
+//                recyclerView.adapter?.notifyItemInserted(0)
+//                adapter.notifyItemInserted(0)
+//
+//                var adapter = CustomAdapter(aNew)
+//                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+//                recyclerView.setHasFixedSize(false)
+//                recyclerView.setAdapter(adapter)
+//                recyclerView.setLayoutManager(LinearLayoutManager(this))
+//                //recyclerView.adapter
+//
+//                adapter.notifyItemRangeInserted(0, 1);
+//
+//            }
 
 //            Log.d("aaaaDBDD", arrr.toString())
 //            Log.d("aaaaDBDD", arrrNew.toString())

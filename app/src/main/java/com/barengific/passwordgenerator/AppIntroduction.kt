@@ -70,7 +70,7 @@ class AppIntroduction : AppIntro() {
             }
             startActivity(intent)
         }
-        
+
         finish()
     }
 }

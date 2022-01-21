@@ -231,13 +231,14 @@ class ConDialogFragment : DialogFragment() {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater;
-            builder.setView(inflater.inflate(R.layout.alertdialog_about, null))
+            builder.setView(inflater.inflate(R.layout.alertdialog_rst_confirm, null))
                 .setPositiveButton(R.string.confirm,
                     DialogInterface.OnClickListener { dialog, id ->
                         val intent = Intent(this.context, CredentialsEnt::class.java).apply {
                             putExtra("fromSettings","fin")
                         }
                         startActivity(intent)
+                        //TODO delete database entries
                         getDialog()?.show()
                     })
                 .setNegativeButton(R.string.cancel,

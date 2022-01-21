@@ -196,6 +196,7 @@ class MainActivity : AppCompatActivity() {
         val factory = SupportFactory(passphrase)
         val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
             .openHelperFactory(factory)
+            .allowMainThreadQueries()
             .build()
         val wordDao = room.wordDao()
 
@@ -387,6 +388,13 @@ class MainActivity : AppCompatActivity() {
             wordDao.insertAll(aa)
 
             arrr = wordDao.getAll()
+            var adapter = CustomAdapter(arrr)
+            //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+            recyclerView.setHasFixedSize(false)
+            recyclerView.setAdapter(adapter)
+            recyclerView.setLayoutManager(LinearLayoutManager(this))
+
+
             //var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
            // arrrNew.add()
 

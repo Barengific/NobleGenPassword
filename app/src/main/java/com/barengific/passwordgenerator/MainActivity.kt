@@ -732,6 +732,7 @@ class MainActivity : AppCompatActivity() {
                 var btnHideAllStatus = false
 
                 if(posis.contains(getPosi())){//if existent then show
+                    posis.removeAt(getPosi())
 
                 }else{//if not existent then hide
                     posis.add(getPosi())

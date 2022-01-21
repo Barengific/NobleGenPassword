@@ -45,7 +45,7 @@ class TutIntroduction : AppIntro() {
         super.onSkipPressed(currentFragment)
         // Decide what to do when the user clicks on "Skip"
         //TODO intent go to main activity
-        val intent = Intent(this, CredentialsEnt::class.java).apply {
+        val intent = Intent(this, SettingsActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
             putExtra("fromIntro","fin")
         }
@@ -56,7 +56,7 @@ class TutIntroduction : AppIntro() {
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
         // Decide what to do when the user clicks on "Done"
-        val intent = Intent(this, CredentialsEnt::class.java).apply {
+        val intent = Intent(this, SettingsActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
             putExtra("fromIntro","fin")
         }

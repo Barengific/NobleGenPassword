@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         var pos: Int = 0
         lateinit var recyclerView: RecyclerView
         lateinit var arrrNew: List<Word>
+        lateinit var posis: MutableList<Int>
         var authStatus = false
         private var instance: MainActivity? = null
         fun getPosi(): Int = pos
@@ -750,9 +751,11 @@ class MainActivity : AppCompatActivity() {
                     arrr = wordDao.getAll()
 
                     val ed = CustomAdapter.position
-                    arrr.get(ed).value = "****"
-                    arrr.get(ed).key = "****"
-                    
+                    val ed2 = getPosi()
+
+                    arrr.get(ed2).value = "****"
+                    arrr.get(ed2).key = "****"
+
                     var adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)

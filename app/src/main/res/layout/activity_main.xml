@@ -101,7 +101,6 @@
                 android:id="@+id/tvGen"
                 android:layout_width="409dp"
                 android:layout_height="57dp"
-                android:editable="false"
                 android:hint="@string/output_result"
                 android:textIsSelectable="false"
                 android:textSize="20sp"

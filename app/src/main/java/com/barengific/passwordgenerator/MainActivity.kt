@@ -748,13 +748,11 @@ class MainActivity : AppCompatActivity() {
                     btnHideAllStatus = true
 
                     arrr = wordDao.getAll()
-                    val arSize = arrr.size
 
-                    for (i in 0 until arSize) {
-                        arrr.get(i).value = "****"
-                        arrr.get(i).key = "****"
-                    }//TODO check - database\Word changed from val to var ^
-
+                    val ed = CustomAdapter.position
+                    arrr.get(ed).value = "****"
+                    arrr.get(ed).key = "****"
+                    
                     var adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)

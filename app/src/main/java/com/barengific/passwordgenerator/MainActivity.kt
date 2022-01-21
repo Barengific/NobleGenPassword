@@ -619,6 +619,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> openSettings()
             R.id.action_about -> openAbout()
             R.id.action_exit -> finish()
+            //TODO donation and ad free version
         }
         return super.onOptionsItemSelected(item)
     }
@@ -718,7 +719,50 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.menu_hide -> {
-                Log.d("aaamenu_cancel", getPosi().toString())
+                Log.d("aaamenu_huide", getPosi().toString())
+                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+                val factory = SupportFactory(passphrase)
+                val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
+                    .openHelperFactory(factory)
+                    .allowMainThreadQueries()
+                    .build()
+                val wordDao = room.wordDao()
+
+                var btnHideAllStatus = false
+                if(btnHideAllStatus){
+                    btnHideAll.setText("Hide")
+                    btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)
+                    btnHideAllStatus = false
+
+                    arrr = wordDao.getAll()
+                    var adapter = CustomAdapter(arrr)
+                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                    recyclerView.setHasFixedSize(false)
+                    recyclerView.setAdapter(adapter)
+                    recyclerView.setLayoutManager(LinearLayoutManager(this))
+                    room.close()
+
+                }else{
+                    btnHideAll.setText("Show")
+                    btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
+                    btnHideAllStatus = true
+
+                    arrr = wordDao.getAll()
+                    val arSize = arrr.size
+
+                    for (i in 0 until arSize) {
+                        arrr.get(i).value = "****"
+                        arrr.get(i).key = "****"
+                    }//TODO check - database\Word changed from val to var ^
+
+                    var adapter = CustomAdapter(arrr)
+                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                    recyclerView.setHasFixedSize(false)
+                    recyclerView.setAdapter(adapter)
+                    recyclerView.setLayoutManager(LinearLayoutManager(this))
+                    room.close()
+
+                }//TODO
             }
             R.id.menu_cancel -> {
                 Log.d("aaamenu_cancel", getPosi().toString())

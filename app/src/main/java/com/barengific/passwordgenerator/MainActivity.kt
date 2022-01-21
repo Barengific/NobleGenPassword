@@ -557,11 +557,13 @@ class MainActivity : AppCompatActivity() {
         btnHideAll.setOnClickListener {
             if(btnHideAllStatus){
                 btnHideAll.setText("Show")
+                btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)
                 btnHideAllStatus = false
             }else{
                 btnHideAll.setText("Hide")
+                btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
                 btnHideAllStatus = true
-            }
+            }//TODO
 
 
         }

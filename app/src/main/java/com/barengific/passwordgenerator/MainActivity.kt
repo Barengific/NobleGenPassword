@@ -82,7 +82,12 @@ import androidx.lifecycle.Lifecycle
 
 import androidx.lifecycle.*
 import com.barengific.passwordgenerator.crypt.Aqtik
+import com.barengific.passwordgenerator.database.WordDao
 import kotlin.concurrent.thread
+import net.sqlcipher.database.SupportFactory
+
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -183,6 +188,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         //***************************************************
+
+
+        val passphrase: ByteArray = SQLiteDatabase.getBytes(userEnteredPassphrase)
+        val factory = SupportFactory(passphrase)
+        val room: WordDao = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name")
+            .openHelperFactory(factory)
+            .build()
 
         //db initialise
         val db = Room.databaseBuilder(

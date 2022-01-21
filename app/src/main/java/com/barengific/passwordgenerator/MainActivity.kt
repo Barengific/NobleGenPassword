@@ -83,6 +83,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.*
 import com.barengific.passwordgenerator.crypt.Aqtik
 import com.barengific.passwordgenerator.database.WordDao
+import net.sqlcipher.database.SQLiteDatabase
 import kotlin.concurrent.thread
 import net.sqlcipher.database.SupportFactory
 
@@ -190,18 +191,21 @@ class MainActivity : AppCompatActivity() {
         //***************************************************
 
 
-        val passphrase: ByteArray = SQLiteDatabase.getBytes(userEnteredPassphrase)
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+
         val factory = SupportFactory(passphrase)
-        val room: WordDao = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name")
+        val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
             .openHelperFactory(factory)
             .build()
+        val wordDao = room.wordDao()
+
 
         //db initialise
         val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "database-name"
         ).allowMainThreadQueries().build()
-        val wordDao = db.wordDao()
+        //val wordDao = db.wordDao()
 
         //recycle view
         val arr = wordDao.getAll()

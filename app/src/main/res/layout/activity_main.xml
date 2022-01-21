@@ -166,9 +166,11 @@
             <Button
                 android:id="@+id/btnHideAll"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="57dp"
+                android:layout_marginTop="12dp"
                 android:text="Hide"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.575"
                 app:layout_constraintStart_toEndOf="@+id/btnSave"
                 app:layout_constraintTop_toBottomOf="@+id/tvCopy" />
 

@@ -559,11 +559,18 @@ class MainActivity : AppCompatActivity() {
                 btnHideAll.setText("Show")
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)
                 btnHideAllStatus = false
+                
+                arrr = wordDao.getAll()
+                var adapter = CustomAdapter(arrr)
+                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                recyclerView.setHasFixedSize(false)
+                recyclerView.setAdapter(adapter)
+                recyclerView.setLayoutManager(LinearLayoutManager(this))
+
             }else{
                 btnHideAll.setText("Hide")
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
                 btnHideAllStatus = true
-
 
                 arrr = wordDao.getAll()
                 val arSize = arrr.size

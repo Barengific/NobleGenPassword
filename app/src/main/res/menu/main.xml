@@ -14,6 +14,18 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_donation"
+        android:orderInCategory="100"
+        android:title="@string/action_donations"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_adfree"
+        android:orderInCategory="100"
+        android:title="@string/action_adfree"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"
         android:title="@string/action_exit"

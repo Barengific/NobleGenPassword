@@ -559,7 +559,7 @@ class MainActivity : AppCompatActivity() {
                 btnHideAll.setText("Show")
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)
                 btnHideAllStatus = false
-                
+
                 arrr = wordDao.getAll()
                 var adapter = CustomAdapter(arrr)
                 //recyclerView = findViewById<View>(R.id.rview) as RecyclerView

@@ -568,7 +568,7 @@ class MainActivity : AppCompatActivity() {
                 arrr = wordDao.getAll()
                 val arSize = arrr.size
 
-                for (i in 0..arSize) {
+                for (i in 0 until arSize) {
                     arrr.get(i).value = "****"
                     arrr.get(i).key = "****"
                 }//TODO check - database\Word changed from val to var ^
@@ -578,7 +578,6 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
-
 
             }//TODO
 

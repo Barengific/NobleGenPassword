@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
-    var posis: MutableList<Int> = mutableListOf(-1,-2)
+    var posis: MutableList<Int> = mutableListOf(-1)
 
     init {
         instance = this
@@ -743,6 +743,7 @@ class MainActivity : AppCompatActivity() {
 
                     val pSize = posis.size
                     for (i in 0 until pSize) {
+                        Log.d("aaaaCVCVCV", posis.get(i).toString())
                         if((posis.get(i) != -1)){
                             arrr.get(posis.get(i)).value = "****"
                             arrr.get(posis.get(i)).key = "****"

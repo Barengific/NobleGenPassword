@@ -1019,8 +1019,15 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                 if(MainActivity.posis.contains(viewHolder.adapterPosition)){//if existent then show
                                     MainActivity.posis.remove(viewHolder.adapterPosition)
 
-                                    arrr?.get(viewHolder.adapterPosition)?.value = arrr?.get(viewHolder.adapterPosition)?.value.toString()
-                                    arrr?.get(viewHolder.adapterPosition)?.key = arrr?.get(viewHolder.adapterPosition)?.key.toString()
+                                    val pSize = MainActivity.posis.size
+                                    for (i in 0 until pSize) {
+                                        Log.d("aaaaCVCVCVQQ", MainActivity.posis.get(i).toString())
+                                        if((MainActivity.posis.get(i) != -1)){
+                                            val qSize = MainActivity.posis.get(i)
+                                            arrr?.get(qSize)?.value = "****"
+                                            arrr?.get(qSize)?.key = "****"
+                                        }
+                                    }
 
                                     var adapter = arrr?.let { CustomAdapter(it) }
                                     MainActivity.recyclerView.setHasFixedSize(false)

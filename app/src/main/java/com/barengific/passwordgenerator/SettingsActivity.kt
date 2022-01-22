@@ -196,6 +196,8 @@ class SettingsActivity : AppCompatActivity(),
                 putExtra("fromSettings","fin")
             }
             startActivity(intent)
+            //getActivity()?.getFragmentManager()?.popBackStack()
+            (activity as FragmentActivity).supportFragmentManager.popBackStack()
         }
     }
 

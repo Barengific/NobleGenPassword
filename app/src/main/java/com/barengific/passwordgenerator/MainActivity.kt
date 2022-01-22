@@ -738,7 +738,16 @@ class MainActivity : AppCompatActivity() {
                 Log.d("aaaaPOS2", getPosi().toString())
                 //posis.add(getPosi())
                 if(posis.contains(getPosi())){//if existent then show
-                    posis.removeAt(getPosi())
+//                    posis.removeAt(getPosi())
+                    posis.remove(getPosi())
+
+                    Log.d("aaaQQWWEE", arrr.get(getPosi()).value.toString())
+
+                    arrr.get(getPosi()).value = arrr.get(getPosi()).value.toString()
+                    arrr.get(getPosi()).key = arrr.get(getPosi()).key.toString()
+
+                    Log.d("aaaMMAADD", arrr.get(getPosi()).value.toString())
+
 
                 }else{//if not existent then hide
                     posis.add(getPosi())

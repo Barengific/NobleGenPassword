@@ -784,7 +784,6 @@ class MainActivity : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 
-
     @Throws(
         NoSuchAlgorithmException::class,
         NoSuchPaddingException::class,
@@ -1000,6 +999,63 @@ class CustomAdapter(private val dataSet: List<Word>) :
                             }
                             R.id.menu_hide ->  {
                                 Log.d("aaaamenuu","canceeel") //TODO
+                                Log.d("aaamenu_huide", MainActivity.getPosi().toString())
+                                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+                                val factory = SupportFactory(passphrase)
+                                val room = view?.context?.let {
+                                    Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
+                                        .openHelperFactory(factory)
+                                        .allowMainThreadQueries()
+                                        .build()
+                                }
+                                val wordDao = room.wordDao()
+
+                                val arrr = wordDao.getAll()
+
+                                var btnHideAllStatus = false
+
+                                Log.d("aaaaPOS", posis.toString())
+                                Log.d("aaaaPOS2", MainActivity.getPosi().toString())
+                                //posis.add(getPosi())
+                                if(posis.contains(MainActivity.getPosi())){//if existent then show
+//                  posis.removeAt(getPosi())
+                                    posis.remove(MainActivity.getPosi())
+
+                                    Log.d("aaaQQWWEE", arrr.get(MainActivity.getPosi()).value.toString())
+
+                                    arrr.get(MainActivity.getPosi()).value = arrr.get(MainActivity.getPosi()).value.toString()
+                                    arrr.get(MainActivity.getPosi()).key = arrr.get(MainActivity.getPosi()).key.toString()
+
+                                    Log.d("aaaMMAADD", arrr.get(MainActivity.getPosi()).value.toString())
+
+                                    var adapter = CustomAdapter(arrr)
+                                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                                    MainActivity.recyclerView.setHasFixedSize(false)
+                                    MainActivity.recyclerView.setAdapter(adapter)
+                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(this))
+                                    room.close()
+
+                                }else{//if not existent then hide
+                                    posis.add(MainActivity.getPosi())
+
+                                    val pSize = posis.size
+                                    for (i in 0 until pSize) {
+                                        Log.d("aaaaCVCVCV", posis.get(i).toString())
+                                        if((posis.get(i) != -1)){
+                                            val qSize = posis.get(i)
+                                            arrr.get(qSize).value = "****"
+                                            arrr.get(qSize).key = "****"
+                                        }
+                                    }
+                                    var adapter = CustomAdapter(arrr)
+                                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                                    MainActivity.recyclerView.setHasFixedSize(false)
+                                    MainActivity.recyclerView.setAdapter(adapter)
+                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(this))
+                                    room.close()
+
+                                }
+
                             }
 
                         }

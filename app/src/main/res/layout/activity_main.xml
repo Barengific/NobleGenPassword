@@ -134,6 +134,7 @@
                 android:drawablePadding="4dp"
                 android:text="@string/text_view_copy_to_clipboard"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:drawableStartCompat="@drawable/ic_content_copy_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,40 +143,44 @@
                 app:layout_constraintVertical_bias="0.03" />
 
             <!--            recyclerview db-->
+
             <Button
                 android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="57dp"
                 android:text="@string/btnSave"
+                android:textSize="16sp"
                 app:icon="@drawable/ic_image_add_save_pressable"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCopy"
-                app:layout_constraintVertical_bias="0.03" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rview"
-                android:layout_width="0dp"
-                android:layout_height="370dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnSave"
+                app:layout_constraintTop_toBottomOf="@id/tvGen"
                 app:layout_constraintVertical_bias="0.01" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnHideAll"
                 style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="57dp"
-                android:layout_marginTop="12dp"
                 android:text="Hide"
                 app:icon="@drawable/ic_image_visible_pressable"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.575"
-                app:layout_constraintStart_toEndOf="@+id/btnSave"
-                app:layout_constraintTop_toBottomOf="@+id/tvCopy" />
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGen"
+                app:layout_constraintVertical_bias="0.01" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rview"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnSave"
+                app:layout_constraintVertical_bias="0.01" />
 
 
             <!--            material dropdown menu-->

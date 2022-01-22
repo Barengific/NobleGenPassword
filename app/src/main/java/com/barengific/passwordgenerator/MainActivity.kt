@@ -743,8 +743,10 @@ class MainActivity : AppCompatActivity() {
 
                     val pSize = posis.size
                     for (i in 0 until pSize) {
-                        arrr.get(posis.get(i)).value = "****"
-                        arrr.get(posis.get(i)).key = "****"
+                        if((posis.get(i) != -1)){
+                            arrr.get(posis.get(i)).value = "****"
+                            arrr.get(posis.get(i)).key = "****"
+                        }
                     }
 
                     var adapter = CustomAdapter(arrr)

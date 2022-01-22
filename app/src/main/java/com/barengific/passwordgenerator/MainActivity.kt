@@ -742,13 +742,15 @@ class MainActivity : AppCompatActivity() {
 //                  posis.removeAt(getPosi())
                     posis.remove(getPosi())
 
-                    Log.d("aaaQQWWEE", arrr.get(getPosi()).value.toString())
-
-                    arrr.get(getPosi()).value = arrr.get(getPosi()).value.toString()
-                    arrr.get(getPosi()).key = arrr.get(getPosi()).key.toString()
-
-                    Log.d("aaaMMAADD", arrr.get(getPosi()).value.toString())
-
+                    val pSize = posis.size
+                    for (i in 0 until pSize) {
+                        Log.d("aaaaCVCVCV", posis.get(i).toString())
+                        if((posis.get(i) != -1)){
+                            val qSize = posis.get(i)
+                            arrr.get(qSize).value = "****"
+                            arrr.get(qSize).key = "****"
+                        }
+                    }
                     var adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)

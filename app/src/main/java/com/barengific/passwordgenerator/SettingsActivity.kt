@@ -248,6 +248,7 @@ class ConDialogFragment : DialogFragment() {
                             putExtra("fromSettings","fin")
                         }
                         startActivity(intent)
+                        
                     })
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

@@ -90,6 +90,7 @@ class SettingsActivity : AppCompatActivity(),
                 putExtra("fromLogin","fin")
             }
             startActivity(intent)
+            finish()
 //            return false
         }
         return super.onSupportNavigateUp()
@@ -169,7 +170,7 @@ class SettingsActivity : AppCompatActivity(),
 
     }
 
-
+//TODO call finish for fragments
     class SyncFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.sync_preferences, rootKey)
@@ -205,6 +206,7 @@ class SettingsActivity : AppCompatActivity(),
                 putExtra("fromSettings","fin")
             }
             startActivity(intent)
+
         }
     }
 
@@ -248,7 +250,6 @@ class ConDialogFragment : DialogFragment() {
                             putExtra("fromSettings","fin")
                         }
                         startActivity(intent)
-                        
                     })
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

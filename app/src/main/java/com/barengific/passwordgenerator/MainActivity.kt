@@ -745,8 +745,9 @@ class MainActivity : AppCompatActivity() {
                     for (i in 0 until pSize) {
                         Log.d("aaaaCVCVCV", posis.get(i).toString())
                         if((posis.get(i) != -1)){
-                            arrr.get(posis.get(i)).value = "****"
-                            arrr.get(posis.get(i)).key = "****"
+                            val qSize = posis.get(i)
+                            arrr.get(qSize).value = "****"
+                            arrr.get(qSize).key = "****"
                         }
                     }
 

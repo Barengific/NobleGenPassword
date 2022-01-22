@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
-    var posis: MutableList<Int> = mutableListOf(-1)
+
 
     init {
         instance = this
@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var recyclerView: RecyclerView
         lateinit var arrrNew: List<Word>
         lateinit var posiss: MutableList<Int>
+        var posis: MutableList<Int> = mutableListOf(-1)
         var authStatus = false
         private var instance: MainActivity? = null
         fun getPosi(): Int = pos
@@ -1008,9 +1009,9 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                         .allowMainThreadQueries()
                                         .build()
                                 }
-                                val wordDao = room.wordDao()
+                                val wordDao = room?.wordDao()
 
-                                val arrr = wordDao.getAll()
+                                val arrr = wordDao?.getAll()
 
                                 var btnHideAllStatus = false
 
@@ -1021,19 +1022,19 @@ class CustomAdapter(private val dataSet: List<Word>) :
 //                  posis.removeAt(getPosi())
                                     posis.remove(MainActivity.getPosi())
 
-                                    Log.d("aaaQQWWEE", arrr.get(MainActivity.getPosi()).value.toString())
+                                    Log.d("aaaQQWWEE", arrr?.get(MainActivity.getPosi()).value.toString())
 
-                                    arrr.get(MainActivity.getPosi()).value = arrr.get(MainActivity.getPosi()).value.toString()
-                                    arrr.get(MainActivity.getPosi()).key = arrr.get(MainActivity.getPosi()).key.toString()
+                                    arrr?.get(MainActivity.getPosi())?.value = arrr?.get(MainActivity.getPosi())?.value.toString()
+                                    arrr?.get(MainActivity.getPosi())?.key = arrr?.get(MainActivity.getPosi())?.key.toString()
 
-                                    Log.d("aaaMMAADD", arrr.get(MainActivity.getPosi()).value.toString())
+                                    Log.d("aaaMMAADD", arrr?.get(MainActivity.getPosi())?.value.toString())
 
-                                    var adapter = CustomAdapter(arrr)
+                                    var adapter = arrr?.let { CustomAdapter(it) }
                                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                                     MainActivity.recyclerView.setHasFixedSize(false)
                                     MainActivity.recyclerView.setAdapter(adapter)
-                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(this))
-                                    room.close()
+                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
+                                    room?.close()
 
                                 }else{//if not existent then hide
                                     posis.add(MainActivity.getPosi())
@@ -1043,16 +1044,16 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                         Log.d("aaaaCVCVCV", posis.get(i).toString())
                                         if((posis.get(i) != -1)){
                                             val qSize = posis.get(i)
-                                            arrr.get(qSize).value = "****"
-                                            arrr.get(qSize).key = "****"
+                                            arrr?.get(qSize)?.value = "****"
+                                            arrr?.get(qSize)?.key = "****"
                                         }
                                     }
-                                    var adapter = CustomAdapter(arrr)
+                                    var adapter = arrr?.let { CustomAdapter(it) }
                                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                                     MainActivity.recyclerView.setHasFixedSize(false)
                                     MainActivity.recyclerView.setAdapter(adapter)
-                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(this))
-                                    room.close()
+                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
+                                    room?.close()
 
                                 }
 

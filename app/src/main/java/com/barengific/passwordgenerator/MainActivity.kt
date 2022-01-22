@@ -738,7 +738,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("aaaaPOS2", getPosi().toString())
                 //posis.add(getPosi())
                 if(posis.contains(getPosi())){//if existent then show
-//                    posis.removeAt(getPosi())
+//                  posis.removeAt(getPosi())
                     posis.remove(getPosi())
 
                     Log.d("aaaQQWWEE", arrr.get(getPosi()).value.toString())
@@ -748,6 +748,12 @@ class MainActivity : AppCompatActivity() {
 
                     Log.d("aaaMMAADD", arrr.get(getPosi()).value.toString())
 
+                    var adapter = CustomAdapter(arrr)
+                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                    recyclerView.setHasFixedSize(false)
+                    recyclerView.setAdapter(adapter)
+                    recyclerView.setLayoutManager(LinearLayoutManager(this))
+                    room.close()
 
                 }else{//if not existent then hide
                     posis.add(getPosi())
@@ -761,14 +767,12 @@ class MainActivity : AppCompatActivity() {
                             arrr.get(qSize).key = "****"
                         }
                     }
-
                     var adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)
                     recyclerView.setAdapter(adapter)
                     recyclerView.setLayoutManager(LinearLayoutManager(this))
                     room.close()
-
 
                 }
 

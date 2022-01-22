@@ -877,6 +877,7 @@ class MainActivity : AppCompatActivity() {
 
 }
 
+//TODO remove pgen in recyclerview
 class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 

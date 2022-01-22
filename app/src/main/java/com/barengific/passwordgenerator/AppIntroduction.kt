@@ -51,7 +51,6 @@ class AppIntroduction : AppIntro() {
             }
             startActivity(intent)
         }
-
         finish()
     }
 
@@ -70,7 +69,6 @@ class AppIntroduction : AppIntro() {
             }
             startActivity(intent)
         }
-
         finish()
     }
 }

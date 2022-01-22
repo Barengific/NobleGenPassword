@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
-    var posis: MutableList<Int> = mutableListOf(-1)
+    var posis: MutableList<Int> = mutableListOf(-1,-2)
 
     init {
         instance = this
@@ -733,7 +733,8 @@ class MainActivity : AppCompatActivity() {
                 var btnHideAllStatus = false
 
                 Log.d("aaaaPOS", posis.toString())
-                posis.add(getPosi())
+                Log.d("aaaaPOS2", getPosi().toString())
+                //posis.add(getPosi())
                 if(posis.contains(getPosi())){//if existent then show
                     posis.removeAt(getPosi())
 

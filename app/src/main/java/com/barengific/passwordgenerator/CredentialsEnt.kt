@@ -40,6 +40,7 @@ class CredentialsEnt : AppCompatActivity() {
                         }
                         Log.d("aaa", "in credentials")
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(
                             applicationContext,

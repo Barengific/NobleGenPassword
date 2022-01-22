@@ -924,7 +924,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         viewHolder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(v: View?): Boolean {
                 setPosition(viewHolder.position)
@@ -999,9 +999,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                 Log.d("aaaamenuu","canceeel") //TODO
                             }
                             R.id.menu_hide ->  {
-                                Log.d("aaaamenuu","canceeel") //TODO
-                                Log.d("aaamenu_huide", MainActivity.getPosi().toString())
-                                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+                                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())//DB passprhase change
                                 val factory = SupportFactory(passphrase)
                                 val room = view?.context?.let {
                                     Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
@@ -1015,35 +1013,29 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                                 var btnHideAllStatus = false
 
-                                Log.d("aaaaPOS", posis.toString())
-                                Log.d("aaaaPOS2", MainActivity.getPosi().toString())
-                                //posis.add(getPosi())
-                                if(posis.contains(MainActivity.getPosi())){//if existent then show
-//                  posis.removeAt(getPosi())
-                                    posis.remove(MainActivity.getPosi())
+                                Log.d("aaaaMORE", viewHolder.adapterPosition.toString())
+                                Log.d("aaaaMORE2", position.toString())
+                                Log.d("aaaaMORE3", MainActivity.posis.toString())
+                                if(MainActivity.posis.contains(viewHolder.adapterPosition)){//if existent then show
+                                    MainActivity.posis.remove(viewHolder.adapterPosition)
 
-                                    Log.d("aaaQQWWEE", arrr?.get(MainActivity.getPosi()).value.toString())
-
-                                    arrr?.get(MainActivity.getPosi())?.value = arrr?.get(MainActivity.getPosi())?.value.toString()
-                                    arrr?.get(MainActivity.getPosi())?.key = arrr?.get(MainActivity.getPosi())?.key.toString()
-
-                                    Log.d("aaaMMAADD", arrr?.get(MainActivity.getPosi())?.value.toString())
+                                    arrr?.get(viewHolder.adapterPosition)?.value = arrr?.get(viewHolder.adapterPosition)?.value.toString()
+                                    arrr?.get(viewHolder.adapterPosition)?.key = arrr?.get(viewHolder.adapterPosition)?.key.toString()
 
                                     var adapter = arrr?.let { CustomAdapter(it) }
-                                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                                     MainActivity.recyclerView.setHasFixedSize(false)
                                     MainActivity.recyclerView.setAdapter(adapter)
                                     MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
                                     room?.close()
 
                                 }else{//if not existent then hide
-                                    posis.add(MainActivity.getPosi())
+                                    MainActivity.posis.add(viewHolder.adapterPosition)
 
-                                    val pSize = posis.size
+                                    val pSize = MainActivity.posis.size
                                     for (i in 0 until pSize) {
-                                        Log.d("aaaaCVCVCV", posis.get(i).toString())
-                                        if((posis.get(i) != -1)){
-                                            val qSize = posis.get(i)
+                                        Log.d("aaaaCVCVCV", MainActivity.posis.get(i).toString())
+                                        if((MainActivity.posis.get(i) != -1)){
+                                            val qSize = MainActivity.posis.get(i)
                                             arrr?.get(qSize)?.value = "****"
                                             arrr?.get(qSize)?.key = "****"
                                         }

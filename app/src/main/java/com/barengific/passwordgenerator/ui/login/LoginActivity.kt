@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
 //                        .show()
                     val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
                     startActivity(intent)
+                    finish()
 //                    Log.d("aaaaaaaa", "ineeeeeerrrr")
                 }
 
@@ -86,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
                         putExtra("fromLogin","fin")
                     }
                     startActivity(intent)
+                    finish()
                 }
 
                 override fun onAuthenticationFailed() {

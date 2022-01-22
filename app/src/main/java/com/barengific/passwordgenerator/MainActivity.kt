@@ -730,6 +730,8 @@ class MainActivity : AppCompatActivity() {
                     .build()
                 val wordDao = room.wordDao()
 
+                arrr = wordDao.getAll()
+
                 var btnHideAllStatus = false
 
                 Log.d("aaaaPOS", posis.toString())

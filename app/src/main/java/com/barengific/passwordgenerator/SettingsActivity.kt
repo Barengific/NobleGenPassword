@@ -213,12 +213,24 @@ class SettingsActivity : AppCompatActivity(),
         }
     }
 
+    //TODO
     class RSTFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            val newFragment = ConDialogFragment()
-            (activity as FragmentActivity).supportFragmentManager
+//            val newFragment = ConDialogFragment()
+//            (activity as FragmentActivity).supportFragmentManager
+//
+//
+//            newFragment.show((activity as FragmentActivity).supportFragmentManager, "missiles")
 
-            newFragment.show((activity as FragmentActivity).supportFragmentManager, "missiles")
+
+            val alert = this.context?.let { AlertDialog.Builder(it) }
+
+            alert?.setCancelable(false)
+
+            val dialog = alert?.create();
+            dialog?.setCanceledOnTouchOutside(false);
+            dialog?.show();
+
 
 
 //            val intent = Intent(this.context, CredentialsEnt::class.java).apply {
@@ -233,6 +245,7 @@ class SettingsActivity : AppCompatActivity(),
 
 class ConDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater;
@@ -246,6 +259,8 @@ class ConDialogFragment : DialogFragment() {
                         //TODO delete database entries
                         getDialog()?.show()
                     })
+                .setCancelable(false)
+
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
@@ -254,7 +269,10 @@ class ConDialogFragment : DialogFragment() {
                         }
                         startActivity(intent)
                     })
+            builder.setCancelable(false)
+
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+
     }
 }

@@ -88,5 +88,9 @@
     <string name="confirm">Confirm</string>
     <string name="action_donations">Donation</string>
     <string name="action_adfree">Ad Free Version</string>
+    <string name="nested_view">Nested View</string>
+    <string name="back_up">Back Up</string>
+    <string name="select_all">Select All</string>
+    <string name="select_none">Select None</string>
 
 </resources>

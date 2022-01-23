@@ -50,15 +50,14 @@ class Backup : AppCompatActivity(){
 //TODO remove pgen in recyclerview
 //remove copy and more image
 
-class CustomAdapter(private val dataSets: List<Word>) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapters(private val dataSets: List<Word>) :
+    RecyclerView.Adapter<CustomAdapters.ViewHolder>() {
 
     companion object {
         var position: Int = 0
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
-        View.OnCreateContextMenuListener {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var fileName: TextView
         val checkBox: CheckBox
         val textView1: TextView

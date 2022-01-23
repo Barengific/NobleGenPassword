@@ -53,7 +53,7 @@ class Backup : AppCompatActivity(){
         recyclerView.setLayoutManager(LinearLayoutManager(this))
 
         val rvSize = recyclerView.adapter?.itemCount
-        Log.d("aaaaaITEMCOun", rvSize.toString())
+//        Log.d("aaaaaITEMCOun", rvSize.toString())
         for(i in 0 until rvSize!!){
             val cb = recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
             cb?.isChecked = true
@@ -64,7 +64,16 @@ class Backup : AppCompatActivity(){
 
 //            recyclerView.findViewHolderForAdapterPosition(i).adapterPosition.
             Log.d("aaaaaSEL: $i", recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)?.isChecked.toString())
+
+            val bob =       recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(           R.id.textView4            )
+
+            Log.d("aaaaaSEL: $i", bob?.text.toString())
+
+
         }
+
+
+
 
 
 

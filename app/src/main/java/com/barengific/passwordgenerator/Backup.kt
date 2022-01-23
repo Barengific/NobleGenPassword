@@ -22,6 +22,8 @@ import net.sqlcipher.database.SupportFactory
 
 class Backup : AppCompatActivity(){
 
+    lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.backup_activity)
@@ -38,11 +40,11 @@ class Backup : AppCompatActivity(){
 
         //recycler initialise
         val arr = wordDao.getAll()
-        var adapter = CustomAdapter(arr)
-        MainActivity.recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-        MainActivity.recyclerView.setHasFixedSize(false)
-        MainActivity.recyclerView.setAdapter(adapter)
-        MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(this))
+        var adapter = CustomAdapters(arr)
+        recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+        recyclerView.setHasFixedSize(false)
+        recyclerView.setAdapter(adapter)
+        recyclerView.setLayoutManager(LinearLayoutManager(this))
 
     }
 }

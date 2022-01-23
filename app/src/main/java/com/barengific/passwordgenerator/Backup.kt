@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.barengific.passwordgenerator.Backup.Companion.checkList
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
 import net.sqlcipher.database.SQLiteDatabase
@@ -99,10 +100,27 @@ class CustomAdapters(private val dataSets: List<Word>) :
 
             override fun onClick(v: View?) {
 //                TODO("Not yet implemented")
-                Log.d("aa", "on checkbox")
+                Log.d("aaa1", "on checkbox")
+                Log.d("aaa2", viewHolder.checkBox.isSelected.toString())
+//                checkList.add(viewHolder.adapterPosition)
+
+                if(viewHolder.checkBox.isSelected){
+                    checkList.add(viewHolder.adapterPosition)
+                    Log.d("aaaWW", checkList.toString())
+
+                }
+                if(!viewHolder.checkBox.isSelected){
+                    checkList.remove(viewHolder.adapterPosition)
+                    Log.d("aaaQQ", checkList.toString())
+
+                }
+
+//                if (checkArray.get(i) !== v as CheckBox) // assuming v is the View param passed in
+//                    checkArray.get(i).setChecked(false)
             }
 
         })
+        viewHolder.checkBox
 
         viewHolder.checkBox.isSelected
         viewHolder.textView1.text = dataSets[position].wid.toString()

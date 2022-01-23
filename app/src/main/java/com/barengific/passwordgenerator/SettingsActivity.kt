@@ -220,7 +220,7 @@ class SettingsActivity : AppCompatActivity(),
                     putExtra("fromSettings","fin")
                 }
                 startActivity(intent)
-                                (activity as FragmentActivity).supportFragmentManager.popBackStack()
+                (activity as FragmentActivity).supportFragmentManager.popBackStack()
             })
             alert?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
                 val intent = Intent(this.context, SettingsActivity::class.java).apply {
@@ -238,38 +238,4 @@ class SettingsActivity : AppCompatActivity(),
     }
 
 
-}
-
-class ConDialogFragment : DialogFragment() {
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater;
-            builder.setView(inflater.inflate(R.layout.alertdialog_rst_confirm, null))
-                .setPositiveButton(R.string.confirm,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        val intent = Intent(this.context, CredentialsEnt::class.java).apply {
-                            putExtra("fromSettings","fin")
-                        }
-                        startActivity(intent)
-                        //TODO delete database entries
-                        getDialog()?.show()
-                    })
-                .setCancelable(false)
-
-                .setNegativeButton(R.string.cancel,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        getDialog()?.cancel()
-                        val intent = Intent(this.context, SettingsActivity::class.java).apply {
-                            putExtra("fromSettings","fin")
-                        }
-                        startActivity(intent)
-                    })
-            builder.setCancelable(false)
-
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
-
-    }
 }

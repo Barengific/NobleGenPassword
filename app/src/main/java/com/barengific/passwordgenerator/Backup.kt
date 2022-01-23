@@ -102,14 +102,15 @@ class CustomAdapters(private val dataSets: List<Word>) :
 //                TODO("Not yet implemented")
                 Log.d("aaa1", "on checkbox")
                 Log.d("aaa2", viewHolder.checkBox.isSelected.toString())
+                Log.d("aaa3", viewHolder.checkBox.isChecked.toString())
 //                checkList.add(viewHolder.adapterPosition)
 
-                if(viewHolder.checkBox.isSelected){
+                if(viewHolder.checkBox.isChecked){
                     checkList.add(viewHolder.adapterPosition)
                     Log.d("aaaWW", checkList.toString())
 
                 }
-                if(!viewHolder.checkBox.isSelected){
+                if(!viewHolder.checkBox.isChecked){
                     checkList.remove(viewHolder.adapterPosition)
                     Log.d("aaaQQ", checkList.toString())
 

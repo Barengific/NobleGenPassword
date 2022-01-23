@@ -50,7 +50,7 @@ class Backup : AppCompatActivity(){
 //TODO remove pgen in recyclerview
 //remove copy and more image
 
-class CustomAdapters(private val dataSet: List<Word>) :
+class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     companion object {
@@ -59,31 +59,14 @@ class CustomAdapters(private val dataSet: List<Word>) :
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
         View.OnCreateContextMenuListener {
-        var ivCopy: ImageView
         var fileName: TextView
-        var ivMore: ImageView
-
-        @SuppressLint("ResourceType")
-        override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-            MainActivity.pos = getPosition()
-            MainActivity.setPosi(getPosition())
-
-        }
-
         val textView1: TextView
-        val textView2: TextView
         val textView3: TextView
         val textView4: TextView
 
         init {
-            ivCopy = view.findViewById(R.id.ivCopy) as ImageView
             fileName = view.findViewById(R.id.textView4) as TextView
-            ivMore = view.findViewById(R.id.ivMore) as ImageView
-            view.setOnCreateContextMenuListener(this)
-
-            // Define click listener for the ViewHolder's View.
             textView1 = view.findViewById(R.id.textView1)
-            textView2 = view.findViewById(R.id.textView2)
             textView3 = view.findViewById(R.id.textView3)
             textView4 = view.findViewById(R.id.textView4)
         }
@@ -93,7 +76,7 @@ class CustomAdapters(private val dataSet: List<Word>) :
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.text_row_item, viewGroup, false)
+            .inflate(R.layout.text_row_item_backup, viewGroup, false)
 
         return ViewHolder(view)
     }

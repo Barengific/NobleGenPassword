@@ -233,12 +233,14 @@ class SettingsActivity : AppCompatActivity(),
                     putExtra("fromSettings","fin")
                 }
                 startActivity(intent)
+                finish()
             })
             alert?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
                 val intent = Intent(this.context, SettingsActivity::class.java).apply {
                     putExtra("fromSettings","fin")
                 }
                 startActivity(intent)
+                finish()
             }
             )
 

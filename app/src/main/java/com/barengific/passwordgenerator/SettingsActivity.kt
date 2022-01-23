@@ -226,14 +226,14 @@ class SettingsActivity : AppCompatActivity(),
                     putExtra("fromSettings","fin")
                 }
                 startActivity(intent)
-                finish()
+                                (activity as FragmentActivity).supportFragmentManager.popBackStack()
             })
             alert?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
                 val intent = Intent(this.context, SettingsActivity::class.java).apply {
                     putExtra("fromSettings","fin")
                 }
                 startActivity(intent)
-                finish()
+                (activity as FragmentActivity).supportFragmentManager.popBackStack()
             })
 
             val dialog = alert?.create();

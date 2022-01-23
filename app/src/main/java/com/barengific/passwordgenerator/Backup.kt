@@ -24,6 +24,10 @@ class Backup : AppCompatActivity(){
 
     lateinit var recyclerView: RecyclerView
 
+    companion object {
+        var checkList: MutableList<Int> = mutableListOf(-1)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.backup_activity)
@@ -60,14 +64,12 @@ class CustomAdapters(private val dataSets: List<Word>) :
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        var fileName: TextView
         val checkBox: CheckBox
         val textView1: TextView
         val textView3: TextView
         val textView4: TextView
 
         init {
-            fileName = view.findViewById(R.id.textView4) as TextView
             checkBox = view.findViewById(R.id.checkBox)
             textView1 = view.findViewById(R.id.textView1)
             textView3 = view.findViewById(R.id.textView3)

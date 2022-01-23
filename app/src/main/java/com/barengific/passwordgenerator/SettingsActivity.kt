@@ -226,6 +226,21 @@ class SettingsActivity : AppCompatActivity(),
             val alert = this.context?.let { AlertDialog.Builder(it) }
 
             alert?.setCancelable(false)
+            alert?.setTitle("Warning!")
+            alert?.setMessage("Are you sure you want to continue? All your saved passwords will be deleted!")
+            alert?.setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, id ->
+                val intent = Intent(this.context, CredentialsEnt::class.java).apply {
+                    putExtra("fromSettings","fin")
+                }
+                startActivity(intent)
+            })
+            alert?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
+                val intent = Intent(this.context, SettingsActivity::class.java).apply {
+                    putExtra("fromSettings","fin")
+                }
+                startActivity(intent)
+            }
+            )
 
             val dialog = alert?.create();
             dialog?.setCanceledOnTouchOutside(false);

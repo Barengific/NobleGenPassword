@@ -18,6 +18,7 @@ import androidx.room.Room
 import com.barengific.passwordgenerator.Backup.Companion.checkList
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
+import kotlinx.android.synthetic.main.text_row_item_backup.view.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
@@ -54,7 +55,14 @@ class Backup : AppCompatActivity(){
         val rvSize = recyclerView.adapter?.itemCount
         Log.d("aaaaaITEMCOun", rvSize.toString())
         for(i in 0 until rvSize!!){
-            recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)?.isChecked = true
+            val cb = recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
+            cb?.isChecked = true
+
+            recyclerView.adapter?.notifyDataSetChanged()
+            val bb = recyclerView.findViewHolderForAdapterPosition(0)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
+
+
+//            recyclerView.findViewHolderForAdapterPosition(i).adapterPosition.
             Log.d("aaaaaSEL: $i", recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)?.isChecked.toString())
         }
 

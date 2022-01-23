@@ -96,7 +96,8 @@ class CustomAdapters(private val dataSets: List<Word>) :
         viewHolder.checkBox.setOnClickListener(object : View.OnClickListener {
 
             override fun onClick(v: View?) {
-                TODO("Not yet implemented")
+//                TODO("Not yet implemented")
+                Log.d("aa", "on checkbox")
             }
 
         })

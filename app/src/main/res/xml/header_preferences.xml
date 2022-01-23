@@ -7,12 +7,6 @@
         app:title="@string/security_header" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.SettingsActivity$SyncFragment"
-        app:icon="@drawable/sync"
-        app:key="sync_header"
-        app:title="@string/sync_header" />
-
-    <Preference
         app:fragment="com.barengific.passwordgenerator.SettingsActivity$BackupFragment"
         app:icon="@drawable/ic_baseline_save_alt_24"
         app:key="backup_header"

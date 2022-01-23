@@ -51,6 +51,10 @@ class Backup : AppCompatActivity(){
         recyclerView.setAdapter(adapter)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
 
+        val rvSize = recyclerView.adapter?.itemCount
+
+        recyclerView.findViewHolderForAdapterPosition(1)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
+
     }
 }
 
@@ -62,6 +66,7 @@ class CustomAdapters(private val dataSets: List<Word>) :
 
     companion object {
         var position: Int = 0
+//        lateinit var checkBox: CheckBox
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){

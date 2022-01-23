@@ -130,7 +130,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
 //                                val wordDao = db?.wordDao()
 
                                 val wid: TextView? = viewHolder.textView1
-                                val pType: TextView? = viewHolder.textView2
                                 val key: TextView? = viewHolder.textView3
                                 val value: TextView? = viewHolder.textView4
 
@@ -236,7 +235,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
         })
 
         viewHolder.textView1.text = dataSet[position].wid.toString()
-        viewHolder.textView2.text = dataSet[position].pType.toString()
         viewHolder.textView3.text = dataSet[position].key.toString()
         viewHolder.textView4.text = dataSet[position].value.toString()
     }

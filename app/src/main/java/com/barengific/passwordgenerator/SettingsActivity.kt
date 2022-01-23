@@ -174,6 +174,12 @@ class SettingsActivity : AppCompatActivity(),
     class BackupFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.backup_preferences, rootKey)
+
+            val intent = Intent(this.context, Backup::class.java).apply {
+                putExtra("fromSettings","fin")
+            }
+            startActivity(intent)
+            (activity as FragmentActivity).supportFragmentManager.popBackStack()
         }
     }
 

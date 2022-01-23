@@ -101,18 +101,17 @@ class CustomAdapters(private val dataSets: List<Word>) :
             override fun onClick(v: View?) {
 //                TODO("Not yet implemented")
                 Log.d("aaa1", "on checkbox")
-                Log.d("aaa2", viewHolder.checkBox.isSelected.toString())
-                Log.d("aaa3", viewHolder.checkBox.isChecked.toString())
+//                Log.d("aaa3", viewHolder.checkBox.isChecked.toString())
 //                checkList.add(viewHolder.adapterPosition)
 
                 if(viewHolder.checkBox.isChecked){
                     checkList.add(viewHolder.adapterPosition)
-                    Log.d("aaaWW", checkList.toString())
+//                    Log.d("aaaWW", checkList.toString())
 
                 }
                 if(!viewHolder.checkBox.isChecked){
                     checkList.remove(viewHolder.adapterPosition)
-                    Log.d("aaaQQ", checkList.toString())
+//                    Log.d("aaaQQ", checkList.toString())
 
                 }
 
@@ -121,9 +120,6 @@ class CustomAdapters(private val dataSets: List<Word>) :
             }
 
         })
-        viewHolder.checkBox
-
-        viewHolder.checkBox.isSelected
         viewHolder.textView1.text = dataSets[position].wid.toString()
         viewHolder.textView3.text = dataSets[position].key.toString()
         viewHolder.textView4.text = dataSets[position].value.toString()

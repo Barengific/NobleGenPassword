@@ -7,7 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
+import android.widget.CheckBox
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
@@ -50,7 +50,7 @@ class Backup : AppCompatActivity(){
 //TODO remove pgen in recyclerview
 //remove copy and more image
 
-class CustomAdapter(private val dataSet: List<Word>) :
+class CustomAdapter(private val dataSets: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     companion object {
@@ -60,12 +60,14 @@ class CustomAdapter(private val dataSet: List<Word>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
         View.OnCreateContextMenuListener {
         var fileName: TextView
+        val checkBox: CheckBox
         val textView1: TextView
         val textView3: TextView
         val textView4: TextView
 
         init {
             fileName = view.findViewById(R.id.textView4) as TextView
+            checkBox = view.findViewById(R.id.checkBox)
             textView1 = view.findViewById(R.id.textView1)
             textView3 = view.findViewById(R.id.textView3)
             textView4 = view.findViewById(R.id.textView4)
@@ -88,6 +90,14 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 setPosition(viewHolder.adapterPosition)
                 return false
             }
+        })
+
+        viewHolder.checkBox.setOnClickListener(object : View.OnClickListener {
+
+            override fun onClick(v: View?) {
+                TODO("Not yet implemented")
+            }
+
         })
 
         viewHolder.ivMore.setOnClickListener(object : View.OnClickListener {
@@ -234,9 +244,9 @@ class CustomAdapter(private val dataSet: List<Word>) :
             }
         })
 
-        viewHolder.textView1.text = dataSet[position].wid.toString()
-        viewHolder.textView3.text = dataSet[position].key.toString()
-        viewHolder.textView4.text = dataSet[position].value.toString()
+        viewHolder.textView1.text = dataSets[position].wid.toString()
+        viewHolder.textView3.text = dataSets[position].key.toString()
+        viewHolder.textView4.text = dataSets[position].value.toString()
     }
 
     override fun onViewRecycled(holder: ViewHolder) {
@@ -244,7 +254,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
         super.onViewRecycled(holder)
     }
 
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount() = dataSets.size
 
     //
     private var position: Int = 0

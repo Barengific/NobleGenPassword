@@ -216,13 +216,6 @@ class SettingsActivity : AppCompatActivity(),
     //TODO
     class RSTFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-//            val newFragment = ConDialogFragment()
-//            (activity as FragmentActivity).supportFragmentManager
-//
-//
-//            newFragment.show((activity as FragmentActivity).supportFragmentManager, "missiles")
-
-
             val alert = this.context?.let { AlertDialog.Builder(it) }
 
             alert?.setCancelable(false)
@@ -241,19 +234,12 @@ class SettingsActivity : AppCompatActivity(),
                 }
                 startActivity(intent)
                 finish()
-            }
-            )
+            })
 
             val dialog = alert?.create();
             dialog?.setCanceledOnTouchOutside(false);
             dialog?.show();
 
-
-
-//            val intent = Intent(this.context, CredentialsEnt::class.java).apply {
-//                putExtra("fromSettings","fin")
-//            }
-//            startActivity(intent)
         }
     }
 

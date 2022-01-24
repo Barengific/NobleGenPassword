@@ -29,11 +29,8 @@ import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
+import java.io.*
 
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.ObjectInputStream
 import java.time.Instant
 import java.util.*
 
@@ -110,7 +107,7 @@ class Backup : AppCompatActivity() {
                 "bar22_new_file.txt"            )
             f.appendText("test ${Calendar.getInstance().getTime()}\n")
             f.readLines().forEach { line ->
-                Log.d("aaaaaaLOG22", line)
+                Log.d("aaaaaaLOG22", line)}
 
                 if (ActivityCompat.checkSelfPermission(
                         this,
@@ -126,8 +123,6 @@ class Backup : AppCompatActivity() {
                     }
                     f.readLines().forEach { line -> Log.d("aaaaaaLOG", line) }
                 }
-//TODO
-                Log.d("aaaaaaBACKq", "a")
                 Log.d(
                     "aaaaaaBACKq", File(
                         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -154,17 +149,28 @@ class Backup : AppCompatActivity() {
             }
             val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
             encryptedOutputStream.write(qqq)
+            encryptedOutputStream.flush()
 
             // read the encrypted file
             val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
 
             Log.d("awawawawa1", encryptedInputStream.toString())
-            Log.d("awawawawa2", encryptedInputStream.read().toString())
-            }
+//            Log.d("awawawawa2", encryptedInputStream.read().toString())
+            encryptedOutputStream.flush()
 
+            save(this, "bar_pop.txt",
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString(),
+            "yeahMadeIT")
+
+            Log.d("aaaaaYYY", get(this, "bar_pop.txt",
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    .toString()).toString())
 
         }
+
+
     }
+
 
     fun save(context: Context, name: String, dir: String, source: Any) : Boolean {
         var realName = name
@@ -210,37 +216,60 @@ class Backup : AppCompatActivity() {
         return true
     }
 
-    fun get(context: Context, dir: String) : Array<Any> {
-        val directory = File(context.filesDir.path + dir)
+    fun get(context: Context, name: String, dir: String) : String {
 
-        if (directory.exists() && directory.isDirectory) {
-            val files = directory.listFiles()
-            val masterKeyAlias = MasterKey.Builder(
-                context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build()
-            val list = mutableListOf<Any>()
+        val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
 
-            files?.forEach {
-                ArchipelagoError.d(it.path)
-                val encryptedFile = EncryptedFile.Builder(
-                    context,
-                    it,
-                    masterKeyAlias,
-                    EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-                ).build()
+        val fii = File(dir, name)
 
-                val encryptedInputStream = encryptedFile.openFileInput()
-                val objectInputStream = ObjectInputStream(encryptedInputStream)
-                val sourceObject = objectInputStream.readObject()
+        val encryptedFile = EncryptedFile.Builder(
+            context,
+            fii,
+            masterKey,
+            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+        ).build()
 
-                list.add(sourceObject)
-            }
+        val encryptedInputStream = encryptedFile.openFileInput()
+        val objectInputStream = ObjectInputStream(encryptedInputStream)
+        val sourceObject = objectInputStream.readObject()
 
-            return list.toTypedArray()
-        } else {
-            return arrayOf()
-        }
+        Log.d("aaaaAaAaA", sourceObject.toString())
+
+
+//        val directory = File(context.filesDir.path + dir)
+//
+//        if (directory.exists() && directory.isDirectory) {
+//            val files = directory.listFiles()
+//            val masterKeyAlias = MasterKey.Builder(
+//                context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+//                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+//                .build()
+//            val list = mutableListOf<Any>()
+//
+//            files?.forEach {
+//                //ArchipelagoError.d(it.path)
+//                val encryptedFile = EncryptedFile.Builder(
+//                    context,
+//                    it,
+//                    masterKeyAlias,
+//                    EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+//                ).build()
+//
+//                val encryptedInputStream = encryptedFile.openFileInput()
+//                val objectInputStream = ObjectInputStream(encryptedInputStream)
+//                val sourceObject = objectInputStream.readObject()
+//
+//                list.add(sourceObject)
+//            }
+//
+//            return list.toTypedArray()
+//        } else {
+//            return arrayOf()
+//        }
+
+        return sourceObject.toString()
     }
 
 }

@@ -24,6 +24,10 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.backup_activity.btnRestore
 import kotlinx.android.synthetic.main.restore_activity.*
 import com.google.gson.JsonElement
+import com.google.gson.reflect.TypeToken
+
+
+
 
 
 
@@ -64,16 +68,20 @@ class Restore : AppCompatActivity() {
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             ))
 
-
             val gson = Gson()
 
             // gson string to object
 //            val toWord = read(this, filename,
 //                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
-            val toWord: Word = gson.fromJson(read(this, filename,
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), Word::class.java)
+            val ww = read(this, filename,
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
 
-            Log.d("aaaaaZZZ", toWord.toString())
+            //val toWord: Word = gson.fromJson( ww, Word::class.java)
+            //val toWords: List<Word> = listOf(gson.fromJson( ww, Word::class.java))
+
+            val enums: Array<Word> = gson.fromJson(ww,Array<Word>::class.java)
+
+            Log.d("aaaaaZZZ", enums.toString())
 
         }
 

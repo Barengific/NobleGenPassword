@@ -158,12 +158,13 @@ class Backup : AppCompatActivity() {
 //            Log.d("awawawawa2", encryptedInputStream.read().toString())
             encryptedOutputStream.flush()
 
-            val time = Calendar.getInstance().getTime()
-            save(this, "noblest_" + time + ".txt",
+            val time = System.currentTimeMillis()
+
+            save(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "yeahMadeIT")
 
-            Log.d("aaaaaYYY", get(this, "noblest_" + time + ".txt",
+            Log.d("aaaaaYYY", get(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     ))
 

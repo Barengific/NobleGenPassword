@@ -18,6 +18,17 @@ import com.barengific.passwordgenerator.database.Word
 import kotlinx.android.synthetic.main.backup_activity.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import androidx.security.crypto.EncryptedFile
+
+import androidx.security.crypto.MasterKeys
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import androidx.security.crypto.EncryptedFile
+
+
+
+
 
 class Backup : AppCompatActivity(){
 
@@ -64,6 +75,24 @@ class Backup : AppCompatActivity(){
         btnBackups.setOnClickListener{
             //TODO if select all is true, then save all data
             //if select all is false, then save from checkList
+
+            val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
+            val file = File(this.getFilesDir(), "secret_data")
+            val encryptedFile = EncryptedFile.Builder(
+                file,
+                this,
+                masterKeyAlias,
+                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+            ).build()
+
+            Use Builder(Context, File, MasterKey, EncryptedFile.FileEncryptionScheme)
+
+            // write to the encrypted file
+            val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
+
+            // read the encrypted file
+            val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
         }
 
 

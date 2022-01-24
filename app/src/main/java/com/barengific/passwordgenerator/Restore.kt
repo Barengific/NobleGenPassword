@@ -1,21 +1,15 @@
 package com.barengific.passwordgenerator
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.barengific.passwordgenerator.Backup.Companion.checkList
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
 import kotlinx.android.synthetic.main.backup_activity.*
@@ -63,7 +57,7 @@ class Restore : AppCompatActivity() {
             Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
         }
 
-        btnSelectNone.setOnClickListener {
+        btnRestore.setOnClickListener {
             CustomAdapters.isSelected = false
             recyclerView.adapter?.notifyDataSetChanged()
             Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())
@@ -106,15 +100,10 @@ class Restore : AppCompatActivity() {
                 Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
             }
 
-//            save(this, "nobles_$time.txt",
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-//            "yeahMadeIT")
-//            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-//                    ))
+            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    ))
 
-
-            //confirm file save with toast with location of saved file
         }
 
 

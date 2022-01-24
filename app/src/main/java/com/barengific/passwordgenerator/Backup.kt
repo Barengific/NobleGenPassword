@@ -103,21 +103,9 @@ class Backup : AppCompatActivity() {
             Log.d("aaaaaaffff", file.readText() )
 
 
-
-
-
-
-//            Log.d("aaaafirrrr",             File(
-//                this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-//                    .toString() + "/np_" + Calendar.getInstance().getTime() + ".npb"
-//            ))
-//
-
-
             val f = File(
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                "bar22_new_file.txt"
-            )
+                "bar22_new_file.txt"            )
             f.appendText("test ${Calendar.getInstance().getTime()}\n")
             f.readLines().forEach { line ->
                 Log.d("aaaaaaLOG22", line)
@@ -145,25 +133,39 @@ class Backup : AppCompatActivity() {
                     ).readText()
                 )
 
-//            val encryptedFile = EncryptedFile.Builder(
-//                this,
-//                file,
-//                masterKey,
-//                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-//            ).build()
-//
-//            // write to the encrypted file
-//            val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
-//
-//            // read the encrypted file
-//            val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
-//
-//            Log.d("awawawawa", encryptedInputStream.toString())
+
+            val fii = File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                    "bar_CAP.txt"            )
+
+            val encryptedFile = EncryptedFile.Builder(
+                this,
+                fii,
+                masterKey,
+                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+            ).build()
+
+            // write to the encrypted file
+            val qqq = "hellooo".toByteArray()
+            if(fii.exists()  ){
+                fii.delete()
+            }
+            val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
+            encryptedOutputStream.write(qqq)
+
+            // read the encrypted file
+            val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
+
+            Log.d("awawawawa1", encryptedInputStream.toString())
+            Log.d("awawawawa2", encryptedInputStream.read().toString())
             }
 
 
         }
     }
+
+    
+
 }
 
 //TODO remove pgen in recyclerview

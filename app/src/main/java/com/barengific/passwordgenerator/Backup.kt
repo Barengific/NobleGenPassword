@@ -71,7 +71,26 @@ class Backup : AppCompatActivity() {
         btnBackups.setOnClickListener {
             //TODO if select all is true, then save all data
             //if select all is false, then save from checkList
+
             val time = System.currentTimeMillis()
+
+            if(CustomAdapters.isSelected){
+                //save all
+                save(this, "noblest_$time.txt",
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                    arr)
+            }else{
+                //save checkList
+//                var savedList: MutableList<Word>
+
+                val savedList = mutableListOf<Word>()
+                for (i in 0 until checkList.size){
+                    savedList.add(arr[checkList[i]])
+                }
+                Log.d("aaaaainsavv", savedList.toString())
+            }
+
+
 
             save(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
@@ -80,6 +99,7 @@ class Backup : AppCompatActivity() {
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     ))
 
+            //confirm file save with toast with location of saved file
         }
 
 
@@ -120,10 +140,9 @@ class Backup : AppCompatActivity() {
 
         val encryptedOutputStream = encryptedFile.openFileOutput()
         val objectOutputStream = ObjectOutputStream(encryptedOutputStream)
-        objectOutputStream.writeObject(source)
 
-        // Added this
-        // Close streams
+        objectOutputStream.writeObject(source.toString())
+
         objectOutputStream.close()
         encryptedOutputStream.flush()
         encryptedOutputStream.close()

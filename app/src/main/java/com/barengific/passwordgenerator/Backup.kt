@@ -1,12 +1,7 @@
 package com.barengific.passwordgenerator
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.content.Intent.ACTION_OPEN_DOCUMENT
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -16,8 +11,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -30,9 +23,6 @@ import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 import java.io.*
-
-import java.time.Instant
-import java.util.*
 
 
 class Backup : AppCompatActivity() {
@@ -81,90 +71,12 @@ class Backup : AppCompatActivity() {
         btnBackups.setOnClickListener {
             //TODO if select all is true, then save all data
             //if select all is false, then save from checkList
-
-            val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build()
-
-            val downloadFolder = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-            //val file = File(downloadFolder?.path, "secret_datas.txt")
-
-            Calendar.getInstance().getTime();
-            File(
-                this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-                    .toString() + "/np_" + Calendar.getInstance().getTime() + ".npb"
-            ).writeText("qAwerd")
-
-
-            val downloadFolders = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-            val file = File(downloadFolders, "secret_datas.txt")
-            file.writeText("tttttttt")
-            Log.d("aaaaaaffff", file.readText() )
-
-
-            val f = File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                "bar22_new_file.txt"            )
-            f.appendText("test ${Calendar.getInstance().getTime()}\n")
-            f.readLines().forEach { line ->
-                Log.d("aaaaaaLOG22", line)}
-
-                if (ActivityCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    val f = File(
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                        "bar_new_file.txt"
-                    )
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        f.appendText("test ${Instant.now().toEpochMilli()}\n")
-                    }
-                    f.readLines().forEach { line -> Log.d("aaaaaaLOG", line) }
-                }
-                Log.d(
-                    "aaaaaaBACKq", File(
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                            .toString() + "/barzzzz.txt"
-                    ).readText()
-                )
-
-
-            val fii = File(
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                    "bar_CAP.txt"            )
-
-            val encryptedFile = EncryptedFile.Builder(
-                this,
-                fii,
-                masterKey,
-                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-            ).build()
-
-            // write to the encrypted file
-            val qqq = "hellooo".toByteArray()
-            if(fii.exists()  ){
-                fii.delete()
-            }
-            val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
-            encryptedOutputStream.write(qqq)
-            encryptedOutputStream.flush()
-
-            // read the encrypted file
-            val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
-
-            Log.d("awawawawa1", encryptedInputStream.toString())
-//            Log.d("awawawawa2", encryptedInputStream.read().toString())
-            encryptedOutputStream.flush()
-
             val time = System.currentTimeMillis()
 
             save(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "yeahMadeIT")
-
-            Log.d("aaaaaYYY", get(this, "noblest_$time.txt",
+            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     ))
 
@@ -219,7 +131,7 @@ class Backup : AppCompatActivity() {
         return true
     }
 
-    fun get(context: Context, name: String, dir: File) : String {
+    fun read(context: Context, name: String, dir: File) : String {
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)

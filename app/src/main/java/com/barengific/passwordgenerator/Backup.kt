@@ -23,6 +23,10 @@ import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 import java.io.*
+import com.google.gson.Gson
+
+
+
 
 
 class Backup : AppCompatActivity() {
@@ -74,23 +78,28 @@ class Backup : AppCompatActivity() {
 
             val time = System.currentTimeMillis()
 
-            if(CustomAdapters.isSelected){
+            if(CustomAdapters.isSelected) {
                 //save all
-                save(this, "noblest_$time.txt",
+                val gson = Gson()
+                val arrJ = gson.toJson(arr)
+                Log.d("aaaaaJSON", arrJ)
+
+                save(
+                    this, "noblest_$time.txt",
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                    arr)
+                    arrJ)
             }else{
                 //save checkList
 //                var savedList: MutableList<Word>
 
                 val savedList = mutableListOf<Word>()
                 for (i in 0 until checkList.size){
-                    savedList.add(arr[checkList[i]])
+                    val cli = checkList[i]
+                    val ari = arr[cli]
+                    savedList.add(ari)
                 }
                 Log.d("aaaaainsavv", savedList.toString())
             }
-
-
 
             save(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
@@ -98,6 +107,7 @@ class Backup : AppCompatActivity() {
             Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     ))
+
 
             //confirm file save with toast with location of saved file
         }
@@ -169,7 +179,7 @@ class Backup : AppCompatActivity() {
         val objectInputStream = ObjectInputStream(encryptedInputStream)
         val sourceObject = objectInputStream.readObject()
 
-        Log.d("aaaaAaAaA", sourceObject.toString())
+//        Log.d("aaaaAaAaA", sourceObject.toString())
 
 //        val directory = File(context.filesDir.path + dir)
 //

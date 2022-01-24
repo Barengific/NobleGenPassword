@@ -89,7 +89,7 @@ class Backup : AppCompatActivity() {
                     arrJ)
                 Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
 
-            }else if (!CustomAdapters.isSelected){
+            }else if (!CustomAdapters.isSelected and (checkList.size <= 1)){
                 Toast.makeText(applicationContext, "Please Select At Least One !", Toast.LENGTH_LONG).show()
             }else {
                 //save checkList

@@ -55,52 +55,6 @@ class Restore : AppCompatActivity() {
             ))
         }
 
-
-    }
-
-
-    fun save(context: Context, name: String, dir: File, source: Any) : Boolean {
-        var realName = name
-        val masterKeyAlias = MasterKey.Builder(
-            context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        var file = File(dir, realName)
-        //var file = File(context.filesDir.path + dir, realName)
-
-        // Check if file doesn't yet exist and change filename if necessary
-        var changes: Boolean
-        do {
-            changes = false
-            if (file.exists()) {
-                realName += ".1"
-                file = File(context.filesDir.path + dir, realName)
-                changes = true
-            }
-        } while (changes)
-
-        // Create missing directories
-        if (!file.parentFile!!.exists()) {
-            file.parentFile!!.mkdirs()
-        }
-
-        val encryptedFile = EncryptedFile.Builder(
-            context,
-            file,
-            masterKeyAlias,
-            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-        ).build()
-
-        val encryptedOutputStream = encryptedFile.openFileOutput()
-        val objectOutputStream = ObjectOutputStream(encryptedOutputStream)
-
-        objectOutputStream.writeObject(source.toString())
-
-        objectOutputStream.close()
-        encryptedOutputStream.flush()
-        encryptedOutputStream.close()
-
-        return true
     }
 
     fun read(context: Context, name: String, dir: File) : String {

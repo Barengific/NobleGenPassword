@@ -19,12 +19,13 @@ import kotlinx.android.synthetic.main.backup_activity.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
+import androidx.security.crypto.MasterKey
 
 import androidx.security.crypto.MasterKeys
+import androidx.security.crypto.MasterKeys.getOrCreate
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import androidx.security.crypto.EncryptedFile
 
 
 
@@ -41,7 +42,6 @@ class Backup : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.backup_activity)
-
 
         //db initialise
         val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())//TODO change pass phrase
@@ -77,17 +77,18 @@ class Backup : AppCompatActivity(){
             //if select all is false, then save from checkList
 
             val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+            val masterKeyAliasS = MasterKey. .getOrCreate(MasterKey.AES256_GCM_SPEC)
 
             val file = File(this.getFilesDir(), "secret_data")
             val encryptedFile = EncryptedFile.Builder(
-                file,
                 this,
+                file,
                 masterKeyAlias,
                 EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
             ).build()
 
             Use Builder(Context, File, MasterKey, EncryptedFile.FileEncryptionScheme)
-
+            //TODO
             // write to the encrypted file
             val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -88,7 +89,9 @@ class Backup : AppCompatActivity() {
                     this, "noblest_$time.txt",
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                     arrJ)
-            }else{
+            }else if (!CustomAdapters.isSelected){
+                Toast.makeText(applicationContext, "Please Select At Least One !", Toast.LENGTH_LONG).show()
+            }else {
                 //save checkList
 //                var savedList: MutableList<Word>
 

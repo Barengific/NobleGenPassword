@@ -17,10 +17,13 @@ import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
+import com.barengific.passwordgenerator.databinding.ActivityMainBinding
+import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
 import java.io.*
 import com.google.gson.Gson
 
 class Restore : AppCompatActivity() {
+    private lateinit var binding: RestoreActivityBinding
 
     lateinit var recyclerView: RecyclerView
 
@@ -32,6 +35,9 @@ class Restore : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.restore_activity)
 
+        binding = RestoreActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         //db initialise
         val passphrase: ByteArray =
             SQLiteDatabase.getBytes("bob".toCharArray())//TODO change pass phrase
@@ -42,7 +48,6 @@ class Restore : AppCompatActivity() {
                 .allowMainThreadQueries()
                 .build()
         val wordDao = room.wordDao()
-
 
         btnRestore.setOnClickListener {
             val filename = "a"

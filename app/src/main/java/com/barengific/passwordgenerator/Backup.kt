@@ -159,12 +159,12 @@ class Backup : AppCompatActivity() {
             encryptedOutputStream.flush()
 
             save(this, "bar_pop.txt",
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString(),
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "yeahMadeIT")
 
             Log.d("aaaaaYYY", get(this, "bar_pop.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    .toString()).toString())
+                    ))
 
         }
 
@@ -172,13 +172,14 @@ class Backup : AppCompatActivity() {
     }
 
 
-    fun save(context: Context, name: String, dir: String, source: Any) : Boolean {
+    fun save(context: Context, name: String, dir: File, source: Any) : Boolean {
         var realName = name
         val masterKeyAlias = MasterKey.Builder(
             context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
             .build()
-        var file = File(context.filesDir.path + dir, realName)
+        var file = File(dir, realName)
+        //var file = File(context.filesDir.path + dir, realName)
 
         // Check if file doesn't yet exist and change filename if necessary
         var changes: Boolean
@@ -216,7 +217,7 @@ class Backup : AppCompatActivity() {
         return true
     }
 
-    fun get(context: Context, name: String, dir: String) : String {
+    fun get(context: Context, name: String, dir: File) : String {
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -236,7 +237,6 @@ class Backup : AppCompatActivity() {
         val sourceObject = objectInputStream.readObject()
 
         Log.d("aaaaAaAaA", sourceObject.toString())
-
 
 //        val directory = File(context.filesDir.path + dir)
 //

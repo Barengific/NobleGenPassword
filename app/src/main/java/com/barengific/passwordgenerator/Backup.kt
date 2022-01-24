@@ -1,6 +1,11 @@
 package com.barengific.passwordgenerator
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.Intent.ACTION_OPEN_DOCUMENT
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -10,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,17 +29,14 @@ import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 
-import androidx.security.crypto.MasterKeys
-import androidx.security.crypto.MasterKeys.getOrCreate
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.time.Instant
+import java.util.*
 
 
-
-
-
-class Backup : AppCompatActivity(){
+class Backup : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
 
@@ -46,12 +49,14 @@ class Backup : AppCompatActivity(){
         setContentView(R.layout.backup_activity)
 
         //db initialise
-        val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())//TODO change pass phrase
+        val passphrase: ByteArray =
+            SQLiteDatabase.getBytes("bob".toCharArray())//TODO change pass phrase
         val factory = SupportFactory(passphrase)
-        val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
-            .openHelperFactory(factory)
-            .allowMainThreadQueries()
-            .build()
+        val room =
+            Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
+                .openHelperFactory(factory)
+                .allowMainThreadQueries()
+                .build()
         val wordDao = room.wordDao()
 
         //recycler initialise
@@ -68,13 +73,13 @@ class Backup : AppCompatActivity(){
             Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
         }
 
-        btnSelectNone.setOnClickListener{
+        btnSelectNone.setOnClickListener {
             CustomAdapters.isSelected = false
             recyclerView.adapter?.notifyDataSetChanged()
             Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())
         }
 
-        btnBackups.setOnClickListener{
+        btnBackups.setOnClickListener {
             //TODO if select all is true, then save all data
             //if select all is false, then save from checkList
 
@@ -83,27 +88,81 @@ class Backup : AppCompatActivity(){
                 .build()
 
             val downloadFolder = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-            val file = File(downloadFolder?.path, "secret_data.txt")
-            val encryptedFile = EncryptedFile.Builder(
-                this,
-                file,
-                masterKey,
-                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-            ).build()
+            //val file = File(downloadFolder?.path, "secret_datas.txt")
 
-            // write to the encrypted file
-            val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
+            Calendar.getInstance().getTime();
+            File(
+                this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+                    .toString() + "/np_" + Calendar.getInstance().getTime() + ".npb"
+            ).writeText("qAwerd")
 
-            // read the encrypted file
-            val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
 
-            Log.d("awawawawa", encryptedInputStream.toString())
+            val downloadFolders = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            val file = File(downloadFolders, "secret_datas.txt")
+            file.writeText("tttttttt")
+            Log.d("aaaaaaffff", file.readText() )
+
+
+
+
+
+
+//            Log.d("aaaafirrrr",             File(
+//                this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+//                    .toString() + "/np_" + Calendar.getInstance().getTime() + ".npb"
+//            ))
+//
+
+
+            val f = File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                "bar22_new_file.txt"
+            )
+            f.appendText("test ${Calendar.getInstance().getTime()}\n")
+            f.readLines().forEach { line ->
+                Log.d("aaaaaaLOG22", line)
+
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    val f = File(
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                        "bar_new_file.txt"
+                    )
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        f.appendText("test ${Instant.now().toEpochMilli()}\n")
+                    }
+                    f.readLines().forEach { line -> Log.d("aaaaaaLOG", line) }
+                }
+//TODO
+                Log.d("aaaaaaBACKq", "a")
+                Log.d(
+                    "aaaaaaBACKq", File(
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                            .toString() + "/barzzzz.txt"
+                    ).readText()
+                )
+
+//            val encryptedFile = EncryptedFile.Builder(
+//                this,
+//                file,
+//                masterKey,
+//                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+//            ).build()
+//
+//            // write to the encrypted file
+//            val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
+//
+//            // read the encrypted file
+//            val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
+//
+//            Log.d("awawawawa", encryptedInputStream.toString())
+            }
+
+
         }
-
-
-
-
-
     }
 }
 

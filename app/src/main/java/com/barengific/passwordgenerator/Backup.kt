@@ -50,26 +50,27 @@ class Backup : AppCompatActivity(){
         recyclerView.setLayoutManager(LinearLayoutManager(this))
 
         btnSelectAll.setOnClickListener {
-            val rvSize = recyclerView.adapter?.itemCount
-//        Log.d("aaaaaITEMCOun", rvSize.toString())
-            for(i in 0 until rvSize!!){
-                val cb = recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
-                cb?.isChecked = true
-
-                recyclerView.adapter?.notifyDataSetChanged()
-                val bb = recyclerView.findViewHolderForAdapterPosition(0)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
+            CustomAdapters.isSelected = true
+            recyclerView.adapter?.notifyDataSetChanged()
+            Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
 
 
-//            recyclerView.findViewHolderForAdapterPosition(i).adapterPosition.
-                Log.d("aaaaaSEL: $i", recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)?.isChecked.toString())
-
-                val bob =       recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(           R.id.textView4            )
-
-                Log.d("aaaaaSEL: $i", bob?.text.toString())
-
-
-            }
-
+//            val rvSize = recyclerView.adapter?.itemCount
+////        Log.d("aaaaaITEMCOun", rvSize.toString())
+//            for(i in 0 until rvSize!!){
+//                val cb = recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
+//                cb?.isChecked = true
+//
+//                recyclerView.adapter?.notifyDataSetChanged()
+//                val bb = recyclerView.findViewHolderForAdapterPosition(0)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
+//
+////            recyclerView.findViewHolderForAdapterPosition(i).adapterPosition.
+//                Log.d("aaaaaSEL: $i", recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)?.isChecked.toString())
+//
+//                val bob =       recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(           R.id.textView4            )
+//
+//                Log.d("aaaaaSEL: $i", bob?.text.toString())
+//            }
         }
 
 
@@ -93,6 +94,9 @@ class CustomAdapters(private val dataSets: List<Word>) :
         var position: Int = 0
 //        lateinit var checkBox: CheckBox
         var isSelected: Boolean = false
+        fun selectAll() {
+            isSelected = true
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -110,7 +114,7 @@ class CustomAdapters(private val dataSets: List<Word>) :
 
     }
 
-    fun selectAll() {
+    fun selectAllT() {
         isSelected = true
         notifyDataSetChanged()
     }
@@ -137,6 +141,8 @@ class CustomAdapters(private val dataSets: List<Word>) :
                 return false
             }
         })
+
+        viewHolder.checkBox.isChecked = isSelected
 
         viewHolder.checkBox.setOnClickListener(object : View.OnClickListener {
 

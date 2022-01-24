@@ -83,14 +83,14 @@ class Backup : AppCompatActivity(){
                 .build()
 
             val downloadFolder = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-            val file = File(downloadFolder, "secret_data")
+            val file = File(downloadFolder?.path, "secret_data.txt")
             val encryptedFile = EncryptedFile.Builder(
                 this,
                 file,
                 masterKey,
                 EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
             ).build()
-//TODO
+
             // write to the encrypted file
             val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
 

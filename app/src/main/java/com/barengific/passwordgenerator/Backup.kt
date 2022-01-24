@@ -61,6 +61,11 @@ class Backup : AppCompatActivity(){
             Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())
         }
 
+        btnBackups.setOnClickListener{
+            //TODO if select all is true, then save all data
+            //if select all is false, then save from checkList
+        }
+
 
 
 

@@ -2,6 +2,7 @@ package com.barengific.passwordgenerator
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_OPEN_DOCUMENT
 import android.content.pm.PackageManager
@@ -32,6 +33,7 @@ import androidx.security.crypto.MasterKey
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.ObjectInputStream
 import java.time.Instant
 import java.util.*
 
@@ -206,6 +208,39 @@ class Backup : AppCompatActivity() {
         encryptedOutputStream.close()
 
         return true
+    }
+
+    fun get(context: Context, dir: String) : Array<Any> {
+        val directory = File(context.filesDir.path + dir)
+
+        if (directory.exists() && directory.isDirectory) {
+            val files = directory.listFiles()
+            val masterKeyAlias = MasterKey.Builder(
+                context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+            val list = mutableListOf<Any>()
+
+            files?.forEach {
+                ArchipelagoError.d(it.path)
+                val encryptedFile = EncryptedFile.Builder(
+                    context,
+                    it,
+                    masterKeyAlias,
+                    EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
+                ).build()
+
+                val encryptedInputStream = encryptedFile.openFileInput()
+                val objectInputStream = ObjectInputStream(encryptedInputStream)
+                val sourceObject = objectInputStream.readObject()
+
+                list.add(sourceObject)
+            }
+
+            return list.toTypedArray()
+        } else {
+            return arrayOf()
+        }
     }
 
 }

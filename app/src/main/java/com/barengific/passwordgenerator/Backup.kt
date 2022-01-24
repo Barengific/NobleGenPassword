@@ -67,7 +67,7 @@ class Backup : AppCompatActivity() {
             Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
         }
 
-        btnSelectNone.setOnClickListener {
+        btnRestore.setOnClickListener {
             CustomAdapters.isSelected = false
             recyclerView.adapter?.notifyDataSetChanged()
             Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())

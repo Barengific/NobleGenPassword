@@ -96,10 +96,12 @@ class Backup : AppCompatActivity() {
                 for (i in 0 until checkList.size){
                     val cli = checkList[i]
                     Log.d("aaaaacli", cli.toString())
-                    val ari = arr[cli]
-                    Log.d("aaaaaari", ari.toString())
+                    if(cli != -1){
+                        val ari = arr[cli]
+                        Log.d("aaaaaari", ari.toString())
+                        savedList.add(ari)
+                    }
 
-                    savedList.add(ari)
                 }
                 Log.d("aaaaainsavv", savedList.toString())
             }

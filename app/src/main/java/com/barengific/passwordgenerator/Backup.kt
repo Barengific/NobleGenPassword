@@ -77,23 +77,26 @@ class Backup : AppCompatActivity(){
             //if select all is false, then save from checkList
 
             val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-            val masterKeyAliasS = MasterKey. .getOrCreate(MasterKey.AES256_GCM_SPEC)
+            val masterKeyAliasS: MasterKey.Builder = MasterKey.Builder(this)
+            val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
 
             val file = File(this.getFilesDir(), "secret_data")
             val encryptedFile = EncryptedFile.Builder(
                 this,
                 file,
-                masterKeyAlias,
+                masterKey,
                 EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
             ).build()
 
-            Use Builder(Context, File, MasterKey, EncryptedFile.FileEncryptionScheme)
-            //TODO
             // write to the encrypted file
             val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
 
             // read the encrypted file
             val encryptedInputStream: FileInputStream = encryptedFile.openFileInput()
+
+            Log.d("awawawawa", encryptedInputStream.toString())
         }
 
 

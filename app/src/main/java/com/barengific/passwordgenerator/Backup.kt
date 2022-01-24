@@ -1,16 +1,13 @@
 package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +16,6 @@ import com.barengific.passwordgenerator.Backup.Companion.checkList
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
 import kotlinx.android.synthetic.main.backup_activity.*
-import kotlinx.android.synthetic.main.text_row_item_backup.view.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
@@ -96,6 +92,7 @@ class CustomAdapters(private val dataSets: List<Word>) :
     companion object {
         var position: Int = 0
 //        lateinit var checkBox: CheckBox
+        var isSelected: Boolean = false
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -112,6 +109,17 @@ class CustomAdapters(private val dataSets: List<Word>) :
         }
 
     }
+
+    fun selectAll() {
+        isSelected = true
+        notifyDataSetChanged()
+    }
+
+    fun deselectAll() {
+        isSelected = false
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item

@@ -2,6 +2,7 @@ package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -76,20 +78,19 @@ class Backup : AppCompatActivity(){
             //TODO if select all is true, then save all data
             //if select all is false, then save from checkList
 
-            val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-            val masterKeyAliasS: MasterKey.Builder = MasterKey.Builder(this)
             val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
 
-            val file = File(this.getFilesDir(), "secret_data")
+            val downloadFolder = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            val file = File(downloadFolder, "secret_data")
             val encryptedFile = EncryptedFile.Builder(
                 this,
                 file,
                 masterKey,
                 EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
             ).build()
-
+//TODO
             // write to the encrypted file
             val encryptedOutputStream: FileOutputStream = encryptedFile.openFileOutput()
 

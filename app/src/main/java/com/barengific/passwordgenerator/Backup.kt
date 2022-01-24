@@ -78,17 +78,17 @@ class Backup : AppCompatActivity() {
             //if select all is false, then save from checkList
 
             val time = System.currentTimeMillis()
-
             if(CustomAdapters.isSelected) {
                 //save all
                 val gson = Gson()
                 val arrJ = gson.toJson(arr)
 //                Log.d("aaaaaJSON", arrJ)
-
                 save(
-                    this, "noblest_$time.txt",
+                    this, "nobles_$time.txt",
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                     arrJ)
+                Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
+
             }else if (!CustomAdapters.isSelected){
                 Toast.makeText(applicationContext, "Please Select At Least One !", Toast.LENGTH_LONG).show()
             }else {
@@ -98,20 +98,21 @@ class Backup : AppCompatActivity() {
                 val savedList = mutableListOf<Word>()
                 for (i in 0 until checkList.size){
                     val cli = checkList[i]
-                    Log.d("aaaaacli", cli.toString())
+//                    Log.d("aaaaacli", cli.toString())
                     if(cli != -1){
                         val ari = arr[cli]
-                        Log.d("aaaaaari", ari.toString())
+//                        Log.d("aaaaaari", ari.toString())
                         savedList.add(ari)
                     }
 
                 }
-                Log.d("aaaaainsavv", savedList.toString())
+//                Log.d("aaaaainsavv", savedList.toString())
+                Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
             }
 
-            save(this, "noblest_$time.txt",
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-            "yeahMadeIT")
+//            save(this, "nobles_$time.txt",
+//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+//            "yeahMadeIT")
 //            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
 //                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 //                    ))

@@ -30,7 +30,7 @@ class Restore : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.backup_activity)
+        setContentView(R.layout.restore_activity)
 
         //db initialise
         val passphrase: ByteArray =
@@ -43,67 +43,16 @@ class Restore : AppCompatActivity() {
                 .build()
         val wordDao = room.wordDao()
 
-        //recycler initialise
-        val arr = wordDao.getAll()
-        var adapter = CustomAdapters(arr)
-        recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-        recyclerView.setHasFixedSize(false)
-        recyclerView.setAdapter(adapter)
-        recyclerView.setLayoutManager(LinearLayoutManager(this))
-
-        btnSelectAll.setOnClickListener {
-            CustomAdapters.isSelected = true
-            recyclerView.adapter?.notifyDataSetChanged()
-            Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
-        }
 
         btnRestore.setOnClickListener {
-            CustomAdapters.isSelected = false
-            recyclerView.adapter?.notifyDataSetChanged()
-            Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())
-        }
+            val filename = "a"
 
-        btnBackups.setOnClickListener {
-            //TODO if select all is true, then save all data
-            //if select all is false, then save from checkList
+            read(this, filename,
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
 
-            val time = System.currentTimeMillis()
-            if(CustomAdapters.isSelected) {
-                //save all
-                val gson = Gson()
-                val arrJ = gson.toJson(arr)
-//                Log.d("aaaaaJSON", arrJ)
-                save(
-                    this, "nobles_$time.txt",
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                    arrJ)
-                Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
-
-            }else if (!CustomAdapters.isSelected and (checkList.size <= 1)){
-                Toast.makeText(applicationContext, "Please Select At Least One !", Toast.LENGTH_LONG).show()
-            }else {
-                //save checkList
-//                var savedList: MutableList<Word>
-
-                val savedList = mutableListOf<Word>()
-                for (i in 0 until checkList.size){
-                    val cli = checkList[i]
-//                    Log.d("aaaaacli", cli.toString())
-                    if(cli != -1){
-                        val ari = arr[cli]
-//                        Log.d("aaaaaari", ari.toString())
-                        savedList.add(ari)
-                    }
-
-                }
-//                Log.d("aaaaainsavv", savedList.toString())
-                Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
-            }
-
-            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
+            Log.d("aaaaaYYY", read(this, filename,
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    ))
-
+            ))
         }
 
 

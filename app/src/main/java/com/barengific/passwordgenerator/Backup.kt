@@ -53,29 +53,13 @@ class Backup : AppCompatActivity(){
             CustomAdapters.isSelected = true
             recyclerView.adapter?.notifyDataSetChanged()
             Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
-
-
-//            val rvSize = recyclerView.adapter?.itemCount
-////        Log.d("aaaaaITEMCOun", rvSize.toString())
-//            for(i in 0 until rvSize!!){
-//                val cb = recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
-//                cb?.isChecked = true
-//
-//                recyclerView.adapter?.notifyDataSetChanged()
-//                val bb = recyclerView.findViewHolderForAdapterPosition(0)?.itemView?.findViewById<CheckBox>(R.id.checkBox)
-//
-////            recyclerView.findViewHolderForAdapterPosition(i).adapterPosition.
-//                Log.d("aaaaaSEL: $i", recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<CheckBox>(R.id.checkBox)?.isChecked.toString())
-//
-//                val bob =       recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(           R.id.textView4            )
-//
-//                Log.d("aaaaaSEL: $i", bob?.text.toString())
-//            }
         }
 
-
-
-
+        btnSelectNone.setOnClickListener{
+            CustomAdapters.isSelected = false
+            recyclerView.adapter?.notifyDataSetChanged()
+            Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())
+        }
 
 
 

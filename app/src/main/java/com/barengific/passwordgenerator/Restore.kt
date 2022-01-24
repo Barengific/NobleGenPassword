@@ -21,6 +21,8 @@ import com.barengific.passwordgenerator.databinding.ActivityMainBinding
 import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
 import java.io.*
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.backup_activity.btnRestore
+import kotlinx.android.synthetic.main.restore_activity.*
 
 class Restore : AppCompatActivity() {
     private lateinit var binding: RestoreActivityBinding
@@ -50,8 +52,7 @@ class Restore : AppCompatActivity() {
         val wordDao = room.wordDao()
 
         btnRestore.setOnClickListener {
-            val filename = "a"
-
+            val filename = editTextFileName.editText?.text.toString()
             read(this, filename,
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
 

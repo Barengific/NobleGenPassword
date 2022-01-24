@@ -186,6 +186,12 @@ class SettingsActivity : AppCompatActivity(),
     class RestoreFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.restore_preferences, rootKey)
+
+            val intent = Intent(this.context, Restore::class.java).apply {
+                putExtra("fromSettings","fin")
+            }
+            startActivity(intent)
+            (activity as FragmentActivity).supportFragmentManager.popBackStack()
         }
     }
 

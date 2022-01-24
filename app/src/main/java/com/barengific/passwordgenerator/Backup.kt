@@ -82,7 +82,7 @@ class Backup : AppCompatActivity() {
                 //save all
                 val gson = Gson()
                 val arrJ = gson.toJson(arr)
-                Log.d("aaaaaJSON", arrJ)
+//                Log.d("aaaaaJSON", arrJ)
 
                 save(
                     this, "noblest_$time.txt",
@@ -95,7 +95,10 @@ class Backup : AppCompatActivity() {
                 val savedList = mutableListOf<Word>()
                 for (i in 0 until checkList.size){
                     val cli = checkList[i]
+                    Log.d("aaaaacli", cli.toString())
                     val ari = arr[cli]
+                    Log.d("aaaaaari", ari.toString())
+
                     savedList.add(ari)
                 }
                 Log.d("aaaaainsavv", savedList.toString())
@@ -104,9 +107,9 @@ class Backup : AppCompatActivity() {
             save(this, "noblest_$time.txt",
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "yeahMadeIT")
-            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    ))
+//            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
+//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+//                    ))
 
 
             //confirm file save with toast with location of saved file

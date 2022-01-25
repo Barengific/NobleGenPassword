@@ -9,7 +9,6 @@ import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
 import java.io.*
 import kotlinx.android.synthetic.main.secfrag_activity.*
-import kotlinx.android.synthetic.main.secfrag_activity.view.*
 
 
 class Secfrag : AppCompatActivity() {
@@ -50,7 +49,7 @@ class Secfrag : AppCompatActivity() {
 
         btnCancels.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java).apply {
-                putExtra("fromRestore","cancel")
+                putExtra("fromSecfrag","cancel")
             }
             startActivity(intent)
             finish()

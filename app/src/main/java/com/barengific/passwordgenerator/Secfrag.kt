@@ -6,19 +6,19 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
+import com.barengific.passwordgenerator.databinding.SecfragActivityBinding
 import java.io.*
 import kotlinx.android.synthetic.main.secfrag_activity.*
 
 
 class Secfrag : AppCompatActivity() {
-    private lateinit var binding: RestoreActivityBinding
+    private lateinit var binding: SecfragActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.secfrag_activity)
 
-        binding = RestoreActivityBinding.inflate(layoutInflater)
+        binding = SecfragActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //TODO read from encrypted shared preferences

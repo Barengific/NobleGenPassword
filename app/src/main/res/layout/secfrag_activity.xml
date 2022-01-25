@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMv"
+        app:layout_constraintTop_toBottomOf="@id/tvMasterKeyv"
         app:layout_constraintVertical_bias="0.02"
         app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
         tools:ignore="MissingClass,SpeakableTextPresentCheck">

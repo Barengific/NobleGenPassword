@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
-import kotlinx.android.synthetic.main.backup_activity.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
@@ -19,20 +18,12 @@ import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
 import java.io.*
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.backup_activity.btnRestore
 import kotlinx.android.synthetic.main.restore_activity.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlin.system.exitProcess
 
 
 class Restore : AppCompatActivity() {
     private lateinit var binding: RestoreActivityBinding
-
-    lateinit var recyclerView: RecyclerView
-
-    companion object {
-        var checkList: MutableList<Int> = mutableListOf(-1)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -25,11 +25,7 @@ import kotlinx.android.synthetic.main.backup_activity.btnRestore
 import kotlinx.android.synthetic.main.restore_activity.*
 import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
-
-
-
-
-
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class Restore : AppCompatActivity() {
@@ -59,6 +55,8 @@ class Restore : AppCompatActivity() {
                 .build()
         val wordDao = room.wordDao()
 
+
+
         btnRestore.setOnClickListener {
             val filename = editTextFileName.editText?.text.toString()
             read(this, filename,
@@ -82,6 +80,16 @@ class Restore : AppCompatActivity() {
             val enums: Array<Word> = gson.fromJson(ww,Array<Word>::class.java)
 
             Log.d("aaaaaZZZ", enums.toString())
+
+            for (i in 0 until enums.size){
+                val aa = Word(
+                    0,
+                    "pgen",
+                    enums.get(i).key.toString(),
+                    enums.get(i).value.toString()
+                )
+                wordDao.insertAll(aa)
+            }
 
         }
 

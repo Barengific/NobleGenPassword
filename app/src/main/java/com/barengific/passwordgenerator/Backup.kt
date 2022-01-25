@@ -170,61 +170,6 @@ class Backup : AppCompatActivity() {
         return true
     }
 
-    fun read(context: Context, name: String, dir: File) : String {
-
-        val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-
-        val fii = File(dir, name)
-
-        val encryptedFile = EncryptedFile.Builder(
-            context,
-            fii,
-            masterKey,
-            EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-        ).build()
-
-        val encryptedInputStream = encryptedFile.openFileInput()
-        val objectInputStream = ObjectInputStream(encryptedInputStream)
-        val sourceObject = objectInputStream.readObject()
-
-//        Log.d("aaaaAaAaA", sourceObject.toString())
-
-//        val directory = File(context.filesDir.path + dir)
-//
-//        if (directory.exists() && directory.isDirectory) {
-//            val files = directory.listFiles()
-//            val masterKeyAlias = MasterKey.Builder(
-//                context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-//                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-//                .build()
-//            val list = mutableListOf<Any>()
-//
-//            files?.forEach {
-//                //ArchipelagoError.d(it.path)
-//                val encryptedFile = EncryptedFile.Builder(
-//                    context,
-//                    it,
-//                    masterKeyAlias,
-//                    EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
-//                ).build()
-//
-//                val encryptedInputStream = encryptedFile.openFileInput()
-//                val objectInputStream = ObjectInputStream(encryptedInputStream)
-//                val sourceObject = objectInputStream.readObject()
-//
-//                list.add(sourceObject)
-//            }
-//
-//            return list.toTypedArray()
-//        } else {
-//            return arrayOf()
-//        }
-
-        return sourceObject.toString()
-    }
-
 }
 
 //TODO remove pgen in recyclerview

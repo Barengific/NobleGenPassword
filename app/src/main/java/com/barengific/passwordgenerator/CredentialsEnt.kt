@@ -26,6 +26,11 @@ class CredentialsEnt : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.credentials_ent)
 
+        val fromSettings = getIntent().extras?.get("fromSettings")
+        if(fromSettings.toString().equals("rst")){
+            //delete all database entries
+        }
+
         btnSubmit.setOnClickListener {
             if (editTextPassword.editText?.text.toString().isNotEmpty()
                 && editTextPin.editText?.text.toString().isNotEmpty()) {

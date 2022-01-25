@@ -230,7 +230,7 @@ class SettingsActivity : AppCompatActivity(),
             alert?.setMessage("Are you sure you want to continue? All your saved passwords will be deleted!")
             alert?.setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, id ->
                 val intent = Intent(this.context, CredentialsEnt::class.java).apply {
-                    putExtra("fromSettings","fin")
+                    putExtra("fromSettings","rst")
                 }
                 startActivity(intent)
                 (activity as FragmentActivity).supportFragmentManager.popBackStack()

@@ -1,6 +1,7 @@
 package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -94,6 +95,18 @@ class SettingsActivity : AppCompatActivity(),
 //            return false
         }
         return super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        MainActivity.authStatus = true
+        val intent = Intent(this, MainActivity::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            putExtra("fromLogin","fin")
+        }
+        startActivity(intent)
+        finish()
+        setResult(RESULT_CANCELED)
+        super.onBackPressed()
     }
 
     override fun onPreferenceStartFragment(

@@ -633,6 +633,7 @@ class MainActivity : AppCompatActivity() {
 //            putExtra(EXTRA_MESSAGE, message)
         }
         startActivity(intent)
+        finish()
     }
 
     fun openAbout() {

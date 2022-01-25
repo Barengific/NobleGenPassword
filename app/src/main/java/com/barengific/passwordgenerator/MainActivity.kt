@@ -10,7 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.appcompat.app.AppCompatActivity
 import com.barengific.passwordgenerator.databinding.ActivityMainBinding
-//import com.barengific.passwordgenerator.databinding.FragmentHomeBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -62,7 +61,6 @@ import kotlinx.android.synthetic.main.fragment_home.btnSave
 import kotlinx.android.synthetic.main.fragment_home.editTextKeyGen
 import kotlinx.android.synthetic.main.fragment_home.filled_exposed_dropdown
 import kotlinx.android.synthetic.main.fragment_home.tvCopy
-import kotlinx.android.synthetic.main.fragment_home.tvDigitv
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
@@ -285,7 +283,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("paaaaaaaa", nameT.toString())
 
             if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
-                tvDigitv.editText?.setText(
+                tvGen.editText?.setText(
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
@@ -297,7 +295,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             } else {
-                tvDigitv.editText?.setText(
+                tvGen.editText?.setText(
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
@@ -333,7 +331,7 @@ class MainActivity : AppCompatActivity() {
         tvCopy.setOnClickListener {
             // Creates a new text clip to put on the clipboard
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip: ClipData = ClipData.newPlainText("PGen", tvDigitv.editText?.text.toString())
+            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
             // Set the clipboard's primary clip.
             clipboard.setPrimaryClip(clip)
 
@@ -351,9 +349,9 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("aaa", editTextKeyGen.editText?.text.toString())
         }
 
-        tvDigitv.setStartIconOnClickListener {
+        tvGen.setStartIconOnClickListener {
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip: ClipData = ClipData.newPlainText("PGen", tvDigitv.editText?.text.toString())
+            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
             // Set the clipboard's primary clip.
             clipboard.setPrimaryClip(clip)
 
@@ -374,7 +372,7 @@ class MainActivity : AppCompatActivity() {
                 0,
                 "pgen",
                 editTextKeyGen.editText?.text.toString(),
-                tvDigitv.editText?.text.toString()
+                tvGen.editText?.text.toString()
             )
             wordDao.insertAll(aa)
 
@@ -476,7 +474,7 @@ class MainActivity : AppCompatActivity() {
             Int
             val selection = parent.getItemAtPosition(position) as String
             Log.d("aaanewMAterialSpinner", selection)
-            tvDigitv.editText?.setText(
+            tvGen.editText?.setText(
                 ss.pgen(
                     editTextKeyGen.editText?.text.toString(),
                     nameS.toString(),
@@ -502,7 +500,7 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
-                    tvDigitv.editText?.setText(
+                    tvGen.editText?.setText(
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),
@@ -514,7 +512,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 } else {
-                    tvDigitv.editText?.setText(
+                    tvGen.editText?.setText(
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),

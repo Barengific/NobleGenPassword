@@ -1,6 +1,7 @@
 package com.barengific.passwordgenerator
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -26,6 +27,7 @@ import kotlinx.android.synthetic.main.restore_activity.*
 import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlin.system.exitProcess
 
 
 class Restore : AppCompatActivity() {
@@ -93,6 +95,7 @@ class Restore : AppCompatActivity() {
 
             Toast.makeText(applicationContext, "Successfully restored. Please restart app to continue!", Toast.LENGTH_LONG).show()
             finish()
+            exitProcess(0)
 
         }
 

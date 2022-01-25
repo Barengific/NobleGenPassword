@@ -91,6 +91,8 @@ class Restore : AppCompatActivity() {
                 wordDao.insertAll(aa)
             }
 
+            Toast.makeText(applicationContext, "Successfully restored. Please restart app to continue!", Toast.LENGTH_LONG).show()
+
         }
 
     }

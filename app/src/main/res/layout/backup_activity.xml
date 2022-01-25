@@ -70,7 +70,7 @@
                 android:layout_height="57dp"
                 android:text="@string/select_none"
                 android:textSize="16sp"
-                
+                app:icon="@drawable/ic_baseline_browser_not_supported_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

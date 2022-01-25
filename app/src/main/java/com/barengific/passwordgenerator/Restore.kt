@@ -5,10 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.barengific.passwordgenerator.database.AppDatabase
@@ -18,14 +16,11 @@ import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
-import com.barengific.passwordgenerator.databinding.ActivityMainBinding
 import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
 import java.io.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.backup_activity.btnRestore
 import kotlinx.android.synthetic.main.restore_activity.*
-import com.google.gson.JsonElement
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlin.system.exitProcess
 
@@ -60,7 +55,7 @@ class Restore : AppCompatActivity() {
 
 
         btnRestore.setOnClickListener {
-            val filename = editTextFileName.editText?.text.toString()
+            val filename = tvMv.editText?.text.toString()
             read(this, filename,
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
 

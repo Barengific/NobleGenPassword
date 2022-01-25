@@ -2,6 +2,7 @@ package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -25,9 +26,8 @@ import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 import java.io.*
 import com.google.gson.Gson
-
-
-
+import kotlinx.android.synthetic.main.backup_activity.btnRestore
+import kotlinx.android.synthetic.main.restore_activity.*
 
 
 class Backup : AppCompatActivity() {
@@ -120,6 +120,14 @@ class Backup : AppCompatActivity() {
 
 
             //confirm file save with toast with location of saved file
+        }
+
+        btnCancelb.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java).apply {
+                putExtra("fromBackup","cancel")
+            }
+            startActivity(intent)
+            finish()
         }
 
 

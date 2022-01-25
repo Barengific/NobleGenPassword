@@ -46,7 +46,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnCancelb"
-                app:layout_constraintVertical_bias="0.1" />
+                app:layout_constraintVertical_bias="0.05" />
 
             <Button
                 android:id="@+id/btnSelectAll"
@@ -59,7 +59,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnBackups"
-                app:layout_constraintVertical_bias="0.05" />
+                app:layout_constraintVertical_bias="0.02" />
 
             <Button
                 android:id="@+id/btnRestore"
@@ -72,7 +72,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnBackups"
-                app:layout_constraintVertical_bias="0.05" />
+                app:layout_constraintVertical_bias="0.02" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rview"

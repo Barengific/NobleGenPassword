@@ -192,6 +192,7 @@ class SettingsActivity : AppCompatActivity(),
             }
             startActivity(intent)
             (activity as FragmentActivity).supportFragmentManager.popBackStack()
+            finish()
         }
     }
 

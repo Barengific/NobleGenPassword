@@ -12,9 +12,13 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.barengific.passwordgenerator.database.AppDatabase
 import kotlinx.android.synthetic.main.credentials_ent.*
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import java.io.File
 
 
@@ -29,6 +33,20 @@ class CredentialsEnt : AppCompatActivity() {
         val fromSettings = getIntent().extras?.get("fromSettings")
         if(fromSettings.toString().equals("rst")){
             //delete all database entries
+            val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+            val factory = SupportFactory(passphrase)
+            val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
+                .openHelperFactory(factory)
+                .allowMainThreadQueries()
+                .build()
+            val wordDao = room.wordDao()
+
+            val arr = wordDao.getAll()
+
+            for(i in 0 until arr.size){
+                wordDao.delete(arr.get(i))
+            }
+
         }
 
         btnSubmit.setOnClickListener {

@@ -91,6 +91,7 @@
                 android:layout_height="57dp"
                 android:text="@string/generate"
                 android:textSize="24sp"
+                app:icon="@drawable/ic_baseline_fiber_new_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

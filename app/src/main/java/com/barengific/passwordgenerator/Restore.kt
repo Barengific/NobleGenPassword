@@ -93,13 +93,13 @@ class Restore : AppCompatActivity() {
                 wordDao.insertAll(aa)
             }
 
-            Toast.makeText(applicationContext, "Successfully restored. Please restart app to continue!", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Successfully restored. Please restart the app to continue!", Toast.LENGTH_LONG).show()
             finish()
             exitProcess(0)
 
         }
 
-        btnRestore.setOnClickListener {
+        btnCancel.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java).apply {
                 putExtra("fromRestore","cancel")
             }

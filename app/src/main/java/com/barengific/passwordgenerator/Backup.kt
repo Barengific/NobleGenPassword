@@ -27,7 +27,6 @@ import androidx.security.crypto.MasterKey
 import java.io.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.backup_activity.btnRestore
-import kotlinx.android.synthetic.main.restore_activity.*
 
 
 class Backup : AppCompatActivity() {

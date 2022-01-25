@@ -104,6 +104,7 @@ class Restore : AppCompatActivity() {
                 putExtra("fromRestore","cancel")
             }
             startActivity(intent)
+            finish()
         }
 
     }

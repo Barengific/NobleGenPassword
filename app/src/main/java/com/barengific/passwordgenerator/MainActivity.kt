@@ -5,17 +5,9 @@ import android.app.Dialog
 import android.content.*
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.widget.*
 import androidx.annotation.RequiresApi
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.barengific.passwordgenerator.databinding.ActivityMainBinding
 //import com.barengific.passwordgenerator.databinding.FragmentHomeBinding
@@ -24,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
-import kotlinx.android.synthetic.main.fragment_home.*
 
 import android.widget.Toast
 import android.text.Editable
@@ -39,10 +30,7 @@ import android.widget.TextView
 import android.view.MenuInflater
 
 import android.view.ContextMenu
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.length_layout.*
 import android.widget.AdapterView.OnItemClickListener
-import com.barengific.passwordgenerator.crypt.Acvb
 import java.io.UnsupportedEncodingException
 import java.security.InvalidAlgorithmParameterException
 import java.security.InvalidKeyException
@@ -54,44 +42,28 @@ import javax.crypto.spec.SecretKeySpec
 import android.content.Intent
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
-import com.barengific.passwordgenerator.CustomAdapter.Companion.position
 
 import com.barengific.passwordgenerator.ui.login.LoginActivity
 import java.util.concurrent.Executor
 
 import android.content.SharedPreferences
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.preference.Preference
-import androidx.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import androidx.security.crypto.MasterKeys
 import android.content.Context.CLIPBOARD_SERVICE
-import android.text.method.PasswordTransformationMethod
 
-import android.view.MotionEvent
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.text_row_item.view.*
-import androidx.lifecycle.Lifecycle
 
-import androidx.lifecycle.*
 import com.barengific.passwordgenerator.crypt.Aqtik
-import com.barengific.passwordgenerator.database.WordDao
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.btnGenerate
 import kotlinx.android.synthetic.main.fragment_home.btnSave
 import kotlinx.android.synthetic.main.fragment_home.editTextKeyGen
 import kotlinx.android.synthetic.main.fragment_home.filled_exposed_dropdown
 import kotlinx.android.synthetic.main.fragment_home.tvCopy
-import kotlinx.android.synthetic.main.fragment_home.tvGen
+import kotlinx.android.synthetic.main.fragment_home.tvDigitv
 import net.sqlcipher.database.SQLiteDatabase
-import kotlin.concurrent.thread
 import net.sqlcipher.database.SupportFactory
 
 
@@ -313,7 +285,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("paaaaaaaa", nameT.toString())
 
             if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
-                tvGen.editText?.setText(
+                tvDigitv.editText?.setText(
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
@@ -325,7 +297,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             } else {
-                tvGen.editText?.setText(
+                tvDigitv.editText?.setText(
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
@@ -361,7 +333,7 @@ class MainActivity : AppCompatActivity() {
         tvCopy.setOnClickListener {
             // Creates a new text clip to put on the clipboard
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
+            val clip: ClipData = ClipData.newPlainText("PGen", tvDigitv.editText?.text.toString())
             // Set the clipboard's primary clip.
             clipboard.setPrimaryClip(clip)
 
@@ -379,9 +351,9 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("aaa", editTextKeyGen.editText?.text.toString())
         }
 
-        tvGen.setStartIconOnClickListener {
+        tvDigitv.setStartIconOnClickListener {
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip: ClipData = ClipData.newPlainText("PGen", tvGen.editText?.text.toString())
+            val clip: ClipData = ClipData.newPlainText("PGen", tvDigitv.editText?.text.toString())
             // Set the clipboard's primary clip.
             clipboard.setPrimaryClip(clip)
 
@@ -402,7 +374,7 @@ class MainActivity : AppCompatActivity() {
                 0,
                 "pgen",
                 editTextKeyGen.editText?.text.toString(),
-                tvGen.editText?.text.toString()
+                tvDigitv.editText?.text.toString()
             )
             wordDao.insertAll(aa)
 
@@ -504,7 +476,7 @@ class MainActivity : AppCompatActivity() {
             Int
             val selection = parent.getItemAtPosition(position) as String
             Log.d("aaanewMAterialSpinner", selection)
-            tvGen.editText?.setText(
+            tvDigitv.editText?.setText(
                 ss.pgen(
                     editTextKeyGen.editText?.text.toString(),
                     nameS.toString(),
@@ -530,7 +502,7 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
-                    tvGen.editText?.setText(
+                    tvDigitv.editText?.setText(
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),
@@ -542,7 +514,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 } else {
-                    tvGen.editText?.setText(
+                    tvDigitv.editText?.setText(
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),

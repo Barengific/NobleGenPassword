@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tvMv"
+        android:id="@+id/tvMasterKeyv"
         android:layout_width="0dp"
         android:layout_height="57dp"
         android:hint="@string/master_key"

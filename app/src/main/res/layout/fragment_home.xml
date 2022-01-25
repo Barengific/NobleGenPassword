@@ -89,7 +89,7 @@
                 app:layout_constraintVertical_bias="0.01" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvGen"
+                android:id="@+id/tvDigitv"
                 android:layout_width="409dp"
                 android:layout_height="57dp"
                 android:background="@drawable/backwithborder"
@@ -132,7 +132,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvGen"
+                app:layout_constraintTop_toBottomOf="@+id/tvDigitv"
                 app:layout_constraintVertical_bias="0.03" />
 
             <!--            recyclerview db-->

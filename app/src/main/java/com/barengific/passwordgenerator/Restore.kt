@@ -99,6 +99,13 @@ class Restore : AppCompatActivity() {
 
         }
 
+        btnRestore.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java).apply {
+                putExtra("fromRestore","cancel")
+            }
+            startActivity(intent)
+        }
+
     }
 
     fun read(context: Context, name: String, dir: File) : String {

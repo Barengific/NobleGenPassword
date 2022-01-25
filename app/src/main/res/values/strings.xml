@@ -94,5 +94,7 @@
     <string name="select_none">Select None</string>
     <string name="restore">Restore</string>
     <string name="filename_hint">Filename.txt</string>
+    <string name="pin_number">Pin Number</string>
+    <string name="master_key">Password</string>
 
 </resources>

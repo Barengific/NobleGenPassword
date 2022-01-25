@@ -143,42 +143,12 @@ class SettingsActivity : AppCompatActivity(),
     class SecurityFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
-
-            //
-            val masterKey = this.context?.let {
-                MasterKey.Builder(it, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                    .build()
+            val intent = Intent(this.context, Secfrag::class.java).apply {
+                putExtra("fromSettings","fin")
             }
-
-            val sharedPreferencesEE: SharedPreferences = masterKey?.let {
-                this.context?.let { it1 ->
-                    EncryptedSharedPreferences.create(
-                        it1,
-                        "secret_shared_prefs",
-                        it,
-                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
-                }
-            }!!
-
-            //write
-            //sharedPreferencesEE.edit().putString("signatureS", "encrrrr").apply()
-            //read
-            val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
-            val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
-
-            //for settings //readwrite
-            val preferences = PreferenceManager.getDefaultSharedPreferences(this.context /* Activity context */)
-            //read
-//            val name = sharedPreferences.getString("signature", "nonon")
-            //write
-            with (preferences.edit()){
-                putString("signatureS",nameS)
-                putString("signatureT",nameT)
-                apply()
-            }
-            setPreferencesFromResource(R.xml.security_preferences, rootKey)
+            startActivity(intent)
+            //(activity as FragmentActivity).supportFragmentManager.popBackStack()
+            requireActivity().finish()
         }
 
     }

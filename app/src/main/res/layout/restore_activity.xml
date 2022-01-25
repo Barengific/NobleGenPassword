@@ -32,11 +32,26 @@
         android:layout_height="57dp"
         android:text="@string/restore"
         android:textSize="20sp"
+        app:icon="@drawable/ic_baseline_restore_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextFileName"
         app:layout_constraintVertical_bias="0.041" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:text="@string/restore"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_image_add_save_pressable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRestore"
+        app:layout_constraintVertical_bias="0.02" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -616,6 +616,12 @@ class MainActivity : AppCompatActivity() {
 
     //TODO donation option
     fun openDonate() {
+        Log.d("aaa", "in open settings")
+        val intent = Intent(this, SettingsActivity::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+        }
+        startActivity(intent)
+        finish()
 
         val newFragment = DonationDialogFragment()
         newFragment.show(supportFragmentManager, "donation")

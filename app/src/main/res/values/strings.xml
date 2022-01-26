@@ -96,5 +96,13 @@
     <string name="filename_hint">Filename.txt</string>
     <string name="pin_number">Pin Number</string>
     <string name="master_key">Password</string>
+    <string name="btc_address">bc1qdhjt7q2qxdzuctxqhaa9awx3vm5rcmuweuf5qv</string>
+    <string name="eth_address">0xB6a882D25a798a0FE623f231f34A3152587F11f8</string>
+    <string name="bch_address">qzrcrtrnqn0mnxcddvpxxh3lywdda8h9mq0avq3xa0</string>
+    <string name="ltc_address">ltc1q407s94mdyntqu2sjkpc7qe79mmzrl0j60nu492</string>
+    <string name="etc_address">0x33cD286E37839aD67f10Af9b38b91B6339127D21</string>
+    <string name="algo_address">WCU3QDLBILUMS73BOXZJSR2UC5LLZS2RZ4K53FUXN66JWPILGRSGP3F6AI</string>
+    <string name="nano_address">nano_19izityh565c3psgjytgrt3ku69f94r7d74u8ts7gy6g9onri55ahyoq5mgf</string>
+    <string name="nano">Nano</string>
 
 </resources>

@@ -41,7 +41,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTextKeyGen"
-                android:layout_width="409dp"
+                android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:hint="@string/textfield_password_derivation_key"
                 android:textSize="20sp"
@@ -66,10 +66,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dropdownmenu"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="409dp"
+                android:layout_width="0dp"
                 android:layout_height="57dp"
-                android:hint="Length"
                 android:background="@drawable/backwithborder"
+                android:hint="Length"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
 
             <Button
                 android:id="@+id/btnGenerate"
-                android:layout_width="409dp"
+                android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:text="@string/generate"
                 android:textSize="24sp"
@@ -100,7 +100,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvGen"
-                android:layout_width="409dp"
+                android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:hint="@string/output_result"
                 android:textIsSelectable="false"

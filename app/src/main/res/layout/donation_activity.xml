@@ -23,7 +23,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="73dp"
+            android:layout_height="match_parent"
             android:editable="false"
             android:hint="@string/btc"
             android:text="@string/btc_address"

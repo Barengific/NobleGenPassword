@@ -609,13 +609,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openAbout() {
-        Log.d("aaa", "in open about")
+        Log.d("aaa", "in open donation")
         val newFragment = FireMissilesDialogFragment()
         newFragment.show(supportFragmentManager, "missiles")
     }
 
     //TODO donation option
     fun openDonate() {
+
+        val newFragment = DonationDialogFragment()
+        newFragment.show(supportFragmentManager, "donation")
 
     }
 
@@ -1089,6 +1092,21 @@ class FireMissilesDialogFragment : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater;
             builder.setView(inflater.inflate(R.layout.alertdialog_about, null))
+                .setNegativeButton(R.string.cancel,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        getDialog()?.cancel()
+                    })
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+}
+
+class DonationDialogFragment : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            val inflater = requireActivity().layoutInflater;
+            builder.setView(inflater.inflate(R.layout.alertdialog_donation, null))
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()

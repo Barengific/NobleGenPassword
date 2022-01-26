@@ -103,7 +103,12 @@
     <string name="etc_address">0x33cD286E37839aD67f10Af9b38b91B6339127D21</string>
     <string name="algo_address">WCU3QDLBILUMS73BOXZJSR2UC5LLZS2RZ4K53FUXN66JWPILGRSGP3F6AI</string>
     <string name="nano_address">nano_19izityh565c3psgjytgrt3ku69f94r7d74u8ts7gy6g9onri55ahyoq5mgf</string>
-    <string name="nano">Nano</string>
+    <string name="nano">NANO</string>
     <string name="btc">BTC</string>
+    <string name="eth">ETH</string>
+    <string name="bch">BCH</string>
+    <string name="ltc">LTC</string>
+    <string name="etc">ETC</string>
+    <string name="algo">ALGO</string>
 
 </resources>

@@ -1,66 +1,129 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="@string/Masterkey_phrase"
-        android:minHeight="48dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvBTC"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:hint="@string/btc_address"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+        tools:ignore="MissingClass,SpeakableTextPresentCheck">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextNumberPassword1"
-        android:inputType="numberPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="Sig1 number [0-9]"
-        android:minHeight="48dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvETH"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:hint="@string/eth_address"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+        tools:ignore="MissingClass,SpeakableTextPresentCheck">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextNumberPassword2"
-        android:inputType="numberPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="Sig2 number [0-9]"
-        android:minHeight="48dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvBCH"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:hint="@string/bch_address"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+        tools:ignore="MissingClass,SpeakableTextPresentCheck">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextNumberPassword3"
-        android:inputType="numberPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="Sig3 number [0-9]"
-        android:minHeight="48dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvLTC"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:hint="@string/ltc_address"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+        tools:ignore="MissingClass,SpeakableTextPresentCheck">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextNumberPassword4"
-        android:inputType="numberPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="Sig4 number [0-9]"
-        android:minHeight="48dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvETC"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:hint="@string/etc_address"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+        tools:ignore="MissingClass,SpeakableTextPresentCheck">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvAlgo"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:hint="@string/algo_address"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+        tools:ignore="MissingClass,SpeakableTextPresentCheck">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvNano"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:text="@string/nano_address"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:hint="@string/nano"
+        android:textStyle="normal|bold"
+        app:startIconDrawable="@drawable/ic_baseline_content_copy_24"
+        tools:ignore="MissingClass,SpeakableTextPresentCheck">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </LinearLayout>

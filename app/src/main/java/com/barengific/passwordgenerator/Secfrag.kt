@@ -22,7 +22,6 @@ class Secfrag : AppCompatActivity() {
         setContentView(binding.root)
 
         //TODO read from encrypted shared preferences
-
         val masterKey = this?.let {
             MasterKey.Builder(it, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)

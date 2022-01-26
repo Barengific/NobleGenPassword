@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //TODO
+
     //lateinit var recyclerView: RecyclerView
 //    lateinit var db = Room.databaseBuilder(applicationContext,
 //        AppDatabase::class.java, "database-name"
@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity() {
 //        recyclerView.adapter?.notifyDataSetChanged()
 //        adapter.notifyItemRangeChanged(0,5)
 
-        //length dropdown ********************8 TODO
+        //length dropdown ********************8
         val Lines = resources.getStringArray(R.array.p_len_array).toList()
         val adapterr = ArrayAdapter(this, R.layout.length_layout, Lines)
         filled_exposed_dropdown.setAdapter(adapterr)
@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity() {
         val ss = Pgen()
 
         //Listeners
-        //TODO encrypt / decrypt to / fro database data
+        //encrypt / decrypt to / fro database data
         btnGenerate.setOnClickListener {
 
 //            val sharedPref = this?.getSharedPreferences(
@@ -360,7 +360,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-//TODO fix visibilty of rcyclerview when item saved
+//fix visibilty of rcyclerview when item saved
 
 //            val aa = Word(
 //                0,
@@ -491,7 +491,7 @@ class MainActivity : AppCompatActivity() {
 //
 //        autoCompleteTextView.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
 //            val selection = parent.getItemAtPosition(position) as String
-//            //TODO Do something with the selected text
+//            // Do something with the selected text
 //        })
 
 
@@ -552,7 +552,7 @@ class MainActivity : AppCompatActivity() {
                 for (i in 0 until arSize) {
                     arrr.get(i).value = "****"
                     arrr.get(i).key = "****"
-                }//TODO check - database\Word changed from val to var ^
+                }// check - database\Word changed from val to var ^
 
                 var adapter = CustomAdapter(arrr)
                 //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
@@ -560,7 +560,7 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setAdapter(adapter)
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
 
-            }//TODO
+            }//
 
 
         }
@@ -592,6 +592,8 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> openSettings()
             R.id.action_about -> openAbout()
             R.id.action_exit -> finish()
+            R.id.action_adfree -> openAdFree()
+            R.id.action_donation -> openDonate()
             //TODO donation and ad free version
         }
         return super.onOptionsItemSelected(item)

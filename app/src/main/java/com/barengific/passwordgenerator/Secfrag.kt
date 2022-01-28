@@ -51,6 +51,8 @@ class Secfrag : AppCompatActivity() {
                 putExtra("fromSecfrag","cancel")
             }
             startActivity(intent)
+            tvMasterKeyv.editText?.setText("nonon")
+            tvDigitv.editText?.setText("nonon")
             finish()
         }
 

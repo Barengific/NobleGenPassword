@@ -20,6 +20,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.barengific.passwordgenerator.*
@@ -105,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
             .setTitle("Noble Manager")
             .setSubtitle("Please scan your fingerprint or your face to proceed.")
             .setNegativeButtonText("CANCEL")
+            .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
             .build()
 
         biometricPrompt.authenticate(promptInfo)

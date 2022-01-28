@@ -105,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
 
         promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Noble Manager")
-            .setSubtitle("Please scan your fingerprint or your face to proceed.")
+            .setSubtitle("Please scan your fingerprint or your face to proceed or use your device credentials")
 //            .setNegativeButtonText("CANCEL")
             .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
             .build()

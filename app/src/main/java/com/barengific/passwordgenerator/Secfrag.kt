@@ -58,4 +58,17 @@ class Secfrag : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        val intent = Intent(this, SettingsActivity::class.java).apply {
+//            putExtra(EXTRA_MESSAGE, message)
+            putExtra("fromSecfrag","cancel")
+        }
+        startActivity(intent)
+        tvMasterKeyv.editText?.setText("nonon")
+        tvDigitv.editText?.setText("nonon")
+        finish()
+        setResult(RESULT_CANCELED)
+        super.onBackPressed()
+    }
+
 }

@@ -15,7 +15,7 @@ import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.R
-import com.barengific.passwordgenerator.SettingsActivity
+import com.barengific.passwordgenerator.setting.SettingsActivity
 import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
 import java.io.*
 import com.google.gson.Gson

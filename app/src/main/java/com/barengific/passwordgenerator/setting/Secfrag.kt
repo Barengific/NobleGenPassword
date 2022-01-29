@@ -1,4 +1,4 @@
-package com.barengific.passwordgenerator
+package com.barengific.passwordgenerator.setting
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -6,9 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.barengific.passwordgenerator.R
 import com.barengific.passwordgenerator.databinding.SecfragActivityBinding
-import com.barengific.passwordgenerator.setting.SettingsActivity
-import java.io.*
 import kotlinx.android.synthetic.main.secfrag_activity.*
 
 

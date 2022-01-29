@@ -3,7 +3,6 @@ package com.barengific.passwordgenerator.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.barengific.passwordgenerator.data.LoginDataSource
-import com.barengific.passwordgenerator.data.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

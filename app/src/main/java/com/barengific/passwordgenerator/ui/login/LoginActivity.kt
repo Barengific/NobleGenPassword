@@ -97,6 +97,7 @@ class LoginActivity : AppCompatActivity() {
 //                    Toast.makeText(applicationContext, "Authentication failed",
 //                        Toast.LENGTH_SHORT)
 //                        .show()
+
                     val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
                     startActivity(intent)
                     Log.d("aaaaaaaa", "infalllled")
@@ -111,7 +112,6 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         biometricPrompt.authenticate(promptInfo)
-
 
     }
 

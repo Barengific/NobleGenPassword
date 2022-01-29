@@ -15,6 +15,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.barengific.passwordgenerator.*
 import com.barengific.passwordgenerator.setting.Restore
 
 private const val TITLE_TAG = "settingsActivityTitle"

@@ -55,6 +55,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 
 import com.barengific.passwordgenerator.crypt.Aqtik
+import com.barengific.passwordgenerator.setting.AppIntroduction
+import com.barengific.passwordgenerator.setting.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.btnGenerate
 import kotlinx.android.synthetic.main.fragment_home.btnSave

@@ -36,4 +36,10 @@
         app:key="rst_header"
         app:title="@string/settings_header_rst" />
 
+    <Preference
+        app:fragment="com.barengific.passwordgenerator.SettingsActivity$HelpFragment"
+        app:icon="@drawable/ic_baseline_help_outline_24"
+        app:key="help_header"
+        app:title="@string/settings_header_help" />
+
 </PreferenceScreen>

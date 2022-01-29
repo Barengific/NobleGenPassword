@@ -24,6 +24,7 @@ import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
+import com.barengific.passwordgenerator.setting.SettingsActivity
 import java.io.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.backup_activity.btnRestore

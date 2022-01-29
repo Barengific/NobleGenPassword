@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.databinding.SecfragActivityBinding
+import com.barengific.passwordgenerator.setting.SettingsActivity
 import java.io.*
 import kotlinx.android.synthetic.main.secfrag_activity.*
 

@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AppIntroduction"
+            android:name=".setting.AppIntroduction"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.PasswordGenerator.NoActionBar">
@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TutIntroduction"
+            android:name=".setting.TutIntroduction"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.PasswordGenerator.NoActionBar">

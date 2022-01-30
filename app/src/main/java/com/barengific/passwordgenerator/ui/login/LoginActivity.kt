@@ -55,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
 //            WindowManager.LayoutParams.FLAG_SECURE,
 //            WindowManager.LayoutParams.FLAG_SECURE
 //        );
+        hideSystemBars()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

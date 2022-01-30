@@ -13,31 +13,31 @@
         app:title="@string/settings_header_backup" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.settting.SettingsActivity$RestoreFragment"
+        app:fragment="com.barengific.passwordgenerator.setting.SettingsActivity$RestoreFragment"
         app:icon="@drawable/ic_baseline_restore_24"
         app:key="restore_header"
         app:title="@string/settings_header_restore" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.settting.SettingsActivity$IntroFragment"
+        app:fragment="com.barengific.passwordgenerator.setting.SettingsActivity$IntroFragment"
         app:icon="@drawable/ic_baseline_first_page_24"
         app:key="intro_header"
         app:title="@string/settings_header_intro" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.settting.SettingsActivity$TutFragment"
+        app:fragment="com.barengific.passwordgenerator.setting.SettingsActivity$TutFragment"
         app:icon="@drawable/ic_baseline_contact_support_24"
         app:key="tut_header"
         app:title="@string/settings_header_tut" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.settting.SettingsActivity$RSTFragment"
+        app:fragment="com.barengific.passwordgenerator.setting.SettingsActivity$RSTFragment"
         app:icon="@drawable/ic_baseline_delete_sweep_24"
         app:key="rst_header"
         app:title="@string/settings_header_rst" />
 
     <Preference
-        app:fragment="com.barengific.passwordgenerator.settting.SettingsActivity$HelpFragment"
+        app:fragment="com.barengific.passwordgenerator.setting.SettingsActivity$HelpFragment"
         app:icon="@drawable/ic_baseline_help_outline_24"
         app:key="help_header"
         app:title="@string/settings_header_help_coming" />

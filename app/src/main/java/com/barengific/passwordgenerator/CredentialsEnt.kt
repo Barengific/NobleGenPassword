@@ -30,6 +30,12 @@ class CredentialsEnt : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.credentials_ent)
 
+        //TODO
+        //getWindow().setFlags(
+//            WindowManager.LayoutParams.FLAG_SECURE,
+//            WindowManager.LayoutParams.FLAG_SECURE
+//        )
+
         val fromSettings = getIntent().extras?.get("fromSettings")
         if(fromSettings.toString().equals("rst")){
             //delete all database entries

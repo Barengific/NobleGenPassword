@@ -30,6 +30,12 @@ class Restore : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.restore_activity)
 
+        //TODO
+        //getWindow().setFlags(
+//            WindowManager.LayoutParams.FLAG_SECURE,
+//            WindowManager.LayoutParams.FLAG_SECURE
+//        )
+
         binding = RestoreActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

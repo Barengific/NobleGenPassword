@@ -37,6 +37,6 @@
 
     <style name="YOURSTYLE.PopupMenu" parent="Widget.AppCompat.PopupMenu">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:itemBackground">@android:color/holo_red_light</item>
+        <item name="android:itemBackground">@color/purple_200</item>
     </style>
 </resources>

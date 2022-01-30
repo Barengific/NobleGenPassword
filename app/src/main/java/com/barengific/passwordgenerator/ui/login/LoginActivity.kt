@@ -51,10 +51,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
-        );
+//        getWindow().setFlags(
+//            WindowManager.LayoutParams.FLAG_SECURE,
+//            WindowManager.LayoutParams.FLAG_SECURE
+//        );
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

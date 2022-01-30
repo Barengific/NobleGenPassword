@@ -122,11 +122,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
-        )
+//
+//        getWindow().setFlags(
+//            WindowManager.LayoutParams.FLAG_SECURE,
+//            WindowManager.LayoutParams.FLAG_SECURE
+//        )
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -923,7 +923,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
         viewHolder.ivMore.setOnClickListener(object : View.OnClickListener {
 
             override fun onClick(view: View?) {
-                val wrapper: Context = ContextThemeWrapper(view?.context, R.style.YOURSTYLE_PopupMenu)
+                val wrapper: Context = ContextThemeWrapper(view?.context, R.style.PopupMenu)
 //                val popup = PopupMenu(wrapper, view)
                 //creating a popup menu
 //                val popup = PopupMenu(view?.context, viewHolder.ivMore)

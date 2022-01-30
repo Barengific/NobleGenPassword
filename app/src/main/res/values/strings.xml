@@ -111,5 +111,6 @@
     <string name="etc">ETC</string>
     <string name="algo">ALGO</string>
     <string name="settings_header_help">Help</string>
+    <string name="app_name_short">Noble</string>
 
 </resources>

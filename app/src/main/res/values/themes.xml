@@ -34,4 +34,9 @@
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
         <item name="android:popupBackground">@android:color/holo_red_dark</item>
     </style>
+
+    <style name="YOURSTYLE.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:itemBackground">@android:color/holo_red_light</item>
+    </style>
 </resources>

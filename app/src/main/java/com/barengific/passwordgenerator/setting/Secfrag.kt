@@ -18,6 +18,12 @@ class Secfrag : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.secfrag_activity)
 
+        //TODO
+        //getWindow().setFlags(
+//            WindowManager.LayoutParams.FLAG_SECURE,
+//            WindowManager.LayoutParams.FLAG_SECURE
+//        )
+
         binding = SecfragActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.databinding.DonationActivityBinding
+import com.barengific.passwordgenerator.setting.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.donation_activity.*
 import kotlinx.android.synthetic.main.donation_activity.btnCancels

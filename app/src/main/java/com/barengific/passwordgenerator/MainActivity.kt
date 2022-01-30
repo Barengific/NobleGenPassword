@@ -52,6 +52,9 @@ import androidx.security.crypto.MasterKey
 import android.content.Context.CLIPBOARD_SERVICE
 
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.DialogFragment
 
 import com.barengific.passwordgenerator.crypt.Aqtik
@@ -127,6 +130,8 @@ class MainActivity : AppCompatActivity() {
 //            WindowManager.LayoutParams.FLAG_SECURE,
 //            WindowManager.LayoutParams.FLAG_SECURE
 //        )
+
+        hideSystemBars()
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -574,6 +579,16 @@ class MainActivity : AppCompatActivity() {
         //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
 
 
+    }
+
+    private fun hideSystemBars() {
+        val windowInsetsController =
+            ViewCompat.getWindowInsetsController(window.decorView) ?: return
+        // Configure the behavior of the hidden system bars
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        // Hide both the status bar and the navigation bar
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
     }
 
 

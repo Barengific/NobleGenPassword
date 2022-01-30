@@ -42,6 +42,12 @@ class Backup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.backup_activity)
 
+        //TODO
+        //getWindow().setFlags(
+//            WindowManager.LayoutParams.FLAG_SECURE,
+//            WindowManager.LayoutParams.FLAG_SECURE
+//        )
+
         //db initialise
         val passphrase: ByteArray =
             SQLiteDatabase.getBytes("bob".toCharArray())//TODO change pass phrase

@@ -27,5 +27,6 @@
 
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
         <item name="android:popupBackground">@android:color/holo_red_dark</item>
+        <item name="android:text">@android:color/holo_red_dark</item>
     </style>
 </resources>

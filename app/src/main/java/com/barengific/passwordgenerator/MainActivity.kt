@@ -647,6 +647,7 @@ class MainActivity : AppCompatActivity() {
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
+
         val inflater: MenuInflater = this.menuInflater //getActivity().getMenuInflater()
         inflater.inflate(R.menu.rv_menu_context, menu)
     }

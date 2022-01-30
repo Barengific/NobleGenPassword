@@ -594,7 +594,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> openSettings()
             R.id.action_about -> openAbout()
             R.id.action_exit -> finish()
-            R.id.action_adfree -> openAdFree()
+//            R.id.action_adfree -> openAdFree()
             R.id.action_donation -> openDonate()
             //TODO donation and ad free version
         }

@@ -923,8 +923,11 @@ class CustomAdapter(private val dataSet: List<Word>) :
         viewHolder.ivMore.setOnClickListener(object : View.OnClickListener {
 
             override fun onClick(view: View?) {
+                val wrapper: Context = ContextThemeWrapper(view?.context, R.style.YOURSTYLE_PopupMenu)
+//                val popup = PopupMenu(wrapper, view)
                 //creating a popup menu
-                val popup = PopupMenu(view?.context, viewHolder.ivMore)
+//                val popup = PopupMenu(view?.context, viewHolder.ivMore)
+                val popup = PopupMenu(wrapper, viewHolder.ivMore)
                 //inflating menu from xml resource
                 popup.inflate(R.menu.rv_menu_context)
                 //adding click listener

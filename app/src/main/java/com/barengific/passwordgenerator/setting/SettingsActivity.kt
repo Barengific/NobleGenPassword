@@ -160,6 +160,7 @@ class SettingsActivity : AppCompatActivity(),
                 putExtra("fromSettings","fin")
             }
             startActivity(intent)
+            requireActivity().finish()
             (activity as FragmentActivity).supportFragmentManager.popBackStack()
         }
     }
@@ -214,6 +215,7 @@ class SettingsActivity : AppCompatActivity(),
                     putExtra("fromSettings","rst")
                 }
                 startActivity(intent)
+                requireActivity().finish()
                 (activity as FragmentActivity).supportFragmentManager.popBackStack()
             })
             alert?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
@@ -221,6 +223,7 @@ class SettingsActivity : AppCompatActivity(),
                     putExtra("fromSettings","fin")
                 }
                 startActivity(intent)
+                requireActivity().finish()
                 (activity as FragmentActivity).supportFragmentManager.popBackStack()
             })
 
@@ -228,6 +231,17 @@ class SettingsActivity : AppCompatActivity(),
             dialog?.setCanceledOnTouchOutside(false);
             dialog?.show();
 
+        }
+    }
+
+    class HelpFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            val intent = Intent(this.context, TutIntroduction::class.java).apply {
+                putExtra("fromSettings","fin")
+            }
+            startActivity(intent)
+            requireActivity().finish()
+            (activity as FragmentActivity).supportFragmentManager.popBackStack()
         }
     }
 

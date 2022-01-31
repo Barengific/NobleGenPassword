@@ -23,7 +23,8 @@ class TutIntroduction : AppIntro() {
         addSlide(AppIntroFragment.newInstance(
             title = "Select...",
             description = "Select a master key and a 4 digit pin number",
-            backgroundDrawable = R.drawable.background5
+            backgroundDrawable = R.drawable.background5,
+            imageDrawable = R.drawable.noble_icon,
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Save",
@@ -33,12 +34,14 @@ class TutIntroduction : AppIntro() {
         addSlide(AppIntroFragment.newInstance(
             title = "When the app is started, generate a password",
             description = "enter a key phrase to find a password for it and select password length",
-            backgroundDrawable = R.drawable.background7
+            backgroundDrawable = R.drawable.background7,
+            imageDrawable = R.drawable.device_9_16
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "New pass",
             description = "Click generate to see the newly generated password",
-            backgroundDrawable = R.drawable.background8
+            backgroundDrawable = R.drawable.background8,
+            imageDrawable = R.drawable.device_9_16122
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Save or copy",

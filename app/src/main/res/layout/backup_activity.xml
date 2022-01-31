@@ -65,7 +65,7 @@
                 app:layout_constraintVertical_bias="0.02" />
 
             <Button
-                android:id="@+id/btnRestore"
+                android:id="@+id/btnSelectNone"
                 android:layout_width="190dp"
                 android:layout_height="57dp"
                 android:text="@string/select_none"

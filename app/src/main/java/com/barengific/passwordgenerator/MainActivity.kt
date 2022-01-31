@@ -566,12 +566,7 @@ class MainActivity : AppCompatActivity() {
                 val wordDao = room.wordDao()
 
                 arrr = wordDao.getAll()
-
-                var btnHideAllStatus = false
-
-                Log.d("aaaaPOS", posis.toString())
-                Log.d("aaaaPOS2", getPosi().toString())
-                //posis.add(getPosi())
+                
                 if(posis.contains(getPosi())){//if existent then show
 //                  posis.removeAt(getPosi())
                     posis.remove(getPosi())

@@ -31,8 +31,6 @@ import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.setting.SettingsActivity
 import java.io.*
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.backup_activity.btnRestore
-
 
 class Backup : AppCompatActivity() {
 
@@ -78,7 +76,7 @@ class Backup : AppCompatActivity() {
             Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
         }
 
-        btnRestore.setOnClickListener {
+        btnSelectNone.setOnClickListener {
             CustomAdapters.isSelected = false
             recyclerView.adapter?.notifyDataSetChanged()
             Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())

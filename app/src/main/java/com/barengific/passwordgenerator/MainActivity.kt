@@ -185,14 +185,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setAdapter(adapter)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
 
-//        adapter = CustomAdapter(arr)
-//        recyclerView.setAdapter(adapter)
-//        adapter.notifyDataSetChanged()
-//        adapter.notifyDataSetChanged()
-//        recyclerView.adapter?.notifyDataSetChanged()
-//        adapter.notifyItemRangeChanged(0,5)
-
-        //length dropdown ********************8
+        //length dropdown ********************
         val Lines = resources.getStringArray(R.array.p_len_array).toList()
         val adapterr = ArrayAdapter(this, R.layout.length_layout, Lines)
         filled_exposed_dropdown.setAdapter(adapterr)

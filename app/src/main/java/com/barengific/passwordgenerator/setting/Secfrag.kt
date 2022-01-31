@@ -3,6 +3,7 @@ package com.barengific.passwordgenerator.setting
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,10 +23,10 @@ class Secfrag : AppCompatActivity() {
         setContentView(R.layout.secfrag_activity)
 
         //TODO
-        //getWindow().setFlags(
-//            WindowManager.LayoutParams.FLAG_SECURE,
-//            WindowManager.LayoutParams.FLAG_SECURE
-//        )
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         hideSystemBars()
 
         binding = SecfragActivityBinding.inflate(layoutInflater)

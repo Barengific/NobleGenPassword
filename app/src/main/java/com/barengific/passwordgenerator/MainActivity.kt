@@ -306,14 +306,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-//fix visibilty of rcyclerview when item saved
-
-//            val aa = Word(
-//                0,
-//                "pgen",
-//                Aqtik.encrypt(editTextKeyGen.editText?.text.toString()),
-//                Aqtik.encrypt(tvGen.editText?.text.toString())
-//            )
             val aa = Word(
                 0,
                 "pgen",
@@ -329,12 +321,6 @@ class MainActivity : AppCompatActivity() {
             recyclerView.setAdapter(adapter)
             recyclerView.setLayoutManager(LinearLayoutManager(this))
 
-
-            //var arrrNew: MutableList<Word> = listOf(Word(0, "pa", "pa", "pa"), Word(0, "pb", "pb", "pb")) as MutableList<Word>
-           // arrrNew.add()
-
-            var aNew: MutableList<Word> = mutableListOf(Word(arrr[0].wid, arrr[0].pType, Aqtik.decrypt(arrr[0].key), Aqtik.decrypt(arrr[0].value)))
-            //arrr += a
             runOnUiThread {
                 adapter.notifyDataSetChanged()
             }

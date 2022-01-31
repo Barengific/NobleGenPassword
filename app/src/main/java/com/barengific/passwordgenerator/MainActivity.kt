@@ -209,7 +209,6 @@ class MainActivity : AppCompatActivity() {
 //                apply()
 //            }
 //
-//
 //            // read retreive
 //            val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
 //            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
@@ -225,10 +224,6 @@ class MainActivity : AppCompatActivity() {
 //                apply()
 //            }
 //            val nameS = sharedPreferences.getString("signature", "nonon")
-//
-////            Log.d("aaaaaaSgared1", highScore.toString() )
-////            Log.d("aaaaaaSgared2", name.toString() )
-////            Log.d("aaaaaaSgared3", nameS.toString() )
 //
 //            val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 //            val masterKeyAliasS: MasterKey.Builder = MasterKey.Builder(this)

@@ -97,13 +97,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    //lateinit var recyclerView: RecyclerView
-//    lateinit var db = Room.databaseBuilder(applicationContext,
-//        AppDatabase::class.java, "database-name"
-//    ).allowMainThreadQueries().build()
-
-    //private lateinit var biometricPrompt: BiometricPrompt
     private val cryptographyManager = CryptographyManager()
     private val ciphertextWrapper
         get() = cryptographyManager.getCiphertextWrapperFromSharedPrefs(
@@ -122,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//
+
         //TODO
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,

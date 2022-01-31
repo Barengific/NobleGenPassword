@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -34,10 +35,11 @@ class CredentialsEnt : AppCompatActivity() {
         setContentView(R.layout.credentials_ent)
 
         //TODO
-        //getWindow().setFlags(
-//            WindowManager.LayoutParams.FLAG_SECURE,
-//            WindowManager.LayoutParams.FLAG_SECURE
-//        )
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+
         hideSystemBars()
 
         val fromSettings = getIntent().extras?.get("fromSettings")

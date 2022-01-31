@@ -22,17 +22,17 @@ class AppIntroduction : AppIntro() {
         addSlide(AppIntroFragment.newInstance(
             title = "Welcome...",
             description = "This is the Noble Password Manager",
-            backgroundDrawable = R.drawable.background,
-            descriptionColor = ContextCompat.getColor(getApplicationContext(), R.color.white),
-            backgroundColor = ContextCompat.getColor(getApplicationContext(), R.color.purple_900)
+            backgroundDrawable = R.drawable.background
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Simple & Effective!",
-            description = "An easy way to create unique passwords"
+            description = "An easy way to create unique passwords",
+            backgroundDrawable = R.drawable.background2
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Safe & Reliable!",
-            description = "You don't have to worry about brute force attacks and even if the app gets deleted, the passwords can be derived back!"
+            description = "You don't have to worry about brute force attacks and even if the app gets deleted, the passwords can be derived back!",
+            backgroundDrawable = R.drawable.background3
         ))
     }
 

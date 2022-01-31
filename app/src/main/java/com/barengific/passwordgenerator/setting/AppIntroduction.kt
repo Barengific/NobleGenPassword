@@ -1,9 +1,14 @@
 package com.barengific.passwordgenerator.setting
 
 import android.content.Intent
+import android.graphics.Color.blue
+import android.graphics.Color.red
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.barengific.passwordgenerator.CredentialsEnt
+import com.barengific.passwordgenerator.R
+import com.barengific.passwordgenerator.R.color.purple_200
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
 
@@ -16,7 +21,9 @@ class AppIntroduction : AppIntro() {
         // You can use AppIntroFragment to use a pre-built fragment
         addSlide(AppIntroFragment.newInstance(
             title = "Welcome...",
-            description = "This is the Noble Password Manager"
+            description = "This is the Noble Password Manager",
+            descriptionColor = purple_200,
+            backgroundColor = ContextCompat(this, R.color.blue)
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Simple & Effective!",

@@ -33,7 +33,7 @@ class TutIntroduction : AppIntro() {
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "When the app is started, generate a password",
-            description = "enter a key phrase to find a password for it and select password length",
+            description = "Enter a key phrase to find a password for it and select password length",
             backgroundDrawable = R.drawable.background7,
             imageDrawable = R.drawable.device_9_16
         ))

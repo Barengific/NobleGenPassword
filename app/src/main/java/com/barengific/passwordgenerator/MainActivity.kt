@@ -345,13 +345,6 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-//
-//        autoCompleteTextView.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
-//            val selection = parent.getItemAtPosition(position) as String
-//            // Do something with the selected text
-//        })
-
-
         editTextKeyGen.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -419,15 +412,9 @@ class MainActivity : AppCompatActivity() {
 
             }//
 
-
         }
 
-
         registerForContextMenu(recyclerView);
-        val ustomAdapter = CustomAdapter(arr)
-
-        //val selectedPostion = (ustomAdapter as AdapterContextMenuInfo).position
-
 
     }
 

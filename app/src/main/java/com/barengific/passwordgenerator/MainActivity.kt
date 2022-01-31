@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))
 
-
     init {
         instance = this
     }
@@ -106,10 +105,6 @@ class MainActivity : AppCompatActivity() {
             CIPHERTEXT_WRAPPER
         )
 
-    private lateinit var executor: Executor
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
-
     @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
         val nameDB = sharedPreferencesEE.getString("signatureDB", "nonon")
 
-//        //authenticate
+//      //authenticate
         val fromLogin = getIntent().extras?.get("fromLogin")
         val fromIntro = getIntent().extras?.get("fromIntro")
 

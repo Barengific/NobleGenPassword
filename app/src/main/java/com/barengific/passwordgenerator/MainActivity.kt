@@ -69,9 +69,6 @@ import kotlinx.android.synthetic.main.fragment_home.tvCopy
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
-
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding

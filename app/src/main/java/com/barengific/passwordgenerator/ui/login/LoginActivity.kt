@@ -54,10 +54,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//        getWindow().setFlags(
-//            WindowManager.LayoutParams.FLAG_SECURE,
-//            WindowManager.LayoutParams.FLAG_SECURE
-//        );
+        //TODO
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        );
+
         hideSystemBars()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)

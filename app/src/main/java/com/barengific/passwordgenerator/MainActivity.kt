@@ -566,7 +566,7 @@ class MainActivity : AppCompatActivity() {
                 val wordDao = room.wordDao()
 
                 arrr = wordDao.getAll()
-                
+
                 if(posis.contains(getPosi())){//if existent then show
 //                  posis.removeAt(getPosi())
                     posis.remove(getPosi())
@@ -668,21 +668,6 @@ class MainActivity : AppCompatActivity() {
         return secret
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//        if (ciphertextWrapper != null) {
-//            if (SampleAppUser.fakeToken == null) {
-//                showBiometricPromptForDecryption()
-//            } else {
-//                // The user has already logged in, so proceed to the rest of the app
-//                // this is a todo for you, the developer
-//                updateApp(getString(R.string.already_signedin))
-//            }
-//        }
-//
-//    }
-
     @RequiresApi(Build.VERSION_CODES.M)
     private fun generateSecretKey(keyGenParameterSpec: KeyGenParameterSpec) {
         val keyGenerator = KeyGenerator.getInstance(
@@ -769,9 +754,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
             override fun onClick(view: View?) {
                 val wrapper: Context = ContextThemeWrapper(view?.context, R.style.PopupMenu)
-//                val popup = PopupMenu(wrapper, view)
-                //creating a popup menu
-//                val popup = PopupMenu(view?.context, viewHolder.ivMore)
+
                 val popup = PopupMenu(wrapper, viewHolder.ivMore)
                 //inflating menu from xml resource
                 popup.inflate(R.menu.rv_menu_context)
@@ -797,15 +780,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                         .build()
                                 }
                                 val wordDao = room?.wordDao()
-//
-//                                Log.d("aaaamenuu","delete")
-//                                val db = view?.context?.let {
-//                                    Room.databaseBuilder(
-//                                        it,
-//                                        AppDatabase::class.java, "database-name"
-//                                    ).allowMainThreadQueries().build()
-//                                }
-//                                val wordDao = db?.wordDao()
 
                                 val wid: TextView? = viewHolder.textView1
                                 val pType: TextView? = viewHolder.textView2
@@ -848,9 +822,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                                 var btnHideAllStatus = false
 
-                                Log.d("aaaaMORE", viewHolder.adapterPosition.toString())
-                                Log.d("aaaaMORE2", position.toString())
-                                Log.d("aaaaMORE3", MainActivity.posis.toString())
                                 if(MainActivity.posis.contains(viewHolder.adapterPosition)){//if existent then show
                                     MainActivity.posis.remove(viewHolder.adapterPosition)
 
@@ -928,8 +899,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
     override fun getItemCount() = dataSet.size
 
-    //
-    //
     private var position: Int = 0
 
     fun getPosition(): Int {

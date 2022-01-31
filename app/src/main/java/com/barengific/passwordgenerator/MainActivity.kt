@@ -282,24 +282,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-
-            //encrypt/decrypt
-//            val acvb = Acvb
-//
-//            val enout =
-//                acvb.encrypt_AES("aaaaaaaaaaaaaaaa", "hello this is a mesage", "qqqqqqqqqqqqqqqq")
-//            Log.d("aaaQQQ_EN", enout!!)
-//
-//            val deout = acvb.decrypt("aaaaaaaaaaaaaaaa", enout, "qqqqqqqqqqqqqqqq")
-//            Log.d("aaaQQQ_DEC", deout!!)
-//
-//            val sc = generateKey("aaaaaaaaaaaaaaaa")
-//            val en = encryptMsg("hell this is a msg", sc)
-//            Log.d("aaaWWW_EN", en!!)
-//
-//            val de = decryptMsg(en, sc)
-//            Log.d("aaaWWW_DE", de!!)
-
         }
 
 

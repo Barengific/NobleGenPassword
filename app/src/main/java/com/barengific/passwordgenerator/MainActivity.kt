@@ -168,7 +168,6 @@ class MainActivity : AppCompatActivity() {
 
         //***************************************************
 
-
         //db initialise
         val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
         val factory = SupportFactory(passphrase)
@@ -177,16 +176,6 @@ class MainActivity : AppCompatActivity() {
             .allowMainThreadQueries()
             .build()
         val wordDao = room.wordDao()
-
-//        //unsecure connection
-//        val db = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java, "database-name"
-//        ).allowMainThreadQueries().build()
-//        //val wordDao = db.wordDao()
-//        val wordDaos = db.wordDao()
-//        val arrs = wordDaos.getAll()
-
 
         //recycle view
         val arr = wordDao.getAll()

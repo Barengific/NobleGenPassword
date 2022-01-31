@@ -476,9 +476,6 @@ class MainActivity : AppCompatActivity() {
         }
         startActivity(intent)
         finish()
-//
-//        val newFragment = DonationDialogFragment()
-//        newFragment.show(supportFragmentManager, "donation")
 
     }
 

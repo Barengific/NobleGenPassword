@@ -16,20 +16,20 @@ class TutIntroduction : AppIntro() {
             description = "Select a master key and a 4 digit pin number"
         ))
         addSlide(AppIntroFragment.newInstance(
-            title = "save",
-            description = "the app automatically saves that master key and pin"
+            title = "Save",
+            description = "The app automatically saves the master key and pin"
         ))
         addSlide(AppIntroFragment.newInstance(
-            title = "when app started, need to generate?",
+            title = "When the app is started, generate a password",
             description = "enter a key phrase to find a password for it and select password length"
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "New pass",
-            description = "click generate"
+            description = "Click generate to see the newly generated password"
         ))
         addSlide(AppIntroFragment.newInstance(
-            title = "save or copy",
-            description = "save the password for later use, copy the password to use now"
+            title = "Save or copy",
+            description = "Save the password for later use, copy the password to use now"
         ))
     }
 

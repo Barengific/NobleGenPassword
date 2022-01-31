@@ -11,12 +11,13 @@ import com.barengific.passwordgenerator.R
 import com.barengific.passwordgenerator.R.color.purple_200
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
+import com.github.appintro.AppIntroPageTransformerType
 
 class AppIntroduction : AppIntro() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Make sure you don't call setContentView!
-
+        setTransformer(AppIntroPageTransformerType.Zoom)
         // Call addSlide passing your Fragments.
         // You can use AppIntroFragment to use a pre-built fragment
         addSlide(AppIntroFragment.newInstance(

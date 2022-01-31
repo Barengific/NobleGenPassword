@@ -925,19 +925,3 @@ class FireMissilesDialogFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 }
-
-class DonationDialogFragment : DialogFragment() {
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater;
-            builder.setView(inflater.inflate(R.layout.alertdialog_donation, null))
-                .setNegativeButton(R.string.cancel,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        getDialog()?.cancel()
-                    })
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
-    }
-}
-

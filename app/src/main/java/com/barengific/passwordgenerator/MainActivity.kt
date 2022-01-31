@@ -293,17 +293,6 @@ class MainActivity : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
-//
-            //tvGen.setText(getPosi().toString())
-//            tvGen.setText(wordDao.getAll().get(1).wid.toString() + "_" + wordDao.getAll().get(1).pType
-//                    + "_" + wordDao.getAll().get(1).key + "_" + wordDao.getAll().get(1).value)
-//
-//            val text1: TextView? =
-//                recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-//                    R.id.textView4)
-//
-//            Log.d("aaacc", text1?.text.toString())
-//            Log.d("aaa", editTextKeyGen.editText?.text.toString())
         }
 
         tvGen.setStartIconOnClickListener {

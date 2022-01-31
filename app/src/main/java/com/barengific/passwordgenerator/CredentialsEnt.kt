@@ -79,7 +79,7 @@ class CredentialsEnt : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             applicationContext,
-                            "Sigma values cannot be more or less than 4 digits",
+                            "Pin cannot be more or less than 4 digits",
                             Toast.LENGTH_LONG
                         ).show()
                     }

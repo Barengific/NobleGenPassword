@@ -23,7 +23,7 @@ class AppIntroduction : AppIntro() {
             title = "Welcome...",
             description = "This is the Noble Password Manager",
             descriptionColor = ContextCompat.getColor(getApplicationContext(), R.color.purple_200),
-            backgroundColor = ContextCompat.getColor(getApplicationContext(), R.color.purple_200)
+            backgroundColor = ContextCompat.getColor(getApplicationContext(), R.color.purple_900)
         ))
         addSlide(AppIntroFragment.newInstance(
             title = "Simple & Effective!",

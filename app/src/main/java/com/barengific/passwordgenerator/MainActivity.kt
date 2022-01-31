@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity() {
         if(nameS.equals("nonon") or nameT.equals("nonon")){
             val intent = Intent(applicationContext, AppIntroduction::class.java).apply {}
             startActivity(intent)
+            finish()
         }
         //
 

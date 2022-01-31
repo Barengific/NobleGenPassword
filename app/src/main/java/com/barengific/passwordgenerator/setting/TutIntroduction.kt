@@ -5,11 +5,19 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
+import com.github.appintro.AppIntroPageTransformerType
 
 class TutIntroduction : AppIntro() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Make sure you don't call setContentView!
+
+        setTransformer(
+            AppIntroPageTransformerType.Parallax(
+            titleParallaxFactor = 1.0,
+            imageParallaxFactor = -1.0,
+            descriptionParallaxFactor = 2.0
+        ))
 
         addSlide(AppIntroFragment.newInstance(
             title = "Select...",

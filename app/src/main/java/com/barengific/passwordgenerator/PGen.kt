@@ -71,9 +71,9 @@ class PGen {
                 message.length.toLong()
             ).toLong()
         ) //msg length in binary
-        val chunkno = chunkNo(message) //chuncks required //padding number
+        val chunkNo = chunkNo(message) //chunks required //padding number
         message += "1"
-        val padding = chunkno * 512 - (message.length + 64)
+        val padding = chunkNo * 512 - (message.length + 64)
         for (i in 0 until padding) {
             message += "0"
         } //padding applied
@@ -81,14 +81,14 @@ class PGen {
         var min = 0
         var max = 512
         val chunks: ArrayList<String> = ArrayList()
-        for (i in 0 until chunkno) {
+        for (i in 0 until chunkNo) {
             chunks.add(message.substring(min, max)) //split into chunks of 512bit
             min += 512
             max += 512
         }
 
         //process the message in successive 512bit chunks:
-        for (i in 0 until chunkno) {
+        for (i in 0 until chunkNo) {
             val newMsg = chunks[i]
             min = 0
             max = 32
@@ -103,13 +103,13 @@ class PGen {
                 val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int4)
 //                val s0 = sig0(msgChunks[msgChunks.size - 15])
 //                val s1 = sig1(msgChunks[msgChunks.size - 2])
-                val addup = adder(
+                val addUp = adder(
                     msgChunks[msgChunks.size - 16],
                     s0,
                     msgChunks[msgChunks.size - 7],
                     s1
                 )
-                msgChunks.add(addup)
+                msgChunks.add(addUp)
             }
             var a = rt22[0]
             var b = rt22[1]
@@ -123,31 +123,31 @@ class PGen {
                 val S1 = sigma1(e, int1, int2, int3)
 //                val S1 = sigma1(e)
                 val ch = cho(e, f, g)
-                val temp1 = addersz(
+                val temp1 = adders(
                     h.toLong(2) + S1.toLong(2) + ch.toLong(2) + rt33[j]
                         .toLong(2) + msgChunks[j].toLong(2)
                 )
                 val S0 = sigma0(a, int1, int2, int3)
 //                val S0 = sigma0(a)
                 val maj = mj(a, b, c)
-                val temp2 = addersz(S0.toLong(2) + maj.toLong(2))
+                val temp2 = adders(S0.toLong(2) + maj.toLong(2))
                 h = g
                 g = f
                 f = e
-                e = addersz(d.toLong(2) + temp1.toLong(2))
+                e = adders(d.toLong(2) + temp1.toLong(2))
                 d = c
                 c = b
                 b = a
-                a = addersz(temp1.toLong(2) + temp2.toLong(2))
+                a = adders(temp1.toLong(2) + temp2.toLong(2))
             }
-            rt22[0] = addersz(rt22[0].toLong(2) + a.toLong(2))
-            rt22[1] = addersz(rt22[1].toLong(2) + b.toLong(2))
-            rt22[2] = addersz(rt22[2].toLong(2) + c.toLong(2))
-            rt22[3] = addersz(rt22[3].toLong(2) + d.toLong(2))
-            rt22[4] = addersz(rt22[4].toLong(2) + e.toLong(2))
-            rt22[5] = addersz(rt22[5].toLong(2) + f.toLong(2))
-            rt22[6] = addersz(rt22[6].toLong(2) + g.toLong(2))
-            rt22[7] = addersz(rt22[7].toLong(2) + h.toLong(2))
+            rt22[0] = adders(rt22[0].toLong(2) + a.toLong(2))
+            rt22[1] = adders(rt22[1].toLong(2) + b.toLong(2))
+            rt22[2] = adders(rt22[2].toLong(2) + c.toLong(2))
+            rt22[3] = adders(rt22[3].toLong(2) + d.toLong(2))
+            rt22[4] = adders(rt22[4].toLong(2) + e.toLong(2))
+            rt22[5] = adders(rt22[5].toLong(2) + f.toLong(2))
+            rt22[6] = adders(rt22[6].toLong(2) + g.toLong(2))
+            rt22[7] = adders(rt22[7].toLong(2) + h.toLong(2))
         }
         var digest = ""
         for (j in 0..7) {
@@ -172,9 +172,9 @@ class PGen {
                 message.length.toLong()
             ).toLong()
         ) //msg length in binary
-        val chunkno = chunkNo(message) //chuncks required //padding number
+        val chunkNo = chunkNo(message) //chunks required //padding number
         message += "1"
-        val padding = chunkno * 512 - (message.length + 64)
+        val padding = chunkNo * 512 - (message.length + 64)
         for (i in 0 until padding) {
             message += "0"
         } //padding applied
@@ -182,14 +182,14 @@ class PGen {
         var min = 0
         var max = 512
         val chunks: ArrayList<String> = ArrayList()
-        for (i in 0 until chunkno) {
+        for (i in 0 until chunkNo) {
             chunks.add(message.substring(min, max)) //split into chunks of 512bit
             min += 512
             max += 512
         }
 
         //process the message in successive 512bit chunks:
-        for (i in 0 until chunkno) {
+        for (i in 0 until chunkNo) {
             val newMsg = chunks[i]
             min = 0
             max = 32
@@ -204,13 +204,13 @@ class PGen {
                 val s1 = sig1(msgChunks[msgChunks.size - 2], int1, int2, int4)
 //                val s0 = sig0(msgChunks[msgChunks.size - 15])
 //                val s1 = sig1(msgChunks[msgChunks.size - 2])
-                val addup = adder(
+                val addUp = adder(
                     msgChunks[msgChunks.size - 16],
                     s0,
                     msgChunks[msgChunks.size - 7],
                     s1
                 )
-                msgChunks.add(addup)
+                msgChunks.add(addUp)
             }
             var a = rt22[0]
             var b = rt22[1]
@@ -224,31 +224,31 @@ class PGen {
                 val S1 = sigma1(e, int1, int2, int3)
 //                val S1 = sigma1(e)
                 val ch = cho(e, f, g)
-                val temp1 = addersz(
+                val temp1 = adders(
                     h.toLong(2) + S1.toLong(2) + ch.toLong(2) + rt33[j]
                         .toLong(2) + msgChunks[j].toLong(2)
                 )
                 val S0 = sigma0(a, int1, int2, int3)
 //                val S0 = sigma0(a)
                 val maj = mj(a, b, c)
-                val temp2 = addersz(S0.toLong(2) + maj.toLong(2))
+                val temp2 = adders(S0.toLong(2) + maj.toLong(2))
                 h = g
                 g = f
                 f = e
-                e = addersz(d.toLong(2) + temp1.toLong(2))
+                e = adders(d.toLong(2) + temp1.toLong(2))
                 d = c
                 c = b
                 b = a
-                a = addersz(temp1.toLong(2) + temp2.toLong(2))
+                a = adders(temp1.toLong(2) + temp2.toLong(2))
             }
-            rt22[0] = addersz(rt22[0].toLong(2) + a.toLong(2))
-            rt22[1] = addersz(rt22[1].toLong(2) + b.toLong(2))
-            rt22[2] = addersz(rt22[2].toLong(2) + c.toLong(2))
-            rt22[3] = addersz(rt22[3].toLong(2) + d.toLong(2))
-            rt22[4] = addersz(rt22[4].toLong(2) + e.toLong(2))
-            rt22[5] = addersz(rt22[5].toLong(2) + f.toLong(2))
-            rt22[6] = addersz(rt22[6].toLong(2) + g.toLong(2))
-            rt22[7] = addersz(rt22[7].toLong(2) + h.toLong(2))
+            rt22[0] = adders(rt22[0].toLong(2) + a.toLong(2))
+            rt22[1] = adders(rt22[1].toLong(2) + b.toLong(2))
+            rt22[2] = adders(rt22[2].toLong(2) + c.toLong(2))
+            rt22[3] = adders(rt22[3].toLong(2) + d.toLong(2))
+            rt22[4] = adders(rt22[4].toLong(2) + e.toLong(2))
+            rt22[5] = adders(rt22[5].toLong(2) + f.toLong(2))
+            rt22[6] = adders(rt22[6].toLong(2) + g.toLong(2))
+            rt22[7] = adders(rt22[7].toLong(2) + h.toLong(2))
         }
         var digest = ""
         for (j in 0..7) {
@@ -299,14 +299,14 @@ class PGen {
 
     private fun chunkNo(msg: String): Int {
         var chunks = 1
-        var bsize = 447
-        if (msg.length <= bsize) {
+        var bSize = 447
+        if (msg.length <= bSize) {
             chunks = 1
-        } else if (msg.length >= bsize + 1) {
+        } else if (msg.length >= bSize + 1) {
             while (true) {
-                bsize += 512
+                bSize += 512
                 chunks += 1
-                if (msg.length <= bsize) {
+                if (msg.length <= bSize) {
                     break
                 }
             }
@@ -373,11 +373,11 @@ class PGen {
         if (binR.length == 32) {
             res = binR
         } else if (binR.length > 32) {
-            res = java.lang.Long.toBinaryString((r % Math.pow(2.0, 32.0)).toLong())
+            res = java.lang.Long.toBinaryString((r % 2.0.pow(32.0)).toLong())
             if (res.length < 32) {
                 res = addZeros(binR, 32)
             } else if (res.length > 32) {
-                //System.out.println("toobig");
+                //System.out.println("too big");
             }
         } else if (binR.length < 32) {
             res = addZeros(binR, 32)
@@ -388,7 +388,7 @@ class PGen {
         return res
     }
 
-    private fun addersz(a: Long): String {
+    private fun adders(a: Long): String {
         var res = ""
         val binR = java.lang.Long.toBinaryString(a)
         when {
@@ -396,7 +396,7 @@ class PGen {
                 res = binR
             }
             binR.length > 32 -> {
-                res = java.lang.Long.toBinaryString((a % Math.pow(2.0, 32.0)).toLong())
+                res = java.lang.Long.toBinaryString((a % 2.0.pow(32.0)).toLong())
             }
             binR.length < 32 -> {
                 res = addZeros(binR, 32)
@@ -406,14 +406,14 @@ class PGen {
             res = addZeros(res, 32)
         }
         if (res.length != 32) {
-            println("tooo smlll still")
+            println("too small still")
         }
         return res
     }
 
-    private fun rotr(a: String, rotnumber: Int): String {
+    private fun rotr(a: String, rotNumber: Int): String {
         var a = a
-        for (i in 0 until rotnumber) {
+        for (i in 0 until rotNumber) {
             val lastChar = a.substring(a.length - 1)
             a = a.substring(0, a.length - 1)
             a = lastChar + a
@@ -421,9 +421,9 @@ class PGen {
         return a
     }
 
-    private fun shr(a: String, rotnumber: Int): String {
+    private fun shr(a: String, rotNumber: Int): String {
         var a = a
-        for (i in 0 until rotnumber) {
+        for (i in 0 until rotNumber) {
             a = a.substring(0, a.length - 1)
             a = "0$a"
         }

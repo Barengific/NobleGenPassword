@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Backup"
+            android:name=".setting.Backup"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.PasswordGenerator.NoActionBar">

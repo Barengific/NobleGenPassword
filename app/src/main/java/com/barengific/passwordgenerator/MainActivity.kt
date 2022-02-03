@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         //recycle view
         val arr = wordDao.getAll()
         val adapter = CustomAdapter(arr)
-        recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+        recyclerView = findViewById<View>(R.id.rView) as RecyclerView
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)

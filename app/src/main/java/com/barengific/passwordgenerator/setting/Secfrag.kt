@@ -23,7 +23,7 @@ class SecFrag : AppCompatActivity() {
         setContentView(R.layout.secfrag_activity)
 
         //TODO
-        getWindow().setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
@@ -59,7 +59,7 @@ class SecFrag : AppCompatActivity() {
 
         btnCancels.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java).apply {
-                putExtra("fromSecfrag","cancel")
+                putExtra("fromSecFrag","cancel")
             }
             startActivity(intent)
             tvMasterKeyv.editText?.setText(R.string.nonon) //("nonon")
@@ -72,7 +72,7 @@ class SecFrag : AppCompatActivity() {
     override fun onBackPressed() {
         val intent = Intent(this, SettingsActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
-            putExtra("fromSecfrag","cancel")
+            putExtra("fromSecFrag","cancel")
         }
         startActivity(intent)
         tvMasterKeyv.editText?.setText(R.string.nonon)

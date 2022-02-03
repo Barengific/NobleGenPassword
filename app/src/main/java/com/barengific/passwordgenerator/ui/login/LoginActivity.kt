@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
@@ -43,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
-        );
+        )
 
         hideSystemBars()
 
@@ -56,13 +55,9 @@ class LoginActivity : AppCompatActivity() {
                 override fun onAuthenticationError(errorCode: Int,
                                                    errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-//                    Toast.makeText(applicationContext,
-//                        "Authentication error: $errString", Toast.LENGTH_SHORT)
-//                        .show()
                     val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
                     startActivity(intent)
                     finish()
-//                    Log.d("aaaaaaaa", "ineeeeeerrrr")
                 }
 
                 override fun onAuthenticationSucceeded(
@@ -71,7 +66,6 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext,
                         "Authentication succeeded!", Toast.LENGTH_SHORT)
                         .show()
-//                    Log.d("aaaaaaaa", "insuccc")
                     MainActivity.authStatus = true
                     val intent = Intent(applicationContext, MainActivity::class.java).apply {
                         putExtra("fromLogin","fin")
@@ -82,13 +76,8 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
-//                    Toast.makeText(applicationContext, "Authentication failed",
-//                        Toast.LENGTH_SHORT)
-//                        .show()
-
                     val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
                     startActivity(intent)
-                    Log.d("aaaaaaaa", "infalllled")
                 }
             })
 

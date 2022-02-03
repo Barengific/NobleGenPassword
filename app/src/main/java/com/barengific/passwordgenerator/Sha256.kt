@@ -172,11 +172,9 @@ class Sha256 {
     }
 
     fun sig0(bits: String): String {
-
         val a = rotr(bits, 7)
         val b = rotr(bits, 18)
         val c = shr(bits, 3)
-
         return xor(a, b, c)
     }
 
@@ -184,32 +182,25 @@ class Sha256 {
         val a = rotr(bits, 17)
         val b = rotr(bits, 19)
         val c = shr(bits, 10)
-
         return xor(a, b, c)
     }
 
     fun sigma0(bits: String): String {
-        var res: String
         val a = rotr(bits, 2)
         val b = rotr(bits, 13)
         val c = rotr(bits, 22)
-        res = xor(a, b, c)
-
-        return res
+        return xor(a, b, c)
     }
 
     fun sigma1(bits: String): String {
-        var res: String
         val a = rotr(bits, 6)
         val b = rotr(bits, 11)
         val c = rotr(bits, 25)
-        res = xor(a, b, c)
-
         return xor(a, b, c)
     }
 
     fun xor(a: String, b: String, c: String): String {
-        var res: String = ""
+        var res = ""
 
         for (i in 0 until a.length) {
             if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
@@ -243,7 +234,6 @@ class Sha256 {
             if (res.length < 32) {
                 res = addZeros(binr, 32)
             } else if (res.length > 32) {
-                //System.out.println("toobig");
             }
         } else if (binr.length < 32) {
             res = addZeros(binr, 32)

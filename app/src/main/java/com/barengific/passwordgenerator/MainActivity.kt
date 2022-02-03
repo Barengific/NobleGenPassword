@@ -714,9 +714,9 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                                 val pSize = MainActivity.posis.size
                                 for (i in 0 until pSize) {
-                                    Log.d("aaaaCVCVCVQQ", MainActivity.posis.get(i).toString())
-                                    if ((MainActivity.posis.get(i) != -1)) {
-                                        val qSize = MainActivity.posis.get(i)
+                                    Log.d("aaaaCVCVCVQQ", MainActivity.posis[i].toString())
+                                    if ((MainActivity.posis[i] != -1)) {
+                                        val qSize = MainActivity.posis[i]
                                         arrr?.get(qSize)?.value = "****"
                                         arrr?.get(qSize)?.key = "****"
                                     }
@@ -734,9 +734,9 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                                 val pSize = MainActivity.posis.size
                                 for (i in 0 until pSize) {
-                                    Log.d("aaaaCVCVCV", MainActivity.posis.get(i).toString())
-                                    if ((MainActivity.posis.get(i) != -1)) {
-                                        val qSize = MainActivity.posis.get(i)
+                                    Log.d("aaaaCVCVCV", MainActivity.posis[i].toString())
+                                    if ((MainActivity.posis[i] != -1)) {
+                                        val qSize = MainActivity.posis[i]
                                         arrr?.get(qSize)?.value = "****"
                                         arrr?.get(qSize)?.key = "****"
                                     }
@@ -761,16 +761,13 @@ class CustomAdapter(private val dataSet: List<Word>) :
             }
         })
 
-        viewHolder.ivCopy.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                Log.d("aaaaICONu","innn copyy")
-                val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
-                clipboard.setPrimaryClip(clip)
-                Toast.makeText(view.context, "Text Copied", Toast.LENGTH_LONG).show()
-
-            }
-        })
+        viewHolder.ivCopy.setOnClickListener { view ->
+            Log.d("aaaaICONu", "innn copyy")
+            val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(view.context, "Text Copied", Toast.LENGTH_LONG).show()
+        }
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element

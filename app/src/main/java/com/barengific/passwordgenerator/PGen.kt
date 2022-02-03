@@ -13,7 +13,7 @@ class PGen {
     private val decode = arrayOf("@","#","£","_","&","-","/","*",";","!","?",".","0","1","2","3","4","5","6","7","8","9","A","B","D","E","F","G","H","K","L","M","N","P","Q","R","S","T","U","V","W","Y","a","b","c","d","e","f","g","h","i","j","k","m","n","p","q","r","s","t","u","v","x","z"
     )
 
-    fun pGen(msg:String, mKey:String, int1:String, int2:String, int3:String, int4:String, pLen:Int): String?{
+    fun pGen(msg:String, mKey:String, int1:String, int2:String, int3:String, int4:String, pLen:Int): String {
         val mKey = mKey
         val int1 = int1.toInt()
         val int2 = int2.toInt()
@@ -27,7 +27,7 @@ class PGen {
         for (i in 0 until msgB!!.length) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msgB!![i].code.toLong()).toLong()
+                java.lang.Long.toBinaryString(msgB[i].code.toLong()).toLong()
             ) //msg to binary
         }
 
@@ -61,7 +61,7 @@ class PGen {
         for (i in 0 until msg.length) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msg[i].toLong()).toLong()
+                java.lang.Long.toBinaryString(msg[i].code.toLong()).toLong()
             ) //msg to binary
         }
         val msgLen = String.format(
@@ -162,7 +162,7 @@ class PGen {
         for (i in 0 until msg.length) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msg[i].toLong()).toLong()
+                java.lang.Long.toBinaryString(msg[i].code.toLong()).toLong()
             ) //msg to binary
         }
         val msgLen = String.format(
@@ -334,12 +334,10 @@ class PGen {
     }
 
     fun sigma0(bits: String, int1:Int, int2:Int, int3:Int): String {
-        var res = ""
         val a = rotr(bits, 2+int1)
         val b = rotr(bits, 13-int2)
         val c = rotr(bits, 22-(int3/2).toInt())
-        res = xor(a, b, c)
-        return res
+        return xor(a, b, c)
     }
 
     fun sigma1(bits: String, int1:Int, int2:Int, int3:Int): String {

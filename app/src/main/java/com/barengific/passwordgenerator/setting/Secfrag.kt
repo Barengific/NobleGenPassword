@@ -62,8 +62,8 @@ class SecFrag : AppCompatActivity() {
                 putExtra("fromSecfrag","cancel")
             }
             startActivity(intent)
-            tvMasterKeyv.editText?.setText("nonon")
-            tvDigitv.editText?.setText("nonon")
+            tvMasterKeyv.editText?.setText(R.string.nonon) //("nonon")
+            tvDigitv.editText?.setText(R.string.nonon)
             finish()
         }
 
@@ -75,8 +75,8 @@ class SecFrag : AppCompatActivity() {
             putExtra("fromSecfrag","cancel")
         }
         startActivity(intent)
-        tvMasterKeyv.editText?.setText("nonon")
-        tvDigitv.editText?.setText("nonon")
+        tvMasterKeyv.editText?.setText(R.string.nonon)
+        tvDigitv.editText?.setText(R.string.nonon)
         finish()
         setResult(RESULT_CANCELED)
         super.onBackPressed()

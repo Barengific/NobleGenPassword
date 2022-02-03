@@ -16,7 +16,6 @@ import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.R
-import com.barengific.passwordgenerator.setting.SettingsActivity
 import com.barengific.passwordgenerator.databinding.RestoreActivityBinding
 import java.io.*
 import com.google.gson.Gson
@@ -32,7 +31,7 @@ class Restore : AppCompatActivity() {
         setContentView(R.layout.restore_activity)
 
         //TODO
-        getWindow().setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
@@ -58,7 +57,7 @@ class Restore : AppCompatActivity() {
             read(this, filename,
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
 
-            Log.d("aaaaaYYY", read(this, filename,
+            Log.d("aaa YYY", read(this, filename,
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             ))
 
@@ -75,14 +74,14 @@ class Restore : AppCompatActivity() {
 
             val enums: Array<Word> = gson.fromJson(ww,Array<Word>::class.java)
 
-            Log.d("aaaaaZZZ", enums.toString())
+            Log.d("aaa_ZZZ", enums.toString())
 
-            for (i in 0 until enums.size){
+            for (i in enums.indices){
                 val aa = Word(
                     0,
-                    "pgen",
-                    enums.get(i).key.toString(),
-                    enums.get(i).value.toString()
+                    "pGen",
+                    enums[i].key.toString(),
+                    enums[i].value.toString()
                 )
                 wordDao.insertAll(aa)
             }
@@ -103,7 +102,7 @@ class Restore : AppCompatActivity() {
 
     }
 
-    fun read(context: Context, name: String, dir: File) : String {
+    private fun read(context: Context, name: String, dir: File) : String {
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)

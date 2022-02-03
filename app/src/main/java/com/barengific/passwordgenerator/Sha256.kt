@@ -198,14 +198,18 @@ class Sha256 {
         var res = ""
 
         for (i in a.indices) {
-            if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
-                res += "1"
+            when {
+                (a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1 -> {
+                    res += "1"
 
-            } else if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0) {
-                res += "0"
+                }
+                (a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0 -> {
+                    res += "0"
 
-            } else {
-                println("____")
+                }
+                else -> {
+                    println("____")
+                }
             }
         }
         return res
@@ -240,12 +244,16 @@ class Sha256 {
     private fun adders(a: Long): String {
         var res = ""
         val binr = java.lang.Long.toBinaryString(a)
-        if (binr.length == 32) {
-            res = binr
-        } else if (binr.length > 32) {
-            res = java.lang.Long.toBinaryString((a % 2.0.pow(32.0)).toLong())
-        } else if (binr.length < 32) {
-            res = addZeros(binr, 32)
+        when {
+            binr.length == 32 -> {
+                res = binr
+            }
+            binr.length > 32 -> {
+                res = java.lang.Long.toBinaryString((a % 2.0.pow(32.0)).toLong())
+            }
+            binr.length < 32 -> {
+                res = addZeros(binr, 32)
+            }
         }
         if (res.length < 32) {
             res = addZeros(res, 32)
@@ -279,12 +287,16 @@ class Sha256 {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         var res = ""
         for (i in a.indices) {
-            if (a[i] == '1') {
-                res += b[i]
-            } else if (a[i] == '0') {
-                res += c[i]
-            } else {
-                println("nothing")
+            when {
+                a[i] == '1' -> {
+                    res += b[i]
+                }
+                a[i] == '0' -> {
+                    res += c[i]
+                }
+                else -> {
+                    println("nothing")
+                }
             }
         }
         return res
@@ -294,18 +306,20 @@ class Sha256 {
 //    #take majority input value
         var res = ""
         for (i in a.indices) {
-            if ((a[i] == '1' && b[i] == '1') xor
-                (a[i] == '1' && c[i] == '1') xor
-                (b[i] == '1' && c[i] == '1')
-            ) {
-                res += "1"
-            } else if ((a[i] == '0' && b[i] == '0') xor
-                (a[i] == '0' && c[i] == '0') xor
-                (b[i] == '0' && c[i] == '0')
-            ) {
-                res += "0"
-            } else {
-                println("maj nothing")
+            when {
+                (a[i] == '1' && b[i] == '1') xor
+                        (a[i] == '1' && c[i] == '1') xor
+                        (b[i] == '1' && c[i] == '1') -> {
+                    res += "1"
+                }
+                (a[i] == '0' && b[i] == '0') xor
+                        (a[i] == '0' && c[i] == '0') xor
+                        (b[i] == '0' && c[i] == '0') -> {
+                    res += "0"
+                }
+                else -> {
+                    println("maj nothing")
+                }
             }
         }
         return res

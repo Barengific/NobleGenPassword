@@ -619,7 +619,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
         init {
             ivCopy = view.findViewById(R.id.ivCopy) as ImageView
-            fileName = view.findViewById(R.id.textView4) as TextView
             ivMore = view.findViewById(R.id.ivMore) as ImageView
             view.setOnCreateContextMenuListener(this)
 

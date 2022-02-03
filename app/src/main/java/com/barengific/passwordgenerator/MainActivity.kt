@@ -2,6 +2,7 @@ package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.ProgressDialog.show
 import android.content.*
 import android.os.Build
 import android.os.Bundle
@@ -355,7 +356,7 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
 
             }else{
-                btnHideAll.text = "Show"
+                btnHideAll.text = resources.getString(R.string.show) //"Show"
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
                 btnHideAllStatus = true
 

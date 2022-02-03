@@ -1,10 +1,12 @@
 package com.barengific.passwordgenerator
 
 import java.math.BigInteger
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class Sha256 {
     private var rt2 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19)
-    var rt3 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+    private var rt3 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
         73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167,
         173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269,
         271,        277,        281,        283,        293,        307,        311
@@ -14,10 +16,10 @@ class Sha256 {
         val rt22 = rt2s()
         val rt33 = rt3s()
         var message = ""
-        for (i in 0 until msg.length) {
+        for (element in msg) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msg[i].code.toLong()).toLong()
+                java.lang.Long.toBinaryString(element.code.toLong()).toLong()
             ) //msg to binary
         }
         val msgLen = String.format(
@@ -106,7 +108,7 @@ class Sha256 {
         return BigInteger(digest, 2).toString(16)
     }
 
-    fun rt2s(): ArrayList<String> {
+    private fun rt2s(): ArrayList<String> {
         //2^1/2 - 2^1/2 * 2^32
         val rt: ArrayList<String> = ArrayList()
         for (i in rt2.indices) {
@@ -114,13 +116,10 @@ class Sha256 {
                 addZeros(
                     String.format(
                         java.lang.Long.toBinaryString(
-                            ((Math.sqrt(
+                            ((sqrt(
                                 rt2[i]
                                     .toDouble()
-                            ) - Math.sqrt(rt2[i].toDouble()).toInt()) * Math.pow(
-                                2.0,
-                                32.0
-                            )).toLong()
+                            ) - sqrt(rt2[i].toDouble()).toInt()) * 2.0.pow(32.0)).toLong()
                         )
                     ), 32
                 )
@@ -129,7 +128,7 @@ class Sha256 {
         return rt
     }
 
-    fun rt3s(): ArrayList<String> {
+    private fun rt3s(): ArrayList<String> {
         //2^1/3 - 2^1/3 * 2^32
         val rt: ArrayList<String> = ArrayList()
         for (i in rt3.indices) {
@@ -140,10 +139,7 @@ class Sha256 {
                             ((Math.cbrt(
                                 rt3[i]
                                     .toDouble()
-                            ) - Math.cbrt(rt3[i].toDouble()).toInt()) * Math.pow(
-                                2.0,
-                                32.0
-                            )).toLong()
+                            ) - Math.cbrt(rt3[i].toDouble()).toInt()) * 2.0.pow(32.0)).toLong()
                         )
                     ), 32
                 )
@@ -152,7 +148,7 @@ class Sha256 {
         return rt
     }
 
-    fun chunkNo(msg: String): Int {
+    private fun chunkNo(msg: String): Int {
         var chunks = 1
         var bsize = 447
         if (msg.length <= bsize) {
@@ -170,35 +166,35 @@ class Sha256 {
         return chunks
     }
 
-    fun sig0(bits: String): String {
+    private fun sig0(bits: String): String {
         val a = rotr(bits, 7)
         val b = rotr(bits, 18)
         val c = shr(bits, 3)
         return xor(a, b, c)
     }
 
-    fun sig1(bits: String): String {
+    private fun sig1(bits: String): String {
         val a = rotr(bits, 17)
         val b = rotr(bits, 19)
         val c = shr(bits, 10)
         return xor(a, b, c)
     }
 
-    fun sigma0(bits: String): String {
+    private fun sigma0(bits: String): String {
         val a = rotr(bits, 2)
         val b = rotr(bits, 13)
         val c = rotr(bits, 22)
         return xor(a, b, c)
     }
 
-    fun sigma1(bits: String): String {
+    private fun sigma1(bits: String): String {
         val a = rotr(bits, 6)
         val b = rotr(bits, 11)
         val c = rotr(bits, 25)
         return xor(a, b, c)
     }
 
-    fun xor(a: String, b: String, c: String): String {
+    private fun xor(a: String, b: String, c: String): String {
         var res = ""
 
         for (i in 0 until a.length) {
@@ -217,7 +213,7 @@ class Sha256 {
         return res
     }
 
-    fun adder(a: String, b: String, c: String, d: String): String {
+    private fun adder(a: String, b: String, c: String, d: String): String {
         var res = ""
 
         val aint = a.toLong(2)
@@ -243,7 +239,7 @@ class Sha256 {
         return res
     }
 
-    fun addersz(a: Long): String {
+    private fun addersz(a: Long): String {
         var res = ""
         val binr = java.lang.Long.toBinaryString(a)
         if (binr.length == 32) {
@@ -262,7 +258,7 @@ class Sha256 {
         return res
     }
 
-    fun rotr(a: String, rotnumber: Int): String {
+    private fun rotr(a: String, rotnumber: Int): String {
         var a = a
         for (i in 0 until rotnumber) {
             val last_char = a.substring(a.length - 1)
@@ -272,7 +268,7 @@ class Sha256 {
         return a
     }
 
-    fun shr(a: String, rotnumber: Int): String {
+    private fun shr(a: String, rotnumber: Int): String {
         var a = a
         for (i in 0 until rotnumber) {
             a = a.substring(0, a.length - 1)
@@ -281,7 +277,7 @@ class Sha256 {
         return a
     }
 
-    fun cho(a: String, b: String, c: String): String {
+    private fun cho(a: String, b: String, c: String): String {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         var res = ""
         for (i in 0 until a.length) {
@@ -296,7 +292,7 @@ class Sha256 {
         return res
     }
 
-    fun mj(a: String, b: String, c: String): String {
+    private fun mj(a: String, b: String, c: String): String {
 //    #take majority input value
         var res = ""
         for (i in 0 until a.length) {
@@ -317,7 +313,7 @@ class Sha256 {
         return res
     }
 
-    fun addZeros(msg: String, newLen: Int): String {
+    private fun addZeros(msg: String, newLen: Int): String {
         var msg = msg
         for (i in msg.length until newLen) {
             msg = "0$msg"
@@ -327,7 +323,7 @@ class Sha256 {
         return msg
     }
 
-    fun rmZeros(msg: String, newLen: Int): String {
+    private fun rmZeros(msg: String, newLen: Int): String {
         var msg = msg
         val target = msg.length - newLen
         msg = msg.substring(target, msg.length)

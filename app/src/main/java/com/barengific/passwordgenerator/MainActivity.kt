@@ -343,7 +343,7 @@ class MainActivity : AppCompatActivity() {
         var btnHideAllStatus = false
         btnHideAll.setOnClickListener {
             if(btnHideAllStatus){
-                btnHideAll.setText("Hide")
+                btnHideAll.text = resources.getString(R.string.hide) //"Hide"
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_off_24)
                 btnHideAllStatus = false
 
@@ -355,7 +355,7 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
 
             }else{
-                btnHideAll.setText("Show")
+                btnHideAll.text = "Show"
                 btnHideAll.setIconResource(R.drawable.ic_baseline_visibility_24)
                 btnHideAllStatus = true
 

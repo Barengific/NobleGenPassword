@@ -4,10 +4,6 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.lifecycle.LiveData
-
-
-
 
 @Dao
 interface WordDao {
@@ -28,7 +24,6 @@ interface WordDao {
 
     @Insert
     fun insertAll(vararg words: Word)
-    //LiveData<Word>
 
     @Delete
     fun delete(word: Word)

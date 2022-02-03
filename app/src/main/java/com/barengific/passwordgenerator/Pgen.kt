@@ -392,7 +392,6 @@ class Pgen {
         if (res.length > 32) {
             res = rmZeros(res, 32)
         }
-//        Log.d("aaaadder", res)
         return res
     }
 
@@ -412,7 +411,6 @@ class Pgen {
         if (res.length != 32) {
             println("tooo smlll still")
         }
-//        Log.d("aaaaddersz", res)
         return res
     }
 
@@ -423,7 +421,6 @@ class Pgen {
             a = a.substring(0, a.length - 1)
             a = last_char + a
         }
-//        Log.d("aaarotr", a)
         return a
     }
 
@@ -433,7 +430,6 @@ class Pgen {
             a = a.substring(0, a.length - 1)
             a = "0$a"
         }
-//        Log.d("aaashr", a)
         return a
     }
 
@@ -449,7 +445,6 @@ class Pgen {
                 println("nothing")
             }
         }
-//        Log.d("aaacho", res)
         return res
     }
 
@@ -471,7 +466,6 @@ class Pgen {
                 //println("maj nothing")
             }
         }
-//        Log.d("aaamj", res)
         return res
     }
 
@@ -483,7 +477,6 @@ class Pgen {
         if (msg.length != 32) {
             //System.out.println("add zeroes: " + msg.length());
         }
-        //Log.d("addZeros", msg)
         return msg
     }
 

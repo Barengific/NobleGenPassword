@@ -225,7 +225,7 @@ class Sha256 {
         if (binr.length == 32) {
             res = binr
         } else if (binr.length > 32) {
-            res = java.lang.Long.toBinaryString((r % Math.pow(2.0, 32.0)).toLong())
+            res = java.lang.Long.toBinaryString((r % 2.0.pow(32.0)).toLong())
             if (res.length < 32) {
                 res = addZeros(binr, 32)
             } else if (res.length > 32) {
@@ -245,7 +245,7 @@ class Sha256 {
         if (binr.length == 32) {
             res = binr
         } else if (binr.length > 32) {
-            res = java.lang.Long.toBinaryString((a % Math.pow(2.0, 32.0)).toLong())
+            res = java.lang.Long.toBinaryString((a % 2.0.pow(32.0)).toLong())
         } else if (binr.length < 32) {
             res = addZeros(binr, 32)
         }
@@ -261,9 +261,9 @@ class Sha256 {
     private fun rotr(a: String, rotNumber: Int): String {
         var a = a
         for (i in 0 until rotNumber) {
-            val last_char = a.substring(a.length - 1)
+            val lastChar = a.substring(a.length - 1)
             a = a.substring(0, a.length - 1)
-            a = last_char + a
+            a = lastChar + a
         }
         return a
     }
@@ -280,7 +280,7 @@ class Sha256 {
     private fun cho(a: String, b: String, c: String): String {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         var res = ""
-        for (i in 0 until a.length) {
+        for (i in a.indices) {
             if (a[i] == '1') {
                 res += b[i]
             } else if (a[i] == '0') {
@@ -295,7 +295,7 @@ class Sha256 {
     private fun mj(a: String, b: String, c: String): String {
 //    #take majority input value
         var res = ""
-        for (i in 0 until a.length) {
+        for (i in a.indices) {
             if ((a[i] == '1' && b[i] == '1') xor
                 (a[i] == '1' && c[i] == '1') xor
                 (b[i] == '1' && c[i] == '1')

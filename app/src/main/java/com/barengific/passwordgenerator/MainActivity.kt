@@ -19,7 +19,6 @@ import android.widget.Toast
 import android.text.Editable
 
 import android.text.TextWatcher
-import android.util.Base64
 import android.view.ContextMenu.ContextMenuInfo
 import android.util.Log
 import android.view.*
@@ -28,18 +27,7 @@ import android.widget.TextView
 import android.view.MenuInflater
 
 import android.view.ContextMenu
-import android.widget.AdapterView.OnItemClickListener
-import java.io.UnsupportedEncodingException
-import java.security.InvalidAlgorithmParameterException
-import java.security.InvalidKeyException
-import java.security.NoSuchAlgorithmException
-import java.security.spec.InvalidKeySpecException
-import java.security.spec.InvalidParameterSpecException
-import javax.crypto.*
-import javax.crypto.spec.SecretKeySpec
 import android.content.Intent
-import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyProperties
 
 import com.barengific.passwordgenerator.ui.login.LoginActivity
 

@@ -1,7 +1,6 @@
 package com.barengific.passwordgenerator.setting
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -55,7 +54,7 @@ class SettingsActivity : AppCompatActivity(),
 
     override fun onSupportNavigateUp(): Boolean {
         if (supportFragmentManager.popBackStackImmediate()) {
-            Log.d("aaaaa", "backit")
+            Log.d("aaa", "back_it")
             val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
@@ -68,7 +67,7 @@ class SettingsActivity : AppCompatActivity(),
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
             val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
-            Log.d("aaaaaEEESEttings", nameE.toString())
+            Log.d("aaa_EEE_Settings", nameE.toString())
             //for settings //readwrite
             val preferences = PreferenceManager.getDefaultSharedPreferences(this /* Activity context */)
             //read
@@ -82,7 +81,7 @@ class SettingsActivity : AppCompatActivity(),
 
             return true
         }else{
-            Log.d("aaaaa", "farrrr")
+            Log.d("aaa", "far rrr")
             MainActivity.authStatus = true
             val intent = Intent(this, MainActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
@@ -218,18 +217,18 @@ class SettingsActivity : AppCompatActivity(),
                 requireActivity().finish()
                 (activity as FragmentActivity).supportFragmentManager.popBackStack()
             }
-            alert?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
+            alert?.setNegativeButton("Cancel") { _, _ ->
                 val intent = Intent(this.context, SettingsActivity::class.java).apply {
-                    putExtra("fromSettings","fin")
+                    putExtra("fromSettings", "fin")
                 }
                 startActivity(intent)
                 requireActivity().finish()
                 (activity as FragmentActivity).supportFragmentManager.popBackStack()
-            })
+            }
 
-            val dialog = alert?.create();
-            dialog?.setCanceledOnTouchOutside(false);
-            dialog?.show();
+            val dialog = alert?.create()
+            dialog?.setCanceledOnTouchOutside(false)
+            dialog?.show()
 
         }
     }

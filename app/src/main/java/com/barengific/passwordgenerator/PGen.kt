@@ -1,6 +1,8 @@
 package com.barengific.passwordgenerator
 
 import java.math.BigInteger
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class PGen {
 
@@ -263,13 +265,10 @@ class PGen {
                 addZeros(
                     String.format(
                         java.lang.Long.toBinaryString(
-                            ((Math.sqrt(
+                            ((sqrt(
                                 rt2[i]
                                     .toDouble()
-                            ) - Math.sqrt(rt2[i].toDouble()).toInt()) * Math.pow(
-                                2.0,
-                                32.0
-                            )).toLong()
+                            ) - sqrt(rt2[i].toDouble()).toInt()) * 2.0.pow(32.0)).toLong()
                         )
                     ), 32
                 )
@@ -289,10 +288,7 @@ class PGen {
                             ((Math.cbrt(
                                 rt3[i]
                                     .toDouble()
-                            ) - Math.cbrt(rt3[i].toDouble()).toInt()) * Math.pow(
-                                2.0,
-                                32.0
-                            )).toLong()
+                            ) - Math.cbrt(rt3[i].toDouble()).toInt()) * 2.0.pow(32.0)).toLong()
                         )
                     ), 32
                 )
@@ -301,7 +297,7 @@ class PGen {
         return rt
     }
 
-    fun chunkNo(msg: String): Int {
+    private fun chunkNo(msg: String): Int {
         var chunks = 1
         var bsize = 447
         if (msg.length <= bsize) {
@@ -319,35 +315,35 @@ class PGen {
     }
 
     //, int1:Int, int2:Int, int3:Int, int4:Int
-    fun sig0(bits: String, int1:Int, int2:Int, int4:Int): String {
+    private fun sig0(bits: String, int1:Int, int2:Int, int4:Int): String {
         val a = rotr(bits, 7+int1)
         val b = rotr(bits, 18-int2)
         val c = shr(bits, 3+int4)
         return xor(a, b, c)
     }
 
-    fun sig1(bits: String, int1:Int, int2:Int, int4:Int): String {
+    private fun sig1(bits: String, int1:Int, int2:Int, int4:Int): String {
         val a = rotr(bits, 17+int1)
         val b = rotr(bits, 19-int2)
         val c = shr(bits, 10+(int4/2).toInt())
         return xor(a, b, c)
     }
 
-    fun sigma0(bits: String, int1:Int, int2:Int, int3:Int): String {
+    private fun sigma0(bits: String, int1:Int, int2:Int, int3:Int): String {
         val a = rotr(bits, 2+int1)
         val b = rotr(bits, 13-int2)
         val c = rotr(bits, 22-(int3/2).toInt())
         return xor(a, b, c)
     }
 
-    fun sigma1(bits: String, int1:Int, int2:Int, int3:Int): String {
+    private fun sigma1(bits: String, int1:Int, int2:Int, int3:Int): String {
         val a = rotr(bits, 6+int1)
         val b = rotr(bits, 11-(int2/2).toInt())
         val c = rotr(bits, 25-int3)
         return xor(a, b, c)
     }
 
-    fun xor(a: String, b: String, c: String): String {
+    private fun xor(a: String, b: String, c: String): String {
         var res = ""
         for (i in 0 until a.length) {
             if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
@@ -361,7 +357,7 @@ class PGen {
         return res
     }
 
-    fun adder(a: String, b: String, c: String, d: String): String {
+    private fun adder(a: String, b: String, c: String, d: String): String {
         var res = ""
 
         val aInt = a.toLong(2)
@@ -388,7 +384,7 @@ class PGen {
         return res
     }
 
-    fun addersz(a: Long): String {
+    private fun addersz(a: Long): String {
         var res = ""
         val binR = java.lang.Long.toBinaryString(a)
         if (binR.length == 32) {
@@ -407,7 +403,7 @@ class PGen {
         return res
     }
 
-    fun rotr(a: String, rotnumber: Int): String {
+    private fun rotr(a: String, rotnumber: Int): String {
         var a = a
         for (i in 0 until rotnumber) {
             val lastChar = a.substring(a.length - 1)
@@ -417,7 +413,7 @@ class PGen {
         return a
     }
 
-    fun shr(a: String, rotnumber: Int): String {
+    private fun shr(a: String, rotnumber: Int): String {
         var a = a
         for (i in 0 until rotnumber) {
             a = a.substring(0, a.length - 1)
@@ -426,7 +422,7 @@ class PGen {
         return a
     }
 
-    fun cho(a: String, b: String, c: String): String {
+    private fun cho(a: String, b: String, c: String): String {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         var res = ""
         for (i in a.indices) {
@@ -441,7 +437,7 @@ class PGen {
         return res
     }
 
-    fun mj(a: String, b: String, c: String): String {
+    private fun mj(a: String, b: String, c: String): String {
 //    #take majority input value
         var res = ""
         for (i in a.indices) {
@@ -462,7 +458,7 @@ class PGen {
         return res
     }
 
-    fun addZeros(msg: String, newLen: Int): String {
+    private fun addZeros(msg: String, newLen: Int): String {
         var msg = msg
         for (i in msg.length until newLen) {
             msg = "0$msg"
@@ -473,7 +469,7 @@ class PGen {
         return msg
     }
 
-    fun rmZeros(msg: String, newLen: Int): String {
+    private fun rmZeros(msg: String, newLen: Int): String {
         var msg = msg
         val target = msg.length - newLen
         msg = msg.substring(target, msg.length)

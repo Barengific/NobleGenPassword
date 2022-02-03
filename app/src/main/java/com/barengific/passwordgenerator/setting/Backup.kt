@@ -34,7 +34,7 @@ import com.google.gson.Gson
 
 class Backup : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
 
     companion object {
         var checkList: MutableList<Int> = mutableListOf(-1)
@@ -205,9 +205,6 @@ class CustomAdapters(private val dataSets: List<Word>) :
 
     companion object {
         var isSelected: Boolean = false
-        fun selectAll() {
-            isSelected = true
-        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -225,17 +222,6 @@ class CustomAdapters(private val dataSets: List<Word>) :
 
     }
 
-    fun selectAllT() {
-        isSelected = true
-        notifyDataSetChanged()
-    }
-
-    fun deselectAll() {
-        isSelected = false
-        notifyDataSetChanged()
-    }
-
-
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
@@ -245,13 +231,10 @@ class CustomAdapters(private val dataSets: List<Word>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        viewHolder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(v: View?): Boolean {
-                setPosition(viewHolder.position)
-                setPosition(viewHolder.adapterPosition)
-                return false
-            }
-        })
+        viewHolder.itemView.setOnLongClickListener {
+            setPosition(viewHolder.adapterPosition)
+            false
+        }
 
         viewHolder.checkBox.isChecked = isSelected
 
@@ -293,10 +276,6 @@ class CustomAdapters(private val dataSets: List<Word>) :
 
     //
     private var position: Int = 0
-
-    fun getPosition(): Int {
-        return position
-    }
 
     fun setPosition(position: Int) {
         this.position = position

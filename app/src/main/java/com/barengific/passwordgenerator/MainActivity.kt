@@ -375,7 +375,7 @@ class MainActivity : AppCompatActivity() {
                 btnHideAllStatus = false
 
                 arrr = wordDao.getAll()
-                var adapter = CustomAdapter(arrr)
+                val adapter = CustomAdapter(arrr)
                 //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)
@@ -394,7 +394,7 @@ class MainActivity : AppCompatActivity() {
                     arrr.get(i).key = "****"
                 }// check - database\Word changed from val to var ^
 
-                var adapter = CustomAdapter(arrr)
+                val adapter = CustomAdapter(arrr)
                 //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)

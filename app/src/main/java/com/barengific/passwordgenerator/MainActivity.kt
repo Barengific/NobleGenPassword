@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         val fromLogin = intent.extras?.get("fromLogin")
         val fromIntro = intent.extras?.get("fromIntro")
 
-        Log.d("aaaaaafromlog", fromLogin.toString())
+        Log.d("aaa_from_log", fromLogin.toString())
         if(nameS.equals("nonon") or nameT.equals("nonon")){
             val intent = Intent(applicationContext, AppIntroduction::class.java).apply {}
             startActivity(intent)
@@ -148,8 +148,8 @@ class MainActivity : AppCompatActivity() {
 
         //length dropdown ********************
         val lines = resources.getStringArray(R.array.p_len_array).toList()
-        val adapterr = ArrayAdapter(this, R.layout.length_layout, lines)
-        filled_exposed_dropdown.setAdapter(adapterr)
+        val adapterDD = ArrayAdapter(this, R.layout.length_layout, lines)
+        filled_exposed_dropdown.setAdapter(adapterDD)
 
         val ss = Pgen()
 
@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
 //            val sharedPref = this?.getSharedPreferences(
 //                getString(R.string.preference_file_key_del), Context.MODE_PRIVATE)
 //
-//            val sharedPreff = this?.getPreferences(Context.MODE_PRIVATE)
+//            val sharedPref = this?.getPreferences(Context.MODE_PRIVATE)
 //
 //            //write save
 //            val newHighScore: Int = 12345
@@ -170,18 +170,18 @@ class MainActivity : AppCompatActivity() {
 //                apply()
 //            }
 //
-//            // read retreive
+//            // read retrieve
 //            val sharedPrefRead = this?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
 //            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key_del)
 //            val highScore = sharedPrefRead.getInt(getString(R.string.saved_high_score_key_del), defaultValue)
 //
-//            //for settings //redwrite
+//            //for settings //read write
 //            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this /* Activity context */)
 //            //read
 //            val name = sharedPreferences.getString("signature", "nonon")
 //            //write
 //            with (sharedPreferences.edit()){
-//                putString("signature", "newwwsigg")
+//                putString("signature", "newsing")
 //                apply()
 //            }
 //            val nameS = sharedPreferences.getString("signature", "nonon")
@@ -207,16 +207,16 @@ class MainActivity : AppCompatActivity() {
 //                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
 //                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 //
-//            sharedPreferencesEE.edit().putString("signatureS", "encrrrr").apply()
+//            sharedPreferencesEE.edit().putString("signatureS", "_encrypt_-_").apply()
 //            val nameE = sharedPreferencesEE.getString("signatureS", "nonon")
-//            Log.d("aaaaaEEEEEEE", nameE.toString())
-//            Log.d("aaaaaEEEEEEEMM", masterKey.toString())
+//            Log.d("aaa IEEE", nameE.toString())
+//            Log.d("aaa ESTEEM", masterKey.toString())
 //            // use the shared preferences and editor as you normally would
 //
 //            // use the shared preferences and editor as you normally would
 //            val editor = sharedPreferences.edit()
-            Log.d("paaaaaaaa", nameS.toString())
-            Log.d("paaaaaaaa", nameT.toString())
+            Log.d("aaa", nameS.toString())
+            Log.d("aaa", nameT.toString())
 
             if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                 tvGen.editText?.setText(
@@ -263,7 +263,7 @@ class MainActivity : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         btnSave.setOnClickListener {
@@ -277,7 +277,6 @@ class MainActivity : AppCompatActivity() {
 
             arrr = wordDao.getAll()
             val adapter = CustomAdapter(arrr)
-            //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
             recyclerView.setHasFixedSize(false)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
@@ -285,13 +284,13 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread {
                 adapter.notifyDataSetChanged()
             }
-            //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
+            //TODO check for duplicates, i.e. compare key and length if already exists when don't add to db
         }
 
         filled_exposed_dropdown.setOnItemClickListener { parent, _, position, _ ->
             Int
             val selection = parent.getItemAtPosition(position) as String
-            Log.d("aaanewMAterialSpinner", selection)
+            Log.d("aaa_new_MAtrial_Spinner", selection)
             tvGen.editText?.setText(
                 ss.pgen(
                     editTextKeyGen.editText?.text.toString(),
@@ -347,7 +346,6 @@ class MainActivity : AppCompatActivity() {
 
                 arrr = wordDao.getAll()
                 val adapter = CustomAdapter(arrr)
-                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                 recyclerView.setHasFixedSize(false)
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = LinearLayoutManager(this)
@@ -366,7 +364,6 @@ class MainActivity : AppCompatActivity() {
                 }// check - database\Word changed from val to var ^
 
                 val adapter = CustomAdapter(arrr)
-                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                 recyclerView.setHasFixedSize(false)
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = LinearLayoutManager(this)
@@ -512,7 +509,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.menu_hide -> {
-                Log.d("aaamenu_huide", getPosi().toString())
+                Log.d("aaa menu_hide", getPosi().toString())
                 val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
                 val factory = SupportFactory(passphrase)
                 val room = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-names")
@@ -537,7 +534,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     val adapter = CustomAdapter(arrr)
-                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)
                     recyclerView.adapter = adapter
                     recyclerView.layoutManager = LinearLayoutManager(this)
@@ -556,7 +552,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     val adapter = CustomAdapter(arrr)
-                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)
                     recyclerView.adapter = adapter
                     recyclerView.layoutManager = LinearLayoutManager(this)
@@ -566,7 +561,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.menu_cancel -> {
-                Log.d("aaamenu_cancel", getPosi().toString())
+                Log.d("aaa menu_cancel", getPosi().toString())
             }
         }
         return super.onContextItemSelected(item)
@@ -582,7 +577,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         authStatus = false
-        //Toast.makeText(applicationContext, authStatus.toString()+"STOPP called", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(applicationContext, authStatus.toString()+"STOP called", Toast.LENGTH_SHORT).show()
     }
 
 }
@@ -648,7 +643,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 popup.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.menu_copy -> {
-                            Log.d("aaaamenuu", "copy")
+                            Log.d("aaa menu", "copy")
                             val clipboard =
                                 view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                             val clip: ClipData =
@@ -688,16 +683,16 @@ class CustomAdapter(private val dataSet: List<Word>) :
                             MainActivity.recyclerView.layoutManager =
                                 LinearLayoutManager(view?.context)
                             room?.close()
-                            Log.d("aaaamenuu", "DDDdelete")
+                            Log.d("aaa menu", "DDDelete")
 
                         }
 
                         R.id.menu_cancel -> {
-                            Log.d("aaaamenuu", "canceeel") //TODO
+                            Log.d("aaa menu", "cancel") //TODO
                         }
                         R.id.menu_hide -> {
                             val passphrase: ByteArray =
-                                SQLiteDatabase.getBytes("bob".toCharArray())//DB passprhase change
+                                SQLiteDatabase.getBytes("bob".toCharArray())//DB passphrase change
                             val factory = SupportFactory(passphrase)
                             val room = view?.context?.let {
                                 Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
@@ -742,7 +737,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                     }
                                 }
                                 val adapter = arrr?.let { CustomAdapter(it) }
-                                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                                 MainActivity.recyclerView.setHasFixedSize(false)
                                 MainActivity.recyclerView.adapter = adapter
                                 MainActivity.recyclerView.layoutManager =
@@ -762,7 +756,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
         })
 
         viewHolder.ivCopy.setOnClickListener { view ->
-            Log.d("aaaaICONu", "innn copyy")
+            Log.d("aaaaICONu", "inn copy")
             val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
             clipboard.setPrimaryClip(clip)
@@ -790,7 +784,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
 //        return position
 //    }
 
-    fun setPosition(position: Int) {
+    private fun setPosition(position: Int) {
         this.position = position
     }
 

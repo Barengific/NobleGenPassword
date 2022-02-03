@@ -56,7 +56,7 @@ import net.sqlcipher.database.SupportFactory
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    var arrr: List<Word> = listOf(Word(0, "", "", ""))
+    var private arrr: List<Word> = listOf(Word(0, "", "", ""))
 
     init {
         instance = this
@@ -817,9 +817,9 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
     private var position: Int = 0
 
-    fun getPosition(): Int {
-        return position
-    }
+//    fun getPosition(): Int {
+//        return position
+//    }
 
     fun setPosition(position: Int) {
         this.position = position
@@ -833,10 +833,10 @@ class FireMissilesDialogFragment : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
             builder.setView(inflater.inflate(R.layout.alertdialog_about, null))
-                .setNegativeButton(R.string.cancel,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        getDialog()?.cancel()
-                    })
+                .setNegativeButton(R.string.cancel
+                ) { _, _ ->
+                    dialog?.cancel()
+                }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

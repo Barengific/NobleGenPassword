@@ -413,7 +413,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun openSettings() {
+    private fun openSettings() {
         Log.d("aaa", "in open settings")
         val intent = Intent(this, SettingsActivity::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
@@ -422,14 +422,14 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    fun openAbout() {
+    private fun openAbout() {
         Log.d("aaa", "in open donation")
         val newFragment = FireMissilesDialogFragment()
         newFragment.show(supportFragmentManager, "missiles")
     }
 
     //TODO donation option
-    fun openDonate() {
+    private fun openDonate() {
         Log.d("aaa", "in open donate")
         val intent = Intent(this, Donate::class.java).apply {
 //            putExtra(EXTRA_MESSAGE, message)
@@ -529,11 +529,11 @@ class MainActivity : AppCompatActivity() {
 
                     val pSize = posis.size
                     for (i in 0 until pSize) {
-                        Log.d("aaaaCVCVCV", posis.get(i).toString())
-                        if((posis.get(i) != -1)){
-                            val qSize = posis.get(i)
-                            arrr.get(qSize).value = "****"
-                            arrr.get(qSize).key = "****"
+                        Log.d("aaaaCVCVCV", posis[i].toString())
+                        if((posis[i] != -1)){
+                            val qSize = posis[i]
+                            arrr[qSize].value = "****"
+                            arrr[qSize].key = "****"
                         }
                     }
                     val adapter = CustomAdapter(arrr)
@@ -548,11 +548,11 @@ class MainActivity : AppCompatActivity() {
 
                     val pSize = posis.size
                     for (i in 0 until pSize) {
-                        Log.d("aaaaCVCVCV", posis.get(i).toString())
-                        if((posis.get(i) != -1)){
-                            val qSize = posis.get(i)
-                            arrr.get(qSize).value = "****"
-                            arrr.get(qSize).key = "****"
+                        Log.d("aaaaCVCVCV", posis[i].toString())
+                        if((posis[i] != -1)){
+                            val qSize = posis[i]
+                            arrr[qSize].value = "****"
+                            arrr[qSize].key = "****"
                         }
                     }
                     val adapter = CustomAdapter(arrr)

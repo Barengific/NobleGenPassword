@@ -41,10 +41,8 @@ import javax.crypto.spec.SecretKeySpec
 import android.content.Intent
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import androidx.biometric.BiometricPrompt
 
 import com.barengific.passwordgenerator.ui.login.LoginActivity
-import java.util.concurrent.Executor
 
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -57,7 +55,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.DialogFragment
 
-import com.barengific.passwordgenerator.crypt.Aqtik
 import com.barengific.passwordgenerator.setting.AppIntroduction
 import com.barengific.passwordgenerator.setting.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -82,7 +79,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var pos: Int = 0
         lateinit var recyclerView: RecyclerView
-        lateinit var arrrNew: List<Word>
         lateinit var posiss: MutableList<Int>
         var posis: MutableList<Int> = mutableListOf(-1)
         var authStatus = false

@@ -141,7 +141,7 @@ class SettingsActivity : AppCompatActivity(),
     class SecurityFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
-            val intent = Intent(this.context, Secfrag::class.java).apply {
+            val intent = Intent(this.context, SecFrag::class.java).apply {
                 putExtra("fromSettings","fin")
             }
             startActivity(intent)

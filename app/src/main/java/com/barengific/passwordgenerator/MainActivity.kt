@@ -378,7 +378,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        registerForContextMenu(recyclerView);
+        registerForContextMenu(recyclerView)
 
     }
 
@@ -445,7 +445,7 @@ class MainActivity : AppCompatActivity() {
 
     //TODO ad free version option
     fun openAdFree() {
-
+        Log.d("aaaOptions", "coming soon")
     }
 
 //    override fun onSupportNavigateUp(): Boolean {
@@ -466,15 +466,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
+        val value: TextView? =
+            recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
+                R.id.textView4
+            )
+        
         when (item.itemId) {
             R.id.menu_copy -> {
-                val text1: TextView? =
-                    recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                        R.id.textView4
-                    )
-
                 val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip: ClipData = ClipData.newPlainText("PGen", text1?.text.toString())
+                val clip: ClipData = ClipData.newPlainText("PGen", value?.text.toString())
                 clipboard.setPrimaryClip(clip)
                 Toast.makeText(applicationContext, "Text Copied", Toast.LENGTH_LONG).show()
             }
@@ -498,10 +498,6 @@ class MainActivity : AppCompatActivity() {
                 val key: TextView? =
                     recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
                         R.id.textView3
-                    )
-                val value: TextView? =
-                    recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
-                        R.id.textView4
                     )
 
                 val a = Word(

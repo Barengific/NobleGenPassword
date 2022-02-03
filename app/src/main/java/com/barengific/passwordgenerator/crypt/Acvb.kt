@@ -1,10 +1,20 @@
 package com.barengific.passwordgenerator.crypt
 
+import android.os.Build
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
 import android.util.Base64
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.barengific.passwordgenerator.crypt.Acvb
+import java.io.UnsupportedEncodingException
 import java.lang.Exception
-import javax.crypto.Cipher
+import java.security.InvalidAlgorithmParameterException
+import java.security.InvalidKeyException
+import java.security.NoSuchAlgorithmException
+import java.security.spec.InvalidKeySpecException
+import java.security.spec.InvalidParameterSpecException
+import javax.crypto.*
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import kotlin.Throws
@@ -103,4 +113,66 @@ object Acvb {
         }
         return null
     }
+
+
+    @Throws(
+        NoSuchAlgorithmException::class,
+        NoSuchPaddingException::class,
+        InvalidKeyException::class,
+        InvalidParameterSpecException::class,
+        IllegalBlockSizeException::class,
+        BadPaddingException::class,
+        UnsupportedEncodingException::class
+    )
+    fun encryptMsg(message: String, secret: SecretKey?): String? {
+        var cipher: Cipher? = null
+        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+        cipher.init(Cipher.ENCRYPT_MODE, secret)
+        val cipherText: ByteArray = cipher.doFinal(message.toByteArray(charset("UTF-8")))
+        return Base64.encodeToString(cipherText, Base64.NO_WRAP)
+    }
+
+    fun encryptMsgs(message: String, secret: SecretKey?): String {
+        var cipher: Cipher? = null
+        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+        cipher.init(Cipher.ENCRYPT_MODE, secret)
+        val cipherText: ByteArray = cipher.doFinal(message.toByteArray(charset("UTF-8")))
+        return Base64.encodeToString(cipherText, Base64.NO_WRAP)
+    }
+
+    @Throws(
+        NoSuchPaddingException::class,
+        NoSuchAlgorithmException::class,
+        InvalidParameterSpecException::class,
+        InvalidAlgorithmParameterException::class,
+        InvalidKeyException::class,
+        BadPaddingException::class,
+        IllegalBlockSizeException::class,
+        UnsupportedEncodingException::class
+    )
+    fun decryptMsg(cipherText: String?, secret: SecretKey?): String? {
+        var cipher: Cipher? = null
+        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+        cipher.init(Cipher.DECRYPT_MODE, secret)
+        val decode: ByteArray = Base64.decode(cipherText, Base64.NO_WRAP)
+        //String("aa")
+        //String(cipher.doFinal(decode), 'U')
+        return String(cipher.doFinal(decode))
+    }
+
+    @Throws(NoSuchAlgorithmException::class, InvalidKeySpecException::class)
+    fun generateKey(key: String): SecretKey? {
+        val secret: SecretKeySpec
+        secret = SecretKeySpec(key.toByteArray(), "AES")
+        return secret
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun generateSecretKey(keyGenParameterSpec: KeyGenParameterSpec) {
+        val keyGenerator = KeyGenerator.getInstance(
+            KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
+        keyGenerator.init(keyGenParameterSpec)
+        keyGenerator.generateKey()
+    }
+
 }

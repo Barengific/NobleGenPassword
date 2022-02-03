@@ -1,35 +1,33 @@
 package com.barengific.passwordgenerator
 
-import android.util.Log
 import java.math.BigInteger
 
-class Pgen {
+class PGen {
 
-    var rt2 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19)
-    var rt3 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+    private var rt2 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19)
+    private var rt3 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
         73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167,
         173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269,
         271,        277,        281,        283,        293,        307,        311
     )
+    private val decode = arrayOf("@","#","£","_","&","-","/","*",";","!","?",".","0","1","2","3","4","5","6","7","8","9","A","B","D","E","F","G","H","K","L","M","N","P","Q","R","S","T","U","V","W","Y","a","b","c","d","e","f","g","h","i","j","k","m","n","p","q","r","s","t","u","v","x","z"
+    )
 
-    val decode = arrayOf("@","#","£","_","&","-","/","*",";","!","?",".","0","1","2","3","4","5","6","7","8","9","A","B","D","E","F","G","H","K","L","M","N","P","Q","R","S","T","U","V","W","Y","a","b","c","d","e","f","g","h","i","j","k","m","n","p","q","r","s","t","u","v","x","z"
-    );
-
-    fun pgen(msg:String, mkey:String, int1:String, int2:String, int3:String, int4:String, plen:Int): String?{
-        val mkey = mkey
+    fun pGen(msg:String, mKey:String, int1:String, int2:String, int3:String, int4:String, pLen:Int): String?{
+        val mKey = mKey
         val int1 = int1.toInt()
         val int2 = int2.toInt()
         val int3 = int3.toInt()
         val int4 = int4.toInt()
-        val plen = plen
+        val pLen = pLen
 
         var message = ""
-        val msg = msg+hashesPure(mkey)
-        val msgb = hashes(msg, int1, int2, int3, int4)
-        for (i in 0 until msgb!!.length) {
+        val msg = msg+hashesPure(mKey)
+        val msgB = hashes(msg, int1, int2, int3, int4)
+        for (i in 0 until msgB!!.length) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msgb!![i].toLong()).toLong()
+                java.lang.Long.toBinaryString(msgB!![i].code.toLong()).toLong()
             ) //msg to binary
         }
 
@@ -43,7 +41,7 @@ class Pgen {
         }
 
         var res = ""
-        for(i in 0 until plen){
+        for(i in 0 until pLen){
             val vol = chunks[i].toInt(2)
             res += decode[vol]
         }

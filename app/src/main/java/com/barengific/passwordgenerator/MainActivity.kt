@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         val adapterDD = ArrayAdapter(this, R.layout.length_layout, lines)
         filled_exposed_dropdown.setAdapter(adapterDD)
 
-        val ss = Pgen()
+        val ss = PGen()
 
         //Listeners
         //encrypt / decrypt to / fro database data
@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
 
             if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                 tvGen.editText?.setText(
-                    ss.pgen(
+                    ss.pGen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
                         nameT.toString()[0].toString(),
@@ -239,7 +239,7 @@ class MainActivity : AppCompatActivity() {
                 )
             } else {
                 tvGen.editText?.setText(
-                    ss.pgen(
+                    ss.pGen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
                         nameT.toString()[0].toString(),
@@ -299,7 +299,7 @@ class MainActivity : AppCompatActivity() {
             val selection = parent.getItemAtPosition(position) as String
             Log.d("aaa_new_MAtrial_Spinner", selection)
             tvGen.editText?.setText(
-                ss.pgen(
+                ss.pGen(
                     editTextKeyGen.editText?.text.toString(),
                     nameS.toString(),
                     nameT.toString()[0].toString(),
@@ -318,7 +318,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (filled_exposed_dropdown.editableText.toString().toIntOrNull() == null) {
                     tvGen.editText?.setText(
-                        ss.pgen(
+                        ss.pGen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),
                             nameT.toString()[0].toString(),
@@ -330,7 +330,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 } else {
                     tvGen.editText?.setText(
-                        ss.pgen(
+                        ss.pGen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),
                             nameT.toString()[0].toString(),

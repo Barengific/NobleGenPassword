@@ -26,6 +26,10 @@ class PGen {
         var message = ""
         val msg = msg+hashesPure(mKey)
         val msgB = hashes(msg, int1, int2, int3, int4)
+        
+        val sha256 = Sha256()
+        val msgHash = msgB?.let { sha256.hashes(it) }
+
         for (i in 0 until msgB!!.length) {
             message += String.format(
                 "%08d",
@@ -50,6 +54,7 @@ class PGen {
 
         return res
     }
+
     private fun hashesPure(msg:String): String? {
         val int1 = 0
         val int2 = 0

@@ -64,7 +64,7 @@ class Backup : AppCompatActivity() {
 
         //recycler initialise
         val arr = wordDao.getAll()
-        var adapter = CustomAdapters(arr)
+        val adapter = CustomAdapters(arr)
         recyclerView = findViewById<View>(R.id.rview) as RecyclerView
         recyclerView.setHasFixedSize(false)
         recyclerView.setAdapter(adapter)
@@ -73,13 +73,11 @@ class Backup : AppCompatActivity() {
         btnSelectAll.setOnClickListener {
             CustomAdapters.isSelected = true
             recyclerView.adapter?.notifyDataSetChanged()
-            Log.d("aaaaaSelected", CustomAdapters.isSelected.toString())
         }
 
         btnSelectNone.setOnClickListener {
             CustomAdapters.isSelected = false
             recyclerView.adapter?.notifyDataSetChanged()
-            Log.d("aaaaaDeSelected", CustomAdapters.isSelected.toString())
         }
 
         btnBackups.setOnClickListener {
@@ -206,8 +204,6 @@ class CustomAdapters(private val dataSets: List<Word>) :
     RecyclerView.Adapter<CustomAdapters.ViewHolder>() {
 
     companion object {
-        var position: Int = 0
-//        lateinit var checkBox: CheckBox
         var isSelected: Boolean = false
         fun selectAll() {
             isSelected = true

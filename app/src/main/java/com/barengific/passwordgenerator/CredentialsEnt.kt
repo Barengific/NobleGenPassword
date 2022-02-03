@@ -1,12 +1,9 @@
 package com.barengific.passwordgenerator
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
@@ -15,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.preference.PreferenceManager
 import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -23,11 +19,8 @@ import com.barengific.passwordgenerator.database.AppDatabase
 import kotlinx.android.synthetic.main.credentials_ent.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import java.io.File
-
 
 class CredentialsEnt : AppCompatActivity() {
-    //private lateinit var appBarConfiguration: AppBarConfiguration
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,14 +28,14 @@ class CredentialsEnt : AppCompatActivity() {
         setContentView(R.layout.credentials_ent)
 
         //TODO
-        getWindow().setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
 
         hideSystemBars()
 
-        val fromSettings = getIntent().extras?.get("fromSettings")
+        val fromSettings = intent.extras?.get("fromSettings")
         if(fromSettings.toString().equals("rst")){
             //delete all database entries
             val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
@@ -55,8 +48,8 @@ class CredentialsEnt : AppCompatActivity() {
 
             val arr = wordDao.getAll()
 
-            for(i in 0 until arr.size){
-                wordDao.delete(arr.get(i))
+            for(i in arr.indices){
+                wordDao.delete(arr[i])
             }
 
         }
@@ -91,7 +84,7 @@ class CredentialsEnt : AppCompatActivity() {
                     ).show()
                 }
             } else {
-                Log.d("aaa", "buttonsss")
+                Log.d("aaa", "buttons")
                 Toast.makeText(
                     applicationContext,
                     "Please fill in all the required fields",
@@ -102,7 +95,7 @@ class CredentialsEnt : AppCompatActivity() {
         }
 
     }
-    fun saveInfo(mk: String, pik: String){
+    private fun saveInfo(mk: String, pik: String){
         //TODO save keys to encrypted sharedPrefs
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
@@ -119,25 +112,14 @@ class CredentialsEnt : AppCompatActivity() {
         sharedPreferencesEE.edit().putString("signatureS", mk).apply()
         sharedPreferencesEE.edit().putString("signatureT", pik).apply()
 
-        val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
-        val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
-        Log.d("aaaaaEEEEEEEMASTER", nameT.toString())
-        Log.d("aaaaaEEEEEEEPINNNN", nameS.toString())
+//        val nameS = sharedPreferencesEE.getString("signatureS", "nonon")
+//        val nameT = sharedPreferencesEE.getString("signatureT", "nonon")
+//        Log.d("aaa_IEEE_MASTER", nameT.toString())
+//        Log.d("aaa_IEEE_PIN", nameS.toString())
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.main, menu)
-//        return true
-//    }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        val navController = findNavController(R.id.nav_host_fragment_content_main)
-//        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-//    }
-
-    fun hideSystemBars() {
+    private fun hideSystemBars() {
         val windowInsetsController =
             ViewCompat.getWindowInsetsController(window.decorView) ?: return
         // Configure the behavior of the hidden system bars

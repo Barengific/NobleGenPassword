@@ -1,14 +1,10 @@
 package com.barengific.passwordgenerator.setting
 
 import android.content.Intent
-import android.graphics.Color.blue
-import android.graphics.Color.red
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.barengific.passwordgenerator.CredentialsEnt
 import com.barengific.passwordgenerator.R
-import com.barengific.passwordgenerator.R.color.purple_200
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
 import com.github.appintro.AppIntroPageTransformerType
@@ -41,7 +37,7 @@ class AppIntroduction : AppIntro() {
         super.onSkipPressed(currentFragment)
         // Decide what to do when the user clicks on "Skip"
         //TODO intent go to main activity
-        val fromSettings = getIntent().extras?.get("fromSettings")
+        val fromSettings = intent.extras?.get("fromSettings")
         if(fromSettings?.equals("fin") == true){
             val intent = Intent(this, SettingsActivity::class.java).apply {
                 putExtra("fromIntro","fin")
@@ -59,7 +55,7 @@ class AppIntroduction : AppIntro() {
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
         // Decide what to do when the user clicks on "Done"
-        val fromSettings = getIntent().extras?.get("fromSettings")
+        val fromSettings = intent.extras?.get("fromSettings")
         if(fromSettings?.equals("fin") == true){
             val intent = Intent(this, SettingsActivity::class.java).apply {
                 putExtra("fromIntro","fin")

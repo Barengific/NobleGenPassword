@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
         //recycle view
         val arr = wordDao.getAll()
-        var adapter = CustomAdapter(arr)
+        val adapter = CustomAdapter(arr)
         recyclerView = findViewById<View>(R.id.rview) as RecyclerView
         recyclerView.setHasFixedSize(false)
         recyclerView.setAdapter(adapter)
@@ -293,7 +293,7 @@ class MainActivity : AppCompatActivity() {
             wordDao.insertAll(aa)
 
             arrr = wordDao.getAll()
-            var adapter = CustomAdapter(arrr)
+            val adapter = CustomAdapter(arrr)
             //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
             recyclerView.setHasFixedSize(false)
             recyclerView.setAdapter(adapter)
@@ -685,7 +685,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                 val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                                 val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
                                 clipboard.setPrimaryClip(clip)
-                                Toast.makeText(view?.context, "Text Copied", Toast.LENGTH_LONG).show()
+                                Toast.makeText(view.context, "Text Copied", Toast.LENGTH_LONG).show()
 
                             }
                             R.id.menu_delete -> {
@@ -699,20 +699,20 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                 }
                                 val wordDao = room?.wordDao()
 
-                                val wid: TextView? = viewHolder.textView1
-                                val pType: TextView? = viewHolder.textView2
-                                val key: TextView? = viewHolder.textView3
-                                val value: TextView? = viewHolder.textView4
+                                val wid: TextView = viewHolder.textView1
+                                val pType: TextView = viewHolder.textView2
+                                val key: TextView = viewHolder.textView3
+                                val value: TextView = viewHolder.textView4
 
-                                var a = Word(
-                                    wid?.text.toString().toInt(),
-                                    pType?.text.toString(),
-                                    key?.text.toString(),
-                                    value?.text.toString()
+                                val a = Word(
+                                    wid.text.toString().toInt(),
+                                    pType.text.toString(),
+                                    key.text.toString(),
+                                    value.text.toString()
                                 )
                                 room?.wordDao()?.delete(a)
                                 val arrr = wordDao?.getAll()
-                                var adapter = arrr?.let { CustomAdapter(it) }
+                                val adapter = arrr?.let { CustomAdapter(it) }
 
                                 MainActivity.recyclerView.setHasFixedSize(false)
                                 MainActivity.recyclerView.setAdapter(adapter)
@@ -753,7 +753,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                         }
                                     }
 
-                                    var adapter = arrr?.let { CustomAdapter(it) }
+                                    val adapter = arrr?.let { CustomAdapter(it) }
                                     MainActivity.recyclerView.setHasFixedSize(false)
                                     MainActivity.recyclerView.setAdapter(adapter)
                                     MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
@@ -771,7 +771,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                             arrr?.get(qSize)?.key = "****"
                                         }
                                     }
-                                    var adapter = arrr?.let { CustomAdapter(it) }
+                                    val adapter = arrr?.let { CustomAdapter(it) }
                                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                                     MainActivity.recyclerView.setHasFixedSize(false)
                                     MainActivity.recyclerView.setAdapter(adapter)

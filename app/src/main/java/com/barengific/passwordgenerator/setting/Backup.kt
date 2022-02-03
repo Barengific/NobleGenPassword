@@ -242,30 +242,14 @@ class CustomAdapters(private val dataSets: List<Word>) :
 
         viewHolder.checkBox.isChecked = isSelected
 
-        viewHolder.checkBox.setOnClickListener(object : View.OnClickListener {
-
-            override fun onClick(v: View?) {
-//                TODO("Not yet implemented")
-                Log.d("aaa1", "on checkbox")
-//                Log.d("aaa3", viewHolder.checkBox.isChecked.toString())
-//                checkList.add(viewHolder.adapterPosition)
-
-                if(viewHolder.checkBox.isChecked){
-                    checkList.add(viewHolder.adapterPosition)
-//                    Log.d("aaaWW", checkList.toString())
-
-                }
-                if(!viewHolder.checkBox.isChecked){
-                    checkList.remove(viewHolder.adapterPosition)
-//                    Log.d("aaaQQ", checkList.toString())
-
-                }
-
-//                if (checkArray.get(i) !== v as CheckBox) // assuming v is the View param passed in
-//                    checkArray.get(i).setChecked(false)
+        viewHolder.checkBox.setOnClickListener {
+            if (viewHolder.checkBox.isChecked) {
+                checkList.add(viewHolder.adapterPosition)
             }
-
-        })
+            if (!viewHolder.checkBox.isChecked) {
+                checkList.remove(viewHolder.adapterPosition)
+            }
+        }
         viewHolder.textView1.text = dataSets[position].wid.toString()
         viewHolder.textView3.text = dataSets[position].key.toString()
         viewHolder.textView4.text = dataSets[position].value.toString()
@@ -281,7 +265,7 @@ class CustomAdapters(private val dataSets: List<Word>) :
     //
     private var position: Int = 0
 
-    fun setPosition(position: Int) {
+    private fun setPosition(position: Int) {
         this.position = position
     }
 }

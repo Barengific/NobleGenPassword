@@ -410,9 +410,9 @@ class PGen {
     fun rotr(a: String, rotnumber: Int): String {
         var a = a
         for (i in 0 until rotnumber) {
-            val last_char = a.substring(a.length - 1)
+            val lastChar = a.substring(a.length - 1)
             a = a.substring(0, a.length - 1)
-            a = last_char + a
+            a = lastChar + a
         }
         return a
     }
@@ -429,7 +429,7 @@ class PGen {
     fun cho(a: String, b: String, c: String): String {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         var res = ""
-        for (i in 0 until a.length) {
+        for (i in a.indices) {
             if (a[i] == '1') {
                 res += b[i]
             } else if (a[i] == '0') {
@@ -444,7 +444,7 @@ class PGen {
     fun mj(a: String, b: String, c: String): String {
 //    #take majority input value
         var res = ""
-        for (i in 0 until a.length) {
+        for (i in a.indices) {
             if ((a[i] == '1' && b[i] == '1') xor
                 (a[i] == '1' && c[i] == '1') xor
                 (b[i] == '1' && c[i] == '1')

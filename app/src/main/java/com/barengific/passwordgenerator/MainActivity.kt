@@ -86,6 +86,13 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_SECURE
         )
 
+        val sha = Sha256()
+
+        sha.hashes("")?.let { Log.d("aaaSHA256", it) }
+        sha.hashes("123")?.let { Log.d("aaaSHA256", it) }
+        sha.hashes("abc")?.let { Log.d("aaaSHA256", it) }
+        sha.hashes("ABC")?.let { Log.d("aaaSHA256", it) }
+
         hideSystemBars()
 
         val masterKey = MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)

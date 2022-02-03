@@ -341,12 +341,10 @@ class PGen {
     }
 
     fun sigma1(bits: String, int1:Int, int2:Int, int3:Int): String {
-        var res = ""
         val a = rotr(bits, 6+int1)
         val b = rotr(bits, 11-(int2/2).toInt())
         val c = rotr(bits, 25-int3)
-        res = xor(a, b, c)
-        return res
+        return xor(a, b, c)
     }
 
     fun xor(a: String, b: String, c: String): String {
@@ -364,26 +362,25 @@ class PGen {
     }
 
     fun adder(a: String, b: String, c: String, d: String): String {
-
         var res = ""
 
-        val aint = a.toLong(2)
-        val bint = b.toLong(2)
-        val cint = c.toLong(2)
-        val dint = d.toLong(2)
-        val r = aint + bint + cint + dint
-        val binr = java.lang.Long.toBinaryString(r)
-        if (binr.length == 32) {
-            res = binr
-        } else if (binr.length > 32) {
+        val aInt = a.toLong(2)
+        val bInt = b.toLong(2)
+        val cInt = c.toLong(2)
+        val dInt = d.toLong(2)
+        val r = aInt + bInt + cInt + dInt
+        val binR = java.lang.Long.toBinaryString(r)
+        if (binR.length == 32) {
+            res = binR
+        } else if (binR.length > 32) {
             res = java.lang.Long.toBinaryString((r % Math.pow(2.0, 32.0)).toLong())
             if (res.length < 32) {
-                res = addZeros(binr, 32)
+                res = addZeros(binR, 32)
             } else if (res.length > 32) {
                 //System.out.println("toobig");
             }
-        } else if (binr.length < 32) {
-            res = addZeros(binr, 32)
+        } else if (binR.length < 32) {
+            res = addZeros(binR, 32)
         }
         if (res.length > 32) {
             res = rmZeros(res, 32)
@@ -393,13 +390,13 @@ class PGen {
 
     fun addersz(a: Long): String {
         var res = ""
-        val binr = java.lang.Long.toBinaryString(a)
-        if (binr.length == 32) {
-            res = binr
-        } else if (binr.length > 32) {
+        val binR = java.lang.Long.toBinaryString(a)
+        if (binR.length == 32) {
+            res = binR
+        } else if (binR.length > 32) {
             res = java.lang.Long.toBinaryString((a % Math.pow(2.0, 32.0)).toLong())
-        } else if (binr.length < 32) {
-            res = addZeros(binr, 32)
+        } else if (binR.length < 32) {
+            res = addZeros(binR, 32)
         }
         if (res.length < 32) {
             res = addZeros(res, 32)

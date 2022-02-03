@@ -345,13 +345,17 @@ class PGen {
 
     private fun xor(a: String, b: String, c: String): String {
         var res = ""
-        for (i in 0 until a.length) {
-            if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
-                res += "1"
-            } else if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0) {
-                res += "0"
-            } else {
-                println("____")
+        for (i in a.indices) {
+            when {
+                (a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1 -> {
+                    res += "1"
+                }
+                (a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0 -> {
+                    res += "0"
+                }
+                else -> {
+                    println("____")
+                }
             }
         }
         return res
@@ -387,12 +391,16 @@ class PGen {
     private fun addersz(a: Long): String {
         var res = ""
         val binR = java.lang.Long.toBinaryString(a)
-        if (binR.length == 32) {
-            res = binR
-        } else if (binR.length > 32) {
-            res = java.lang.Long.toBinaryString((a % Math.pow(2.0, 32.0)).toLong())
-        } else if (binR.length < 32) {
-            res = addZeros(binR, 32)
+        when {
+            binR.length == 32 -> {
+                res = binR
+            }
+            binR.length > 32 -> {
+                res = java.lang.Long.toBinaryString((a % Math.pow(2.0, 32.0)).toLong())
+            }
+            binR.length < 32 -> {
+                res = addZeros(binR, 32)
+            }
         }
         if (res.length < 32) {
             res = addZeros(res, 32)
@@ -426,12 +434,16 @@ class PGen {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         var res = ""
         for (i in a.indices) {
-            if (a[i] == '1') {
-                res += b[i]
-            } else if (a[i] == '0') {
-                res += c[i]
-            } else {
-                println("nothing")
+            when {
+                a[i] == '1' -> {
+                    res += b[i]
+                }
+                a[i] == '0' -> {
+                    res += c[i]
+                }
+                else -> {
+                    println("nothing")
+                }
             }
         }
         return res
@@ -441,18 +453,20 @@ class PGen {
 //    #take majority input value
         var res = ""
         for (i in a.indices) {
-            if ((a[i] == '1' && b[i] == '1') xor
-                (a[i] == '1' && c[i] == '1') xor
-                (b[i] == '1' && c[i] == '1')
-            ) {
-                res += "1"
-            } else if ((a[i] == '0' && b[i] == '0') xor
-                (a[i] == '0' && c[i] == '0') xor
-                (b[i] == '0' && c[i] == '0')
-            ) {
-                res += "0"
-            } else {
-                //println("maj nothing")
+            when {
+                (a[i] == '1' && b[i] == '1') xor
+                        (a[i] == '1' && c[i] == '1') xor
+                        (b[i] == '1' && c[i] == '1') -> {
+                    res += "1"
+                }
+                (a[i] == '0' && b[i] == '0') xor
+                        (a[i] == '0' && c[i] == '0') xor
+                        (b[i] == '0' && c[i] == '0') -> {
+                    res += "0"
+                }
+                else -> {
+                    //println("maj nothing")
+                }
             }
         }
         return res

@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //TODO
-        getWindow().setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
@@ -107,8 +107,8 @@ class MainActivity : AppCompatActivity() {
         val nameDB = sharedPreferencesEE.getString("signatureDB", "nonon")
 
 //      //authenticate
-        val fromLogin = getIntent().extras?.get("fromLogin")
-        val fromIntro = getIntent().extras?.get("fromIntro")
+        val fromLogin = intent.extras?.get("fromLogin")
+        val fromIntro = intent.extras?.get("fromIntro")
 
         Log.d("aaaaaafromlog", fromLogin.toString())
         if(nameS.equals("nonon") or nameT.equals("nonon")){
@@ -146,8 +146,8 @@ class MainActivity : AppCompatActivity() {
         val adapter = CustomAdapter(arr)
         recyclerView = findViewById<View>(R.id.rview) as RecyclerView
         recyclerView.setHasFixedSize(false)
-        recyclerView.setAdapter(adapter)
-        recyclerView.setLayoutManager(LinearLayoutManager(this))
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         //length dropdown ********************
         val Lines = resources.getStringArray(R.array.p_len_array).toList()
@@ -282,8 +282,8 @@ class MainActivity : AppCompatActivity() {
             val adapter = CustomAdapter(arrr)
             //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
             recyclerView.setHasFixedSize(false)
-            recyclerView.setAdapter(adapter)
-            recyclerView.setLayoutManager(LinearLayoutManager(this))
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(this)
 
             runOnUiThread {
                 adapter.notifyDataSetChanged()
@@ -352,8 +352,8 @@ class MainActivity : AppCompatActivity() {
                 val adapter = CustomAdapter(arrr)
                 //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                 recyclerView.setHasFixedSize(false)
-                recyclerView.setAdapter(adapter)
-                recyclerView.setLayoutManager(LinearLayoutManager(this))
+                recyclerView.adapter = adapter
+                recyclerView.layoutManager = LinearLayoutManager(this)
 
             }else{
                 btnHideAll.text = resources.getString(R.string.show) //"Show"
@@ -371,8 +371,8 @@ class MainActivity : AppCompatActivity() {
                 val adapter = CustomAdapter(arrr)
                 //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                 recyclerView.setHasFixedSize(false)
-                recyclerView.setAdapter(adapter)
-                recyclerView.setLayoutManager(LinearLayoutManager(this))
+                recyclerView.adapter = adapter
+                recyclerView.layoutManager = LinearLayoutManager(this)
 
             }//
 
@@ -444,9 +444,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     //TODO ad free version option
-    fun openAdFree() {
-        Log.d("aaaOptions", "coming soon")
-    }
+//    fun openAdFree() {
+//        Log.d("aaaOptions", "coming soon")
+//    }
 
 //    override fun onSupportNavigateUp(): Boolean {
 //        val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -470,7 +470,7 @@ class MainActivity : AppCompatActivity() {
             recyclerView.findViewHolderForAdapterPosition(getPosi())?.itemView?.findViewById(
                 R.id.textView4
             )
-        
+
         when (item.itemId) {
             R.id.menu_copy -> {
                 val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -510,8 +510,8 @@ class MainActivity : AppCompatActivity() {
                 arrr = wordDao.getAll()
                 val adapter = CustomAdapter(arrr)
                 recyclerView.setHasFixedSize(false)
-                recyclerView.setAdapter(adapter)
-                recyclerView.setLayoutManager(LinearLayoutManager(this))
+                recyclerView.adapter = adapter
+                recyclerView.layoutManager = LinearLayoutManager(this)
                 room.close()
 
             }
@@ -543,8 +543,8 @@ class MainActivity : AppCompatActivity() {
                     val adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)
-                    recyclerView.setAdapter(adapter)
-                    recyclerView.setLayoutManager(LinearLayoutManager(this))
+                    recyclerView.adapter = adapter
+                    recyclerView.layoutManager = LinearLayoutManager(this)
                     room.close()
 
                 }else{//if not existent then hide
@@ -562,8 +562,8 @@ class MainActivity : AppCompatActivity() {
                     val adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)
-                    recyclerView.setAdapter(adapter)
-                    recyclerView.setLayoutManager(LinearLayoutManager(this))
+                    recyclerView.adapter = adapter
+                    recyclerView.layoutManager = LinearLayoutManager(this)
                     room.close()
 
                 }
@@ -594,10 +594,10 @@ class MainActivity : AppCompatActivity() {
 //TODO remove pgen in recyclerview
 class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-
-    companion object {
-        var position: Int = 0
-    }
+//
+//    companion object {
+//        var position: Int = 0
+//    }
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
@@ -608,9 +608,8 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
         @SuppressLint("ResourceType")
         override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
-            MainActivity.pos = getPosition()
-            MainActivity.setPosi(getPosition())
-
+            MainActivity.pos = adapterPosition
+            MainActivity.setPosi(layoutPosition)
         }
 
         val textView1: TextView
@@ -697,8 +696,8 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                 val adapter = arrr?.let { CustomAdapter(it) }
 
                                 MainActivity.recyclerView.setHasFixedSize(false)
-                                MainActivity.recyclerView.setAdapter(adapter)
-                                MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
+                                MainActivity.recyclerView.adapter = adapter
+                                MainActivity.recyclerView.layoutManager = LinearLayoutManager(view?.context)
                                 room?.close()
                                 Log.d("aaaamenuu","DDDdelete")
 
@@ -735,8 +734,8 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                                     val adapter = arrr?.let { CustomAdapter(it) }
                                     MainActivity.recyclerView.setHasFixedSize(false)
-                                    MainActivity.recyclerView.setAdapter(adapter)
-                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
+                                    MainActivity.recyclerView.adapter = adapter
+                                    MainActivity.recyclerView.layoutManager = LinearLayoutManager(view?.context)
                                     room?.close()
 
                                 }else{//if not existent then hide
@@ -754,8 +753,8 @@ class CustomAdapter(private val dataSet: List<Word>) :
                                     val adapter = arrr?.let { CustomAdapter(it) }
                                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                                     MainActivity.recyclerView.setHasFixedSize(false)
-                                    MainActivity.recyclerView.setAdapter(adapter)
-                                    MainActivity.recyclerView.setLayoutManager(LinearLayoutManager(view?.context))
+                                    MainActivity.recyclerView.adapter = adapter
+                                    MainActivity.recyclerView.layoutManager = LinearLayoutManager(view?.context)
                                     room?.close()
 
                                 }

@@ -276,7 +276,7 @@ class MainActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             val aa = Word(
                 0,
-                "pgen",
+                "pGen",
                 editTextKeyGen.editText?.text.toString(),
                 tvGen.editText?.text.toString()
             )
@@ -341,7 +341,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 }
-                //tvGen.editText?.setText(ss.pgen(editTextKeyGen.editText?.text.toString(),"jimbob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
+                //tvGen.editText?.setText(ss.pGen(editTextKeyGen.editText?.text.toString(),"jimBob","4","5","6","7",filled_exposed_dropdown.editableText.toString().toInt()))
             }
         })
         var btnHideAllStatus = false

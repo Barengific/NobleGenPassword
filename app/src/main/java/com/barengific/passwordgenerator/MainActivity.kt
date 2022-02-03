@@ -521,7 +521,6 @@ class MainActivity : AppCompatActivity() {
                 arrr = wordDao.getAll()
 
                 if(posis.contains(getPosi())){//if existent then show
-//                  posis.removeAt(getPosi())
                     posis.remove(getPosi())
 
                     val pSize = posis.size
@@ -582,7 +581,6 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-//TODO remove pgen in recyclerview
 class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 

@@ -738,8 +738,6 @@ class CustomAdapter(private val dataSet: List<Word>) :
 
                                 val arrr = wordDao?.getAll()
 
-                                var btnHideAllStatus = false
-
                                 if(MainActivity.posis.contains(viewHolder.adapterPosition)){//if existent then show
                                     MainActivity.posis.remove(viewHolder.adapterPosition)
 
@@ -797,7 +795,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
                 clipboard.setPrimaryClip(clip)
-                Toast.makeText(view?.context, "Text Copied", Toast.LENGTH_LONG).show()
+                Toast.makeText(view.context, "Text Copied", Toast.LENGTH_LONG).show()
 
             }
         })
@@ -833,7 +831,7 @@ class FireMissilesDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater;
+            val inflater = requireActivity().layoutInflater
             builder.setView(inflater.inflate(R.layout.alertdialog_about, null))
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->

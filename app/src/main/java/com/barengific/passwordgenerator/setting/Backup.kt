@@ -80,9 +80,6 @@ class Backup : AppCompatActivity() {
         }
 
         btnBackups.setOnClickListener {
-            //TODO if select all is true, then save all data
-            //if select all is false, then save from checkList
-
             val time = System.currentTimeMillis()
             when {
                 CustomAdapters.isSelected -> {

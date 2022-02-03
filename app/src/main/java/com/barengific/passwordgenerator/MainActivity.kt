@@ -483,7 +483,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
-        menuInfo: ContextMenu.ContextMenuInfo?
+        menuInfo: ContextMenuInfo?
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
 
@@ -530,7 +530,7 @@ class MainActivity : AppCompatActivity() {
                         R.id.textView4
                     )
 
-                var a = Word(
+                val a = Word(
                     wid?.text.toString().toInt(),
                     pType?.text.toString(),
                     key?.text.toString(),

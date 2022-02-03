@@ -201,11 +201,9 @@ class Sha256 {
             when {
                 (a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1 -> {
                     res += "1"
-
                 }
                 (a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0 -> {
                     res += "0"
-
                 }
                 else -> {
                     println("____")

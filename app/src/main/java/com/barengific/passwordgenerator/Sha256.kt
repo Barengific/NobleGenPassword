@@ -310,11 +310,6 @@ class Sha256 {
     }
 
     fun adder(a: String, b: String, c: String, d: String): String {
-//        Log.d("aaainadderA", a)
-//        Log.d("aaainadderB", b)
-//        Log.d("aaainadderC", c)
-//        Log.d("aaainadderD", d)
-
         var res = ""
 
         val aint = a.toLong(2)
@@ -338,7 +333,6 @@ class Sha256 {
         if (res.length > 32) {
             res = rmZeros(res, 32)
         }
-//        Log.d("aaaadder", res)
         return res
     }
 
@@ -358,7 +352,6 @@ class Sha256 {
         if (res.length != 32) {
             println("tooo smlll still")
         }
-//        Log.d("aaaaddersz", res)
         return res
     }
 
@@ -369,7 +362,6 @@ class Sha256 {
             a = a.substring(0, a.length - 1)
             a = last_char + a
         }
-//        Log.d("aaarotr", a)
         return a
     }
 
@@ -379,7 +371,6 @@ class Sha256 {
             a = a.substring(0, a.length - 1)
             a = "0$a"
         }
-//        Log.d("aaashr", a)
         return a
     }
 
@@ -395,7 +386,6 @@ class Sha256 {
                 println("nothing")
             }
         }
-//        Log.d("aaacho", res)
         return res
     }
 
@@ -417,7 +407,6 @@ class Sha256 {
                 println("maj nothing")
             }
         }
-//        Log.d("aaamj", res)
         return res
     }
 
@@ -427,9 +416,7 @@ class Sha256 {
             msg = "0$msg"
         }
         if (msg.length != 32) {
-            //System.out.println("add zeroes: " + msg.length());
         }
-        //Log.d("addZeros", msg)
         return msg
     }
 
@@ -440,7 +427,6 @@ class Sha256 {
         if (msg.length != 32) {
             println("remove zeroes: " + msg.length)
         }
-//        Log.d("aaarmZeros", msg)
         return msg
     }
 

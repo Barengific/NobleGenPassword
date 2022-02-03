@@ -2,7 +2,6 @@ package com.barengific.passwordgenerator
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog.show
 import android.content.*
 import android.os.Build
 import android.os.Bundle
@@ -29,8 +28,6 @@ import android.view.MenuInflater
 
 import android.view.ContextMenu
 import android.content.Intent
-
-import com.barengific.passwordgenerator.ui.login.LoginActivity
 
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -150,8 +147,8 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         //length dropdown ********************
-        val Lines = resources.getStringArray(R.array.p_len_array).toList()
-        val adapterr = ArrayAdapter(this, R.layout.length_layout, Lines)
+        val lines = resources.getStringArray(R.array.p_len_array).toList()
+        val adapterr = ArrayAdapter(this, R.layout.length_layout, lines)
         filled_exposed_dropdown.setAdapter(adapterr)
 
         val ss = Pgen()
@@ -594,16 +591,10 @@ class MainActivity : AppCompatActivity() {
 //TODO remove pgen in recyclerview
 class CustomAdapter(private val dataSet: List<Word>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-//
-//    companion object {
-//        var position: Int = 0
-//    }
-
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
         View.OnCreateContextMenuListener {
         var ivCopy: ImageView
-        var fileName: TextView
         var ivMore: ImageView
 
         @SuppressLint("ResourceType")
@@ -642,7 +633,7 @@ class CustomAdapter(private val dataSet: List<Word>) :
     override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         viewHolder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(v: View?): Boolean {
-                setPosition(viewHolder.position)
+                setPosition(viewHolder.layoutPosition)
                 setPosition(viewHolder.adapterPosition)
                 return false
             }

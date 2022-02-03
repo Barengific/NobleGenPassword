@@ -13,7 +13,7 @@
     <string name="dialog_fire_missiles">\"BARZ\"</string>
     <string name="fire">\"HAA FIRES\"</string>
     <string name="cancel">Cancel</string>
-    <string name="Masterkey_phrase">Enter a Master Phrase Key</string>
+    <string name="MasterKey_phrase">Enter a Master Phrase Key</string>
     <string name="submit">Submit</string>
     <string name="generate">Generate</string>
     <string name="delete">Delete</string>
@@ -117,5 +117,6 @@
     <string name="settings_header_help_coming">Help (Coming soon...)</string>
     <string name="nonon">nonon</string>
     <string name="length">Length</string>
+    <string name="rst_confirm">Are you sure you want to reset your credentials? All your saved passwords will be deleted!</string>
 
 </resources>

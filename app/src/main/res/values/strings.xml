@@ -19,7 +19,7 @@
     <string name="delete">Delete</string>
     <string name="copy">Copy</string>
     <string name="action_about">About</string>
-    <string name="textfield_password_derivation_key">Password Derivation Key</string>
+    <string name="textField_password_derivation_key">Password Derivation Key</string>
     <string name="btnSave">Save</string>
     <string name="text_view_length">Length</string>
     <string name="text_view_copy_to_clipboard">Copy to clipboard</string>
@@ -116,5 +116,6 @@
     <string name="app_name_short">Noble</string>
     <string name="settings_header_help_coming">Help (Coming soon...)</string>
     <string name="nonon">nonon</string>
+    <string name="length">Length</string>
 
 </resources>

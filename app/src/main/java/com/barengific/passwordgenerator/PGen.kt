@@ -48,7 +48,7 @@ class PGen {
 
         return res
     }
-    fun hashesPure(msg:String): String? {
+    private fun hashesPure(msg:String): String? {
         val int1 = 0
         val int2 = 0
         val int3 = 0
@@ -58,10 +58,10 @@ class PGen {
         val rt33 = rt3s()
 
         var message = ""
-        for (i in 0 until msg.length) {
+        for (element in msg) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msg[i].code.toLong()).toLong()
+                java.lang.Long.toBinaryString(element.code.toLong()).toLong()
             ) //msg to binary
         }
         val msgLen = String.format(
@@ -154,15 +154,15 @@ class PGen {
         return BigInteger(digest, 2).toString(16)
     }
 
-    fun hashes(msg:String, int1:Int, int2:Int, int3:Int, int4:Int): String? {
+    private fun hashes(msg:String, int1:Int, int2:Int, int3:Int, int4:Int): String? {
         val rt22 = rt2s()
         val rt33 = rt3s()
 
         var message = ""
-        for (i in 0 until msg.length) {
+        for (element in msg) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msg[i].code.toLong()).toLong()
+                java.lang.Long.toBinaryString(element.code.toLong()).toLong()
             ) //msg to binary
         }
         val msgLen = String.format(
@@ -348,7 +348,7 @@ class PGen {
     }
 
     fun xor(a: String, b: String, c: String): String {
-        var res: String = ""
+        var res = ""
         for (i in 0 until a.length) {
             if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
                 res += "1"

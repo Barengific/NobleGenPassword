@@ -1,4 +1,4 @@
-package com.barengific.passwordgenerator
+package com.barengific.passwordgenerator.setting
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.barengific.passwordgenerator.Backup.Companion.checkList
+import com.barengific.passwordgenerator.setting.Backup.Companion.checkList
 import com.barengific.passwordgenerator.database.AppDatabase
 import com.barengific.passwordgenerator.database.Word
 import kotlinx.android.synthetic.main.backup_activity.*
@@ -28,7 +28,7 @@ import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
-import com.barengific.passwordgenerator.setting.SettingsActivity
+import com.barengific.passwordgenerator.R
 import java.io.*
 import com.google.gson.Gson
 
@@ -45,7 +45,7 @@ class Backup : AppCompatActivity() {
         setContentView(R.layout.backup_activity)
 
         //TODO
-        getWindow().setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
@@ -67,8 +67,8 @@ class Backup : AppCompatActivity() {
         val adapter = CustomAdapters(arr)
         recyclerView = findViewById<View>(R.id.rview) as RecyclerView
         recyclerView.setHasFixedSize(false)
-        recyclerView.setAdapter(adapter)
-        recyclerView.setLayoutManager(LinearLayoutManager(this))
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         btnSelectAll.setOnClickListener {
             CustomAdapters.isSelected = true
@@ -85,37 +85,41 @@ class Backup : AppCompatActivity() {
             //if select all is false, then save from checkList
 
             val time = System.currentTimeMillis()
-            if(CustomAdapters.isSelected) {
-                //save all
-                val gson = Gson()
-                val arrJ = gson.toJson(arr)
-//                Log.d("aaaaaJSON", arrJ)
-                save(
-                    this, "nobles_$time.txt",
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                    arrJ)
-                Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
+            when {
+                CustomAdapters.isSelected -> {
+                    //save all
+                    val gson = Gson()
+                    val arrJ = gson.toJson(arr)
+        //                Log.d("aaaaaJSON", arrJ)
+                    save(
+                        this, "nobles_$time.txt",
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                        arrJ)
+                    Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
 
-
-            }else if (!CustomAdapters.isSelected and (checkList.size <= 1)){
-                Toast.makeText(applicationContext, "Please Select At Least One !", Toast.LENGTH_LONG).show()
-            }else {
-                //save checkList
-//                var savedList: MutableList<Word>
-
-                val savedList = mutableListOf<Word>()
-                for (i in 0 until checkList.size){
-                    val cli = checkList[i]
-//                    Log.d("aaaaacli", cli.toString())
-                    if(cli != -1){
-                        val ari = arr[cli]
-//                        Log.d("aaaaaari", ari.toString())
-                        savedList.add(ari)
-                    }
 
                 }
-//                Log.d("aaaaainsavv", savedList.toString())
-                Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
+                !CustomAdapters.isSelected and (checkList.size <= 1) -> {
+                    Toast.makeText(applicationContext, "Please Select At Least One !", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    //save checkList
+        //                var savedList: MutableList<Word>
+
+                    val savedList = mutableListOf<Word>()
+                    for (i in 0 until checkList.size){
+                        val cli = checkList[i]
+        //                    Log.d("aaaaacli", cli.toString())
+                        if(cli != -1){
+                            val ari = arr[cli]
+        //                        Log.d("aaaaaari", ari.toString())
+                            savedList.add(ari)
+                        }
+
+                    }
+        //                Log.d("aaaaainsavv", savedList.toString())
+                    Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
+                }
             }
 
 //            save(this, "nobles_$time.txt",
@@ -140,7 +144,7 @@ class Backup : AppCompatActivity() {
 
     }
 
-    fun hideSystemBars() {
+    private fun hideSystemBars() {
         val windowInsetsController =
             ViewCompat.getWindowInsetsController(window.decorView) ?: return
         // Configure the behavior of the hidden system bars

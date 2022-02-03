@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.appcompat.app.AppCompatActivity
 import com.barengific.passwordgenerator.databinding.ActivityMainBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,7 +66,6 @@ import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     var arrr: List<Word> = listOf(Word(0, "", "", ""))

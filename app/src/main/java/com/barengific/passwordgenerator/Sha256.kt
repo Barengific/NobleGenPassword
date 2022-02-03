@@ -26,7 +26,7 @@ class Sha256 {
                 message.length.toLong()
             ).toLong()
         ) //msg length in binary
-        val chunkno = chunkNo(message) //chuncks required //padding number
+        val chunkno = chunkNo(message) //chunks required //padding number
         message += "1"
         val padding = chunkno * 512 - (message.length + 64)
         for (i in 0 until padding) {
@@ -167,20 +167,16 @@ class Sha256 {
                 }
             }
         }
-        Log.d("aaachunkNo", chunks.toString())
+
         return chunks
     }
 
     fun sig0(bits: String): String {
-//        Log.d("aaainsig0", bits)
+
         val a = rotr(bits, 7)
         val b = rotr(bits, 18)
         val c = shr(bits, 3)
-//        Log.d("aaainsig0A", a)
-//        Log.d("aaainsig0B", b)
-//        Log.d("aaainsig0C", c)
-//
-//        Log.d("aaasig0", xor(a, b, c))
+
         return xor(a, b, c)
     }
 
@@ -188,7 +184,7 @@ class Sha256 {
         val a = rotr(bits, 17)
         val b = rotr(bits, 19)
         val c = shr(bits, 10)
-//        Log.d("aaasig1", xor(a, b, c))
+
         return xor(a, b, c)
     }
 
@@ -198,7 +194,7 @@ class Sha256 {
         val b = rotr(bits, 13)
         val c = rotr(bits, 22)
         res = xor(a, b, c)
-//        Log.d("aaasigma0", res)
+
         return res
     }
 
@@ -208,7 +204,7 @@ class Sha256 {
         val b = rotr(bits, 11)
         val c = rotr(bits, 25)
         res = xor(a, b, c)
-//        Log.d("aaasigma1", res)
+
         return xor(a, b, c)
     }
 
@@ -228,7 +224,6 @@ class Sha256 {
                 println("____")
             }
         }
-//        Log.d("aaaxor", res)
         return res
     }
 

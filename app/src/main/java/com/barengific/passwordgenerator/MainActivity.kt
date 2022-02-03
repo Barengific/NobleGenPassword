@@ -223,10 +223,10 @@ class MainActivity : AppCompatActivity() {
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
-                        nameT.toString().get(0).toString(),
-                        nameT.toString().get(1).toString(),
-                        nameT.toString().get(2).toString(),
-                        nameT.toString().get(3).toString(),
+                        nameT.toString()[0].toString(),
+                        nameT.toString()[1].toString(),
+                        nameT.toString()[2].toString(),
+                        nameT.toString()[3].toString(),
                         10
                     )
                 )
@@ -235,10 +235,10 @@ class MainActivity : AppCompatActivity() {
                     ss.pgen(
                         editTextKeyGen.editText?.text.toString(),
                         nameS.toString(),
-                        nameT.toString().get(0).toString(),
-                        nameT.toString().get(1).toString(),
-                        nameT.toString().get(2).toString(),
-                        nameT.toString().get(3).toString(),
+                        nameT.toString()[0].toString(),
+                        nameT.toString()[1].toString(),
+                        nameT.toString()[2].toString(),
+                        nameT.toString()[3].toString(),
                         filled_exposed_dropdown.editableText.toString().toInt()
                     )
                 )
@@ -288,7 +288,7 @@ class MainActivity : AppCompatActivity() {
             //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
         }
 
-        filled_exposed_dropdown.setOnItemClickListener { parent, view, position, rowId ->
+        filled_exposed_dropdown.setOnItemClickListener { parent, _, position, _ ->
             Int
             val selection = parent.getItemAtPosition(position) as String
             Log.d("aaanewMAterialSpinner", selection)
@@ -296,10 +296,10 @@ class MainActivity : AppCompatActivity() {
                 ss.pgen(
                     editTextKeyGen.editText?.text.toString(),
                     nameS.toString(),
-                    nameT.toString().get(0).toString(),
-                    nameT.toString().get(1).toString(),
-                    nameT.toString().get(2).toString(),
-                    nameT.toString().get(3).toString(),
+                    nameT.toString()[0].toString(),
+                    nameT.toString()[1].toString(),
+                    nameT.toString()[2].toString(),
+                    nameT.toString()[3].toString(),
                     selection.toInt()
                 )
             )
@@ -315,10 +315,10 @@ class MainActivity : AppCompatActivity() {
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),
-                            nameT.toString().get(0).toString(),
-                            nameT.toString().get(1).toString(),
-                            nameT.toString().get(2).toString(),
-                            nameT.toString().get(3).toString(),
+                            nameT.toString()[0].toString(),
+                            nameT.toString()[1].toString(),
+                            nameT.toString()[2].toString(),
+                            nameT.toString()[3].toString(),
                             10
                         )
                     )
@@ -327,10 +327,10 @@ class MainActivity : AppCompatActivity() {
                         ss.pgen(
                             editTextKeyGen.editText?.text.toString(),
                             nameS.toString(),
-                            nameT.toString().get(0).toString(),
-                            nameT.toString().get(1).toString(),
-                            nameT.toString().get(2).toString(),
-                            nameT.toString().get(3).toString(),
+                            nameT.toString()[0].toString(),
+                            nameT.toString()[1].toString(),
+                            nameT.toString()[2].toString(),
+                            nameT.toString()[3].toString(),
                             filled_exposed_dropdown.editableText.toString().toInt()
                         )
                     )
@@ -361,8 +361,8 @@ class MainActivity : AppCompatActivity() {
                 val arSize = arrr.size
 
                 for (i in 0 until arSize) {
-                    arrr.get(i).value = "****"
-                    arrr.get(i).key = "****"
+                    arrr[i].value = "****"
+                    arrr[i].key = "****"
                 }// check - database\Word changed from val to var ^
 
                 val adapter = CustomAdapter(arrr)
@@ -397,8 +397,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId = item.itemId
-        when (itemId) {
+        when (item.itemId) {
             R.menu.main -> {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

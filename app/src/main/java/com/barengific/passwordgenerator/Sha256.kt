@@ -79,7 +79,7 @@ class Sha256 {
         for (i in 0 until msg.length) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msg[i].toLong()).toLong()
+                java.lang.Long.toBinaryString(msg[i].code.toLong()).toLong()
             ) //msg to binary
         }
         val msgLen = String.format(
@@ -254,7 +254,7 @@ class Sha256 {
     }
 
     fun sigma0(bits: String): String {
-        var res = ""
+        var res: String
         val a = rotr(bits, 2)
         val b = rotr(bits, 13)
         val c = rotr(bits, 22)
@@ -264,7 +264,7 @@ class Sha256 {
     }
 
     fun sigma1(bits: String): String {
-        var res = ""
+        var res: String
         val a = rotr(bits, 6)
         val b = rotr(bits, 11)
         val c = rotr(bits, 25)

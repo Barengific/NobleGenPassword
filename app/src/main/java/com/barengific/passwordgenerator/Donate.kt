@@ -5,17 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
 import com.barengific.passwordgenerator.databinding.DonationActivityBinding
 import com.barengific.passwordgenerator.setting.SettingsActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.donation_activity.*
 import kotlinx.android.synthetic.main.donation_activity.btnCancels
-import kotlinx.android.synthetic.main.secfrag_activity.*
-import java.io.*
-
-
 
 class Donate : AppCompatActivity() {
     private lateinit var binding: DonationActivityBinding
@@ -34,7 +27,7 @@ class Donate : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "BTC Address Copied", Toast.LENGTH_SHORT).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         tvETH.setStartIconOnClickListener {
@@ -44,7 +37,7 @@ class Donate : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "ETH Address Copied", Toast.LENGTH_SHORT).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         tvBCH.setStartIconOnClickListener {
@@ -54,7 +47,7 @@ class Donate : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "BCH Address Copied", Toast.LENGTH_SHORT).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         tvLTC.setStartIconOnClickListener {
@@ -64,7 +57,7 @@ class Donate : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "LTC Address Copied", Toast.LENGTH_SHORT).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         tvETC.setStartIconOnClickListener {
@@ -74,7 +67,7 @@ class Donate : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "ETC Address Copied", Toast.LENGTH_SHORT).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         tvAlgo.setStartIconOnClickListener {
@@ -84,7 +77,7 @@ class Donate : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "ALGO Address Copied", Toast.LENGTH_SHORT).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         tvNano.setStartIconOnClickListener {
@@ -94,7 +87,7 @@ class Donate : AppCompatActivity() {
             clipboard.setPrimaryClip(clip)
 
             Toast.makeText(applicationContext, "NANO Address Copied", Toast.LENGTH_SHORT).show()
-            Log.d("aaaaaaaaa", "copyyyingggg123")
+            Log.d("aaa", "copying123")
         }
 
         btnCancels.setOnClickListener {
@@ -104,7 +97,6 @@ class Donate : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
 
 }

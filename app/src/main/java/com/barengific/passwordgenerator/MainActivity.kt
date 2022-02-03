@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var pos: Int = 0
         lateinit var recyclerView: RecyclerView
-        lateinit var posiss: MutableList<Int>
         var posis: MutableList<Int> = mutableListOf(-1)
         var authStatus = false
         private var instance: MainActivity? = null
@@ -76,15 +75,6 @@ class MainActivity : AppCompatActivity() {
             return instance!!.applicationContext
         }
     }
-
-    private val cryptographyManager = CryptographyManager()
-    private val ciphertextWrapper
-        get() = cryptographyManager.getCiphertextWrapperFromSharedPrefs(
-            applicationContext,
-            SHARED_PREFS_FILENAME,
-            Context.MODE_PRIVATE,
-            CIPHERTEXT_WRAPPER
-        )
 
     @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -127,14 +117,10 @@ class MainActivity : AppCompatActivity() {
         }
         //
 
-        if(!(authStatus or fromLogin.toString().equals("fin"))){
-            val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
-            startActivity(intent)
-        }
-//
-//        var secretKey: SecretKey?
-//        if(nameDB.equals("nonon")){
-//            secretKey = generateKey(nameS+nameT)
+        //TODO
+//        if(!(authStatus or fromLogin.toString().equals("fin"))){
+//            val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
+//            startActivity(intent)
 //        }
 
 

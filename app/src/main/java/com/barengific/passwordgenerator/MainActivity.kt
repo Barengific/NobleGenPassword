@@ -317,7 +317,7 @@ class MainActivity : AppCompatActivity() {
             //TODO check for duplicates, i.e. comparedkey and length if already exists when don't add to db
         }
 
-        filled_exposed_dropdown.setOnItemClickListener(OnItemClickListener { parent, view, position, rowId ->
+        filled_exposed_dropdown.setOnItemClickListener { parent, view, position, rowId ->
             Int
             val selection = parent.getItemAtPosition(position) as String
             Log.d("aaanewMAterialSpinner", selection)
@@ -333,7 +333,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
 
-        })
+        }
 
         editTextKeyGen.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}

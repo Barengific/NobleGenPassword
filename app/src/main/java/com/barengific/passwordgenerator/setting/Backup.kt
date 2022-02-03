@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,7 +89,7 @@ class Backup : AppCompatActivity() {
                     //save all
                     val gson = Gson()
                     val arrJ = gson.toJson(arr)
-        //                Log.d("aaaaaJSON", arrJ)
+        //                Log.d("aaa JSON", arrJ)
                     save(
                         this, "nobles_$time.txt",
                         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
@@ -109,15 +108,15 @@ class Backup : AppCompatActivity() {
                     val savedList = mutableListOf<Word>()
                     for (i in 0 until checkList.size){
                         val cli = checkList[i]
-        //                    Log.d("aaaaacli", cli.toString())
+        //                    Log.d("aaa cli", cli.toString())
                         if(cli != -1){
                             val ari = arr[cli]
-        //                        Log.d("aaaaaari", ari.toString())
+        //                        Log.d("aaa ri", ari.toString())
                             savedList.add(ari)
                         }
 
                     }
-        //                Log.d("aaaaainsavv", savedList.toString())
+        //                Log.d("aaa_in_save", savedList.toString())
                     Toast.makeText(applicationContext, "File saved as: nobles_$time.txt in your downloads folder!", Toast.LENGTH_LONG).show()
                 }
             }
@@ -125,7 +124,7 @@ class Backup : AppCompatActivity() {
 //            save(this, "nobles_$time.txt",
 //                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
 //            "yeahMadeIT")
-//            Log.d("aaaaaYYY", read(this, "noblest_$time.txt",
+//            Log.d("aaa YYY", read(this, "noblest_$time.txt",
 //                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 //                    ))
 
@@ -201,7 +200,7 @@ class Backup : AppCompatActivity() {
 
 }
 
-//TODO remove pgen in recyclerview
+//TODO remove pGen in recyclerview
 //remove copy and more image
 
 class CustomAdapters(private val dataSets: List<Word>) :

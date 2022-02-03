@@ -7,6 +7,6 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Are you sure you want to reset your credentials? All your saved passwords will be deleted!"
+        android:text="@string/rst_confirm"
         android:textSize="24sp" />
 </LinearLayout>

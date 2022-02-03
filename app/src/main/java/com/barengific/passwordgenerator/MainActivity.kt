@@ -144,11 +144,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, LoginActivity::class.java).apply {}
             startActivity(intent)
         }
-
-        var secretKey: SecretKey?
-        if(nameDB.equals("nonon")){
-            secretKey = generateKey(nameS+nameT)
-        }
+//
+//        var secretKey: SecretKey?
+//        if(nameDB.equals("nonon")){
+//            secretKey = generateKey(nameS+nameT)
+//        }
 
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -538,7 +538,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 room.wordDao().delete(a)
                 arrr = wordDao.getAll()
-                var adapter = CustomAdapter(arrr)
+                val adapter = CustomAdapter(arrr)
                 recyclerView.setHasFixedSize(false)
                 recyclerView.setAdapter(adapter)
                 recyclerView.setLayoutManager(LinearLayoutManager(this))
@@ -570,7 +570,7 @@ class MainActivity : AppCompatActivity() {
                             arrr.get(qSize).key = "****"
                         }
                     }
-                    var adapter = CustomAdapter(arrr)
+                    val adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)
                     recyclerView.setAdapter(adapter)
@@ -589,7 +589,7 @@ class MainActivity : AppCompatActivity() {
                             arrr.get(qSize).key = "****"
                         }
                     }
-                    var adapter = CustomAdapter(arrr)
+                    val adapter = CustomAdapter(arrr)
                     //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
                     recyclerView.setHasFixedSize(false)
                     recyclerView.setAdapter(adapter)
@@ -604,66 +604,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onContextItemSelected(item)
-    }
-
-    @Throws(
-        NoSuchAlgorithmException::class,
-        NoSuchPaddingException::class,
-        InvalidKeyException::class,
-        InvalidParameterSpecException::class,
-        IllegalBlockSizeException::class,
-        BadPaddingException::class,
-        UnsupportedEncodingException::class
-    )
-    fun encryptMsg(message: String, secret: SecretKey?): String? {
-        var cipher: Cipher? = null
-        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
-        cipher.init(Cipher.ENCRYPT_MODE, secret)
-        val cipherText: ByteArray = cipher.doFinal(message.toByteArray(charset("UTF-8")))
-        return Base64.encodeToString(cipherText, Base64.NO_WRAP)
-    }
-
-    fun encryptMsgs(message: String, secret: SecretKey?): String {
-        var cipher: Cipher? = null
-        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
-        cipher.init(Cipher.ENCRYPT_MODE, secret)
-        val cipherText: ByteArray = cipher.doFinal(message.toByteArray(charset("UTF-8")))
-        return Base64.encodeToString(cipherText, Base64.NO_WRAP)
-    }
-
-    @Throws(
-        NoSuchPaddingException::class,
-        NoSuchAlgorithmException::class,
-        InvalidParameterSpecException::class,
-        InvalidAlgorithmParameterException::class,
-        InvalidKeyException::class,
-        BadPaddingException::class,
-        IllegalBlockSizeException::class,
-        UnsupportedEncodingException::class
-    )
-    fun decryptMsg(cipherText: String?, secret: SecretKey?): String? {
-        var cipher: Cipher? = null
-        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
-        cipher.init(Cipher.DECRYPT_MODE, secret)
-        val decode: ByteArray = Base64.decode(cipherText, Base64.NO_WRAP)
-        //String("aa")
-        //String(cipher.doFinal(decode), 'U')
-        return String(cipher.doFinal(decode))
-    }
-
-    @Throws(NoSuchAlgorithmException::class, InvalidKeySpecException::class)
-    fun generateKey(key: String): SecretKey? {
-        val secret: SecretKeySpec
-        secret = SecretKeySpec(key.toByteArray(), "AES")
-        return secret
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun generateSecretKey(keyGenParameterSpec: KeyGenParameterSpec) {
-        val keyGenerator = KeyGenerator.getInstance(
-            KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
-        keyGenerator.init(keyGenParameterSpec)
-        keyGenerator.generateKey()
     }
 
     override fun onPause() {

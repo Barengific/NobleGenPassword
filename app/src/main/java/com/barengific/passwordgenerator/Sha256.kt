@@ -1,10 +1,9 @@
 package com.barengific.passwordgenerator
 
-import android.util.Log
 import java.math.BigInteger
 
 class Sha256 {
-    var rt2 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19)
+    private var rt2 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19)
     var rt3 = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
         73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167,
         173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269,
@@ -26,9 +25,9 @@ class Sha256 {
                 message.length.toLong()
             ).toLong()
         ) //msg length in binary
-        val chunkno = chunkNo(message) //chunks required //padding number
+        val chunkNo = chunkNo(message) //chunks required //padding number
         message += "1"
-        val padding = chunkno * 512 - (message.length + 64)
+        val padding = chunkNo * 512 - (message.length + 64)
         for (i in 0 until padding) {
             message += "0"
         } //padding applied
@@ -36,14 +35,14 @@ class Sha256 {
         var min = 0
         var max = 512
         val chunks: ArrayList<String> = ArrayList()
-        for (i in 0 until chunkno) {
+        for (i in 0 until chunkNo) {
             chunks.add(message.substring(min, max)) //split into chunks of 512bit
             min += 512
             max += 512
         }
 
         //process the message in successive 512bit chunks:
-        for (i in 0 until chunkno) {
+        for (i in 0 until chunkNo) {
             val newMsg = chunks[i]
             min = 0
             max = 32

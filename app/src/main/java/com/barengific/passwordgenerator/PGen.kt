@@ -26,14 +26,14 @@ class PGen {
         var message = ""
         val msg = msg+hashesPure(mKey)
         val msgB = hashes(msg, int1, int2, int3, int4)
-        
+
         val sha256 = Sha256()
         val msgHash = msgB?.let { sha256.hashes(it) }
 
-        for (i in 0 until msgB!!.length) {
+        for (i in 0 until msgHash!!.length) {
             message += String.format(
                 "%08d",
-                java.lang.Long.toBinaryString(msgB[i].code.toLong()).toLong()
+                java.lang.Long.toBinaryString(msgHash[i].code.toLong()).toLong()
             ) //msg to binary
         }
 

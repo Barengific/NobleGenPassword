@@ -15,7 +15,7 @@ import com.barengific.passwordgenerator.databinding.SecfragActivityBinding
 import kotlinx.android.synthetic.main.secfrag_activity.*
 
 
-class Secfrag : AppCompatActivity() {
+class SecFrag : AppCompatActivity() {
     private lateinit var binding: SecfragActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,14 +33,14 @@ class Secfrag : AppCompatActivity() {
         setContentView(binding.root)
 
         //TODO read from encrypted shared preferences
-        val masterKey = this?.let {
+        val masterKey = this.let {
             MasterKey.Builder(it, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
         }
 
-        val sharedPreferencesEE: SharedPreferences = masterKey?.let {
-            this?.let { it1 ->
+        val sharedPreferencesEE: SharedPreferences = masterKey.let {
+            this.let { it1 ->
                 EncryptedSharedPreferences.create(
                     it1,
                     "secret_shared_prefs",
@@ -48,7 +48,7 @@ class Secfrag : AppCompatActivity() {
                     EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                     EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
             }
-        }!!
+        }
 
         //read
         val nameS = sharedPreferencesEE.getString("signatureS", "nonon")

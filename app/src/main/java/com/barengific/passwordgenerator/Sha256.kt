@@ -197,14 +197,12 @@ class Sha256 {
     private fun xor(a: String, b: String, c: String): String {
         var res = ""
 
-        for (i in 0 until a.length) {
+        for (i in a.indices) {
             if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
                 res += "1"
 
             } else if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0) {
                 res += "0"
-
-                var qqq: Boolean = res.isNullOrEmpty()
 
             } else {
                 println("____")

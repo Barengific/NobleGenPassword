@@ -213,34 +213,18 @@ class Sha256 {
     }
 
     fun xor(a: String, b: String, c: String): String {
-//        Log.d("aaainxorA", a)
-//        Log.d("aaainxorB", b)
-//        Log.d("aaainxorC", c)
-
         var res: String = ""
-//        var ress: String = "a"
-//        Log.d("aaainxorQQQQQ", (a[0].digitToInt() xor b[0].digitToInt() xor c[0].digitToInt()).toString())
+
         for (i in 0 until a.length) {
             if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 1) {
                 res += "1"
-//                Log.d("aaainxorIF0", "res")
-//                Log.d("aaainxorIF0", res)
+
             } else if ((a[i].digitToInt() xor b[i].digitToInt() xor c[i].digitToInt()) == 0) {
                 res += "0"
-//                Log.d("aaainxorIF1", "res")
-//                Log.d("aaainxorIF1", res.toString())
-//                Log.d("aaainxorIF1", res.length.toString())
+
                 var qqq: Boolean = res.isNullOrEmpty()
-//                Log.d("aaainxorIF1", qqq.toString())
-//                Log.d("aaainxorIFOUTTT1", ress)
+
             } else {
-                //Log.d("aaainxorIF2", "res")
-                //Log.d("aaainxorIF2", res)
-//                Log.d("aaainxorIF2", res.toString())
-//                Log.d("aaainxorIF2", res.length.toString())
-//                var qqq: Boolean = res.isNullOrEmpty()
-//                Log.d("aaainxorIF2", qqq.toString())
-//                Log.d("aaainxorIFOUTT2", ress)
                 println("____")
             }
         }

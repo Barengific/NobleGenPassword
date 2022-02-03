@@ -50,8 +50,6 @@ class Restore : AppCompatActivity() {
                 .build()
         val wordDao = room.wordDao()
 
-
-
         btnRestore.setOnClickListener {
             val filename = tvMv.editText?.text.toString()
             read(this, filename,
@@ -63,14 +61,8 @@ class Restore : AppCompatActivity() {
 
             val gson = Gson()
 
-            // gson string to object
-//            val toWord = read(this, filename,
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
             val ww = read(this, filename,
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
-
-            //val toWord: Word = gson.fromJson( ww, Word::class.java)
-            //val toWords: List<Word> = listOf(gson.fromJson( ww, Word::class.java))
 
             val enums: Array<Word> = gson.fromJson(ww,Array<Word>::class.java)
 

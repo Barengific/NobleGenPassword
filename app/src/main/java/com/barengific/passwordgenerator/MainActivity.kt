@@ -55,8 +55,7 @@ import net.sqlcipher.database.SupportFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    var private arrr: List<Word> = listOf(Word(0, "", "", ""))
+    private var arrr: List<Word> = listOf(Word(0, "", "", ""))
 
     init {
         instance = this

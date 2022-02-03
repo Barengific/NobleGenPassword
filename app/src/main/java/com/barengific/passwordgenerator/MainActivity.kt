@@ -630,13 +630,11 @@ class CustomAdapter(private val dataSet: List<Word>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        viewHolder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(v: View?): Boolean {
-                setPosition(viewHolder.layoutPosition)
-                setPosition(viewHolder.adapterPosition)
-                return false
-            }
-        })
+        viewHolder.itemView.setOnLongClickListener {
+            setPosition(viewHolder.layoutPosition)
+            setPosition(viewHolder.adapterPosition)
+            false
+        }
 
         viewHolder.ivMore.setOnClickListener(object : View.OnClickListener {
 
@@ -647,113 +645,117 @@ class CustomAdapter(private val dataSet: List<Word>) :
                 //inflating menu from xml resource
                 popup.inflate(R.menu.rv_menu_context)
                 //adding click listener
-                popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-                    override fun onMenuItemClick(item: MenuItem): Boolean {
-                        when (item.itemId) {
-                            R.id.menu_copy -> {
-                                Log.d("aaaamenuu","copy")
-                                val clipboard = view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                                val clip: ClipData = ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
-                                clipboard.setPrimaryClip(clip)
-                                Toast.makeText(view.context, "Text Copied", Toast.LENGTH_LONG).show()
+                popup.setOnMenuItemClickListener { item ->
+                    when (item.itemId) {
+                        R.id.menu_copy -> {
+                            Log.d("aaaamenuu", "copy")
+                            val clipboard =
+                                view?.context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                            val clip: ClipData =
+                                ClipData.newPlainText("PGen", viewHolder.textView4.text.toString())
+                            clipboard.setPrimaryClip(clip)
+                            Toast.makeText(view.context, "Text Copied", Toast.LENGTH_LONG).show()
 
+                        }
+                        R.id.menu_delete -> {
+                            val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
+                            val factory = SupportFactory(passphrase)
+                            val room = view?.context?.let {
+                                Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
+                                    .openHelperFactory(factory)
+                                    .allowMainThreadQueries()
+                                    .build()
                             }
-                            R.id.menu_delete -> {
-                                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())
-                                val factory = SupportFactory(passphrase)
-                                val room = view?.context?.let {
-                                    Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
-                                        .openHelperFactory(factory)
-                                        .allowMainThreadQueries()
-                                        .build()
+                            val wordDao = room?.wordDao()
+
+                            val wid: TextView = viewHolder.textView1
+                            val pType: TextView = viewHolder.textView2
+                            val key: TextView = viewHolder.textView3
+                            val value: TextView = viewHolder.textView4
+
+                            val a = Word(
+                                wid.text.toString().toInt(),
+                                pType.text.toString(),
+                                key.text.toString(),
+                                value.text.toString()
+                            )
+                            room?.wordDao()?.delete(a)
+                            val arrr = wordDao?.getAll()
+                            val adapter = arrr?.let { CustomAdapter(it) }
+
+                            MainActivity.recyclerView.setHasFixedSize(false)
+                            MainActivity.recyclerView.adapter = adapter
+                            MainActivity.recyclerView.layoutManager =
+                                LinearLayoutManager(view?.context)
+                            room?.close()
+                            Log.d("aaaamenuu", "DDDdelete")
+
+                        }
+
+                        R.id.menu_cancel -> {
+                            Log.d("aaaamenuu", "canceeel") //TODO
+                        }
+                        R.id.menu_hide -> {
+                            val passphrase: ByteArray =
+                                SQLiteDatabase.getBytes("bob".toCharArray())//DB passprhase change
+                            val factory = SupportFactory(passphrase)
+                            val room = view?.context?.let {
+                                Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
+                                    .openHelperFactory(factory)
+                                    .allowMainThreadQueries()
+                                    .build()
+                            }
+                            val wordDao = room?.wordDao()
+
+                            val arrr = wordDao?.getAll()
+
+                            if (MainActivity.posis.contains(viewHolder.adapterPosition)) {//if existent then show
+                                MainActivity.posis.remove(viewHolder.adapterPosition)
+
+                                val pSize = MainActivity.posis.size
+                                for (i in 0 until pSize) {
+                                    Log.d("aaaaCVCVCVQQ", MainActivity.posis.get(i).toString())
+                                    if ((MainActivity.posis.get(i) != -1)) {
+                                        val qSize = MainActivity.posis.get(i)
+                                        arrr?.get(qSize)?.value = "****"
+                                        arrr?.get(qSize)?.key = "****"
+                                    }
                                 }
-                                val wordDao = room?.wordDao()
 
-                                val wid: TextView = viewHolder.textView1
-                                val pType: TextView = viewHolder.textView2
-                                val key: TextView = viewHolder.textView3
-                                val value: TextView = viewHolder.textView4
-
-                                val a = Word(
-                                    wid.text.toString().toInt(),
-                                    pType.text.toString(),
-                                    key.text.toString(),
-                                    value.text.toString()
-                                )
-                                room?.wordDao()?.delete(a)
-                                val arrr = wordDao?.getAll()
                                 val adapter = arrr?.let { CustomAdapter(it) }
-
                                 MainActivity.recyclerView.setHasFixedSize(false)
                                 MainActivity.recyclerView.adapter = adapter
-                                MainActivity.recyclerView.layoutManager = LinearLayoutManager(view?.context)
+                                MainActivity.recyclerView.layoutManager =
+                                    LinearLayoutManager(view?.context)
                                 room?.close()
-                                Log.d("aaaamenuu","DDDdelete")
 
-                            }
+                            } else {//if not existent then hide
+                                MainActivity.posis.add(viewHolder.adapterPosition)
 
-                            R.id.menu_cancel ->  {
-                                Log.d("aaaamenuu","canceeel") //TODO
-                            }
-                            R.id.menu_hide ->  {
-                                val passphrase: ByteArray = SQLiteDatabase.getBytes("bob".toCharArray())//DB passprhase change
-                                val factory = SupportFactory(passphrase)
-                                val room = view?.context?.let {
-                                    Room.databaseBuilder(it, AppDatabase::class.java, "database-names")
-                                        .openHelperFactory(factory)
-                                        .allowMainThreadQueries()
-                                        .build()
-                                }
-                                val wordDao = room?.wordDao()
-
-                                val arrr = wordDao?.getAll()
-
-                                if(MainActivity.posis.contains(viewHolder.adapterPosition)){//if existent then show
-                                    MainActivity.posis.remove(viewHolder.adapterPosition)
-
-                                    val pSize = MainActivity.posis.size
-                                    for (i in 0 until pSize) {
-                                        Log.d("aaaaCVCVCVQQ", MainActivity.posis.get(i).toString())
-                                        if((MainActivity.posis.get(i) != -1)){
-                                            val qSize = MainActivity.posis.get(i)
-                                            arrr?.get(qSize)?.value = "****"
-                                            arrr?.get(qSize)?.key = "****"
-                                        }
+                                val pSize = MainActivity.posis.size
+                                for (i in 0 until pSize) {
+                                    Log.d("aaaaCVCVCV", MainActivity.posis.get(i).toString())
+                                    if ((MainActivity.posis.get(i) != -1)) {
+                                        val qSize = MainActivity.posis.get(i)
+                                        arrr?.get(qSize)?.value = "****"
+                                        arrr?.get(qSize)?.key = "****"
                                     }
-
-                                    val adapter = arrr?.let { CustomAdapter(it) }
-                                    MainActivity.recyclerView.setHasFixedSize(false)
-                                    MainActivity.recyclerView.adapter = adapter
-                                    MainActivity.recyclerView.layoutManager = LinearLayoutManager(view?.context)
-                                    room?.close()
-
-                                }else{//if not existent then hide
-                                    MainActivity.posis.add(viewHolder.adapterPosition)
-
-                                    val pSize = MainActivity.posis.size
-                                    for (i in 0 until pSize) {
-                                        Log.d("aaaaCVCVCV", MainActivity.posis.get(i).toString())
-                                        if((MainActivity.posis.get(i) != -1)){
-                                            val qSize = MainActivity.posis.get(i)
-                                            arrr?.get(qSize)?.value = "****"
-                                            arrr?.get(qSize)?.key = "****"
-                                        }
-                                    }
-                                    val adapter = arrr?.let { CustomAdapter(it) }
-                                    //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
-                                    MainActivity.recyclerView.setHasFixedSize(false)
-                                    MainActivity.recyclerView.adapter = adapter
-                                    MainActivity.recyclerView.layoutManager = LinearLayoutManager(view?.context)
-                                    room?.close()
-
                                 }
+                                val adapter = arrr?.let { CustomAdapter(it) }
+                                //recyclerView = findViewById<View>(R.id.rview) as RecyclerView
+                                MainActivity.recyclerView.setHasFixedSize(false)
+                                MainActivity.recyclerView.adapter = adapter
+                                MainActivity.recyclerView.layoutManager =
+                                    LinearLayoutManager(view?.context)
+                                room?.close()
 
                             }
 
                         }
-                        return true
+
                     }
-                })
+                    true
+                }
                 //displaying the popup
                 popup.show()
             }

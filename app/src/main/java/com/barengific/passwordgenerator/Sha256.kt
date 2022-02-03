@@ -57,13 +57,13 @@ class Sha256 {
             for (j in 16..63) { //
                 val s0 = sig0(msgChunks[msgChunks.size - 15])
                 val s1 = sig1(msgChunks[msgChunks.size - 2])
-                val addup = adder(
+                val addUp = adder(
                     msgChunks[msgChunks.size - 16],
                     s0,
                     msgChunks[msgChunks.size - 7],
                     s1
                 )
-                msgChunks.add(addup)
+                msgChunks.add(addUp)
             }
             var a = rt22[0]
             var b = rt22[1]
@@ -150,14 +150,14 @@ class Sha256 {
 
     private fun chunkNo(msg: String): Int {
         var chunks = 1
-        var bsize = 447
-        if (msg.length <= bsize) {
+        var bSize = 447
+        if (msg.length <= bSize) {
             chunks = 1
-        } else if (msg.length >= bsize + 1) {
+        } else if (msg.length >= bSize + 1) {
             while (true) {
-                bsize += 512
+                bSize += 512
                 chunks += 1
-                if (msg.length <= bsize) {
+                if (msg.length <= bSize) {
                     break
                 }
             }
@@ -218,22 +218,22 @@ class Sha256 {
     private fun adder(a: String, b: String, c: String, d: String): String {
         var res = ""
 
-        val aint = a.toLong(2)
-        val bint = b.toLong(2)
-        val cint = c.toLong(2)
-        val dint = d.toLong(2)
-        val r = aint + bint + cint + dint
-        val binr = java.lang.Long.toBinaryString(r)
-        if (binr.length == 32) {
-            res = binr
-        } else if (binr.length > 32) {
+        val aInt = a.toLong(2)
+        val bInt = b.toLong(2)
+        val cInt = c.toLong(2)
+        val dInt = d.toLong(2)
+        val r = aInt + bInt + cInt + dInt
+        val binR = java.lang.Long.toBinaryString(r)
+        if (binR.length == 32) {
+            res = binR
+        } else if (binR.length > 32) {
             res = java.lang.Long.toBinaryString((r % 2.0.pow(32.0)).toLong())
             if (res.length < 32) {
-                res = addZeros(binr, 32)
+                res = addZeros(binR, 32)
             } else if (res.length > 32) {
             }
-        } else if (binr.length < 32) {
-            res = addZeros(binr, 32)
+        } else if (binR.length < 32) {
+            res = addZeros(binR, 32)
         }
         if (res.length > 32) {
             res = rmZeros(res, 32)
@@ -243,23 +243,23 @@ class Sha256 {
 
     private fun adders(a: Long): String {
         var res = ""
-        val binr = java.lang.Long.toBinaryString(a)
+        val binR = java.lang.Long.toBinaryString(a)
         when {
-            binr.length == 32 -> {
-                res = binr
+            binR.length == 32 -> {
+                res = binR
             }
-            binr.length > 32 -> {
+            binR.length > 32 -> {
                 res = java.lang.Long.toBinaryString((a % 2.0.pow(32.0)).toLong())
             }
-            binr.length < 32 -> {
-                res = addZeros(binr, 32)
+            binR.length < 32 -> {
+                res = addZeros(binR, 32)
             }
         }
         if (res.length < 32) {
             res = addZeros(res, 32)
         }
         if (res.length != 32) {
-            println("tooo smlll still")
+            println("too small still")
         }
         return res
     }

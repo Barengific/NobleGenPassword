@@ -26,10 +26,10 @@ class SettingsActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
-        getWindow().setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
-        );
+        )
 
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -210,14 +210,14 @@ class SettingsActivity : AppCompatActivity(),
             alert?.setCancelable(false)
             alert?.setTitle("Warning!")
             alert?.setMessage("Are you sure you want to continue? All your saved passwords will be deleted!")
-            alert?.setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, id ->
+            alert?.setPositiveButton("Confirm") { _, _ ->
                 val intent = Intent(this.context, CredentialsEnt::class.java).apply {
-                    putExtra("fromSettings","rst")
+                    putExtra("fromSettings", "rst")
                 }
                 startActivity(intent)
                 requireActivity().finish()
                 (activity as FragmentActivity).supportFragmentManager.popBackStack()
-            })
+            }
             alert?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
                 val intent = Intent(this.context, SettingsActivity::class.java).apply {
                     putExtra("fromSettings","fin")

@@ -115,5 +115,6 @@
     <string name="settings_header_help">Help</string>
     <string name="app_name_short">Noble</string>
     <string name="settings_header_help_coming">Help (Coming soon...)</string>
+    <string name="nonon">nonon</string>
 
 </resources>
